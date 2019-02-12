@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.platform = :osx
   s.osx.deployment_target = "10.14"
 
-  s.source_files = 'SwiftArchitekkt/Classes/**/*'
+  s.source_files = 'SwiftArchitekkt/Source/**/*'
 
   # s.resource_bundles = {
   #   'SwiftArchitekkt' => ['SwiftArchitekkt/Assets/*.png']
