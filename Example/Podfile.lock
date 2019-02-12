@@ -1,0 +1,23 @@
+PODS:
+  - CoreArchitekkt (0.1.0)
+  - SwiftArchitekkt (0.1.0):
+    - CoreArchitekkt (= 0.1.0)
+
+DEPENDENCIES:
+  - SwiftArchitekkt (from `../`)
+
+SPEC REPOS:
+  https://github.com/Lausbert/PodSpecsArchitekkt:
+    - CoreArchitekkt
+
+EXTERNAL SOURCES:
+  SwiftArchitekkt:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  CoreArchitekkt: 57aea056c71375cd430b8b8e02de3c92d43a180c
+  SwiftArchitekkt: 46c910505439ec1191b060140de4e171ece748d9
+
+PODFILE CHECKSUM: 74d8dcc5fe77d383a43dbb943c39af0fd343deff
+
+COCOAPODS: 1.6.0

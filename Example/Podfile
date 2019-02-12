@@ -1,3 +1,6 @@
+platform :macos, '10.14'
+source 'https://github.com/Lausbert/PodSpecsArchitekkt.git'
+
 use_frameworks!
 target 'SwiftArchitekkt_Tests' do
   pod 'SwiftArchitekkt', :path => '../'
