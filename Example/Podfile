@@ -1,0 +1,6 @@
+use_frameworks!
+target 'SwiftArchitekkt_Tests' do
+  pod 'SwiftArchitekkt', :path => '../'
+  
+  
+end
