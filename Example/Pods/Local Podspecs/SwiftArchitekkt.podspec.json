@@ -16,7 +16,7 @@
     "tag": "0.1.0"
   },
   "platforms": {
-    "osx": "10.10"
+    "osx": "10.14"
   },
   "source_files": "SwiftArchitekkt/Classes/**/*",
   "dependencies": {
