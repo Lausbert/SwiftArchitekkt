@@ -18,7 +18,7 @@
   "platforms": {
     "osx": "10.14"
   },
-  "source_files": "SwiftArchitekkt/Classes/**/*",
+  "source_files": "SwiftArchitekkt/Source/**/*",
   "dependencies": {
     "CoreArchitekkt": [
       "0.1.0"
