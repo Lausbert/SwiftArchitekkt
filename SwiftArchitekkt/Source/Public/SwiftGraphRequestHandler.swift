@@ -12,7 +12,7 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
     
     public func handle(graphRequest: GraphRequest, statusUpdateHandler: ((GraphRequest.StatusUpdate) -> Void)? = nil, completionHandler: @escaping (GraphRequest.Result) -> Void) {
         SwiftGraphRequestHandler.queue.async {
-            
+                        
             let statusUpdateHandler = DispatchQueue.main.asyncClosure(statusUpdateHandler)
             let completionHandler = DispatchQueue.main.asyncClosure(completionHandler)
             
