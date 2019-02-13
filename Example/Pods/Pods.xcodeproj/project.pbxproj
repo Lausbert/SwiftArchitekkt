@@ -153,8 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				D9686C1D9C6690C3E4AE0C938C48B20F /* XcodeBuildWrapper.swift */,
-				6356E16B3D6522C724C5B2F08B0E6449 /* XcodeBuildWrapper+CompileCommands.swift */,
 				2EAFAA7C5B891A13F45A688ABE1B46E9 /* XcodeBuildWrapper+UpdateGraphRequest.swift */,
+				6356E16B3D6522C724C5B2F08B0E6449 /* XcodeBuildWrapper+CompileCommands.swift */,
 			);
 			path = XcodeBuildWrapper;
 			sourceTree = "<group>";
@@ -320,9 +320,9 @@
 		D6D551E3DDDA482E1EBA6F64BFB3D31F /* GraphBuilder */ = {
 			isa = PBXGroup;
 			children = (
-				65A09E35425CDF6296C52576ACC6AB18 /* GraphBuilder.swift */,
 				DCE4CA94E8A25799567AF2D8CB436471 /* RawTokenizer.swift */,
 				FBC253BECA2F5EDA90F67D8717E707F1 /* Tokenizer.swift */,
+				65A09E35425CDF6296C52576ACC6AB18 /* GraphBuilder.swift */,
 			);
 			path = GraphBuilder;
 			sourceTree = "<group>";
