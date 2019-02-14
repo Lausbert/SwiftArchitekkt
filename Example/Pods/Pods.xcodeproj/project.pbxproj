@@ -107,7 +107,6 @@
 		BD34A7FE6CEE5348895F815E26586F71 /* RootNodeHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RootNodeHandler.swift; path = CoreArchitekkt/Source/Public/Protocols/RootNodeHandler.swift; sourceTree = "<group>"; };
 		C76CDCDA0ACA9F18BF139F1F872A18C4 /* Arc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Arc.swift; path = "CoreArchitekkt/Source/Public/Classes+Structs/Arc.swift"; sourceTree = "<group>"; };
 		C7884A98A66C7E0767939FAB5528E903 /* SwiftArchitekkt-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftArchitekkt-umbrella.h"; sourceTree = "<group>"; };
-		D07DD138FACFC4DD57F95372DBF33CB1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D9686C1D9C6690C3E4AE0C938C48B20F /* XcodeBuildWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = XcodeBuildWrapper.swift; sourceTree = "<group>"; };
 		D9FFE55DC79BB2C12177662E5E0D8007 /* SwiftArchitekkt.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftArchitekkt.xcconfig; sourceTree = "<group>"; };
 		DCE4CA94E8A25799567AF2D8CB436471 /* RawTokenizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RawTokenizer.swift; sourceTree = "<group>"; };
@@ -247,7 +246,6 @@
 		7FFA91FD93B30F30C880FA8BE9BA30C2 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				D07DD138FACFC4DD57F95372DBF33CB1 /* LICENSE */,
 				A54D6CEE6B8BE93E6BAC848A8D83AAD7 /* README.md */,
 				7DD061F97E04615C1536D50AEEB67FDA /* SwiftArchitekkt.podspec */,
 			);
