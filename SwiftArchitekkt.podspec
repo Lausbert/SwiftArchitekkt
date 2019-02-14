@@ -13,6 +13,7 @@ An implementation of a graph request handler, which handles XCode projects & wor
 
     s.platform = :osx
     s.osx.deployment_target = "10.14"
+    s.swift_version = '5.0'
 
     s.source_files = 'SwiftArchitekkt/Source/**/*'
 
