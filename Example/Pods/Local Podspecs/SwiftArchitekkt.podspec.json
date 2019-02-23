@@ -1,13 +1,9 @@
 {
   "name": "SwiftArchitekkt",
   "version": "0.1.0",
-  "summary": "A short description of SwiftArchitekkt.",
-  "description": "TODO: Add long description of the pod here.",
+  "summary": "An implementation of a graph request handler, which handles XCode projects & workspaces.",
+  "description": "An implementation of a graph request handler, which handles XCode projects & workspaces.",
   "homepage": "https://github.com/Lausbert/SwiftArchitekkt",
-  "license": {
-    "type": "MIT",
-    "file": "LICENSE"
-  },
   "authors": {
     "Lausbert": "stephanlerner@icloud.com"
   },
@@ -18,10 +14,11 @@
   "platforms": {
     "osx": "10.14"
   },
+  "swift_version": "5.0",
   "source_files": "SwiftArchitekkt/Source/**/*",
   "dependencies": {
     "CoreArchitekkt": [
-      "0.1.0"
+
     ]
   }
 }
