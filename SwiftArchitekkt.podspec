@@ -17,5 +17,5 @@ An implementation of a graph request handler, which handles XCode projects & wor
 
     s.source_files = 'SwiftArchitekkt/Source/**/*'
 
-    s.dependency 'CoreArchitekkt', '0.1.0'
+    s.dependency 'CoreArchitekkt'
 end
