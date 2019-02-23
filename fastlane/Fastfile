@@ -18,7 +18,8 @@ platform :mac do
   end
 
   def release(type)
-    pod_lib_lint(allow_warnings: true)
+    pod_lib_lint(allow_warnings: true,
+		 sources: [ENV["PODSPEC_SOURCE"]])
     version = version_bump_podspec(path: ENV["PODSPEC_NAME"],
                                    bump_type: type)
     git_add(path: ENV["PODSPEC_NAME"])
@@ -26,6 +27,9 @@ platform :mac do
                message: "#{version} release")
     add_git_tag(tag: "#{version}")
     push_to_git_remote
-    pod_push(path: ENV["PODSPEC_NAME"], repo: ENV["PODSPEC_REPO"], allow_warnings: true)
+    pod_push(path: ENV["PODSPEC_NAME"],
+	     repo: ENV["PODSPEC_REPO"],
+	     allow_warnings: true,
+	     sources: [ENV["PODSPEC_SOURCE"]])
   end
 end
