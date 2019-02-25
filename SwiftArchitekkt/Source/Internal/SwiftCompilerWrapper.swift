@@ -7,11 +7,11 @@ import os
 // MARK: - Internal -
 
 struct SwiftCompilerWrapper {
-    
+
     enum ErrorEnum: LocalizedError, Equatable {
         case couldNotProperlyRunSwiftCompiler
         case invalidAstFormat(String)
-        
+
         var errorDescription: String? {
             switch self {
             case .couldNotProperlyRunSwiftCompiler:
@@ -21,7 +21,7 @@ struct SwiftCompilerWrapper {
             }
         }
     }
-        
+
     static func generateAst(for compileCommands: [String], graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> String? {
         do {
             var ast = try generateAst(for: compileCommands)
@@ -36,12 +36,12 @@ struct SwiftCompilerWrapper {
             return nil
         }
     }
-    
+
     // MARK: - Private -
-    
+
     private static func generateAst(for compileCommands: [String]) throws -> String {
         guard let ast = Shell.launch(path: "/usr/bin/xcrun", arguments: compileCommands) else { throw ErrorEnum.couldNotProperlyRunSwiftCompiler }
         return ast
     }
-    
+
 }

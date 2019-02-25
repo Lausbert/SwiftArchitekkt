@@ -4,26 +4,26 @@ import Foundation
 import CoreArchitekkt
 
 struct XcodeBuildWrapper {
-    
+
     // MARK: - Internal -
-    
+
     enum SwiftFileExtension: String, CaseIterable {
         case project = "xcodeproj"
         case workspace = "xcworkspace"
     }
-    
+
     enum ParameterEnum: String, CaseIterable {
-        case scheme = "scheme"
-        case target = "target"
+        case scheme
+        case target
     }
-    
+
     enum ErrorEnum: LocalizedError, Equatable {
         case couldNotHandleFileExtension(String)
         case couldNotProperlyRunXcodeBuild
         case couldNotFindAnySchemes(String)
         case couldNotFindAnyTargets(String)
         case couldNotFindAnyCompileCommands(String)
-        
+
         var errorDescription: String? {
             switch self {
             case .couldNotHandleFileExtension(let fileExtension):
@@ -38,7 +38,7 @@ struct XcodeBuildWrapper {
                 return "Could not find any compile commands for specified target: \(xcodeBuildResults)"
             }
         }
-        
+
     }
-    
+
 }

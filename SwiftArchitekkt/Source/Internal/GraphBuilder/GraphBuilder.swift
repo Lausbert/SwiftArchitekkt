@@ -5,9 +5,9 @@ import CoreArchitekkt
 import os
 
 class GraphBuilder {
-    
+
     // MARK: - Internal -
-    
+
     enum ErrorEnum: LocalizedError, Equatable {
         case unexpectedScopeEnd(RawTokenizer.RawToken, identifier: String?)
         case unexpectedNewSourceFile
@@ -15,7 +15,7 @@ class GraphBuilder {
         case uncontainedNonSourceFileScope
         case missingIdentifier(RawTokenizer.RawToken)
         case invalidToken(RawTokenizer.RawToken)
-        
+
         var errorDescription: String? {
             switch self {
             case let .unexpectedScopeEnd(rawToken, identifier):
@@ -33,11 +33,11 @@ class GraphBuilder {
             }
         }
     }
-    
+
     init(ast: String) {
         tokenizer = Tokenizer(ast: ast)
     }
-    
+
     func generateGraph(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Node? {
         do {
             while let token = try tokenizer.getNextToken() {
@@ -69,9 +69,9 @@ class GraphBuilder {
             return nil
         }
     }
-    
+
     // MARK: - Private -
-    
+
     private enum Scope: String {
         case root
         case unknown
@@ -80,17 +80,17 @@ class GraphBuilder {
         case function
         case variable
     }
-    
+
     private var tokenizer: Tokenizer
     private var openNodes: [Node] = []
     private var graph: [Node] = []
     private var namedNodes: [String: (node: Node, isChild: Bool)] = [:]
-    
+
     private func getLastOpenNode() throws -> Node {
         guard let lastOpenNode = openNodes.last else { throw ErrorEnum.uncontainedNonSourceFileScope }
         return lastOpenNode
     }
-    
+
     private func getNamedNode(for identifier: String, willAddAsChild: Bool = false) -> Node {
         let node: Node
         if let existingNode = namedNodes[identifier]?.node {
@@ -104,7 +104,7 @@ class GraphBuilder {
         }
         return node
     }
-    
+
     private func addNamedNodesAsChildIfPossible() {
         for (identifier, tuple) in namedNodes {
             guard !tuple.isChild else { continue }
@@ -116,7 +116,7 @@ class GraphBuilder {
             }
         }
     }
-        
+
     private func handleScopeStart(rawToken: RawTokenizer.RawToken, identifier: String?) throws {
         switch rawToken {
         case .sourceFile:
@@ -142,27 +142,27 @@ class GraphBuilder {
             }
         }
     }
-    
+
     private func handleScopeEnd(rawToken: RawTokenizer.RawToken, identifier: String?) throws {
         guard !openNodes.isEmpty else { throw ErrorEnum.unexpectedScopeEnd(rawToken, identifier: identifier) }
         openNodes.removeLast()
     }
-    
+
     private func handleInheritance(identifiers: [String]) throws {
         try handle(identifiers: identifiers)
     }
-    
+
     private func handle(typeString: String) throws {
         var typeString = typeString.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
         typeString = typeString.replacingOccurrences(of: "->", with: ",")
         let identifiers = typeString.components(separatedBy: CharacterSet(charactersIn: ",:")).filter { !$0.isEmpty }
         try handle(identifiers: identifiers)
     }
-    
+
     private func handleNamedScopeStart(rawToken: RawTokenizer.RawToken, identifier: String?) throws {
         assert(identifier != nil)
         guard let identifier = identifier else { throw ErrorEnum.missingIdentifier(rawToken) }
-        
+
         let scope: Scope
         switch rawToken {
         case .classDeclaration:
@@ -174,19 +174,18 @@ class GraphBuilder {
         default:
             throw ErrorEnum.invalidToken(rawToken)
         }
-        
+
         let node = getNamedNode(for: identifier, willAddAsChild: true)
         node.set(scope: scope.rawValue)
         try getLastOpenNode().add(child: node)
         openNodes.append(node)
     }
-    
+
     private func handle(identifiers: [String]) throws {
         for identifier in identifiers {
             let node = getNamedNode(for: identifier)
             try getLastOpenNode().add(arc: node)
         }
     }
-    
-}
 
+}

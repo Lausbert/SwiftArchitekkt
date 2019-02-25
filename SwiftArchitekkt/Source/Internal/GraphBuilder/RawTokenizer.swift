@@ -3,22 +3,22 @@
 import Foundation
 
 class RawTokenizer {
-    
+
     // MARK: - Internal -
-    
+
     init(ast: String) {
         iterator = ast.unicodeScalars.makeIterator()
     }
-    
+
     enum RawToken: Equatable {
-        
+
         // helper tokens
         case comma
         case colon
         case leftParenthesis
         case rightParenthesis
         case identifier(String)
-        
+
         // pass-through tokens
         case implicit
         case interface
@@ -31,7 +31,7 @@ class RawTokenizer {
         case required
         case directToStorage
         case inOut
-        
+
         // followed by identifier
         case type
         case apiName
@@ -53,17 +53,17 @@ class RawTokenizer {
         case setter
         case materializeForSet
         case value
-        
+
         // followed by identifiers
         case inherits
-        
+
         // named scopes
         case importDeclaration
         case classDeclaration
         case funcDeclaration
         case varDeclaration
         case parameter
-        
+
         // anonymous scopes
         case sourceFile
         case accessorDeclaration
@@ -90,9 +90,9 @@ class RawTokenizer {
         case typeId
         case component
         case assignExpression
-        
+
     }
-    
+
     func nextToken() -> RawToken? {
         while let ch = nextScalar() {
             switch ch {
@@ -122,12 +122,12 @@ class RawTokenizer {
         }
         return nil
     }
-    
+
     // MARK: - Private -
-    
+
     private var iterator: String.UnicodeScalarView.Iterator
     private var pushedBackScalar: UnicodeScalar?
-    
+
     private func nextScalar() -> UnicodeScalar? {
         if let next = pushedBackScalar {
             pushedBackScalar = nil
@@ -135,7 +135,7 @@ class RawTokenizer {
         }
         return iterator.next()
     }
-    
+
     private func identifierTokenAfterEqual() -> RawToken? {
         if let ch = nextScalar() {
             switch ch {
@@ -154,7 +154,7 @@ class RawTokenizer {
             return nil
         }
     }
-    
+
     private func identifierToken(startingWith first: UnicodeScalar? = nil, endingWith last: UnicodeScalar) -> RawToken {
         var tokenText: String
         if let first = first {
@@ -163,7 +163,7 @@ class RawTokenizer {
             tokenText = ""
         }
         var allowedRightParenthesis = 0
-        
+
         while let ch = nextScalar() {
             switch ch {
             case last,
@@ -186,10 +186,10 @@ class RawTokenizer {
         }
         return .identifier(tokenText)
     }
-    
+
     private func keywordToken(startingWith first: UnicodeScalar) -> RawToken {
         var tokenText = String(first)
-        
+
         loop: while let ch = nextScalar() {
             switch ch {
             case " ",
@@ -210,7 +210,7 @@ class RawTokenizer {
                 tokenText.unicodeScalars.append(ch)
             }
         }
-        
+
         switch tokenText {
         case "@objc":
             return .objc
@@ -340,5 +340,5 @@ class RawTokenizer {
             return .identifier(tokenText)
         }
     }
-    
+
 }
