@@ -1,7 +1,0 @@
-disabled_rules:
-  - cyclomatic_complexity
-  - identifier_name
-  - line_length
-  - file_length
-  - function_body_length
-  - type_body_length
