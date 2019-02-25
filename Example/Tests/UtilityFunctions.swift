@@ -10,14 +10,14 @@ import CoreArchitekkt
 ///   - pathExtension: The path extension
 /// - Returns: A url related to defined file
 func getUrlForRessourceFile(withName name: String, pathExtension: String) -> URL {
-    
+
     guard let rootPath = ProcessInfo.processInfo.environment["SRCROOT"] else {
         fatalError("No root path defined in test environment variables.")
     }
     guard let rootUrl = URL(string: rootPath) else {
         fatalError("Could not initialize root url.")
     }
-    
+
     return rootUrl.appendingPathComponent("Tests/Ressources/\(name)/\(name)").appendingPathExtension(pathExtension)
 }
 
@@ -37,7 +37,7 @@ func XCTEqualAfterCasting<T, U: Equatable>(_ lhs: T, toTypeOf rhs: U) {
 func XCTStringMatchesPattern(string: String, pattern: String) {
     // greatly improves debugging
     XCTStringsContainedInString(strings: pattern.replacingOccurrences(of: "@@@", with: " ").components(separatedBy: " "), string: string)
-    
+
     var regex = pattern
     [("[", "\\["), ("]", "\\]"), ("?", "\\?"), ("(", "\\("), (")", "\\)"), ("\n", "\\n"), ("\'", "\\'"), (".", "\\."), ("\"", "\\\""), ("*", "\\*"), ("/", "\\/"), ("@@@", "[\\s\\S]*")].forEach {
         regex = regex.replacingOccurrences(of: $0, with: $1)

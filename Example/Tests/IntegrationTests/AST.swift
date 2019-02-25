@@ -5,12 +5,12 @@ import CoreArchitekkt
 @testable import SwiftArchitekkt
 
 extension IntegrationTests {
-        
+
     func testMacOSASTForProject() {
         testGraphRequestHandlingForRessourceFile(withName: "MacOSSDK",
                                                  pathExtension: "xcodeproj",
-                                                 options: ["scheme":"MacOSSDK",
-                                                           "target":"MacOSSDK"],
+                                                 options: ["scheme": "MacOSSDK",
+                                                           "target": "MacOSSDK"],
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingAST,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {
@@ -21,12 +21,12 @@ extension IntegrationTests {
                                                     expectation.fulfill()
         })
     }
-    
+
     func testIOSASTForProject() {
         testGraphRequestHandlingForRessourceFile(withName: "iOSSDK",
                                                  pathExtension: "xcodeproj",
-                                                 options: ["scheme":"iOSSDK",
-                                                           "target":"iOSSDK"],
+                                                 options: ["scheme": "iOSSDK",
+                                                           "target": "iOSSDK"],
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingAST,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {
@@ -39,5 +39,5 @@ extension IntegrationTests {
                                                     expectation.fulfill()
         })
     }
-    
+
 }

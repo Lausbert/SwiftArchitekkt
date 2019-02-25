@@ -5,15 +5,15 @@ import CoreArchitekkt
 @testable import SwiftArchitekkt
 
 extension IntegrationTests {
-        
+
     func testNoTargetForProject() {
         testGraphRequestHandlingForRessourceFile(withName: "NoTarget",
                                                  pathExtension: "xcodeproj",
-                                                 options: ["scheme":"AnyScheme"],
+                                                 options: ["scheme": "AnyScheme"],
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
-                                                    case .success(_, _), .decisionNeeded(_, _):
+                                                    case .success, .decisionNeeded:
                                                         XCTFail()
                                                     case .failure(_, let error):
                                                         XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnyTargets("xcodebuild: error: The project named \"NoTarget\" does not contain a scheme named \"AnyScheme\". The \"-list\" option can be used to find the names of the schemes in the project.\n"))
@@ -21,11 +21,11 @@ extension IntegrationTests {
                                                     }
         })
     }
-    
+
     func testSingleTargetForProject() {
         testGraphRequestHandlingForRessourceFile(withName: "SingleTarget",
                                                  pathExtension: "xcodeproj",
-                                                 options: ["scheme":"SingleTarget"],
+                                                 options: ["scheme": "SingleTarget"],
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
                                                  statusUpdateValidationHandler: { (graphRequest, _, expectation) in
                                                     if let target = graphRequest.options["target"] {
@@ -36,15 +36,15 @@ extension IntegrationTests {
                                                     expectation.fulfill()
         })
     }
-    
+
     func testMultipleTargetsForProject() {
         testGraphRequestHandlingForRessourceFile(withName: "MultipleTargets",
                                                  pathExtension: "xcodeproj",
-                                                 options: ["scheme":"MultipleTargets"],
+                                                 options: ["scheme": "MultipleTargets"],
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
-                                                    case .success(_, _), .failure(_, _):
+                                                    case .success, .failure:
                                                         XCTFail()
                                                     case .decisionNeeded(_, let options):
                                                         if let targets = options["target"] {
@@ -58,5 +58,5 @@ extension IntegrationTests {
                                                     }
         })
     }
-    
+
 }
