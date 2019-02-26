@@ -4,9 +4,9 @@ import Foundation
 import CoreArchitekkt
 import os
 
-// MARK: - Internal -
-
 struct SwiftCompilerWrapper {
+    
+    // MARK: - Internal -
 
     enum ErrorEnum: LocalizedError, Equatable {
         case couldNotProperlyRunSwiftCompiler

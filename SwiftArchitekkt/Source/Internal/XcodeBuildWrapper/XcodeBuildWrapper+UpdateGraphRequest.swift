@@ -20,7 +20,7 @@ extension XcodeBuildWrapper {
             do {
                 let parameterOptions = try XcodeBuildWrapper.get(parameter: mostUrgentMissingParamter, for: updatedGraphRequest)
                 if let options = parameterOptions[mostUrgentMissingParamter.rawValue], options.count == 1, let singleOption = options.first {
-                    updatedGraphRequest = GraphRequest(url: updatedGraphRequest.url, options: updatedGraphRequest.options.merging([mostUrgentMissingParamter.rawValue: singleOption], uniquingKeysWith: { $1 }))
+                    updatedGraphRequest = GraphRequest(url: updatedGraphRequest.url, options: updatedGraphRequest.options.merging([mostUrgentMissingParamter.rawValue: singleOption], uniquingKeysWith: { $1 }), accessibleUrls: updatedGraphRequest.accessibleUrls)
                 } else {
                     completionHandler(GraphRequest.Result.decisionNeeded(updatedGraphRequest, parameterOptions))
                     return nil

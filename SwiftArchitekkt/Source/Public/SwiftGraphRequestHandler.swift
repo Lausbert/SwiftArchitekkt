@@ -8,7 +8,7 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
 
     // MARK: - Public -
 
-    public var accessRequirements: [AccessRequirement]? = [AccessRequirement(key: "SwiftGraphRequestHandler)", description: "Choose your Xcode app and relate command line tools.", fileName: "Xcode", fileType: "app")]
+    public var accessRequirements: [AccessRequirement]? { return AccessRequirementsEvaluator.accessRequirements }
 
     public var handableFileExtensions: [String] { return XcodeBuildWrapper.SwiftFileExtension.allCases.map { $0.rawValue } }
 
@@ -17,6 +17,16 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
 
             let statusUpdateHandler = DispatchQueue.main.asyncClosure(statusUpdateHandler)
             let completionHandler = DispatchQueue.main.asyncClosure(completionHandler)
+            
+            statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue))
+            guard let accessibleUrl = AccessRequirementsEvaluator.evaluateAndStartAccessFor(graphRequest: graphRequest, completionHandler: completionHandler) else { return }
+            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue, nil))
+            
+            #if DEBUG
+            if self.shouldStopAfter(procedure: LastProcedure.evaluatingAccessRequirements.rawValue, graphRequest: graphRequest) {
+                return
+            }
+            #endif
 
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(graphRequest, LastProcedure.updatingGraphRequest.rawValue))
             guard let updatedGraphRequest = XcodeBuildWrapper.update(graphRequest: graphRequest, completionHandler: completionHandler) else { return }
@@ -47,7 +57,9 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
                 return
             }
             #endif
-
+            
+            accessibleUrl.stopAccessingSecurityScopedResource()
+            
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue))
             let encoder = JSONEncoder()
             guard let rootNode = GraphBuilder(ast: ast).generateGraph(graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
@@ -77,6 +89,7 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
     static let queue = DispatchQueue.global(qos: .utility)
 
     enum LastProcedure: String, CaseIterable {
+        case evaluatingAccessRequirements
         case updatingGraphRequest
         case generatingCompileCommands
         case generatingAST
