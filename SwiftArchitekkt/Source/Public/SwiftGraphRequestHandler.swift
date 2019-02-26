@@ -4,10 +4,10 @@ import Foundation
 import CoreArchitekkt
 import os
 
-class SwiftGraphRequestHandler: GraphRequestHandler {    
-    
+class SwiftGraphRequestHandler: GraphRequestHandler {
+
     // MARK: - Public -
-    
+
     public var accessRequirements: [AccessRequirement]? = [AccessRequirement(key: "SwiftGraphRequestHandler)", description: "Choose your Xcode app and relate command line tools.", fileName: "Xcode", fileType: "app")]
 
     public var handableFileExtensions: [String] { return XcodeBuildWrapper.SwiftFileExtension.allCases.map { $0.rawValue } }
