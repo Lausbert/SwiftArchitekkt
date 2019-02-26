@@ -380,7 +380,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 6E329DF2802B567D7A38D1A7 /* Pods-SwiftArchitekkt_Tests.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
@@ -395,7 +394,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 887A1D0711F4671AAF29AD60 /* Pods-SwiftArchitekkt_Tests.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Tests/Info.plist;
