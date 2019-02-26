@@ -16,9 +16,10 @@ class IntegrationTests: XCTestCase {
         let url = getUrlForRessourceFile(withName: name, pathExtension: pathExtension)
         let options = options.merging([String(describing: SwiftGraphRequestHandler.LastProcedure.self): lastProcedure.rawValue], uniquingKeysWith: { first, _ in first })
         let expectation = XCTestExpectation(description: "expectation fullfilled")
-        let swiftArchitekkt = SwiftGraphRequestHandler()
-        let graphRequest = GraphRequest(url: url, options: options)
-        swiftArchitekkt.handle(graphRequest: graphRequest, statusUpdateHandler: { (statusUpdate) in
+        let swiftGraphRequestHandler = SwiftGraphRequestHandler()
+        guard let accessRequirement = swiftGraphRequestHandler.accessRequirements?[0] else { fatalError("No access requirement defined for swift graph request handler.") }
+        let graphRequest = GraphRequest(url: url, options: options, accessibleUrls: [accessRequirement: URL(fileURLWithPath: "/Applications/Xcode.app")])
+        swiftGraphRequestHandler.handle(graphRequest: graphRequest, statusUpdateHandler: { (statusUpdate) in
             switch statusUpdate {
             case .willStartProcedure(_, let procedure):
                 XCTAssert(self.isProcedureAllowed(currentProcedure: procedure, lastProcedure: lastProcedure))
