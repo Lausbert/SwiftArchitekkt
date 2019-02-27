@@ -19,7 +19,7 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
             let completionHandler = DispatchQueue.main.asyncClosure(completionHandler)
             
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue))
-            guard let accessibleUrl = AccessRequirementsEvaluator.evaluateAndStartAccessFor(graphRequest: graphRequest, completionHandler: completionHandler) else { return }
+            guard AccessRequirementsEvaluator.evaluateAndStartAccessFor(graphRequest: graphRequest, completionHandler: completionHandler) else { return }
             statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue, nil))
             
             #if DEBUG
@@ -58,7 +58,7 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
             }
             #endif
             
-            accessibleUrl.stopAccessingSecurityScopedResource()
+            guard AccessRequirementsEvaluator.stopAccessFor(graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
             
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue))
             let encoder = JSONEncoder()

@@ -30,15 +30,27 @@ struct AccessRequirementsEvaluator {
         AccessRequirement(key: "SwiftGraphRequestHandler", description: "Choose your Xcode app and relate command line tools.", fileName: "Xcode", fileType: "app")
     ]
     
-    static func evaluateAndStartAccessFor(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> URL? {
+    static func evaluateAndStartAccessFor(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Bool {
         do {
             let accessibleUrl = try evaluateAccessFor(graphRequest: graphRequest)
             guard accessibleUrl.startAccessingSecurityScopedResource() else { throw ErrorEnum.accessDeniedForAccessibleUrl }
-            return accessibleUrl
+            return true
         } catch {
             os_log("%@", log: SwiftGraphRequestHandler.errorLog, type: .debug, error.localizedDescription)
             completionHandler(GraphRequest.Result.failure(graphRequest, error))
-            return nil
+            return false
+        }
+    }
+    
+    static func stopAccessFor(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Bool {
+        do {
+            let accessibleUrl = try evaluateAccessFor(graphRequest: graphRequest)
+            accessibleUrl.stopAccessingSecurityScopedResource()
+            return true
+        } catch {
+            os_log("%@", log: SwiftGraphRequestHandler.errorLog, type: .debug, error.localizedDescription)
+            completionHandler(GraphRequest.Result.failure(graphRequest, error))
+            return false
         }
     }
     
