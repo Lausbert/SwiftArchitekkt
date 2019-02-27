@@ -9,11 +9,14 @@ struct SwiftCompilerWrapper {
     // MARK: - Internal -
 
     enum ErrorEnum: LocalizedError, Equatable {
+        case unexpectedlyCouldNotFindAnyAccessibleUrl
         case couldNotProperlyRunSwiftCompiler
         case invalidAstFormat(String)
 
         var errorDescription: String? {
             switch self {
+            case .unexpectedlyCouldNotFindAnyAccessibleUrl:
+                return "Unexpectedly could not find any accessible url."
             case .couldNotProperlyRunSwiftCompiler:
                 return "Could not properly run swift compiler."
             case .invalidAstFormat(let ast):
@@ -24,7 +27,9 @@ struct SwiftCompilerWrapper {
 
     static func generateAst(for compileCommands: [String], graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> String? {
         do {
-            var ast = try generateAst(for: compileCommands)
+            guard let accessibleUrl = graphRequest.accessibleUrls?.values.first else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
+            let swiftUrl = accessibleUrl.appendingPathComponent("Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc/")
+            var ast = try generateAst(for: compileCommands, swiftUrl: swiftUrl)
             if ast.first == "\n" {
                 ast.removeFirst()
             }
@@ -39,8 +44,8 @@ struct SwiftCompilerWrapper {
 
     // MARK: - Private -
 
-    private static func generateAst(for compileCommands: [String]) throws -> String {
-        guard let ast = Shell.launch(path: "/usr/bin/xcrun", arguments: compileCommands) else { throw ErrorEnum.couldNotProperlyRunSwiftCompiler }
+    private static func generateAst(for compileCommands: [String], swiftUrl: URL) throws -> String {
+        guard let ast = Shell.launch(path: swiftUrl.absoluteString, arguments: compileCommands) else { throw ErrorEnum.couldNotProperlyRunSwiftCompiler }
         return ast
     }
 

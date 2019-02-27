@@ -23,7 +23,7 @@ extension XcodeBuildWrapper {
     private static func getCompileCommands(for graphRequest: GraphRequest) throws -> [String] {
         guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
         guard let accessibleUrl = graphRequest.accessibleUrls?.values.first else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
-        let xcodeBuildUrl = accessibleUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild")
+        let xcodeBuildUrl = accessibleUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
 
         switch fileExtension {
         case .project:
@@ -49,6 +49,7 @@ extension XcodeBuildWrapper {
 
     private static func update(compileCommands: [String]) -> [String] {
         var updatedCompileCommands = compileCommands
+        updatedCompileCommands.remove(element: "swiftc", andFollowing: 0)
         updatedCompileCommands.remove(element: "-incremental", andFollowing: 0)
         updatedCompileCommands.remove(element: "-embed-bitcode-marker", andFollowing: 0)
         updatedCompileCommands.remove(element: "-emit-dependencies", andFollowing: 0)

@@ -48,7 +48,7 @@ extension XcodeBuildWrapper {
     private static func get(parameter: ParameterEnum, for graphRequest: GraphRequest) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
         guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
         guard let accessibleUrl = graphRequest.accessibleUrls?.values.first else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
-        let xcodeBuildUrl = accessibleUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild")
+        let xcodeBuildUrl = accessibleUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
         
         switch fileExtension {
         case .project:
