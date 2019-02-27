@@ -47,14 +47,16 @@ extension XcodeBuildWrapper {
 
     private static func get(parameter: ParameterEnum, for graphRequest: GraphRequest) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
         guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
-
+        guard let accessibleUrl = graphRequest.accessibleUrls?.values.first else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
+        let xcodeBuildUrl = accessibleUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild")
+        
         switch fileExtension {
         case .project:
             switch parameter {
             case .scheme:
-                return try getProjectSchemes(for: graphRequest)
+                return try getProjectSchemes(for: graphRequest, xcodeBuildUrl: xcodeBuildUrl)
             case .target:
-                return try getProjectTargets(for: graphRequest)
+                return try getProjectTargets(for: graphRequest, xcodeBuildUrl: xcodeBuildUrl)
             }
         case .workspace:
             #warning("todo")
@@ -62,8 +64,8 @@ extension XcodeBuildWrapper {
         }
     }
 
-    private static func getProjectSchemes(for graphRequest: GraphRequest) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
-        guard let xcodeBuildResults = Shell.launch(path: "/usr/bin/xcrun", arguments: ["xcodebuild", "-list", "-project", graphRequest.url.absoluteString]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
+    private static func getProjectSchemes(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
+        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-list", "-project", graphRequest.url.absoluteString]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
 
         let schemeRegex = "Schemes:(\\n[ \\t]*[\\S]+)+"
         let schemeMatchingStrings = try Regex.getMatchingStrings(for: schemeRegex, text: xcodeBuildResults, captureGroup: 0)
@@ -72,9 +74,9 @@ extension XcodeBuildWrapper {
         return ["scheme": schemes]
     }
 
-    private static func getProjectTargets(for graphRequest: GraphRequest) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
+    private static func getProjectTargets(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
         guard let scheme = graphRequest.options[ParameterEnum.scheme.rawValue] else { throw ErrorEnum.couldNotFindAnySchemes(graphRequest.options.description) }
-        guard let xcodeBuildResults = Shell.launch(path: "/usr/bin/xcrun", arguments: ["xcodebuild", "-showBuildSettings", "-project", graphRequest.url.absoluteString, "-scheme", scheme]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
+        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-showBuildSettings", "-project", graphRequest.url.absoluteString, "-scheme", scheme]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
 
         let targetRegex = "TARGETNAME = ([\\S]+)"
         let targets = try Regex.getMatchingStrings(for: targetRegex, text: xcodeBuildResults, captureGroup: 1)

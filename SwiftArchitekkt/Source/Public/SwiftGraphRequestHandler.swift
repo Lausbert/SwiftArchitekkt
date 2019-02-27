@@ -21,7 +21,6 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue))
             guard AccessRequirementsEvaluator.evaluateAndStartAccessFor(graphRequest: graphRequest, completionHandler: completionHandler) else { return }
             statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue, nil))
-            
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.evaluatingAccessRequirements.rawValue, graphRequest: graphRequest) {
                 return
@@ -31,7 +30,6 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(graphRequest, LastProcedure.updatingGraphRequest.rawValue))
             guard let updatedGraphRequest = XcodeBuildWrapper.update(graphRequest: graphRequest, completionHandler: completionHandler) else { return }
             statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.updatingGraphRequest.rawValue, nil))
-
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.updatingGraphRequest.rawValue, graphRequest: updatedGraphRequest) {
                 return
@@ -41,17 +39,15 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingCompileCommands.rawValue))
             guard let compileCommands = XcodeBuildWrapper.getCompileCommands(for: updatedGraphRequest, completionHandler: completionHandler) else { return }
             statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingCompileCommands.rawValue, compileCommands.joined(separator: " ")))
-
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.generatingCompileCommands.rawValue, graphRequest: updatedGraphRequest) {
                 return
             }
             #endif
-
+            
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingAST.rawValue))
             guard let ast = SwiftCompilerWrapper.generateAst(for: compileCommands, graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
             statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingAST.rawValue, ast))
-
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.generatingAST.rawValue, graphRequest: updatedGraphRequest) {
                 return
@@ -71,12 +67,12 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
             } else {
                 statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue, nil))
             }
-
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.generatingGraph.rawValue, graphRequest: updatedGraphRequest) {
                 return
             }
             #endif
+            
 
             completionHandler(.success(updatedGraphRequest, rootNode))
 

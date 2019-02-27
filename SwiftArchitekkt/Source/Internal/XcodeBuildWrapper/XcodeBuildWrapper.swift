@@ -19,6 +19,7 @@ struct XcodeBuildWrapper {
 
     enum ErrorEnum: LocalizedError, Equatable {
         case couldNotHandleFileExtension(String)
+        case unexpectedlyCouldNotFindAnyAccessibleUrl
         case couldNotProperlyRunXcodeBuild
         case couldNotFindAnySchemes(String)
         case couldNotFindAnyTargets(String)
@@ -28,6 +29,8 @@ struct XcodeBuildWrapper {
             switch self {
             case .couldNotHandleFileExtension(let fileExtension):
                 return "Could not handle file extension: \(fileExtension)"
+            case .unexpectedlyCouldNotFindAnyAccessibleUrl:
+                return "Unexpectedly could not find any accessible url."
             case .couldNotProperlyRunXcodeBuild:
                 return "Could not properly run xcodebuild."
             case .couldNotFindAnySchemes(let description):

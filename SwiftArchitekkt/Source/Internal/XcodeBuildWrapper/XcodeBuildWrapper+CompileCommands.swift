@@ -22,10 +22,12 @@ extension XcodeBuildWrapper {
 
     private static func getCompileCommands(for graphRequest: GraphRequest) throws -> [String] {
         guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
+        guard let accessibleUrl = graphRequest.accessibleUrls?.values.first else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
+        let xcodeBuildUrl = accessibleUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild")
 
         switch fileExtension {
         case .project:
-            let compileCommands = try getProjectCompileCommands(for: graphRequest)
+            let compileCommands = try getProjectCompileCommands(for: graphRequest, xcodeBuildUrl: xcodeBuildUrl)
             let updatedCompileCommands = update(compileCommands: compileCommands)
             return updatedCompileCommands
         case .workspace:
@@ -34,10 +36,10 @@ extension XcodeBuildWrapper {
         }
     }
 
-    private static func getProjectCompileCommands(for graphRequest: GraphRequest) throws -> [String] {
+    private static func getProjectCompileCommands(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [String] {
         guard let scheme = graphRequest.options[ParameterEnum.scheme.rawValue] else { throw ErrorEnum.couldNotFindAnySchemes(graphRequest.options.description) }
         guard let target = graphRequest.options[ParameterEnum.target.rawValue] else { throw ErrorEnum.couldNotFindAnyTargets(graphRequest.options.description) }
-        guard let xcodeBuildResults = Shell.launch(path: "/usr/bin/xcrun", arguments: ["xcodebuild", "-project", graphRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
+        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-project", graphRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
 
         let compileCommandsRegex = "/(swiftc +[^\\n]* -module-name +\(target.replacingOccurrences(of: " ", with: "_")) +[^\\n]*)"
         guard let compileCommandsMatchingString = try Regex.getMatchingStrings(for: compileCommandsRegex, text: xcodeBuildResults, captureGroup: 1).first else { throw ErrorEnum.couldNotFindAnyCompileCommands(xcodeBuildResults) }

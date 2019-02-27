@@ -27,7 +27,7 @@ struct AccessRequirementsEvaluator {
     }
     
     static public let accessRequirements = [
-        AccessRequirement(key: "SwiftGraphRequestHandler", description: "Choose your Xcode app and relate command line tools.", fileName: "Xcode", fileType: "app")
+        AccessRequirement(key: "SwiftArchitekkt", description: "Choose your Xcode app and related command line tools.", fileName: "Xcode", fileType: "app")
     ]
     
     static func evaluateAndStartAccessFor(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Bool {
