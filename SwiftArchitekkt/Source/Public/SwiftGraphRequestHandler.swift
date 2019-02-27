@@ -17,7 +17,7 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
 
             let statusUpdateHandler = DispatchQueue.main.asyncClosure(statusUpdateHandler)
             let completionHandler = DispatchQueue.main.asyncClosure(completionHandler)
-            
+
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue))
             guard AccessRequirementsEvaluator.evaluateAndStartAccessFor(graphRequest: graphRequest, completionHandler: completionHandler) else { return }
             statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue, nil))
@@ -44,7 +44,7 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
                 return
             }
             #endif
-            
+
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingAST.rawValue))
             guard let ast = SwiftCompilerWrapper.generateAst(for: compileCommands, graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
             statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingAST.rawValue, ast))
@@ -53,9 +53,9 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
                 return
             }
             #endif
-            
+
             guard AccessRequirementsEvaluator.stopAccessFor(graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
-            
+
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue))
             let encoder = JSONEncoder()
             guard let rootNode = GraphBuilder(ast: ast).generateGraph(graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
@@ -72,7 +72,6 @@ class SwiftGraphRequestHandler: GraphRequestHandler {
                 return
             }
             #endif
-            
 
             completionHandler(.success(updatedGraphRequest, rootNode))
 

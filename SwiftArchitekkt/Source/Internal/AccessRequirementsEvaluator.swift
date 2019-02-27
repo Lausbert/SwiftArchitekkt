@@ -5,15 +5,15 @@ import CoreArchitekkt
 import os
 
 struct AccessRequirementsEvaluator {
-    
+
     // MARK: - Internal -
-    
+
     enum ErrorEnum: LocalizedError, Equatable {
-        
+
         case couldNotFindAnyAccessibleUrls
         case accessibleUrlDoesNotMatchRequirement
         case accessDeniedForAccessibleUrl
-        
+
         var errorDescription: String? {
             switch self {
             case .couldNotFindAnyAccessibleUrls:
@@ -25,11 +25,11 @@ struct AccessRequirementsEvaluator {
             }
         }
     }
-    
+
     static public let accessRequirements = [
         AccessRequirement(key: "SwiftArchitekkt", description: "Choose your Xcode app and related command line tools.", fileName: "Xcode", fileType: "app")
     ]
-    
+
     static func evaluateAndStartAccessFor(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Bool {
         do {
             let accessibleUrl = try evaluateAccessFor(graphRequest: graphRequest)
@@ -41,7 +41,7 @@ struct AccessRequirementsEvaluator {
             return false
         }
     }
-    
+
     static func stopAccessFor(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Bool {
         do {
             let accessibleUrl = try evaluateAccessFor(graphRequest: graphRequest)
@@ -53,14 +53,14 @@ struct AccessRequirementsEvaluator {
             return false
         }
     }
-    
+
     // MARK: - Private -
-    
+
     private static func evaluateAccessFor(graphRequest: GraphRequest) throws -> URL {
         let accessRequirement = accessRequirements[0]
         guard let accessibleUrls = graphRequest.accessibleUrls, !accessibleUrls.isEmpty else { throw ErrorEnum.couldNotFindAnyAccessibleUrls }
         guard let accessibleUrl = accessibleUrls[accessRequirement] else { throw ErrorEnum.accessibleUrlDoesNotMatchRequirement }
         return accessibleUrl
     }
-        
+
 }

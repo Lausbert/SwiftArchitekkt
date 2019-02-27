@@ -5,7 +5,7 @@ import CoreArchitekkt
 import os
 
 struct SwiftCompilerWrapper {
-    
+
     // MARK: - Internal -
 
     enum ErrorEnum: LocalizedError, Equatable {
