@@ -4,9 +4,11 @@ import Foundation
 import CoreArchitekkt
 import os
 
-class SwiftGraphRequestHandler: GraphRequestHandler {
+public class SwiftGraphRequestHandler: GraphRequestHandler {
 
     // MARK: - Public -
+    
+    public init() {}
 
     public var accessRequirements: [AccessRequirement]? { return AccessRequirementsEvaluator.accessRequirements }
 
