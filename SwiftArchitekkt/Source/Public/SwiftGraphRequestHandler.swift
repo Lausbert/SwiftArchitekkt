@@ -7,7 +7,7 @@ import os
 public class SwiftGraphRequestHandler: GraphRequestHandler {
 
     // MARK: - Public -
-    
+
     public init() {}
 
     public var accessRequirements: [AccessRequirement]? { return AccessRequirementsEvaluator.accessRequirements }
