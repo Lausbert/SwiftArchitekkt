@@ -13,7 +13,7 @@ extension IntegrationTests {
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
-                                                    case .success, .accessDenied, .decisionNeeded:
+                                                    case .success, .decisionNeeded:
                                                         XCTFail()
                                                     case .failure(_, let error):
                                                         XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnyTargets("xcodebuild: error: The project named \"NoTarget\" does not contain a scheme named \"AnyScheme\". The \"-list\" option can be used to find the names of the schemes in the project.\n"))
@@ -44,7 +44,7 @@ extension IntegrationTests {
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
-                                                    case .success, .accessDenied, .failure:
+                                                    case .success, .failure:
                                                         XCTFail()
                                                     case .decisionNeeded(_, let options):
                                                         if let targets = options["target"] {

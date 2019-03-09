@@ -12,7 +12,7 @@ extension IntegrationTests {
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
-                                                    case .success, .accessDenied, .decisionNeeded:
+                                                    case .success, .decisionNeeded:
                                                         XCTFail()
                                                     case .failure(_, let error):
                                                         XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotHandleFileExtension("test"))
