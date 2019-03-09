@@ -12,7 +12,7 @@ extension IntegrationTests {
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
-                                                    case .success, .decisionNeeded:
+                                                    case .success, .accessDenied, .decisionNeeded:
                                                         XCTFail()
                                                     case .failure(_, let error):
                                                         let url = getUrlForRessourceFile(withName: "MissingProject", pathExtension: "xcodeproj")
@@ -28,7 +28,7 @@ extension IntegrationTests {
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
-                                                    case .success, .decisionNeeded:
+                                                    case .success, .accessDenied, .decisionNeeded:
                                                         XCTFail()
                                                     case .failure(_, let error):
                                                         XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnySchemes("Information about project \"NoScheme\":\n    Targets:\n        NoScheme\n\n    Build Configurations:\n        Debug\n        Release\n\n    If no build configuration is specified and -scheme is not passed then \"Release\" is used.\n\n    This project contains no schemes.\n"))
@@ -57,7 +57,7 @@ extension IntegrationTests {
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
-                                                    case .success, .failure:
+                                                    case .success, .accessDenied, .failure:
                                                         XCTFail()
                                                     case .decisionNeeded(_, let options):
                                                         if let schemes = options["scheme"] {
