@@ -37,7 +37,7 @@ struct AccessRequirementsEvaluator {
             return true
         } catch {
             os_log("%@", log: SwiftGraphRequestHandler.errorLog, type: .debug, error.localizedDescription)
-            completionHandler(GraphRequest.Result.failure(graphRequest, error))
+            completionHandler(GraphRequest.Result.accessDenied(graphRequest, accessRequirements[0]))
             return false
         }
     }
@@ -49,7 +49,7 @@ struct AccessRequirementsEvaluator {
             return true
         } catch {
             os_log("%@", log: SwiftGraphRequestHandler.errorLog, type: .debug, error.localizedDescription)
-            completionHandler(GraphRequest.Result.failure(graphRequest, error))
+            completionHandler(GraphRequest.Result.accessDenied(graphRequest, accessRequirements[0]))
             return false
         }
     }
