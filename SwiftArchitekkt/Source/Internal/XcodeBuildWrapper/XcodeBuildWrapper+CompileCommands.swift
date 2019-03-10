@@ -21,8 +21,8 @@ extension XcodeBuildWrapper {
 
     private static func getCompileCommands(for graphRequest: GraphRequest) throws -> [String] {
         guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
-        guard let accessibleUrl = graphRequest.accessibleUrls?.values.first else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
-        let xcodeBuildUrl = accessibleUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
+        guard let url = graphRequest.accessibleUrls?[AccessRequirementsEvaluator.accessRequirements[0]] else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
+        let xcodeBuildUrl = url.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
 
         switch fileExtension {
         case .project:

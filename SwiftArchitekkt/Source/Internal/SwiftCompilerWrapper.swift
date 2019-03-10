@@ -27,8 +27,8 @@ struct SwiftCompilerWrapper {
 
     static func generateAst(for compileCommands: [String], graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> String? {
         do {
-            guard let accessibleUrl = graphRequest.accessibleUrls?.values.first else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
-            let swiftUrl = accessibleUrl.appendingPathComponent("Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc/")
+            guard let url = graphRequest.accessibleUrls?[AccessRequirementsEvaluator.accessRequirements[0]] else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
+            let swiftUrl = url.appendingPathComponent("Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc/")
             var ast = try generateAst(for: compileCommands, swiftUrl: swiftUrl)
             if ast.first == "\n" {
                 ast.removeFirst()
