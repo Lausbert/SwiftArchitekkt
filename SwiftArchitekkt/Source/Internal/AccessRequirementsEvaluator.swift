@@ -32,8 +32,10 @@ struct AccessRequirementsEvaluator {
 
     static func evaluateAndStartAccessFor(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Bool {
         do {
-            let accessibleUrl = try evaluateAccessFor(graphRequest: graphRequest)
-            guard accessibleUrl.startAccessingSecurityScopedResource() else { throw ErrorEnum.accessDeniedForAccessibleUrl }
+            let urls = try evaluateAccessFor(graphRequest: graphRequest)
+            for url in urls {
+                guard url.startAccessingSecurityScopedResource() else { throw ErrorEnum.accessDeniedForAccessibleUrl }
+            }
             return true
         } catch {
             completionHandler(GraphRequest.Result.failure(graphRequest, error))
@@ -47,11 +49,14 @@ struct AccessRequirementsEvaluator {
 
     // MARK: - Private -
 
-    private static func evaluateAccessFor(graphRequest: GraphRequest) throws -> URL {
-        let accessRequirement = accessRequirements[0]
+    private static func evaluateAccessFor(graphRequest: GraphRequest) throws -> [URL] {
         guard let accessibleUrls = graphRequest.accessibleUrls, !accessibleUrls.isEmpty else { throw ErrorEnum.couldNotFindAnyAccessibleUrls }
-        guard let accessibleUrl = accessibleUrls[accessRequirement] else { throw ErrorEnum.accessibleUrlDoesNotMatchRequirement }
-        return accessibleUrl
+        var urls: [URL] = []
+        for accessRequirement in accessRequirements {
+            guard let url = accessibleUrls[accessRequirement] else { throw ErrorEnum.accessibleUrlDoesNotMatchRequirement }
+            urls.append(url)
+        }
+        return urls
     }
 
 }
