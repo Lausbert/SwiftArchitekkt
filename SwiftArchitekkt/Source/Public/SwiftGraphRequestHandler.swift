@@ -18,7 +18,17 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
         SwiftGraphRequestHandler.queue.async {
 
             let statusUpdateHandler = DispatchQueue.main.asyncClosure(statusUpdateHandler)
-            let completionHandler = DispatchQueue.main.asyncClosure(completionHandler)
+            let completionHandler = DispatchQueue.main.asyncClosure({ (result: GraphRequest.Result) -> Void in
+                switch result {
+                case let .failure(graphRequest, error):
+                    AccessRequirementsEvaluator.stopAccessFor(graphRequest: graphRequest)
+                    let log = OSLog(subsystem: "org.cocoapods.SwiftArchitekkt", category: String(describing: self))
+                    os_log("%@", log: log, type: .debug, error.localizedDescription)
+                case let .decisionNeeded(graphRequest, _), let .success(graphRequest, _):
+                    AccessRequirementsEvaluator.stopAccessFor(graphRequest: graphRequest)
+                }
+                completionHandler(result)
+            })
 
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue))
             guard AccessRequirementsEvaluator.evaluateAndStartAccessFor(graphRequest: graphRequest, completionHandler: completionHandler) else { return }
@@ -56,7 +66,7 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
             }
             #endif
 
-            guard AccessRequirementsEvaluator.stopAccessFor(graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
+            AccessRequirementsEvaluator.stopAccessFor(graphRequest: updatedGraphRequest)
 
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue))
             let encoder = JSONEncoder()
@@ -82,7 +92,6 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
 
     // MARK: - Internal -
 
-    static let errorLog = OSLog(subsystem: "SwiftArchitekkt", category: "Error")
     static let queue = DispatchQueue.global(qos: .utility)
 
     enum LastProcedure: String, CaseIterable {

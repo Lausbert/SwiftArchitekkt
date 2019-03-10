@@ -64,7 +64,6 @@ class GraphBuilder {
             rootNode.set(children: completeGraph)
             return rootNode
         } catch {
-            os_log("%@", log: SwiftGraphRequestHandler.errorLog, type: .debug, error.localizedDescription)
             completionHandler(GraphRequest.Result.failure(graphRequest, error))
             return nil
         }

@@ -36,22 +36,13 @@ struct AccessRequirementsEvaluator {
             guard accessibleUrl.startAccessingSecurityScopedResource() else { throw ErrorEnum.accessDeniedForAccessibleUrl }
             return true
         } catch {
-            os_log("%@", log: SwiftGraphRequestHandler.errorLog, type: .debug, error.localizedDescription)
             completionHandler(GraphRequest.Result.failure(graphRequest, error))
             return false
         }
     }
 
-    static func stopAccessFor(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Bool {
-        do {
-            let accessibleUrl = try evaluateAccessFor(graphRequest: graphRequest)
-            accessibleUrl.stopAccessingSecurityScopedResource()
-            return true
-        } catch {
-            os_log("%@", log: SwiftGraphRequestHandler.errorLog, type: .debug, error.localizedDescription)
-            completionHandler(GraphRequest.Result.failure(graphRequest, error))
-            return false
-        }
+    static func stopAccessFor(graphRequest: GraphRequest) {
+        graphRequest.accessibleUrls?.values.forEach { $0.stopAccessingSecurityScopedResource() }
     }
 
     // MARK: - Private -

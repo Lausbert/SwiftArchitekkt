@@ -12,7 +12,6 @@ extension XcodeBuildWrapper {
         do {
             return try getCompileCommands(for: graphRequest)
         } catch {
-            os_log("%@", log: SwiftGraphRequestHandler.errorLog, type: .debug, error.localizedDescription)
             completionHandler(GraphRequest.Result.failure(graphRequest, error))
             return nil
         }

@@ -26,7 +26,6 @@ extension XcodeBuildWrapper {
                     return nil
                 }
             } catch {
-                os_log("%@", log: SwiftGraphRequestHandler.errorLog, type: .debug, error.localizedDescription)
                 completionHandler(GraphRequest.Result.failure(updatedGraphRequest, error))
                 return nil
             }

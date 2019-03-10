@@ -36,7 +36,6 @@ struct SwiftCompilerWrapper {
             guard ast.prefix(12) == "(source_file" && ast.suffix(1) == ")" else { throw ErrorEnum.invalidAstFormat(ast) }
             return ast
         } catch {
-            os_log("%@", log: SwiftGraphRequestHandler.errorLog, type: .debug, error.localizedDescription)
             completionHandler(GraphRequest.Result.failure(graphRequest, error))
             return nil
         }
