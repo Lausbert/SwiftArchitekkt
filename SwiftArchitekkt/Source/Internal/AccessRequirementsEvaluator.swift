@@ -27,7 +27,8 @@ struct AccessRequirementsEvaluator {
     }
 
     static public let accessRequirements = [
-        AccessRequirement(key: "SwiftArchitekkt", description: "Choose your Xcode app and related command line tools.", fileName: "Xcode", fileType: "app")
+        AccessRequirement(key: "org.cocoapods.SwiftArchitekkt.Xcode.app", description: "Choose your Xcode app and related command line tools.", fileName: "Xcode", fileType: "app"),
+        AccessRequirement(key: "org.cocoapods.SwiftArchitekkt.com.apple.dt.Xcode.plist", description: "Choose your Xcode user preferences, probably located in ~Library/Preferences.", fileName: "com.apple.dt.Xcode", fileType: "plist")
     ]
 
     static func evaluateAndStartAccessFor(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Bool {
