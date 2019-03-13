@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -75,9 +75,9 @@
 		0DF9E1BCC799AF3B40A423415CC5D0D0 /* StoryBoardLoadable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StoryBoardLoadable.swift; path = CoreArchitekkt/Source/Public/Utilities/Protocols/StoryBoardLoadable.swift; sourceTree = "<group>"; };
 		1A311FD3AE7ECA46EBAEA254F95A2778 /* SwiftArchitekkt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftArchitekkt.modulemap; sourceTree = "<group>"; };
 		1B5A5F6742F58A47115DDFA2E1C00D91 /* XcodeBuildWrapper+CompileCommands.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "XcodeBuildWrapper+CompileCommands.swift"; sourceTree = "<group>"; };
-		2B937C1E75FE6CEA18E55C45CC439AD9 /* SwiftArchitekkt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftArchitekkt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B937C1E75FE6CEA18E55C45CC439AD9 /* SwiftArchitekkt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftArchitekkt.framework; path = SwiftArchitekkt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		32F278E4582C806F35FE27EEFA4407A7 /* Array.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
-		39239BECF59A706BB68D989CD6EC662A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		39239BECF59A706BB68D989CD6EC662A /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		4394587EBADB7D907B4D4C0AF66C9C53 /* SwiftArchitekkt-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftArchitekkt-prefix.pch"; sourceTree = "<group>"; };
 		46E6164392DD03C7CE6E6326B6302CE2 /* Regex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Regex.swift; path = "CoreArchitekkt/Source/Public/Utilities/Classes+Structs/Regex.swift"; sourceTree = "<group>"; };
 		4DECCD7903FA2D02390AF8DCA7F77B0B /* Pods-SwiftArchitekkt_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SwiftArchitekkt_Tests-umbrella.h"; sourceTree = "<group>"; };
@@ -86,7 +86,7 @@
 		5A7CFCCD689E212AF5FAF1E204F4E6F3 /* Node+Comparable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Node+Comparable.swift"; path = "CoreArchitekkt/Source/Public/Classes+Structs/Node/Node+Comparable.swift"; sourceTree = "<group>"; };
 		6254C938A51F488B874CBD76A17688C6 /* AccessRequirementsEvaluator.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = AccessRequirementsEvaluator.swift; sourceTree = "<group>"; };
 		68FEB81161AE46A869971DE9C2C1E48F /* Pods-SwiftArchitekkt_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SwiftArchitekkt_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		69028E594647C9A105CF660A38C7EECC /* CoreArchitekkt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreArchitekkt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		69028E594647C9A105CF660A38C7EECC /* CoreArchitekkt.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = CoreArchitekkt.framework; path = CoreArchitekkt.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A5C2564DD6A029D2205CB87294DF625 /* Pods-SwiftArchitekkt_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SwiftArchitekkt_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		6AA045EDBF9293C23A51C5F681D9E2B1 /* Pods-SwiftArchitekkt_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SwiftArchitekkt_Tests-dummy.m"; sourceTree = "<group>"; };
 		6FA3DFF31F2893FC91687B104F5364CC /* RawTokenizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = RawTokenizer.swift; sourceTree = "<group>"; };
@@ -102,12 +102,12 @@
 		982C9EF71039FA67524BF0230F935C1F /* SwiftArchitekkt-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftArchitekkt-umbrella.h"; sourceTree = "<group>"; };
 		9A476A05EC322B2170B3F3919163EC0A /* String.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = String.swift; path = CoreArchitekkt/Source/Public/Extensions/String.swift; sourceTree = "<group>"; };
 		9D5C5B79A365AA95668B4B7F847D0B09 /* SwiftCompilerWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = SwiftCompilerWrapper.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DE632454E2F07E7E47F68C55664BCDD /* Array.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Array.swift; path = CoreArchitekkt/Source/Public/Extensions/Array.swift; sourceTree = "<group>"; };
 		9F3779837FF6E0F8FDA4F8D5F96816F0 /* SwiftArchitekkt-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftArchitekkt-dummy.m"; sourceTree = "<group>"; };
 		A3DC94B60655AA608B97E045DE4F0F27 /* CoreArchitekkt.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = CoreArchitekkt.modulemap; sourceTree = "<group>"; };
-		A906BC6D29A04C1A24B86A2E9F9C4E23 /* SwiftArchitekkt.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = SwiftArchitekkt.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		AB2DE82EDA02B2B94DDEC5AD4D084AB9 /* Pods_SwiftArchitekkt_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftArchitekkt_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A906BC6D29A04C1A24B86A2E9F9C4E23 /* SwiftArchitekkt.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = SwiftArchitekkt.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AB2DE82EDA02B2B94DDEC5AD4D084AB9 /* Pods_SwiftArchitekkt_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SwiftArchitekkt_Tests.framework; path = "Pods-SwiftArchitekkt_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADD887F2D5EB32C295B1FC4DE87892F1 /* Tokenizer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Tokenizer.swift; sourceTree = "<group>"; };
 		B54C479369047517C27B82BA723612E1 /* CoreArchitekkt-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "CoreArchitekkt-prefix.pch"; sourceTree = "<group>"; };
 		CBAA5B6E2E51C3CADCDB9B81A2543362 /* XcodeBuildWrapper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = XcodeBuildWrapper.swift; sourceTree = "<group>"; };
@@ -157,6 +157,7 @@
 				1B5A5F6742F58A47115DDFA2E1C00D91 /* XcodeBuildWrapper+CompileCommands.swift */,
 				023A9A71BB495A74298A887E5E3E6FA5 /* XcodeBuildWrapper+UpdateGraphRequest.swift */,
 			);
+			name = XcodeBuildWrapper;
 			path = XcodeBuildWrapper;
 			sourceTree = "<group>";
 		};
@@ -187,6 +188,7 @@
 			children = (
 				32F278E4582C806F35FE27EEFA4407A7 /* Array.swift */,
 			);
+			name = Extensions;
 			path = Extensions;
 			sourceTree = "<group>";
 		};
@@ -197,6 +199,7 @@
 				6FA3DFF31F2893FC91687B104F5364CC /* RawTokenizer.swift */,
 				ADD887F2D5EB32C295B1FC4DE87892F1 /* Tokenizer.swift */,
 			);
+			name = GraphBuilder;
 			path = GraphBuilder;
 			sourceTree = "<group>";
 		};
@@ -227,6 +230,7 @@
 				9A476A05EC322B2170B3F3919163EC0A /* String.swift */,
 				C6AF0417337D626E9D06724D2E79110B /* Support Files */,
 			);
+			name = CoreArchitekkt;
 			path = CoreArchitekkt;
 			sourceTree = "<group>";
 		};
@@ -444,15 +448,14 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0930;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 0930;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = en;
+			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
 			productRefGroup = A407FA189122D34B53E25CAA57A80FFC /* Products */;
@@ -567,6 +570,7 @@
 			baseConfigurationReference = 73447260643AA140A248BCBE1C3D36A1 /* Pods-SwiftArchitekkt_Tests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -601,6 +605,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8F72FD0DA83669CC49F0F87B02E1DCF7 /* SwiftArchitekkt.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -634,7 +639,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -699,6 +703,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DD7E72A9A58226879F044C5E3615C82F /* CoreArchitekkt.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -732,6 +737,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DD7E72A9A58226879F044C5E3615C82F /* CoreArchitekkt.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -765,7 +771,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -815,7 +820,8 @@
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.2;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -826,6 +832,7 @@
 			baseConfigurationReference = 68FEB81161AE46A869971DE9C2C1E48F /* Pods-SwiftArchitekkt_Tests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -860,6 +867,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 8F72FD0DA83669CC49F0F87B02E1DCF7 /* SwiftArchitekkt.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";

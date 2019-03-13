@@ -20,7 +20,7 @@ class IntegrationTests: XCTestCase {
         guard let firstAccessRequirement = swiftGraphRequestHandler.accessRequirements?[0] else { fatalError("No access requirement defined for swift graph request handler.") }
         guard let firstAccessibleUrl = URL(string: "/Applications/Xcode-beta.app/") else { fatalError("Could not initialize accessible Url.") }
         guard let secondAccessRequirement = swiftGraphRequestHandler.accessRequirements?[1] else { fatalError("No access requirement defined for swift graph request handler.") }
-        guard let secondAccessibleUrl = URL(string: "/does/not/matter/since/tests/are/not/sandboxed/com.apple.dt.Xcode.plist/") else { fatalError("Could not initialize accessible Url.") }
+        guard let secondAccessibleUrl = URL(string: "/does/not/matter/since/tests/are/not/sandboxed/") else { fatalError("Could not initialize accessible Url.") }
         let graphRequest = GraphRequest(url: url, options: options, accessibleUrls: [firstAccessRequirement: firstAccessibleUrl, secondAccessRequirement: secondAccessibleUrl])
         swiftGraphRequestHandler.handle(graphRequest: graphRequest, statusUpdateHandler: { (statusUpdate) in
             switch statusUpdate {
