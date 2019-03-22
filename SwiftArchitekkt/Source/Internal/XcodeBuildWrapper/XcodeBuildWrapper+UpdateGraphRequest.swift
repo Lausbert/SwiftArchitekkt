@@ -65,11 +65,15 @@ extension XcodeBuildWrapper {
 
     private static func getProjectSchemes(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
         guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-list", "-project", graphRequest.url.absoluteString]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
-
-        let schemeRegex = "Schemes:(\\n[ \\t]*[\\S]+)+"
-        let schemeMatchingStrings = try Regex.getMatchingStrings(for: schemeRegex, text: xcodeBuildResults, captureGroup: 0)
-        guard let schemes = schemeMatchingStrings.first?.replacingOccurrences(of: "Schemes:\n", with: "").replacingOccurrences(of: " ", with: "").components(separatedBy: "\n") else { throw ErrorEnum.couldNotFindAnySchemes(xcodeBuildResults) }
-
+        
+        let schemeRegex = "Schemes:\\n((.+\\n)+)"
+        let schemeMatchingStrings = try Regex.getMatchingStrings(for: schemeRegex, text: xcodeBuildResults, captureGroup: 1)
+        guard let schemes = schemeMatchingStrings
+            .first?
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .components(separatedBy: "\n")
+            .map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
+            else { throw ErrorEnum.couldNotFindAnySchemes(xcodeBuildResults) }
         return ["scheme": schemes]
     }
 

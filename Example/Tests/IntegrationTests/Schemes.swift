@@ -71,5 +71,26 @@ extension IntegrationTests {
                                                     }
         })
     }
+    
+    func testMultipleSchemesWithWhitespaceForProject() {
+        testGraphRequestHandlingForRessourceFile(withName: "MultipleSchemesWithWhitespace",
+                                                 pathExtension: "xcodeproj",
+                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
+                                                 completionValidationHandler: { (result, expectation) in
+                                                    switch result {
+                                                    case .success, .failure:
+                                                        XCTFail()
+                                                    case .decisionNeeded(_, let options):
+                                                        if let schemes = options["scheme"] {
+                                                            XCTAssert(schemes.contains("First Scheme"))
+                                                            XCTAssert(schemes.contains("Second Scheme"))
+                                                            XCTAssert(schemes.count == 2)
+                                                        } else {
+                                                            XCTFail()
+                                                        }
+                                                        expectation.fulfill()
+                                                    }
+        })
+    }
 
 }
