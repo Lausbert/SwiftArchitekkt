@@ -65,7 +65,7 @@ extension XcodeBuildWrapper {
 
     private static func getProjectSchemes(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
         guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-list", "-project", graphRequest.url.absoluteString]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
-        
+
         let schemeRegex = "Schemes:\\n((.+\\n)+)"
         let schemeMatchingStrings = try Regex.getMatchingStrings(for: schemeRegex, text: xcodeBuildResults, captureGroup: 1)
         guard let schemes = schemeMatchingStrings

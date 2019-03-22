@@ -71,7 +71,7 @@ extension IntegrationTests {
                                                     }
         })
     }
-    
+
     func testMultipleSchemesWithWhitespaceForProject() {
         testGraphRequestHandlingForRessourceFile(withName: "MultipleSchemesWithWhitespace",
                                                  pathExtension: "xcodeproj",
