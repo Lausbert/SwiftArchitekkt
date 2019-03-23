@@ -14,11 +14,8 @@ func getUrlForRessourceFile(withName name: String, pathExtension: String) -> URL
     guard let rootPath = ProcessInfo.processInfo.environment["SRCROOT"] else {
         fatalError("No root path defined in test environment variables.")
     }
-    guard let rootUrl = URL(string: rootPath) else {
-        fatalError("Could not initialize root url.")
-    }
 
-    return rootUrl.appendingPathComponent("Tests/Ressources/\(name)/\(name)").appendingPathExtension(pathExtension)
+    return URL(fileURLWithPath: rootPath).appendingPathComponent("Tests/Ressources/\(name)/\(name)").appendingPathExtension(pathExtension)
 }
 
 func XCTEqualAfterCasting<T, U: Equatable>(_ lhs: T, toTypeOf rhs: U) {

@@ -69,8 +69,8 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
             AccessRequirementsEvaluator.stopAccessFor(graphRequest: updatedGraphRequest)
 
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue))
-            let encoder = JSONEncoder()
             guard let rootNode = GraphBuilder(ast: ast).generateGraph(graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
+            let encoder = JSONEncoder()
             #if DEBUG
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
             #endif

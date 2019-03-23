@@ -16,7 +16,7 @@ extension IntegrationTests {
                                                         XCTFail()
                                                     case .failure(_, let error):
                                                         let url = getUrlForRessourceFile(withName: "MissingProject", pathExtension: "xcodeproj")
-                                                        XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnySchemes("xcodebuild: error: \'\(url.absoluteString)\' does not exist.\n"))
+                                                        XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnySchemes("xcodebuild: error: \'\(url.absoluteString.replacingOccurrences(of: "file://", with: ""))\' does not exist.\n"))
                                                         expectation.fulfill()
                                                     }
         })
