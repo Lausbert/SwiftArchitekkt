@@ -3,9 +3,9 @@
 import Foundation
 
 class Tokenizer {
-    
+
     // MARK: - Internal -
-    
+
     #if DEBUG
     static func debugDescription(of tokens: [Token]) {
         var indent = 0
@@ -23,12 +23,12 @@ class Tokenizer {
         }
     }
     #endif
-    
+
     enum ErrorEnum: LocalizedError, Equatable {
-        
+
         case nonSourceFileScopeContainsSourceFileString(RawTokenizer.RawToken)
         case invalidToken(RawTokenizer.RawToken)
-        
+
         var errorDescription: String? {
             switch self {
             case .nonSourceFileScopeContainsSourceFileString(let rawToken):
@@ -37,13 +37,13 @@ class Tokenizer {
                 return "Invalid token: \(rawToken)"
             }
         }
-        
+
     }
-    
+
     init(ast: String) {
         rawTokenizer = RawTokenizer(ast: ast)
     }
-    
+
     func getNextToken() throws -> Token? {
         while let rawToken = nextRawToken() {
             // This switch statement prevents any handling of raw tokens within scopes that are not handled. Raw scope tokens should only be handled if there is just one or no unhandled left parenthesis token. All other raw tokens should only be handled if there is no unhandled left parenthesis token.
@@ -92,7 +92,7 @@ class Tokenizer {
                     break
                 }
             }
-            
+
             // The actual handling of raw tokens.
             switch rawToken {
             case .sourceFile,
@@ -185,9 +185,9 @@ class Tokenizer {
         }
         return nil
     }
-    
+
     enum Token: CustomStringConvertible, Equatable {
-        
+
         // pass-through tokens
         case implicit
         case interface
@@ -200,7 +200,7 @@ class Tokenizer {
         case required
         case directToStorage
         case inOut
-        
+
         // token with identifier
         case type(String)
         case apiName(String)
@@ -222,14 +222,14 @@ class Tokenizer {
         case setter(String)
         case materializeForSet(String)
         case value(String)
-        
+
         // token with identifiers
         case inherits([String])
-        
+
         // scope tokens
         case scopeStart(RawTokenizer.RawToken, identifier: String?)
         case scopeEnd(RawTokenizer.RawToken, identifier: String?)
-        
+
         var description: String {
             switch self {
             case .scopeStart(let rawToken, let identifier):
@@ -302,11 +302,11 @@ class Tokenizer {
                 return "value: \(identifier)"
             }
         }
-        
+
     }
-    
+
     // MARK: - Private -
-    
+
     private var rawTokenizer: RawTokenizer
     private var pushedBackRawTokens: [RawTokenizer.RawToken] = []
     private var openScopes: [Token] = []
@@ -319,7 +319,7 @@ class Tokenizer {
         }
         return ""
     }
-    
+
     private func nextRawToken() -> RawTokenizer.RawToken? {
         if let pushedBackRawToken = pushedBackRawTokens.first {
             pushedBackRawTokens.removeFirst()
@@ -327,7 +327,7 @@ class Tokenizer {
         }
         return rawTokenizer.nextToken()
     }
-    
+
     private func scopeStartToken(with rawToken: RawTokenizer.RawToken) throws -> Token {
         unclosedLeftParenthesisCount -= 1
         var pushedBackRawTokens: [RawTokenizer.RawToken] = []
@@ -345,7 +345,7 @@ class Tokenizer {
                 if rawToken == .sourceFile {
                     identifier = (identifier.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
                 } else if identifier.contains("SourceFile") {
-                    
+
                 }
                 scopeStart = Token.scopeStart(rawToken, identifier: identifierPrefix + identifier)
                 break loop
@@ -358,7 +358,7 @@ class Tokenizer {
         openScopes.append(scopeStart)
         return scopeStart
     }
-    
+
     private func scopeEndToken() -> Token? {
         if unclosedLeftParenthesisCount > 0 {
             unclosedLeftParenthesisCount -= 1
@@ -367,7 +367,7 @@ class Tokenizer {
         guard let scopeStart = openScopes.popLast(), case let .scopeStart(rawToken, identifier) = scopeStart else { return nil }
         return .scopeEnd(rawToken, identifier: identifier)
     }
-    
+
     private func inheritsToken() -> Token {
         var identifiers: [String] = []
         loop: while let rawToken = nextRawToken() {
@@ -384,7 +384,7 @@ class Tokenizer {
         }
         return .inherits(identifiers)
     }
-    
+
     private func tokenWithIdentifier(for initialRawToken: RawTokenizer.RawToken) throws -> Token {
         while let rawToken = nextRawToken() {
             switch rawToken {
@@ -439,5 +439,5 @@ class Tokenizer {
         }
         throw ErrorEnum.invalidToken(initialRawToken)
     }
-    
+
 }
