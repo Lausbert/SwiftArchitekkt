@@ -200,9 +200,11 @@ class Tokenizer {
         case required
         case directToStorage
         case inOut
+        
+        // token with optional identifier
+        case type(String?)
 
         // token with identifier
-        case type(String)
         case apiName(String)
         case access(String)
         case override(String)
@@ -249,7 +251,7 @@ class Tokenizer {
             case .apiName(let identifier):
                 return "apiName: \(identifier)"
             case .type(let identifier):
-                return "type: \(identifier)"
+                return "type: \(identifier ?? "")"
             case .override(let identifier):
                 return "override: \(identifier)"
             case .declaration(let identifier):
@@ -434,7 +436,12 @@ class Tokenizer {
                     throw ErrorEnum.invalidToken(initialRawToken)
                 }
             default:
-                throw ErrorEnum.invalidToken(rawToken)
+                switch initialRawToken {
+                case .type:
+                    return .type(nil)
+                default:
+                    throw ErrorEnum.invalidToken(rawToken)
+                }
             }
         }
         throw ErrorEnum.invalidToken(initialRawToken)

@@ -151,8 +151,9 @@ class GraphBuilder {
         try handle(identifiers: identifiers)
     }
 
-    private func handle(typeString: String) throws {
-        var typeString = typeString.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
+    private func handle(typeString: String?) throws {
+        guard var typeString = typeString else { return }
+        typeString = typeString.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
         typeString = typeString.replacingOccurrences(of: "->", with: ",")
         let identifiers = typeString.components(separatedBy: CharacterSet(charactersIn: ",:")).filter { !$0.isEmpty }
         try handle(identifiers: identifiers)
