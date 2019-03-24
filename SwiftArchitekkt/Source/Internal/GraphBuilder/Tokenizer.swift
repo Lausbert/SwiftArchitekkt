@@ -438,6 +438,7 @@ class Tokenizer {
             default:
                 switch initialRawToken {
                 case .type:
+                    pushedBackRawTokens.append(rawToken)
                     return .type(nil)
                 default:
                     throw ErrorEnum.invalidToken(rawToken)

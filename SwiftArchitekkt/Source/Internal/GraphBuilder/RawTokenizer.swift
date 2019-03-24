@@ -147,6 +147,8 @@ class RawTokenizer {
                 return identifierToken(endingWith: "'")
             case "\n":
                 return .identifier("")
+            case "(":
+                return identifierToken(endingWith: ")")
             default:
                 return identifierToken(startingWith: ch, endingWith: " ")
             }
@@ -166,20 +168,22 @@ class RawTokenizer {
 
         while let ch = nextScalar() {
             switch ch {
-            case last,
-                 "\n":
-                return .identifier(tokenText)
             case "(":
                 allowedRightParenthesis += 1
                 tokenText.unicodeScalars.append(ch)
             case ")":
                 if allowedRightParenthesis < 1 {
-                    pushedBackScalar = ch
+                    if last != ")" {
+                        pushedBackScalar = ch
+                    }
                     return .identifier(tokenText)
                 } else {
                     allowedRightParenthesis -= 1
                     tokenText.unicodeScalars.append(ch)
                 }
+            case last,
+                 "\n":
+                return .identifier(tokenText)
             default:
                 tokenText.unicodeScalars.append(ch)
             }
