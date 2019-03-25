@@ -149,7 +149,7 @@ class Tokenizer {
         var scopeStart = Token.scopeStart(rawToken, identifier: nil)
         loop: while let nextRawToken = nextRawToken() {
             switch nextRawToken {
-            case var .identifier(identifier):
+            case var .nameIdentifier(identifier):
                 if rawToken == .sourceFile {
                     identifier = (identifier.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
                 } else if identifier.contains("SourceFile") {
@@ -157,9 +157,12 @@ class Tokenizer {
                 }
                 scopeStart = Token.scopeStart(rawToken, identifier: identifierPrefix + identifier)
                 break loop
-            default:
+            case .leftParenthesis:
                 pushedBackRawTokens.append(nextRawToken)
                 break loop
+            default:
+                pushedBackRawTokens.append(nextRawToken)
+                continue
             }
         }
         self.pushedBackRawTokens += pushedBackRawTokens

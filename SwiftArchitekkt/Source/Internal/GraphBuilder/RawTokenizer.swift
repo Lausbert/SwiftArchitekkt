@@ -18,6 +18,7 @@ class RawTokenizer {
         case leftParenthesis
         case rightParenthesis
         case identifier(String)
+        case nameIdentifier(String)
 
         // followed by identifier
         case type
@@ -51,11 +52,11 @@ class RawTokenizer {
             case "=":
                 return identifierTokenAfterEqual()
             case "[":
-                return identifierToken(endingWith: "]")
+                return .identifier(identifier(endingWith: "]"))
             case "\"":
-                return identifierToken(endingWith: "\"")
+                return .nameIdentifier(identifier(endingWith: "\""))
             case "'":
-                return identifierToken(endingWith: "'")
+                return .identifier(identifier(endingWith: "'"))
             default:
                 return keywordToken(startingWith: ch)
             }
@@ -80,24 +81,24 @@ class RawTokenizer {
         if let ch = nextScalar() {
             switch ch {
             case "[":
-                return identifierToken(endingWith: "]")
+                return .identifier(identifier(endingWith: "]"))
             case "\"":
-                return identifierToken(endingWith: "\"")
+                return .nameIdentifier(identifier(endingWith: "\""))
             case "'":
-                return identifierToken(endingWith: "'")
+                return .identifier(identifier(endingWith: "'"))
             case "\n":
                 return .identifier("")
             case "(":
-                return identifierToken(endingWith: ")")
+                return .identifier(identifier(endingWith: ")"))
             default:
-                return identifierToken(startingWith: ch, endingWith: " ")
+                return .identifier(identifier(endingWith: " "))
             }
         } else {
             return nil
         }
     }
 
-    private func identifierToken(startingWith first: UnicodeScalar? = nil, endingWith last: UnicodeScalar) -> RawToken {
+    private func identifier(startingWith first: UnicodeScalar? = nil, endingWith last: UnicodeScalar) -> String {
         var tokenText: String
         if let first = first {
             tokenText = String(first)
@@ -116,19 +117,19 @@ class RawTokenizer {
                     if last != ")" {
                         pushedBackScalar = ch
                     }
-                    return .identifier(tokenText)
+                    return tokenText
                 } else {
                     allowedRightParenthesis -= 1
                     tokenText.unicodeScalars.append(ch)
                 }
             case last,
                  "\n":
-                return .identifier(tokenText)
+                return tokenText
             default:
                 tokenText.unicodeScalars.append(ch)
             }
         }
-        return .identifier(tokenText)
+        return tokenText
     }
 
     private func keywordToken(startingWith first: UnicodeScalar) -> RawToken {
