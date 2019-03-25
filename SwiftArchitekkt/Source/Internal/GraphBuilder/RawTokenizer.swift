@@ -76,23 +76,9 @@ class RawTokenizer {
 
     private func identifier(endingWith last: UnicodeScalar) -> String {
         var tokenText = ""
-        var allowedRightParenthesis = 0
 
         while let ch = nextScalar() {
             switch ch {
-            case "(":
-                allowedRightParenthesis += 1
-                tokenText.unicodeScalars.append(ch)
-            case ")":
-                if allowedRightParenthesis < 1 {
-                    if last != ")" {
-                        pushedBackScalar = ch
-                    }
-                    return tokenText
-                } else {
-                    allowedRightParenthesis -= 1
-                    tokenText.unicodeScalars.append(ch)
-                }
             case last,
                  "\n":
                 return tokenText
