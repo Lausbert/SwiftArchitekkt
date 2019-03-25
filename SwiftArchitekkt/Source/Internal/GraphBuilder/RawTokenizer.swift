@@ -20,18 +20,13 @@ class RawTokenizer {
         case nameIdentifier(String)
         case typeIdentifier(String)
         case unknown(String)
-
+        
         // followed by identifier
-        case type
+        case scope(String)
 
         // followed by identifiers
+        case type
         case inherits
-
-        // named scopes
-        case sourceFile
-        case classDeclaration
-        case funcDeclaration
-        case varDeclaration
 
     }
 
@@ -134,13 +129,13 @@ class RawTokenizer {
 
         switch tokenText {
         case "source_file":
-            return .sourceFile
+            return .scope("sourceFile")
         case "class_decl":
-            return .classDeclaration
+            return .scope("class")
         case "var_decl":
-            return .varDeclaration
+            return .scope("variable")
         case "func_decl":
-            return .funcDeclaration
+            return .scope("function")
         case "type=":
             return .type
         case "inherits:":

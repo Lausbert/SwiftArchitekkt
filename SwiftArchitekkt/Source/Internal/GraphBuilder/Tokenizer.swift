@@ -26,13 +26,10 @@ class Tokenizer {
 
     enum ErrorEnum: LocalizedError, Equatable {
 
-        case nonSourceFileScopeContainsSourceFileString(RawTokenizer.RawToken)
         case invalidToken(RawTokenizer.RawToken)
 
         var errorDescription: String? {
             switch self {
-            case .nonSourceFileScopeContainsSourceFileString(let rawToken):
-                return "Non source file scope contains source file string: \(rawToken)"
             case .invalidToken(let rawToken):
                 return "Invalid token: \(rawToken)"
             }
@@ -50,10 +47,7 @@ class Tokenizer {
             switch rawToken {
             case .leftParenthesis, .rightParenthesis:
                 break
-            case .sourceFile,
-                 .classDeclaration,
-                 .funcDeclaration,
-                 .varDeclaration:
+            case .scope:
                 if unclosedLeftParenthesisCount > 1 {
                     continue
                 } else {
@@ -69,11 +63,8 @@ class Tokenizer {
 
             // The actual handling of raw tokens.
             switch rawToken {
-            case .sourceFile,
-                 .classDeclaration,
-                 .funcDeclaration,
-                 .varDeclaration:
-                return try scopeStartToken(with: rawToken)
+            case let .scope(scope):
+                return try scopeStartToken(with: scope)
             case .leftParenthesis:
                 unclosedLeftParenthesisCount += 1
             case .rightParenthesis:
@@ -100,19 +91,19 @@ class Tokenizer {
         case inherits([String])
         
         // scope tokens
-        case scopeStart(RawTokenizer.RawToken, identifier: String?)
-        case scopeEnd(RawTokenizer.RawToken, identifier: String?)
+        case scopeStart(String, identifier: String?)
+        case scopeEnd(String, identifier: String?)
 
         var description: String {
             switch self {
-            case .scopeStart(let rawToken, let identifier):
-                return identifier == nil ? "scopeStart: \(rawToken)" : "scopeStart: \(rawToken), \(identifier ?? "")"
-            case .scopeEnd(let rawToken, let identifier):
-                return identifier == nil ? "scopeEnd: \(rawToken)" : "scopeEnd: \(rawToken), \(identifier ?? "")"
+            case .scopeStart(let scope, let identifier):
+                return identifier == nil ? "scopeStart: \(scope)" : "scopeStart: \(scope), \(identifier ?? "")"
+            case .scopeEnd(let scope, let identifier):
+                return identifier == nil ? "scopeEnd: \(scope)" : "scopeEnd: \(scope), \(identifier ?? "")"
             case .inherits(let identifiers):
                 return "inherits: \(identifiers)"
-            case .type(let identifier):
-                return "type: \(identifier)"
+            case .type(let identifiers):
+                return "type: \(identifiers)"
             }
         }
 
@@ -126,7 +117,7 @@ class Tokenizer {
     private var unclosedLeftParenthesisCount = 0
     private var identifierPrefix: String {
         for openScope in openScopes.reversed() {
-            if case let .scopeStart(rawToken, identifier) = openScope, rawToken != .sourceFile, let id = identifier {
+            if case let .scopeStart(scope, identifier) = openScope, scope != "sourceFile", let id = identifier {
                 return id + "."
             }
         }
@@ -141,19 +132,17 @@ class Tokenizer {
         return rawTokenizer.nextToken()
     }
 
-    private func scopeStartToken(with rawToken: RawTokenizer.RawToken) throws -> Token {
+    private func scopeStartToken(with scope: String) throws -> Token {
         unclosedLeftParenthesisCount -= 1
         var pushedBackRawTokens: [RawTokenizer.RawToken] = []
-        var scopeStart = Token.scopeStart(rawToken, identifier: nil)
+        var scopeStart = Token.scopeStart(scope, identifier: nil)
         loop: while let nextRawToken = nextRawToken() {
             switch nextRawToken {
             case var .nameIdentifier(identifier):
-                if rawToken == .sourceFile {
+                if scope == "sourceFile" {
                     identifier = (identifier.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
-                } else if identifier.contains("SourceFile") {
-
                 }
-                scopeStart = Token.scopeStart(rawToken, identifier: identifierPrefix + identifier)
+                scopeStart = Token.scopeStart(scope, identifier: identifierPrefix + identifier)
                 break loop
             case .leftParenthesis:
                 pushedBackRawTokens.append(nextRawToken)
