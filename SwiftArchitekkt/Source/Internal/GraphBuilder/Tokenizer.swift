@@ -51,35 +51,9 @@ class Tokenizer {
             case .leftParenthesis, .rightParenthesis:
                 break
             case .sourceFile,
-                 .importDeclaration,
                  .classDeclaration,
                  .funcDeclaration,
-                 .varDeclaration,
-                 .accessorDeclaration,
-                 .parameterList,
-                 .parameter,
-                 .constructorDeclaration,
-                 .destructorDeclaration,
-                 .braceStatement,
-                 .callExpression,
-                 .dotSyntaxCallExpression,
-                 .declarationReferenceExpression,
-                 .superReferenceExpression,
-                 .tupleExpression,
-                 .rebindSelfInConstructorExpression,
-                 .otherConstructorReferenceExpression,
-                 .returnStatement,
-                 .patternBindingDeclaration,
-                 .patternTyped,
-                 .patternNamed,
-                 .typeExpression,
-                 .loadExpression,
-                 .memberReferenceExpression,
-                 .constructorReferenceCallExpression,
-                 .result,
-                 .typeId,
-                 .component,
-                 .assignExpression:
+                 .varDeclaration:
                 if unclosedLeftParenthesisCount > 1 {
                     continue
                 } else {
@@ -96,35 +70,9 @@ class Tokenizer {
             // The actual handling of raw tokens.
             switch rawToken {
             case .sourceFile,
-                 .importDeclaration,
                  .classDeclaration,
                  .funcDeclaration,
-                 .varDeclaration,
-                 .accessorDeclaration,
-                 .parameterList,
-                 .parameter,
-                 .constructorDeclaration,
-                 .destructorDeclaration,
-                 .braceStatement,
-                 .callExpression,
-                 .dotSyntaxCallExpression,
-                 .declarationReferenceExpression,
-                 .superReferenceExpression,
-                 .tupleExpression,
-                 .rebindSelfInConstructorExpression,
-                 .otherConstructorReferenceExpression,
-                 .returnStatement,
-                 .patternBindingDeclaration,
-                 .patternTyped,
-                 .patternNamed,
-                 .typeExpression,
-                 .loadExpression,
-                 .memberReferenceExpression,
-                 .constructorReferenceCallExpression,
-                 .result,
-                 .typeId,
-                 .component,
-                 .assignExpression:
+                 .varDeclaration:
                 return try scopeStartToken(with: rawToken)
             case .leftParenthesis:
                 unclosedLeftParenthesisCount += 1
@@ -134,50 +82,9 @@ class Tokenizer {
                 } else {
                     continue
                 }
-            case .implicit:
-                return .implicit
-            case .interface:
-                return .interface
-            case .superReference:
-                return .superReference
-            case .objc:
-                return .objc
-            case .nonResilient:
-                return .nonResilient
-            case .dynamic:
-                return .dynamic
-            case .noThrow:
-                return .noThrow
-            case .designated:
-                return .designated
-            case .required:
-                return .required
-            case .directToStorage:
-                return .directToStorage
-            case .inOut:
-                return .inOut
             case .inherits:
                 return inheritsToken()
-            case .type,
-                 .apiName,
-                 .access,
-                 .override,
-                 .declaration,
-                 .id,
-                 .bind,
-                 .location,
-                 .range,
-                 .failable,
-                 .argumentLabels,
-                 .names,
-                 .functionReference,
-                 .typeRepresantation,
-                 .storageKind,
-                 .getter,
-                 .accessKind,
-                 .setter,
-                 .materializeForSet,
-                 .value:
+            case .type:
                 return try tokenWithIdentifier(for: rawToken)
             default:
                 continue
@@ -187,43 +94,9 @@ class Tokenizer {
     }
 
     enum Token: CustomStringConvertible, Equatable {
-
-        // pass-through tokens
-        case implicit
-        case interface
-        case superReference
-        case objc
-        case nonResilient
-        case dynamic
-        case noThrow
-        case designated
-        case required
-        case directToStorage
-        case inOut
         
-        // token with optional identifier
-        case type(String?)
-
         // token with identifier
-        case apiName(String)
-        case access(String)
-        case override(String)
-        case declaration(String)
-        case id(String)
-        case bind(String)
-        case location(String)
-        case range(String)
-        case failable(String)
-        case argumentLabels(String)
-        case names(String)
-        case functionReference(String)
-        case typeRepresantation(String)
-        case storageKind(String)
-        case getter(String)
-        case accessKind(String)
-        case setter(String)
-        case materializeForSet(String)
-        case value(String)
+        case type(String)
 
         // token with identifiers
         case inherits([String])
@@ -240,68 +113,8 @@ class Tokenizer {
                 return identifier == nil ? "scopeEnd: \(rawToken)" : "scopeEnd: \(rawToken), \(identifier ?? "")"
             case .inherits(let identifiers):
                 return "inherits: \(identifiers)"
-            case .access(let rawToken):
-                return "access: \(rawToken)"
-            case .implicit:
-                return "implicit"
-            case .interface:
-                return "interface"
-            case .superReference:
-                return "super"
-            case .apiName(let identifier):
-                return "apiName: \(identifier)"
             case .type(let identifier):
-                return "type: \(identifier ?? "")"
-            case .override(let identifier):
-                return "override: \(identifier)"
-            case .declaration(let identifier):
-                return "declaration: \(identifier)"
-            case .id(let identifier):
-                return "id: \(identifier)"
-            case .bind(let identifier):
-                return "bind: \(identifier)"
-            case .objc:
-                return "objc"
-            case .nonResilient:
-                return "nonResilient"
-            case .dynamic:
-                return "dynamic"
-            case .noThrow:
-                return "noThrow"
-            case .designated:
-                return "designated"
-            case .required:
-                return "required"
-            case .directToStorage:
-                return "directToStorage"
-            case .inOut:
-                return "inOut"
-            case .location(let identifier):
-                return "location: \(identifier)"
-            case .range(let identifier):
-                return "range: \(identifier)"
-            case .failable(let identifier):
-                return "failable: \(identifier)"
-            case .argumentLabels(let identifier):
-                return "argumentLabels: \(identifier)"
-            case .names(let identifier):
-                return "names: \(identifier)"
-            case .functionReference(let identifier):
-                return "functionReference: \(identifier)"
-            case .typeRepresantation(let identifier):
-                return "typeRepresentation: \(identifier)"
-            case .storageKind(let identifier):
-                return "storageKind: \(identifier)"
-            case .getter(let identifier):
-                return "getter: \(identifier)"
-            case .accessKind(let identifier):
-                return "accessKind: \(identifier)"
-            case .setter(let identifier):
-                return "setter: \(identifier)"
-            case .materializeForSet(let identifier):
-                return "materializeForSet: \(identifier)"
-            case .value(let identifier):
-                return "value: \(identifier)"
+                return "type: \(identifier)"
             }
         }
 
@@ -336,13 +149,6 @@ class Tokenizer {
         var scopeStart = Token.scopeStart(rawToken, identifier: nil)
         loop: while let nextRawToken = nextRawToken() {
             switch nextRawToken {
-            case .range:
-                if let rangeIdentifierRawToken = self.nextRawToken() {
-                    pushedBackRawTokens.append(nextRawToken)
-                    pushedBackRawTokens.append(rangeIdentifierRawToken)
-                }
-            case .implicit:
-                pushedBackRawTokens.append(nextRawToken)
             case var .identifier(identifier):
                 if rawToken == .sourceFile {
                     identifier = (identifier.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
@@ -394,55 +200,11 @@ class Tokenizer {
                 switch initialRawToken {
                 case .type:
                     return .type(identifier)
-                case .apiName:
-                    return .apiName(identifier)
-                case .access:
-                    return .access(identifier)
-                case .override:
-                    return .override(identifier.components(separatedBy: ".").dropFirst(2).joined(separator: "."))
-                case .declaration:
-                    return .declaration(identifier.components(separatedBy: ".").dropFirst(2).joined(separator: "."))
-                case .id:
-                    return .id(identifier)
-                case .bind:
-                    return .bind(identifier.components(separatedBy: ".").dropFirst(2).joined(separator: "."))
-                case .location:
-                    return .location(identifier)
-                case .range:
-                    return .range(identifier)
-                case .failable:
-                    return .failable(identifier)
-                case .argumentLabels:
-                    return .argumentLabels(identifier)
-                case .names:
-                    return .names(identifier)
-                case .functionReference:
-                    return .functionReference(identifier)
-                case .typeRepresantation:
-                    return .typeRepresantation(identifier)
-                case .storageKind:
-                    return .storageKind(identifier)
-                case .getter:
-                    return .getter(identifier)
-                case .accessKind:
-                    return .accessKind(identifier)
-                case .setter:
-                    return .setter(identifier)
-                case .materializeForSet:
-                    return .materializeForSet(identifier)
-                case .value:
-                    return .value(identifier)
                 default:
                     throw ErrorEnum.invalidToken(initialRawToken)
                 }
             default:
-                switch initialRawToken {
-                case .type:
-                    pushedBackRawTokens.append(rawToken)
-                    return .type(nil)
-                default:
-                    throw ErrorEnum.invalidToken(rawToken)
-                }
+                throw ErrorEnum.invalidToken(rawToken)
             }
         }
         throw ErrorEnum.invalidToken(initialRawToken)
