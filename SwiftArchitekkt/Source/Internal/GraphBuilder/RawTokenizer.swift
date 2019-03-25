@@ -19,6 +19,7 @@ class RawTokenizer {
         case rightParenthesis
         case identifier(String)
         case nameIdentifier(String)
+        case unknown(String)
 
         // followed by identifier
         case type
@@ -49,10 +50,6 @@ class RawTokenizer {
                 return .leftParenthesis
             case ")":
                 return .rightParenthesis
-            case "=":
-                return identifierTokenAfterEqual()
-            case "[":
-                return .identifier(identifier(endingWith: "]"))
             case "\"":
                 return .nameIdentifier(identifier(endingWith: "\""))
             case "'":
@@ -77,34 +74,8 @@ class RawTokenizer {
         return iterator.next()
     }
 
-    private func identifierTokenAfterEqual() -> RawToken? {
-        if let ch = nextScalar() {
-            switch ch {
-            case "[":
-                return .identifier(identifier(endingWith: "]"))
-            case "\"":
-                return .nameIdentifier(identifier(endingWith: "\""))
-            case "'":
-                return .identifier(identifier(endingWith: "'"))
-            case "\n":
-                return .identifier("")
-            case "(":
-                return .identifier(identifier(endingWith: ")"))
-            default:
-                return .identifier(identifier(endingWith: " "))
-            }
-        } else {
-            return nil
-        }
-    }
-
-    private func identifier(startingWith first: UnicodeScalar? = nil, endingWith last: UnicodeScalar) -> String {
-        var tokenText: String
-        if let first = first {
-            tokenText = String(first)
-        } else {
-            tokenText = ""
-        }
+    private func identifier(endingWith last: UnicodeScalar) -> String {
+        var tokenText = ""
         var allowedRightParenthesis = 0
 
         while let ch = nextScalar() {
@@ -139,14 +110,9 @@ class RawTokenizer {
             switch ch {
             case " ",
                  "\n",
-                 "\\",
-                 "=",
                  ",",
-                 ":",
                  "(",
                  ")",
-                 "[",
-                 "]",
                  "\"",
                  "'":
                 pushedBackScalar = ch
@@ -165,12 +131,12 @@ class RawTokenizer {
             return .varDeclaration
         case "func_decl":
             return .funcDeclaration
-        case "type":
+        case "type=":
             return .type
-        case "inherits":
+        case "inherits:":
             return .inherits
         default:
-            return .identifier(tokenText)
+            return .unknown(tokenText)
         }
     }
 

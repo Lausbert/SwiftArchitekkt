@@ -183,7 +183,7 @@ class Tokenizer {
         var identifiers: [String] = []
         loop: while let rawToken = nextRawToken() {
             switch rawToken {
-            case .identifier(let identifier):
+            case .unknown(let identifier):
                 identifiers.append(identifier)
             case .colon,
                  .comma:
