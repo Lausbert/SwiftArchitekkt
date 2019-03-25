@@ -16,6 +16,12 @@
 		5D800AFA22143A9300600D5B /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACE22143A9300600D5B /* Graph.swift */; };
 		5D800AFB22143A9300600D5B /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACF22143A9300600D5B /* IntegrationTests.swift */; };
 		5D8BDF552246488700177CF0 /* GraphBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8BDF542246488700177CF0 /* GraphBuilderTests.swift */; };
+		5DB2CEF322491861005B9445 /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEF222491861005B9445 /* Class.swift */; };
+		5DB2CEF52249188F005B9445 /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEF42249188F005B9445 /* Struct.swift */; };
+		5DB2CEF722491BD8005B9445 /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEF622491BD8005B9445 /* Enum.swift */; };
+		5DB2CEF922491BF7005B9445 /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEF822491BF7005B9445 /* Protocol.swift */; };
+		5DB2CEFB22491C43005B9445 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEFA22491C43005B9445 /* Function.swift */; };
+		5DB2CEFD22491C75005B9445 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEFC22491C75005B9445 /* Variable.swift */; };
 		F89B317D1B6622D4E24A723D /* Pods_SwiftArchitekkt_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7F04948C5190A4047861E3 /* Pods_SwiftArchitekkt_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +37,12 @@
 		5D800ACE22143A9300600D5B /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		5D800ACF22143A9300600D5B /* IntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
 		5D8BDF542246488700177CF0 /* GraphBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBuilderTests.swift; sourceTree = "<group>"; };
+		5DB2CEF222491861005B9445 /* Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
+		5DB2CEF42249188F005B9445 /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
+		5DB2CEF622491BD8005B9445 /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		5DB2CEF822491BF7005B9445 /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		5DB2CEFA22491C43005B9445 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
+		5DB2CEFC22491C75005B9445 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		6E329DF2802B567D7A38D1A7 /* Pods-SwiftArchitekkt_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftArchitekkt_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SwiftArchitekkt_Tests/Pods-SwiftArchitekkt_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		887A1D0711F4671AAF29AD60 /* Pods-SwiftArchitekkt_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftArchitekkt_Tests.release.xcconfig"; path = "Target Support Files/Pods-SwiftArchitekkt_Tests/Pods-SwiftArchitekkt_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8B7F04948C5190A4047861E3 /* Pods_SwiftArchitekkt_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftArchitekkt_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -68,6 +80,12 @@
 			isa = PBXGroup;
 			children = (
 				5D8BDF542246488700177CF0 /* GraphBuilderTests.swift */,
+				5DB2CEF222491861005B9445 /* Class.swift */,
+				5DB2CEF42249188F005B9445 /* Struct.swift */,
+				5DB2CEF622491BD8005B9445 /* Enum.swift */,
+				5DB2CEF822491BF7005B9445 /* Protocol.swift */,
+				5DB2CEFA22491C43005B9445 /* Function.swift */,
+				5DB2CEFC22491C75005B9445 /* Variable.swift */,
 			);
 			path = GraphBuilderTests;
 			sourceTree = "<group>";
@@ -249,15 +267,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DB2CEF52249188F005B9445 /* Struct.swift in Sources */,
 				5D800AF622143A9300600D5B /* FileExtensions.swift in Sources */,
+				5DB2CEF322491861005B9445 /* Class.swift in Sources */,
+				5DB2CEF922491BF7005B9445 /* Protocol.swift in Sources */,
 				5D800AF422143A9300600D5B /* UtilityFunctions.swift in Sources */,
 				5D800AF822143A9300600D5B /* Targets.swift in Sources */,
 				5D800AFA22143A9300600D5B /* Graph.swift in Sources */,
+				5DB2CEF722491BD8005B9445 /* Enum.swift in Sources */,
+				5DB2CEFB22491C43005B9445 /* Function.swift in Sources */,
 				5D800AF722143A9300600D5B /* AST.swift in Sources */,
 				5D8BDF552246488700177CF0 /* GraphBuilderTests.swift in Sources */,
 				5D800AF922143A9300600D5B /* CompileCommands.swift in Sources */,
 				5D800AF522143A9300600D5B /* Schemes.swift in Sources */,
 				5D800AFB22143A9300600D5B /* IntegrationTests.swift in Sources */,
+				5DB2CEFD22491C75005B9445 /* Variable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

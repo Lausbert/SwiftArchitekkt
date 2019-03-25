@@ -132,6 +132,12 @@ class RawTokenizer {
             return .scope("sourceFile")
         case "class_decl":
             return .scope("class")
+        case "struct_decl":
+            return .scope("struct")
+        case "enum_decl":
+            return .scope("enum")
+        case "protocol":
+            return .scope("protocol")
         case "var_decl":
             return .scope("variable")
         case "func_decl":
