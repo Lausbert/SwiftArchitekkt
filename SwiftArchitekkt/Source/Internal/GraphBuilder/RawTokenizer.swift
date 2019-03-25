@@ -17,8 +17,8 @@ class RawTokenizer {
         case colon
         case leftParenthesis
         case rightParenthesis
-        case identifier(String)
         case nameIdentifier(String)
+        case typeIdentifier(String)
         case unknown(String)
 
         // followed by identifier
@@ -53,7 +53,7 @@ class RawTokenizer {
             case "\"":
                 return .nameIdentifier(identifier(endingWith: "\""))
             case "'":
-                return .identifier(identifier(endingWith: "'"))
+                return .typeIdentifier(identifier(endingWith: "'"))
             default:
                 return keywordToken(startingWith: ch)
             }
@@ -91,18 +91,42 @@ class RawTokenizer {
 
     private func keywordToken(startingWith first: UnicodeScalar) -> RawToken {
         var tokenText = String(first)
+        
+        var allowedRightParenthesis = 0
 
         loop: while let ch = nextScalar() {
             switch ch {
-            case " ",
-                 "\n",
-                 ",",
-                 "(",
-                 ")",
+            case "\n",
                  "\"",
                  "'":
                 pushedBackScalar = ch
                 break loop
+            case "(":
+                tokenText.unicodeScalars.append(ch)
+                allowedRightParenthesis += 1
+            case ")":
+                if allowedRightParenthesis == 0 {
+                    pushedBackScalar = ch
+                    break loop
+                } else {
+                    allowedRightParenthesis -= 1
+                    tokenText.unicodeScalars.append(ch)
+                }
+            case ",",
+                 " ":
+                if allowedRightParenthesis == 0 {
+                    pushedBackScalar = ch
+                    break loop
+                } else {
+                    tokenText.unicodeScalars.append(ch)
+                }
+            case "=":
+                if allowedRightParenthesis == 0 {
+                    tokenText.unicodeScalars.append(ch)
+                    break loop
+                } else {
+                    tokenText.unicodeScalars.append(ch)
+                }
             default:
                 tokenText.unicodeScalars.append(ch)
             }

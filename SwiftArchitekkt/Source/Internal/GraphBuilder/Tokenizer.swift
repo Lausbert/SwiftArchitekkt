@@ -85,7 +85,7 @@ class Tokenizer {
             case .inherits:
                 return inheritsToken()
             case .type:
-                return try tokenWithIdentifier(for: rawToken)
+                return try typeToken()
             default:
                 continue
             }
@@ -195,22 +195,14 @@ class Tokenizer {
         }
         return .inherits(identifiers)
     }
-
-    private func tokenWithIdentifier(for initialRawToken: RawTokenizer.RawToken) throws -> Token {
-        while let rawToken = nextRawToken() {
-            switch rawToken {
-            case let .identifier(identifier):
-                switch initialRawToken {
-                case .type:
-                    return .type(identifier)
-                default:
-                    throw ErrorEnum.invalidToken(initialRawToken)
-                }
-            default:
-                throw ErrorEnum.invalidToken(rawToken)
-            }
+    
+    private func typeToken() throws -> Token {
+        guard let rawToken = nextRawToken() else { fatalError() }
+        if case let .typeIdentifier(identifier) = rawToken {
+            return .type(identifier)
+        } else {
+            throw ErrorEnum.invalidToken(rawToken)
         }
-        throw ErrorEnum.invalidToken(initialRawToken)
     }
 
 }
