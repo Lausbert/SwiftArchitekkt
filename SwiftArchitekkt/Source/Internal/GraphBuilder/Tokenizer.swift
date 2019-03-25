@@ -94,13 +94,11 @@ class Tokenizer {
     }
 
     enum Token: CustomStringConvertible, Equatable {
-        
-        // token with identifier
-        case type(String)
 
         // token with identifiers
+        case type([String])
         case inherits([String])
-
+        
         // scope tokens
         case scopeStart(RawTokenizer.RawToken, identifier: String?)
         case scopeEnd(RawTokenizer.RawToken, identifier: String?)
@@ -181,12 +179,19 @@ class Tokenizer {
 
     private func inheritsToken() -> Token {
         var identifiers: [String] = []
+        var commaNeeded = false
         loop: while let rawToken = nextRawToken() {
             switch rawToken {
             case .unknown(let identifier):
-                identifiers.append(identifier)
-            case .colon,
-                 .comma:
+                if commaNeeded {
+                    pushedBackRawTokens.append(rawToken)
+                    break loop
+                } else {
+                    identifiers.append(identifier)
+                    commaNeeded = true
+                }
+            case .comma:
+                commaNeeded = false
                 continue
             default:
                 pushedBackRawTokens.append(rawToken)
@@ -198,8 +203,11 @@ class Tokenizer {
     
     private func typeToken() throws -> Token {
         guard let rawToken = nextRawToken() else { fatalError() }
-        if case let .typeIdentifier(identifier) = rawToken {
-            return .type(identifier)
+        if case var .typeIdentifier(identifier) = rawToken {
+            identifier = identifier.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
+            identifier = identifier.replacingOccurrences(of: "->", with: ",")
+            let identifiers = identifier.components(separatedBy: CharacterSet(charactersIn: ",:")).filter { !$0.isEmpty }
+            return .type(identifiers)
         } else {
             throw ErrorEnum.invalidToken(rawToken)
         }

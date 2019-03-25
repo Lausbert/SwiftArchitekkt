@@ -46,10 +46,9 @@ class GraphBuilder {
                     try handleScopeStart(rawToken: rawToken, identifier: identifier)
                 case let .scopeEnd(rawToken, identifier):
                     try handleScopeEnd(rawToken: rawToken, identifier: identifier)
-                case .inherits(let identifiers):
-                    try handleInheritance(identifiers: identifiers)
-                case .type(let typeString):
-                    try handle(typeString: typeString)
+                case .type(let identifiers),
+                     .inherits(let identifiers):
+                    try handle(identifiers: identifiers)
                 }
             }
             addNamedNodesAsChildIfPossible()
@@ -143,17 +142,6 @@ class GraphBuilder {
     private func handleScopeEnd(rawToken: RawTokenizer.RawToken, identifier: String?) throws {
         guard !openNodes.isEmpty else { throw ErrorEnum.unexpectedScopeEnd(rawToken, identifier: identifier) }
         openNodes.removeLast()
-    }
-
-    private func handleInheritance(identifiers: [String]) throws {
-        try handle(identifiers: identifiers)
-    }
-
-    private func handle(typeString: String) throws {
-        var typeString = typeString.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
-        typeString = typeString.replacingOccurrences(of: "->", with: ",")
-        let identifiers = typeString.components(separatedBy: CharacterSet(charactersIn: ",:")).filter { !$0.isEmpty }
-        try handle(identifiers: identifiers)
     }
 
     private func handleNamedScopeStart(rawToken: RawTokenizer.RawToken, identifier: String?) throws {
