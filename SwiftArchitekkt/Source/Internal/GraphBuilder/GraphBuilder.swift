@@ -27,7 +27,6 @@ class GraphBuilder {
                     continue
                 }
             }
-            addNamedNodesAsChildIfPossible()
             #if DEBUG
             let completeGraph = (graph + namedNodes.values.compactMap { $0.isChild ? nil : $0.node }).sorted()
             #else
@@ -64,18 +63,6 @@ class GraphBuilder {
             namedNodes[identifier] = (node: node, isChild: willAddAsChild)
         }
         return node
-    }
-
-    private func addNamedNodesAsChildIfPossible() {
-        for (identifier, tuple) in namedNodes {
-            guard !tuple.isChild else { continue }
-            let parentIdentifier = identifier.components(separatedBy: ".").dropLast().joined(separator: ".")
-            guard !parentIdentifier.isEmpty else { continue }
-            if let parentNode = namedNodes[parentIdentifier]?.node {
-                namedNodes[identifier] = (node: tuple.node, isChild: true)
-                parentNode.add(child: tuple.node)
-            }
-        }
     }
     
     private func handleScopeStart(scope: String, identifier: String?) throws {
