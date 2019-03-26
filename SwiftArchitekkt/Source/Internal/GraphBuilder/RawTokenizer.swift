@@ -19,7 +19,7 @@ class RawTokenizer {
         case rightParenthesis
         case nameIdentifier(String)
         case typeIdentifier(String)
-        case unknown(String)
+        case tag(String)
         
         // followed by identifier
         case scope(String)
@@ -33,9 +33,7 @@ class RawTokenizer {
     func nextToken() -> RawToken? {
         while let ch = nextScalar() {
             switch ch {
-            case " ", "\n":
-                continue
-            case "\\":
+            case " ", "\n", "\\":
                 continue
             case ",":
                 return .comma
@@ -45,6 +43,8 @@ class RawTokenizer {
                 return .leftParenthesis
             case ")":
                 return .rightParenthesis
+            case "[":
+                return .tag(identifier(endingWith: "]"))
             case "\"":
                 return .nameIdentifier(identifier(endingWith: "\""))
             case "'":
@@ -100,7 +100,7 @@ class RawTokenizer {
                 tokenText.unicodeScalars.append(ch)
                 allowedRightParenthesis += 1
             case ")":
-                if allowedRightParenthesis == 0 {
+                if allowedRightParenthesis <= 0 {
                     pushedBackScalar = ch
                     break loop
                 } else {
@@ -109,15 +109,8 @@ class RawTokenizer {
                 }
             case ",",
                  " ":
-                if allowedRightParenthesis == 0 {
+                if allowedRightParenthesis <= 0 {
                     pushedBackScalar = ch
-                    break loop
-                } else {
-                    tokenText.unicodeScalars.append(ch)
-                }
-            case "=":
-                if allowedRightParenthesis == 0 {
-                    tokenText.unicodeScalars.append(ch)
                     break loop
                 } else {
                     tokenText.unicodeScalars.append(ch)
@@ -147,7 +140,7 @@ class RawTokenizer {
         case "inherits:":
             return .inherits
         default:
-            return .unknown(tokenText)
+            return .tag(tokenText)
         }
     }
 

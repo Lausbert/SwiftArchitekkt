@@ -171,7 +171,7 @@ class Tokenizer {
         var commaNeeded = false
         loop: while let rawToken = nextRawToken() {
             switch rawToken {
-            case .unknown(let identifier):
+            case .tag(let identifier):
                 if commaNeeded {
                     pushedBackRawTokens.append(rawToken)
                     break loop
