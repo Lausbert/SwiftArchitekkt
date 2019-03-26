@@ -14,7 +14,6 @@ class RawTokenizer {
 
         // helper tokens
         case comma
-        case colon
         case leftParenthesis
         case rightParenthesis
         case nameIdentifier(String)
@@ -37,8 +36,6 @@ class RawTokenizer {
                 continue
             case ",":
                 return .comma
-            case ":":
-                return .colon
             case "(":
                 return .leftParenthesis
             case ")":
