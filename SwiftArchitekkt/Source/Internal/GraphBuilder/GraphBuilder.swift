@@ -8,24 +8,13 @@ class GraphBuilder {
 
     // MARK: - Internal -
 
-    enum ErrorEnum: LocalizedError, Equatable {
-        case missingIdentifier(String)
-
-        var errorDescription: String? {
-            switch self {
-            case let .missingIdentifier(scope):
-                return "Missing identifier: \(scope)"
-            }
-        }
-    }
-
     init(ast: String) {
         tokenizer = Tokenizer(ast: ast)
     }
 
     func generateGraph(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Node? {
         do {
-            while let token = try tokenizer.getNextToken() {
+            while let token = tokenizer.nextToken() {
                 switch token {
                 case let .scopeStart(scope, identifier):
                     try handleScopeStart(scope: scope, identifier: identifier)
@@ -34,6 +23,8 @@ class GraphBuilder {
                 case .type(let identifiers),
                      .inherits(let identifiers):
                     handle(identifiers: identifiers)
+                default:
+                    continue
                 }
             }
             addNamedNodesAsChildIfPossible()
@@ -58,15 +49,18 @@ class GraphBuilder {
     private var graph: [Node] = []
     private var namedNodes: [String: (node: Node, isChild: Bool)] = [:]
 
-    private func getNamedNode(for identifier: String, willAddAsChild: Bool = false) -> Node {
+    private func getNamedNode(for identifier: String, scope: String = "unknown", willAddAsChild: Bool = false) -> Node {
         let node: Node
         if let existingNode = namedNodes[identifier]?.node {
             node = existingNode
+            if scope != "unknown" {
+                node.set(scope: scope)
+            }
             if willAddAsChild {
                 namedNodes[identifier] = (node: node, isChild: true)
             }
         } else {
-            node = Node(identifier: identifier, scope: "unknown")
+            node = Node(identifier: identifier, scope: scope)
             namedNodes[identifier] = (node: node, isChild: willAddAsChild)
         }
         return node
@@ -85,10 +79,12 @@ class GraphBuilder {
     }
     
     private func handleScopeStart(scope: String, identifier: String?) throws {
-        guard let identifier = identifier else { throw ErrorEnum.missingIdentifier(scope) }
-        
-        let node = getNamedNode(for: identifier, willAddAsChild: true)
-        node.set(scope: scope)
+        let node: Node
+        if let identifier = identifier {
+            node = getNamedNode(for: identifier, scope: scope, willAddAsChild: true)
+        } else {
+            node = Node(scope: scope)
+        }
         if let lastOpenNode = openNodes.last {
             lastOpenNode.add(child: node)
         } else {

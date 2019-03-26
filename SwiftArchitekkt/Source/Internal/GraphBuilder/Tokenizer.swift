@@ -5,7 +5,7 @@ import Foundation
 class Tokenizer {
 
     // MARK: - Internal -
-
+    
     #if DEBUG
     static func debugDescription(of tokens: [Token]) {
         var indent = 0
@@ -24,156 +24,221 @@ class Tokenizer {
     }
     #endif
 
-    enum ErrorEnum: LocalizedError, Equatable {
+    enum Token: CustomStringConvertible, Equatable {
+        
+        // token with identifiers
+        case type([String])
+        case inherits([String])
+        case tag(String)
 
-        case invalidToken(RawTokenizer.RawToken)
+        // scope tokens
+        case scopeStart(String, identifier: String?)
+        case scopeEnd(String, identifier: String?)
 
-        var errorDescription: String? {
+        // helper tokens
+        case comma
+        case nameIdentifier(String)
+        case typeIdentifier(String)
+        
+        var description: String {
             switch self {
-            case .invalidToken(let rawToken):
-                return "Invalid token: \(rawToken)"
+            case let .scopeStart(scope, identifier):
+                return identifier == nil ? "scopeStart: \(scope)" : "scopeStart: \(scope), \(identifier ?? "")"
+            case let .scopeEnd(scope, identifier):
+                return identifier == nil ? "scopeEnd: \(scope)" : "scopeEnd: \(scope), \(identifier ?? "")"
+            case let .inherits(identifiers):
+                return "inherits: \(identifiers)"
+            case let .type(identifiers):
+                return "type: \(identifiers)"
+            case let .tag(identifier):
+                return "tag: \(identifier)"
+            case .comma:
+                return "comma"
+            case let .nameIdentifier(identifier):
+                return "nameIdentfier: \(identifier)"
+            case let .typeIdentifier(identifier):
+                return "typeIdentifier: \(identifier)"
             }
         }
 
     }
-
+    
     init(ast: String) {
-        rawTokenizer = RawTokenizer(ast: ast)
+        iterator = ast.unicodeScalars.makeIterator()
     }
 
-    func getNextToken() throws -> Token? {
-        while let rawToken = nextRawToken() {
-            // This switch statement prevents any handling of raw tokens within scopes that are not handled. Raw scope tokens should only be handled if there is just one or no unhandled left parenthesis token. All other raw tokens should only be handled if there is no unhandled left parenthesis token.
-            switch rawToken {
-            case .leftParenthesis, .rightParenthesis:
-                break
-            case .scope:
-                if unclosedLeftParenthesisCount > 1 {
-                    continue
-                } else {
-                    break
-                }
-            default:
-                if unclosedLeftParenthesisCount > 0 {
-                    continue
-                } else {
-                    break
-                }
-            }
-
-            // The actual handling of raw tokens.
-            switch rawToken {
-            case let .scope(scope):
-                return try scopeStartToken(with: scope)
-            case .leftParenthesis:
-                unclosedLeftParenthesisCount += 1
-            case .rightParenthesis:
-                if let scopeEnd = scopeEndToken() {
-                    return scopeEnd
-                } else {
-                    continue
-                }
-            case .inherits:
-                return inheritsToken()
-            case .type:
-                return try typeToken()
-            default:
+    func nextToken() -> Token? {
+        if let pushedBackToken = pushedBackTokens.first {
+            pushedBackTokens.removeFirst()
+            return pushedBackToken
+        }
+        
+        while let ch = nextScalar() {
+            switch ch {
+            case " ", "\n", "\\":
                 continue
+            case ",":
+                return .comma
+            case "(":
+                return scopeStartToken()
+            case ")":
+                return scopeEndToken()
+            case "[":
+                return .tag(identifier(endingWith: "]"))
+            case "\"":
+                return .nameIdentifier(identifier(endingWith: "\""))
+            case "'":
+                return .typeIdentifier(identifier(endingWith: "'"))
+            default:
+                return keywordToken(startingWith: ch)
             }
         }
         return nil
     }
 
-    enum Token: CustomStringConvertible, Equatable {
-
-        // token with identifiers
-        case type([String])
-        case inherits([String])
-        
-        // scope tokens
-        case scopeStart(String, identifier: String?)
-        case scopeEnd(String, identifier: String?)
-
-        var description: String {
-            switch self {
-            case .scopeStart(let scope, let identifier):
-                return identifier == nil ? "scopeStart: \(scope)" : "scopeStart: \(scope), \(identifier ?? "")"
-            case .scopeEnd(let scope, let identifier):
-                return identifier == nil ? "scopeEnd: \(scope)" : "scopeEnd: \(scope), \(identifier ?? "")"
-            case .inherits(let identifiers):
-                return "inherits: \(identifiers)"
-            case .type(let identifiers):
-                return "type: \(identifiers)"
-            }
-        }
-
-    }
-
     // MARK: - Private -
 
-    private var rawTokenizer: RawTokenizer
-    private var pushedBackRawTokens: [RawTokenizer.RawToken] = []
+    private var iterator: String.UnicodeScalarView.Iterator
+    private var pushedBackScalar: UnicodeScalar?
+    private var pushedBackTokens: [Token] = []
     private var openScopes: [Token] = []
-    private var unclosedLeftParenthesisCount = 0
     private var identifierPrefix: String {
         for openScope in openScopes.reversed() {
-            if case let .scopeStart(scope, identifier) = openScope, scope != "sourceFile", let id = identifier {
+            if case let .scopeStart(scope, identifier) = openScope, scope != "source_file", let id = identifier {
                 return id + "."
             }
         }
         return ""
     }
 
-    private func nextRawToken() -> RawTokenizer.RawToken? {
-        if let pushedBackRawToken = pushedBackRawTokens.first {
-            pushedBackRawTokens.removeFirst()
-            return pushedBackRawToken
+    private func nextScalar() -> UnicodeScalar? {
+        if let next = pushedBackScalar {
+            pushedBackScalar = nil
+            return next
         }
-        return rawTokenizer.nextToken()
+        return iterator.next()
     }
-
-    private func scopeStartToken(with scope: String) throws -> Token {
-        unclosedLeftParenthesisCount -= 1
-        var pushedBackRawTokens: [RawTokenizer.RawToken] = []
+    
+    private func scopeStartToken() -> Token {
+        var pushedBackTokens: [Token] = []
+        guard let token = nextToken(), case let .tag(scope) = token else { fatalError("Unexpectedly could not find scope.") }
         var scopeStart = Token.scopeStart(scope, identifier: nil)
-        loop: while let nextRawToken = nextRawToken() {
-            switch nextRawToken {
+        loop: while let token = nextToken() {
+            switch token {
             case var .nameIdentifier(identifier):
-                if scope == "sourceFile" {
+                if scope == "source_file" {
                     identifier = (identifier.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
                 }
                 scopeStart = Token.scopeStart(scope, identifier: identifierPrefix + identifier)
                 break loop
-            case .leftParenthesis:
-                pushedBackRawTokens.append(nextRawToken)
+            case .scopeStart, .scopeEnd:
+                pushedBackTokens.append(token)
                 break loop
             default:
-                pushedBackRawTokens.append(nextRawToken)
+                pushedBackTokens.append(token)
                 continue
             }
         }
-        self.pushedBackRawTokens += pushedBackRawTokens
+        self.pushedBackTokens += pushedBackTokens
         openScopes.append(scopeStart)
         return scopeStart
     }
-
-    private func scopeEndToken() -> Token? {
-        if unclosedLeftParenthesisCount > 0 {
-            unclosedLeftParenthesisCount -= 1
-            return nil
-        }
-        guard let scopeStart = openScopes.popLast(), case let .scopeStart(rawToken, identifier) = scopeStart else { return nil }
-        return .scopeEnd(rawToken, identifier: identifier)
+    
+    private func scopeEndToken() -> Token {
+        guard let scopeStart = openScopes.popLast(), case let .scopeStart(scope, identifier) = scopeStart else { fatalError("Unexpectedly reached scope end.") }
+        return .scopeEnd(scope, identifier: identifier)
     }
 
+    private func identifier(endingWith last: UnicodeScalar) -> String {
+        var tokenText = ""
+
+        while let ch = nextScalar() {
+            switch ch {
+            case last,
+                 "\n":
+                return tokenText
+            default:
+                tokenText.unicodeScalars.append(ch)
+            }
+        }
+        return tokenText
+    }
+
+    private func keywordToken(startingWith first: UnicodeScalar) -> Token {
+        var tokenText = String(first)
+        
+        var allowedRightParenthesis = 0
+        var allowedRightBracket = 0
+
+        loop: while let ch = nextScalar() {
+            switch ch {
+            case "\n",
+                 "\"",
+                 "'":
+                pushedBackScalar = ch
+                break loop
+            case "(":
+                allowedRightParenthesis += 1
+                tokenText.unicodeScalars.append(ch)
+            case ")":
+                if allowedRightParenthesis <= 0 {
+                    pushedBackScalar = ch
+                    break loop
+                } else {
+                    allowedRightParenthesis -= 1
+                    tokenText.unicodeScalars.append(ch)
+                }
+            case "[":
+                allowedRightBracket += 1
+                tokenText.unicodeScalars.append(ch)
+            case "]":
+                allowedRightBracket -= 1
+                tokenText.unicodeScalars.append(ch)
+            case ",",
+                 " ":
+                if allowedRightParenthesis <= 0 && allowedRightBracket <= 0 {
+                    pushedBackScalar = ch
+                    break loop
+                } else {
+                    tokenText.unicodeScalars.append(ch)
+                }
+            default:
+                tokenText.unicodeScalars.append(ch)
+            }
+        }
+        
+        assert(allowedRightParenthesis == 0)
+        assert(allowedRightBracket == 0)
+
+        switch tokenText {
+        case "type=":
+            return typeToken()
+        case "inherits:":
+            return inheritsToken()
+        default:
+            return .tag(tokenText)
+        }
+    }
+    
+    private func typeToken() -> Token {
+        if let token = nextToken(), case var .typeIdentifier(identifier) = token {
+            identifier = identifier.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
+            identifier = identifier.replacingOccurrences(of: "->", with: ",")
+            let identifiers = identifier.components(separatedBy: CharacterSet(charactersIn: ",:")).filter { !$0.isEmpty }
+            return .type(identifiers)
+        } else {
+            return .type([])
+        }
+    }
+    
     private func inheritsToken() -> Token {
         var identifiers: [String] = []
         var commaNeeded = false
-        loop: while let rawToken = nextRawToken() {
-            switch rawToken {
+        loop: while let token = nextToken() {
+            switch token {
             case .tag(let identifier):
                 if commaNeeded {
-                    pushedBackRawTokens.append(rawToken)
+                    pushedBackTokens.append(token)
                     break loop
                 } else {
                     identifiers.append(identifier)
@@ -183,23 +248,11 @@ class Tokenizer {
                 commaNeeded = false
                 continue
             default:
-                pushedBackRawTokens.append(rawToken)
+                pushedBackTokens.append(token)
                 break loop
             }
         }
         return .inherits(identifiers)
-    }
-    
-    private func typeToken() throws -> Token {
-        guard let rawToken = nextRawToken() else { fatalError() }
-        if case var .typeIdentifier(identifier) = rawToken {
-            identifier = identifier.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
-            identifier = identifier.replacingOccurrences(of: "->", with: ",")
-            let identifiers = identifier.components(separatedBy: CharacterSet(charactersIn: ",:")).filter { !$0.isEmpty }
-            return .type(identifiers)
-        } else {
-            throw ErrorEnum.invalidToken(rawToken)
-        }
     }
 
 }
