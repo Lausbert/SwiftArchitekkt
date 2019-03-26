@@ -85,6 +85,7 @@ class RawTokenizer {
         var tokenText = String(first)
         
         var allowedRightParenthesis = 0
+        var allowedRightBracket = 0
 
         loop: while let ch = nextScalar() {
             switch ch {
@@ -94,8 +95,8 @@ class RawTokenizer {
                 pushedBackScalar = ch
                 break loop
             case "(":
-                tokenText.unicodeScalars.append(ch)
                 allowedRightParenthesis += 1
+                tokenText.unicodeScalars.append(ch)
             case ")":
                 if allowedRightParenthesis <= 0 {
                     pushedBackScalar = ch
@@ -104,9 +105,15 @@ class RawTokenizer {
                     allowedRightParenthesis -= 1
                     tokenText.unicodeScalars.append(ch)
                 }
+            case "[":
+                allowedRightBracket += 1
+                tokenText.unicodeScalars.append(ch)
+            case "]":
+                allowedRightBracket -= 1
+                tokenText.unicodeScalars.append(ch)
             case ",",
                  " ":
-                if allowedRightParenthesis <= 0 {
+                if allowedRightParenthesis <= 0 && allowedRightBracket <= 0 {
                     pushedBackScalar = ch
                     break loop
                 } else {
@@ -116,6 +123,9 @@ class RawTokenizer {
                 tokenText.unicodeScalars.append(ch)
             }
         }
+        
+        assert(allowedRightParenthesis == 0)
+        assert(allowedRightBracket == 0)
 
         switch tokenText {
         case "source_file":
