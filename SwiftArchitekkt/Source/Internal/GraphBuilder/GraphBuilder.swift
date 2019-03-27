@@ -32,8 +32,6 @@ class GraphBuilder {
                     handle(identifiers: identifiers)
                 case let .tag(tag):
                     handle(tag: tag)
-                default:
-                    continue
                 }
             }
             #if DEBUG

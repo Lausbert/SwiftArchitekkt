@@ -35,10 +35,6 @@ class Tokenizer {
         case scopeStart(String, identifier: String?)
         case scopeEnd(String, identifier: String?)
 
-        // helper tokens
-        case nameIdentifier(String)
-        case typeIdentifier(String)
-
         var description: String {
             switch self {
             case let .scopeStart(scope, identifier):
@@ -51,10 +47,6 @@ class Tokenizer {
                 return "type: \(identifiers)"
             case let .tag(identifier):
                 return "tag: \(identifier)"
-            case let .nameIdentifier(identifier):
-                return "nameIdentfier: \(identifier)"
-            case let .typeIdentifier(identifier):
-                return "typeIdentifier: \(identifier)"
             }
         }
 
@@ -65,11 +57,6 @@ class Tokenizer {
     }
 
     func nextToken() -> Token? {
-        if let pushedBackToken = pushedBackTokens.first {
-            pushedBackTokens.removeFirst()
-            return pushedBackToken
-        }
-
         while let ch = nextScalar() {
             switch ch {
             case " ", "\n", "\\":
@@ -82,10 +69,6 @@ class Tokenizer {
                 return .tag(identifier(endingWith: "]"))
             case "<":
                 return .tag(identifier(endingWith: ">"))
-            case "\"":
-                return .nameIdentifier(identifier(endingWith: "\""))
-            case "'":
-                return .typeIdentifier(identifier(endingWith: "'"))
             default:
                 return keywordToken(startingWith: ch)
             }
@@ -97,7 +80,6 @@ class Tokenizer {
 
     private var iterator: String.UnicodeScalarView.Iterator
     private var pushedBackScalars: [UnicodeScalar] = []
-    private var pushedBackTokens: [Token] = []
     private var openScopes: [Token] = []
     private var identifierPrefix: String {
         for openScope in openScopes.reversed() {
@@ -117,26 +99,36 @@ class Tokenizer {
     }
 
     private func scopeStartToken() -> Token {
-        var pushedBackTokens: [Token] = []
-        guard let token = nextToken(), case let .tag(scope) = token else { fatalError("Unexpectedly could not find scope.") }
-        var scopeStart = Token.scopeStart(scope, identifier: nil)
-        loop: while let token = nextToken() {
-            switch token {
-            case var .nameIdentifier(identifier):
-                if scope == "source_file" {
-                    identifier = (identifier.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
-                }
-                scopeStart = Token.scopeStart(scope, identifier: identifierPrefix + identifier)
-                break loop
-            case .scopeStart, .scopeEnd:
-                pushedBackTokens.append(token)
+        var scope: String = ""
+        var pushedBackScalars: [UnicodeScalar] = []
+        loop: while let ch = nextScalar() {
+            switch ch {
+            case " ", "\n", ")":
+                pushedBackScalars.append(ch)
                 break loop
             default:
-                pushedBackTokens.append(token)
-                continue
+                scope.unicodeScalars.append(ch)
             }
         }
-        self.pushedBackTokens += pushedBackTokens
+        self.pushedBackScalars = pushedBackScalars
+        pushedBackScalars = []
+        
+        var id: String?
+        loop: while let ch = nextScalar() {
+            switch ch {
+            case  "\n":
+                pushedBackScalars.append(ch)
+                break loop
+            case "\"":
+                id = identifier(endingWith: "\"")
+                break loop
+            default:
+                pushedBackScalars.append(ch)
+            }
+        }
+        self.pushedBackScalars = pushedBackScalars
+        
+        let scopeStart = Token.scopeStart(scope, identifier: id)
         openScopes.append(scopeStart)
         return scopeStart
     }
