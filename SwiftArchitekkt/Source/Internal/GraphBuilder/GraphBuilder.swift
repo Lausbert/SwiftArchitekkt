@@ -20,9 +20,11 @@ class GraphBuilder {
                     try handleScopeStart(scope: scope, identifier: identifier)
                 case let .scopeEnd(scope, identifier):
                     handleScopeEnd(scope: scope, identifier: identifier)
-                case .type(let identifiers),
-                     .inherits(let identifiers):
+                case let .type(identifiers),
+                     let .inherits(identifiers):
                     handle(identifiers: identifiers)
+                case let .tag(tag):
+                    handle(tag: tag)
                 default:
                     continue
                 }
@@ -91,6 +93,11 @@ class GraphBuilder {
             assert(openNodes.last != nil)
             openNodes.last?.add(arc: node)
         }
+    }
+    
+    private func handle(tag: String) {
+        guard tag.count <= 32 else { return }
+        openNodes.last?.add(tag: tag)
     }
 
 }
