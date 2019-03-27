@@ -36,7 +36,6 @@ class Tokenizer {
         case scopeEnd(String, identifier: String?)
 
         // helper tokens
-        case comma
         case nameIdentifier(String)
         case typeIdentifier(String)
 
@@ -52,8 +51,6 @@ class Tokenizer {
                 return "type: \(identifiers)"
             case let .tag(identifier):
                 return "tag: \(identifier)"
-            case .comma:
-                return "comma"
             case let .nameIdentifier(identifier):
                 return "nameIdentfier: \(identifier)"
             case let .typeIdentifier(identifier):
@@ -77,8 +74,6 @@ class Tokenizer {
             switch ch {
             case " ", "\n", "\\":
                 continue
-            case ",":
-                return .comma
             case "(":
                 return scopeStartToken()
             case ")":
@@ -232,26 +227,8 @@ class Tokenizer {
     }
 
     private func inheritsToken() -> Token {
-        var identifiers: [String] = []
-        var commaNeeded = false
-        loop: while let token = nextToken() {
-            switch token {
-            case .tag(let identifier):
-                if commaNeeded {
-                    pushedBackTokens.append(token)
-                    break loop
-                } else {
-                    identifiers.append(identifier)
-                    commaNeeded = true
-                }
-            case .comma:
-                commaNeeded = false
-                continue
-            default:
-                pushedBackTokens.append(token)
-                break loop
-            }
-        }
+        let id = identifier(endingWith: "\n")
+        let identifiers = id.replacingOccurrences(of: " ", with: "").components(separatedBy: ",")
         return .inherits(identifiers)
     }
 
