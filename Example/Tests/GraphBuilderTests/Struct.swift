@@ -19,26 +19,79 @@ extension GraphBuilderTests {
 {
   "children" : [
     {
+      "identifier" : "Test.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
       "children" : [
         {
           "arcs" : [
-
-          ],
-          "children" : [
             {
               "identifier" : "Test.Type",
               "isRoot" : false,
               "scope" : "unknown"
             }
           ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "Test.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "Test.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "inout",
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "return_stmt"
+                }
+              ],
+              "identifier" : "Test.init()",
+              "isRoot" : false,
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface"
+              ]
+            }
+          ],
           "identifier" : "Test",
           "isRoot" : false,
-          "scope" : "struct"
+          "scope" : "struct_decl",
+          "tags" : [
+            "access=internal",
+            "interface",
+            "non-resilient"
+          ]
         }
       ],
       "identifier" : "TestSourceFile",
       "isRoot" : false,
-      "scope" : "sourceFile"
+      "scope" : "source_file"
     }
   ],
   "isRoot" : true,
@@ -65,12 +118,19 @@ extension GraphBuilderTests {
 {
   "children" : [
     {
+      "identifier" : "Protocol.Protocol",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "Test.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
       "children" : [
         {
           "arcs" : [
-
-          ],
-          "children" : [
             {
               "identifier" : "Protocol.Protocol",
               "isRoot" : false,
@@ -79,10 +139,23 @@ extension GraphBuilderTests {
           ],
           "identifier" : "Protocol",
           "isRoot" : false,
-          "scope" : "protocol"
+          "scope" : "protocol",
+          "tags" : [
+            "Self : Protocol",
+            "access=internal",
+            "interface",
+            "non-resilient",
+            "requirement",
+            "signature=<Self>"
+          ]
         },
         {
           "arcs" : [
+            {
+              "identifier" : "Test.Type",
+              "isRoot" : false,
+              "scope" : "unknown"
+            },
             {
               "identifier" : "Protocol",
               "isRoot" : false,
@@ -91,19 +164,64 @@ extension GraphBuilderTests {
           ],
           "children" : [
             {
-              "identifier" : "Test.Type",
+              "arcs" : [
+                {
+                  "identifier" : "Test.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "Test.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "inout",
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "return_stmt"
+                }
+              ],
+              "identifier" : "Test.init()",
               "isRoot" : false,
-              "scope" : "unknown"
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface"
+              ]
             }
           ],
           "identifier" : "Test",
           "isRoot" : false,
-          "scope" : "struct"
+          "scope" : "struct_decl",
+          "tags" : [
+            "access=internal",
+            "implicit",
+            "interface",
+            "non-resilient"
+          ]
         }
       ],
       "identifier" : "TestSourceFile",
       "isRoot" : false,
-      "scope" : "sourceFile"
+      "scope" : "source_file"
     }
   ],
   "isRoot" : true,

@@ -18,14 +18,28 @@ extension GraphBuilderTests {
     {
       "children" : [
         {
+          "children" : [
+            {
+              "isRoot" : false,
+              "scope" : "parameter_list"
+            },
+            {
+              "isRoot" : false,
+              "scope" : "brace_stmt"
+            }
+          ],
           "identifier" : "Test()",
           "isRoot" : false,
-          "scope" : "function"
+          "scope" : "func_decl",
+          "tags" : [
+            "access=internal",
+            "interface"
+          ]
         }
       ],
       "identifier" : "TestSourceFile",
       "isRoot" : false,
-      "scope" : "sourceFile"
+      "scope" : "source_file"
     }
   ],
   "isRoot" : true,

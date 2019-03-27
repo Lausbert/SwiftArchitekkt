@@ -85,6 +85,8 @@ class Tokenizer {
                 return scopeEndToken()
             case "[":
                 return .tag(identifier(endingWith: "]"))
+            case "<":
+                return .tag(identifier(endingWith: ">"))
             case "\"":
                 return .nameIdentifier(identifier(endingWith: "\""))
             case "'":

@@ -23,26 +23,110 @@ extension GraphBuilderTests {
 {
   "children" : [
     {
+      "identifier" : "Test.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
       "children" : [
         {
           "arcs" : [
-
-          ],
-          "children" : [
             {
               "identifier" : "Test.Type",
               "isRoot" : false,
               "scope" : "unknown"
             }
           ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "Test.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "Test.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "return_stmt"
+                }
+              ],
+              "identifier" : "Test.init()",
+              "isRoot" : false,
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface"
+              ]
+            },
+            {
+              "children" : [
+                {
+                  "identifier" : "Test.deinit.self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "Test.deinit",
+              "isRoot" : false,
+              "scope" : "destructor_decl",
+              "tags" : [
+                "@objc",
+                "access=internal",
+                "implicit",
+                "interface"
+              ]
+            }
+          ],
           "identifier" : "Test",
           "isRoot" : false,
-          "scope" : "class"
+          "scope" : "class_decl",
+          "tags" : [
+            "access=internal",
+            "interface",
+            "non-resilient"
+          ]
         }
       ],
       "identifier" : "TestSourceFile",
       "isRoot" : false,
-      "scope" : "sourceFile"
+      "scope" : "source_file"
     }
   ],
   "isRoot" : true,
@@ -88,45 +172,295 @@ extension GraphBuilderTests {
 {
   "children" : [
     {
+      "identifier" : "BaseClass.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "Test.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
       "children" : [
         {
           "arcs" : [
-
-          ],
-          "children" : [
             {
               "identifier" : "BaseClass.Type",
               "isRoot" : false,
               "scope" : "unknown"
             }
           ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "BaseClass.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "BaseClass.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "return_stmt"
+                }
+              ],
+              "identifier" : "BaseClass.init()",
+              "isRoot" : false,
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface"
+              ]
+            },
+            {
+              "children" : [
+                {
+                  "identifier" : "BaseClass.deinit.self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "BaseClass.deinit",
+              "isRoot" : false,
+              "scope" : "destructor_decl",
+              "tags" : [
+                "@objc",
+                "access=internal",
+                "implicit",
+                "interface"
+              ]
+            }
+          ],
           "identifier" : "BaseClass",
           "isRoot" : false,
-          "scope" : "class"
+          "scope" : "class_decl",
+          "tags" : [
+            "access=internal",
+            "interface",
+            "non-resilient"
+          ]
         },
         {
           "arcs" : [
             {
+              "identifier" : "Test.Type",
+              "isRoot" : false,
+              "scope" : "unknown"
+            },
+            {
               "identifier" : "BaseClass",
               "isRoot" : false,
-              "scope" : "class"
+              "scope" : "class_decl"
             }
           ],
           "children" : [
             {
-              "identifier" : "Test.Type",
+              "arcs" : [
+                {
+                  "identifier" : "Test.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                },
+                {
+                  "identifier" : "BaseClass",
+                  "isRoot" : false,
+                  "scope" : "class_decl"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "Test.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "arcs" : [
+                    {
+                      "identifier" : "BaseClass",
+                      "isRoot" : false,
+                      "scope" : "class_decl"
+                    }
+                  ],
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                },
+                {
+                  "arcs" : [
+                    {
+                      "identifier" : "BaseClass",
+                      "isRoot" : false,
+                      "scope" : "class_decl"
+                    }
+                  ],
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "children" : [
+                                {
+                                  "arcs" : [
+                                    {
+                                      "identifier" : "BaseClass",
+                                      "isRoot" : false,
+                                      "scope" : "class_decl"
+                                    }
+                                  ],
+                                  "isRoot" : false,
+                                  "scope" : "super_ref_expr",
+                                  "tags" : [
+                                    "implicit"
+                                  ]
+                                }
+                              ],
+                              "isRoot" : false,
+                              "scope" : "rebind_self_in_constructor_expr"
+                            },
+                            {
+                              "isRoot" : false,
+                              "scope" : "tuple_expr",
+                              "tags" : [
+                                "implicit"
+                              ]
+                            }
+                          ],
+                          "isRoot" : false,
+                          "scope" : "call_expr",
+                          "tags" : [
+                            "implicit"
+                          ]
+                        }
+                      ],
+                      "isRoot" : false,
+                      "scope" : "dot_syntax_call_expr",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    },
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
+                  "isRoot" : false,
+                  "scope" : "other_constructor_ref_expr",
+                  "tags" : [
+                    "arg_labels=",
+                    "implicit",
+                    "nothrow"
+                  ]
+                }
+              ],
+              "identifier" : "Test.init()",
               "isRoot" : false,
-              "scope" : "unknown"
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface",
+                "nothrow",
+                "super"
+              ]
+            },
+            {
+              "children" : [
+                {
+                  "identifier" : "Test.deinit.self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "Test.deinit",
+              "isRoot" : false,
+              "scope" : "destructor_decl",
+              "tags" : [
+                "@objc",
+                "access=internal",
+                "implicit",
+                "interface"
+              ]
             }
           ],
           "identifier" : "Test",
           "isRoot" : false,
-          "scope" : "class"
+          "scope" : "class_decl",
+          "tags" : [
+            "access=internal",
+            "implicit",
+            "interface",
+            "non-resilient"
+          ]
         }
       ],
       "identifier" : "TestSourceFile",
       "isRoot" : false,
-      "scope" : "sourceFile"
+      "scope" : "source_file"
     }
   ],
   "isRoot" : true,
@@ -157,12 +491,19 @@ extension GraphBuilderTests {
 {
   "children" : [
     {
+      "identifier" : "Protocol.Protocol",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "Test.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
       "children" : [
         {
           "arcs" : [
-
-          ],
-          "children" : [
             {
               "identifier" : "Protocol.Protocol",
               "isRoot" : false,
@@ -171,10 +512,23 @@ extension GraphBuilderTests {
           ],
           "identifier" : "Protocol",
           "isRoot" : false,
-          "scope" : "protocol"
+          "scope" : "protocol",
+          "tags" : [
+            "Self : Protocol",
+            "access=internal",
+            "interface",
+            "non-resilient",
+            "requirement",
+            "signature=<Self>"
+          ]
         },
         {
           "arcs" : [
+            {
+              "identifier" : "Test.Type",
+              "isRoot" : false,
+              "scope" : "unknown"
+            },
             {
               "identifier" : "Protocol",
               "isRoot" : false,
@@ -183,19 +537,95 @@ extension GraphBuilderTests {
           ],
           "children" : [
             {
-              "identifier" : "Test.Type",
+              "arcs" : [
+                {
+                  "identifier" : "Test.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "Test.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "return_stmt"
+                }
+              ],
+              "identifier" : "Test.init()",
               "isRoot" : false,
-              "scope" : "unknown"
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface"
+              ]
+            },
+            {
+              "children" : [
+                {
+                  "identifier" : "Test.deinit.self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "Test.deinit",
+              "isRoot" : false,
+              "scope" : "destructor_decl",
+              "tags" : [
+                "@objc",
+                "access=internal",
+                "implicit",
+                "interface"
+              ]
             }
           ],
           "identifier" : "Test",
           "isRoot" : false,
-          "scope" : "class"
+          "scope" : "class_decl",
+          "tags" : [
+            "access=internal",
+            "implicit",
+            "interface",
+            "non-resilient"
+          ]
         }
       ],
       "identifier" : "TestSourceFile",
       "isRoot" : false,
-      "scope" : "sourceFile"
+      "scope" : "source_file"
     }
   ],
   "isRoot" : true,
@@ -243,12 +673,24 @@ extension GraphBuilderTests {
 {
   "children" : [
     {
+      "identifier" : "BaseClass.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "Protocol.Protocol",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "Test.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
       "children" : [
         {
           "arcs" : [
-
-          ],
-          "children" : [
             {
               "identifier" : "Protocol.Protocol",
               "isRoot" : false,
@@ -257,29 +699,121 @@ extension GraphBuilderTests {
           ],
           "identifier" : "Protocol",
           "isRoot" : false,
-          "scope" : "protocol"
+          "scope" : "protocol",
+          "tags" : [
+            "Self : Protocol",
+            "access=internal",
+            "interface",
+            "non-resilient",
+            "requirement",
+            "signature=<Self>"
+          ]
         },
         {
           "arcs" : [
-
-          ],
-          "children" : [
             {
               "identifier" : "BaseClass.Type",
               "isRoot" : false,
               "scope" : "unknown"
             }
           ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "BaseClass.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "BaseClass.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "return_stmt"
+                }
+              ],
+              "identifier" : "BaseClass.init()",
+              "isRoot" : false,
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface"
+              ]
+            },
+            {
+              "children" : [
+                {
+                  "identifier" : "BaseClass.deinit.self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "BaseClass.deinit",
+              "isRoot" : false,
+              "scope" : "destructor_decl",
+              "tags" : [
+                "@objc",
+                "access=internal",
+                "implicit",
+                "interface"
+              ]
+            }
+          ],
           "identifier" : "BaseClass",
           "isRoot" : false,
-          "scope" : "class"
+          "scope" : "class_decl",
+          "tags" : [
+            "access=internal",
+            "interface",
+            "non-resilient"
+          ]
         },
         {
           "arcs" : [
             {
+              "identifier" : "Test.Type",
+              "isRoot" : false,
+              "scope" : "unknown"
+            },
+            {
               "identifier" : "BaseClass",
               "isRoot" : false,
-              "scope" : "class"
+              "scope" : "class_decl"
             },
             {
               "identifier" : "Protocol",
@@ -289,19 +823,175 @@ extension GraphBuilderTests {
           ],
           "children" : [
             {
-              "identifier" : "Test.Type",
+              "arcs" : [
+                {
+                  "identifier" : "Test.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                },
+                {
+                  "identifier" : "BaseClass",
+                  "isRoot" : false,
+                  "scope" : "class_decl"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "Test.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "arcs" : [
+                    {
+                      "identifier" : "BaseClass",
+                      "isRoot" : false,
+                      "scope" : "class_decl"
+                    }
+                  ],
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                },
+                {
+                  "arcs" : [
+                    {
+                      "identifier" : "BaseClass",
+                      "isRoot" : false,
+                      "scope" : "class_decl"
+                    }
+                  ],
+                  "children" : [
+                    {
+                      "children" : [
+                        {
+                          "children" : [
+                            {
+                              "children" : [
+                                {
+                                  "arcs" : [
+                                    {
+                                      "identifier" : "BaseClass",
+                                      "isRoot" : false,
+                                      "scope" : "class_decl"
+                                    }
+                                  ],
+                                  "isRoot" : false,
+                                  "scope" : "super_ref_expr",
+                                  "tags" : [
+                                    "implicit"
+                                  ]
+                                }
+                              ],
+                              "isRoot" : false,
+                              "scope" : "rebind_self_in_constructor_expr"
+                            },
+                            {
+                              "isRoot" : false,
+                              "scope" : "tuple_expr",
+                              "tags" : [
+                                "implicit"
+                              ]
+                            }
+                          ],
+                          "isRoot" : false,
+                          "scope" : "call_expr",
+                          "tags" : [
+                            "implicit"
+                          ]
+                        }
+                      ],
+                      "isRoot" : false,
+                      "scope" : "dot_syntax_call_expr",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    },
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
+                  "isRoot" : false,
+                  "scope" : "other_constructor_ref_expr",
+                  "tags" : [
+                    "arg_labels=",
+                    "implicit",
+                    "nothrow"
+                  ]
+                }
+              ],
+              "identifier" : "Test.init()",
               "isRoot" : false,
-              "scope" : "unknown"
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface",
+                "nothrow",
+                "super"
+              ]
+            },
+            {
+              "children" : [
+                {
+                  "identifier" : "Test.deinit.self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "Test.deinit",
+              "isRoot" : false,
+              "scope" : "destructor_decl",
+              "tags" : [
+                "@objc",
+                "access=internal",
+                "implicit",
+                "interface"
+              ]
             }
           ],
           "identifier" : "Test",
           "isRoot" : false,
-          "scope" : "class"
+          "scope" : "class_decl",
+          "tags" : [
+            "access=internal",
+            "implicit",
+            "interface",
+            "non-resilient"
+          ]
         }
       ],
       "identifier" : "TestSourceFile",
       "isRoot" : false,
-      "scope" : "sourceFile"
+      "scope" : "source_file"
     }
   ],
   "isRoot" : true,

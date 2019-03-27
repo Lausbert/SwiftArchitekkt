@@ -15,7 +15,6 @@ class GraphBuilderTests: XCTestCase {
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
         if let data = try? encoder.encode(rootNode), let graphString = String(data: data, encoding: String.Encoding.utf8) {
-            print(graphString)
             XCTAssertEqual(graphString, expectedGraphString)
         } else {
             XCTFail("Could not encode root node.")

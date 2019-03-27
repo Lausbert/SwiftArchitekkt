@@ -14,12 +14,14 @@ extension GraphBuilderTests {
 {
   "children" : [
     {
+      "identifier" : "Test.Protocol",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
       "children" : [
         {
           "arcs" : [
-
-          ],
-          "children" : [
             {
               "identifier" : "Test.Protocol",
               "isRoot" : false,
@@ -28,12 +30,20 @@ extension GraphBuilderTests {
           ],
           "identifier" : "Test",
           "isRoot" : false,
-          "scope" : "protocol"
+          "scope" : "protocol",
+          "tags" : [
+            "Self : Test",
+            "access=internal",
+            "interface",
+            "non-resilient",
+            "requirement",
+            "signature=<Self>"
+          ]
         }
       ],
       "identifier" : "TestSourceFile",
       "isRoot" : false,
-      "scope" : "sourceFile"
+      "scope" : "source_file"
     }
   ],
   "isRoot" : true,

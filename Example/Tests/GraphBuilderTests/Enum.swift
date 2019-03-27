@@ -7,25 +7,40 @@ extension GraphBuilderTests {
     func testGraphBuilderForEmptyEnum() {
         // enum Test {}
         let ast = """
-(enum_decl range=[Test.swift:1:1 - line:1:12] "Test" interface type='Test.Type' access=internal non-resilient))
+(source_file "Test.swift"
+  (enum_decl range=[Test.swift:1:1 - line:1:12] "Test" interface type='Test.Type' access=internal non-resilient))
 """
         let expectedGraphString = """
 {
   "children" : [
     {
-      "arcs" : [
-
-      ],
+      "identifier" : "Test.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
       "children" : [
         {
-          "identifier" : "Test.Type",
+          "arcs" : [
+            {
+              "identifier" : "Test.Type",
+              "isRoot" : false,
+              "scope" : "unknown"
+            }
+          ],
+          "identifier" : "Test",
           "isRoot" : false,
-          "scope" : "unknown"
+          "scope" : "enum_decl",
+          "tags" : [
+            "access=internal",
+            "interface",
+            "non-resilient"
+          ]
         }
       ],
-      "identifier" : "Test",
+      "identifier" : "TestSourceFile",
       "isRoot" : false,
-      "scope" : "enum"
+      "scope" : "source_file"
     }
   ],
   "isRoot" : true,
