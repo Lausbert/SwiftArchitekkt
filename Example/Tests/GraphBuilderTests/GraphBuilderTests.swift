@@ -5,11 +5,11 @@ import CoreArchitekkt
 @testable import SwiftArchitekkt
 
 class GraphBuilderTests: XCTestCase {
-    
+
     func testGraphBuilderFor(ast: String, expectedGraphString: String) {
         guard let url = URL(string: "/does/not/matter/since/only/happy/path/is/Tested") else { fatalError("Could not initialize url.") }
         let graphRequest = GraphRequest(url: url, options: [:])
-        let rootNode = GraphBuilder(ast: ast).generateGraph(graphRequest: graphRequest) { (result) in
+        let rootNode = GraphBuilder(ast: ast).generateGraph(graphRequest: graphRequest) { (_) in
             XCTFail("Should not happend since only happy path is Tested. Happy path control flow is synchronous.")
         }
         let encoder = JSONEncoder()
@@ -20,6 +20,5 @@ class GraphBuilderTests: XCTestCase {
             XCTFail("Could not encode root node.")
         }
     }
-    
-}
 
+}

@@ -66,7 +66,7 @@ class GraphBuilder {
         }
         return node
     }
-    
+
     private func handleScopeStart(scope: String, identifier: String?) throws {
         let node: Node
         if let identifier = identifier {
@@ -94,7 +94,7 @@ class GraphBuilder {
             openNodes.last?.add(arc: node)
         }
     }
-    
+
     private func handle(tag: String) {
         guard tag.count <= 32, !["range=", "decl=", "override="].contains(tag) else { return }
         openNodes.last?.add(tag: tag)

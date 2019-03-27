@@ -3,7 +3,7 @@
 import Foundation
 
 extension GraphBuilderTests {
-    
+
     func testGraphBuilderForEmptyProtocol() {
         // protocol Test {}
         let ast = """
@@ -52,5 +52,5 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
 }

@@ -5,7 +5,7 @@ import Foundation
 class Tokenizer {
 
     // MARK: - Internal -
-    
+
     #if DEBUG
     static func debugDescription(of tokens: [Token]) {
         var indent = 0
@@ -25,7 +25,7 @@ class Tokenizer {
     #endif
 
     enum Token: CustomStringConvertible, Equatable {
-        
+
         // token with identifiers
         case type([String])
         case inherits([String])
@@ -39,7 +39,7 @@ class Tokenizer {
         case comma
         case nameIdentifier(String)
         case typeIdentifier(String)
-        
+
         var description: String {
             switch self {
             case let .scopeStart(scope, identifier):
@@ -62,7 +62,7 @@ class Tokenizer {
         }
 
     }
-    
+
     init(ast: String) {
         iterator = ast.unicodeScalars.makeIterator()
     }
@@ -72,7 +72,7 @@ class Tokenizer {
             pushedBackTokens.removeFirst()
             return pushedBackToken
         }
-        
+
         while let ch = nextScalar() {
             switch ch {
             case " ", "\n", "\\":
@@ -120,7 +120,7 @@ class Tokenizer {
         }
         return iterator.next()
     }
-    
+
     private func scopeStartToken() -> Token {
         var pushedBackTokens: [Token] = []
         guard let token = nextToken(), case let .tag(scope) = token else { fatalError("Unexpectedly could not find scope.") }
@@ -145,7 +145,7 @@ class Tokenizer {
         openScopes.append(scopeStart)
         return scopeStart
     }
-    
+
     private func scopeEndToken() -> Token {
         guard let scopeStart = openScopes.popLast(), case let .scopeStart(scope, identifier) = scopeStart else { fatalError("Unexpectedly reached scope end.") }
         return .scopeEnd(scope, identifier: identifier)
@@ -168,7 +168,7 @@ class Tokenizer {
 
     private func keywordToken(startingWith first: UnicodeScalar) -> Token {
         var tokenText = String(first)
-        
+
         var allowedRightParenthesis = 0
         var allowedRightBracket = 0
 
@@ -208,7 +208,7 @@ class Tokenizer {
                 tokenText.unicodeScalars.append(ch)
             }
         }
-        
+
         assert(allowedRightParenthesis == 0)
         assert(allowedRightBracket == 0)
 
@@ -221,7 +221,7 @@ class Tokenizer {
             return .tag(tokenText)
         }
     }
-    
+
     private func typeToken() -> Token {
         if let token = nextToken(), case var .typeIdentifier(identifier) = token {
             identifier = identifier.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
@@ -232,7 +232,7 @@ class Tokenizer {
             return .type([])
         }
     }
-    
+
     private func inheritsToken() -> Token {
         var identifiers: [String] = []
         var commaNeeded = false

@@ -3,7 +3,7 @@
 import Foundation
 
 extension GraphBuilderTests {
-    
+
     func testGraphBuilderForSingleVariable() {
         // var Test = 1
         let ast = """
@@ -227,7 +227,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderForSingleConstant() {
         // let Test = 1
         let ast = """
@@ -451,5 +451,5 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
 }

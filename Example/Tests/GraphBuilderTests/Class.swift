@@ -3,7 +3,7 @@
 import Foundation
 
 extension GraphBuilderTests {
-    
+
     func testGraphBuilderForEmptyClass() {
         // class Test {}
         let ast = """
@@ -135,7 +135,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderForClassInheritance() {
         // class BaseClass {}
         // class Test: BaseClass {}
@@ -469,7 +469,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderForClassProtocolConformance() {
         // protocol Protocol {}
         // class Test: Protocol {}
@@ -634,7 +634,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderForClassInheritanceAndProtocolConformance() {
         // protocol Protocol {}
         // class BaseClass {}
@@ -1000,5 +1000,5 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
 }
