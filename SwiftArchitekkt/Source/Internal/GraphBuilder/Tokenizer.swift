@@ -101,7 +101,7 @@ class Tokenizer {
     // MARK: - Private -
 
     private var iterator: String.UnicodeScalarView.Iterator
-    private var pushedBackScalar: UnicodeScalar?
+    private var pushedBackScalars: [UnicodeScalar] = []
     private var pushedBackTokens: [Token] = []
     private var openScopes: [Token] = []
     private var identifierPrefix: String {
@@ -114,8 +114,8 @@ class Tokenizer {
     }
 
     private func nextScalar() -> UnicodeScalar? {
-        if let next = pushedBackScalar {
-            pushedBackScalar = nil
+        if let next = pushedBackScalars.first {
+            pushedBackScalars.removeFirst()
             return next
         }
         return iterator.next()
@@ -177,14 +177,14 @@ class Tokenizer {
             case "\n",
                  "\"",
                  "'":
-                pushedBackScalar = ch
+                pushedBackScalars.append(ch)
                 break loop
             case "(":
                 allowedRightParenthesis += 1
                 tokenText.unicodeScalars.append(ch)
             case ")":
                 if allowedRightParenthesis <= 0 {
-                    pushedBackScalar = ch
+                    pushedBackScalars.append(ch)
                     break loop
                 } else {
                     allowedRightParenthesis -= 1
@@ -199,7 +199,7 @@ class Tokenizer {
             case ",",
                  " ":
                 if allowedRightParenthesis <= 0 && allowedRightBracket <= 0 {
-                    pushedBackScalar = ch
+                    pushedBackScalars.append(ch)
                     break loop
                 } else {
                     tokenText.unicodeScalars.append(ch)
@@ -223,14 +223,12 @@ class Tokenizer {
     }
 
     private func typeToken() -> Token {
-        if let token = nextToken(), case var .typeIdentifier(identifier) = token {
-            identifier = identifier.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
-            identifier = identifier.replacingOccurrences(of: "->", with: ",")
-            let identifiers = identifier.components(separatedBy: CharacterSet(charactersIn: ",:")).filter { !$0.isEmpty }
-            return .type(identifiers)
-        } else {
-            return .type([])
-        }
+        guard nextScalar() == "'" else { fatalError("Unexpectly found no typeIdentifier.") }
+        var id = identifier(endingWith: "'")
+        id = id.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
+        id = id.replacingOccurrences(of: "->", with: ",")
+        let identifiers = id.components(separatedBy: CharacterSet(charactersIn: ",:")).filter { !$0.isEmpty }
+        return .type(identifiers)
     }
 
     private func inheritsToken() -> Token {

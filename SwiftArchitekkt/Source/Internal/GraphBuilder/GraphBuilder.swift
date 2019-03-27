@@ -9,6 +9,13 @@ class GraphBuilder {
     // MARK: - Internal -
 
     init(ast: String) {
+        print(ast)
+        var tokens: [Tokenizer.Token] = []
+        let newTokenizer = Tokenizer(ast: ast)
+        while let token = newTokenizer.nextToken() {
+            tokens.append(token)
+        }
+        Tokenizer.debugDescription(of: tokens)
         tokenizer = Tokenizer(ast: ast)
     }
 
