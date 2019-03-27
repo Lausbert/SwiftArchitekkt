@@ -110,7 +110,7 @@ class Tokenizer {
                 scope.unicodeScalars.append(ch)
             }
         }
-        self.pushedBackScalars = pushedBackScalars
+        self.pushedBackScalars = pushedBackScalars + self.pushedBackScalars
         pushedBackScalars = []
         
         var id: String?
@@ -126,7 +126,7 @@ class Tokenizer {
                 pushedBackScalars.append(ch)
             }
         }
-        self.pushedBackScalars = pushedBackScalars
+        self.pushedBackScalars = pushedBackScalars + self.pushedBackScalars
         
         let scopeStart = Token.scopeStart(scope, identifier: id)
         openScopes.append(scopeStart)
@@ -136,21 +136,6 @@ class Tokenizer {
     private func scopeEndToken() -> Token {
         guard let scopeStart = openScopes.popLast(), case let .scopeStart(scope, identifier) = scopeStart else { fatalError("Unexpectedly reached scope end.") }
         return .scopeEnd(scope, identifier: identifier)
-    }
-
-    private func identifier(endingWith last: UnicodeScalar) -> String {
-        var tokenText = ""
-
-        while let ch = nextScalar() {
-            switch ch {
-            case last,
-                 "\n":
-                return tokenText
-            default:
-                tokenText.unicodeScalars.append(ch)
-            }
-        }
-        return tokenText
     }
 
     private func keywordToken(startingWith first: UnicodeScalar) -> Token {
@@ -164,14 +149,14 @@ class Tokenizer {
             case "\n",
                  "\"",
                  "'":
-                pushedBackScalars.append(ch)
+                pushedBackScalars.insert(ch, at: 0)
                 break loop
             case "(":
                 allowedRightParenthesis += 1
                 tokenText.unicodeScalars.append(ch)
             case ")":
                 if allowedRightParenthesis <= 0 {
-                    pushedBackScalars.append(ch)
+                    pushedBackScalars.insert(ch, at: 0)
                     break loop
                 } else {
                     allowedRightParenthesis -= 1
@@ -186,7 +171,7 @@ class Tokenizer {
             case ",",
                  " ":
                 if allowedRightParenthesis <= 0 && allowedRightBracket <= 0 {
-                    pushedBackScalars.append(ch)
+                    pushedBackScalars.insert(ch, at: 0)
                     break loop
                 } else {
                     tokenText.unicodeScalars.append(ch)
@@ -222,6 +207,21 @@ class Tokenizer {
         let id = identifier(endingWith: "\n")
         let identifiers = id.replacingOccurrences(of: " ", with: "").components(separatedBy: ",")
         return .inherits(identifiers)
+    }
+    
+    private func identifier(endingWith last: UnicodeScalar) -> String {
+        var tokenText = ""
+        
+        while let ch = nextScalar() {
+            switch ch {
+            case last,
+                 "\n":
+                return tokenText
+            default:
+                tokenText.unicodeScalars.append(ch)
+            }
+        }
+        return tokenText
     }
 
 }
