@@ -65,6 +65,8 @@ class Tokenizer {
                 return scopeStartToken()
             case ")":
                 return scopeEndToken()
+            case "'":
+                return .tag(identifier(endingWith: "'"))
             case "[":
                 return .tag(identifier(endingWith: "]"))
             case "<":
@@ -100,19 +102,17 @@ class Tokenizer {
 
     private func scopeStartToken() -> Token {
         var scope: String = ""
-        var pushedBackScalars: [UnicodeScalar] = []
         loop: while let ch = nextScalar() {
             switch ch {
             case " ", "\n", ")":
-                pushedBackScalars.append(ch)
+                pushedBackScalars.insert(ch, at: 0)
                 break loop
             default:
                 scope.unicodeScalars.append(ch)
             }
         }
-        self.pushedBackScalars = pushedBackScalars + self.pushedBackScalars
-        pushedBackScalars = []
         
+        var pushedBackScalars: [UnicodeScalar] = []
         var id: String?
         loop: while let ch = nextScalar() {
             switch ch {
@@ -120,7 +120,10 @@ class Tokenizer {
                 pushedBackScalars.append(ch)
                 break loop
             case "\"":
-                id = identifier(endingWith: "\"")
+                id = identifierPrefix + identifier(endingWith: "\"")
+                if scope == "source_file", let strongId = id {
+                    id = (strongId.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
+                }
                 break loop
             default:
                 pushedBackScalars.append(ch)
