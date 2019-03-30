@@ -6,11 +6,9 @@ public class Node: NSObject, Codable {
 
     // MARK: - Public -
 
-    public typealias Scope = String
-
     public let isRoot: Bool
-    public let identifier: String?
-    public private(set) var scope: Scope
+    public private(set) var identifier: String?
+    public private(set) var scope: String
     // for cleaner encoded nodes _children, _arcs and _tags should be optional; for cleaner API children, arcs and tags should not
     public var children: [Node] {
         return _children ?? []
@@ -22,26 +20,34 @@ public class Node: NSObject, Codable {
         return _tags ?? []
     }
     public private(set) weak var parent: Node?
+    public var allDescendants: [Node] {
+        guard !children.isEmpty else { return [] }
+        return children + children.flatMap { $0.allDescendants }
+    }
 
-    public init(identifier: String?, scope: Scope, isRoot: Bool) {
+    public init(identifier: String?, scope: String, isRoot: Bool) {
         self.identifier = identifier
         self.scope = scope
         self.isRoot = isRoot
     }
 
-    public convenience init(scope: Scope, isRoot: Bool) {
+    public convenience init(scope: String, isRoot: Bool) {
         self.init(identifier: nil, scope: scope, isRoot: isRoot)
     }
 
-    public convenience init(identifier: String, scope: Scope) {
+    public convenience init(identifier: String, scope: String) {
         self.init(identifier: identifier, scope: scope, isRoot: false)
     }
 
-    public convenience init(scope: Scope) {
+    public convenience init(scope: String) {
         self.init(identifier: nil, scope: scope, isRoot: false)
     }
 
-    public func set(scope: Scope) {
+    public func set(identifier: String) {
+        self.identifier = identifier
+    }
+
+    public func set(scope: String) {
         self.scope = scope
     }
 
@@ -118,7 +124,7 @@ public class Node: NSObject, Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         isRoot = try container.decode(Bool.self, forKey: .isRoot)
         identifier = try container.decodeIfPresent(String.self, forKey: .identifier)
-        scope = try container.decode(Scope.self, forKey: .scope)
+        scope = try container.decode(String.self, forKey: .scope)
         _children = try container.decodeIfPresent([Node].self, forKey: .children)
         _arcs = try container.decodeIfPresent([Node].self, forKey: .arcs)
         _tags = try container.decodeIfPresent(Set<String>.self, forKey: .tags)
@@ -174,11 +180,6 @@ public class Node: NSObject, Codable {
         case arcs
         case tags
         // parent is missing on purpose to avoid circular dependencies during encoding
-    }
-
-    private var allDescendants: [Node] {
-        guard !children.isEmpty else { return [] }
-        return children + children.flatMap { $0.allDescendants }
     }
 
     private func replaceAllNamedArcs(with namedDescendants: [String: Node]) throws {

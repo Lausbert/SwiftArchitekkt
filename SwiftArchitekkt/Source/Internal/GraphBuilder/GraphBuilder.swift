@@ -37,9 +37,9 @@ class GraphBuilder {
                 }
             }
             #if DEBUG
-            let completeGraph = (graph + namedNodes.values.compactMap { $0.isChild ? nil : $0.node }).sorted()
+            let completeGraph = (graph + getNonChildNamedNodes()).sorted()
             #else
-            let completeGraph = graph + namedNodes.values.compactMap { $0.isChild ? nil : $0.node }
+            let completeGraph = graph + getNonChildNamedNodes()
             #endif
             let rootNode = Node(scope: "root", isRoot: true)
             rootNode.set(children: completeGraph)
@@ -55,48 +55,72 @@ class GraphBuilder {
     private var tokenizer: Tokenizer
     private var openNodes: [Node] = []
     private var graph: [Node] = []
-    private var namedNodes: [String: (node: Node, isChild: Bool)] = [:]
-
-    private func getNamedNode(for identifier: String, scope: String = "unknown", willAddAsChild: Bool = false) -> Node {
-        let node: Node
-        if let existingNode = namedNodes[identifier]?.node {
-            node = existingNode
-            if scope != "unknown" {
-                node.set(scope: scope)
+    private var childNodes: Set<String> = [] // track which nodes are already children
+    private var namedNodes: [String: Node] = [:]
+    
+    private func getNonChildNamedNodes() -> [Node] {
+        return namedNodes.values.compactMap { (node) -> Node? in
+            guard let identifier = node.identifier else { return nil }
+            if !childNodes.contains(identifier) {
+                return node
             }
-            if willAddAsChild {
-                namedNodes[identifier] = (node: node, isChild: true)
-            }
-        } else {
-            node = Node(identifier: identifier, scope: scope)
-            namedNodes[identifier] = (node: node, isChild: willAddAsChild)
+            return nil
         }
-        return node
     }
 
     private func handleScopeStart(scope: String, identifier: String?) throws {
         let node: Node
         if let identifier = identifier {
-            node = getNamedNode(for: identifier, scope: scope, willAddAsChild: true)
+            if childNodes.contains(identifier) {
+                if let namedNode = namedNodes[identifier], let oldId = namedNode.identifier {
+                    namedNodes.removeValue(forKey: identifier)
+                    namedNode.set(identifier: oldId + "." + UUID().uuidString)
+                }
+                node = Node(identifier: identifier + "." + UUID().uuidString, scope: scope)
+            } else {
+                childNodes.insert(identifier)
+                if let namedNode = namedNodes[identifier] {
+                    namedNode.set(scope: scope)
+                    node = namedNode
+                } else {
+                    node = Node(identifier: identifier, scope: scope)
+                    namedNodes[identifier] = node
+                }
+            }
         } else {
             node = Node(scope: scope)
         }
+        
         if let lastOpenNode = openNodes.last {
             lastOpenNode.add(child: node)
         } else {
             graph.append(node)
         }
+        
         openNodes.append(node)
     }
 
     private func handleScopeEnd(scope: String, identifier: String?) {
-        assert(openNodes.last != nil)
+        if let id = openNodes.last?.identifier {
+            if let identifier = identifier {
+                assert(id.contains(identifier))
+            } else {
+                assertionFailure()
+            }
+        }
+        assert(openNodes.last != nil && openNodes.last?.scope == scope)
         openNodes.removeLast()
     }
 
     private func handle(identifiers: [String]) {
         for identifier in identifiers {
-            let node = getNamedNode(for: identifier)
+            let node: Node
+            if let namedNode = namedNodes[identifier] {
+                node = namedNode
+            } else {
+                node = Node(identifier: identifier, scope: "unknown")
+                namedNodes[identifier] = node
+            }
             assert(openNodes.last != nil)
             openNodes.last?.add(arc: node)
         }
