@@ -199,10 +199,14 @@ class Tokenizer {
 
     private func typeToken() -> Token {
         guard nextScalar() == "'" else { fatalError("Unexpectly found no typeIdentifier.") }
-        var id = identifier(endingWith: "'")
-        id = id.components(separatedBy: CharacterSet(charactersIn: "()[]? ")).joined()
-        id = id.replacingOccurrences(of: "->", with: ",")
-        let identifiers = id.components(separatedBy: CharacterSet(charactersIn: ",:")).filter { !$0.isEmpty }
+        let id = identifier(endingWith: "'")
+        let identifiers = id.replacingOccurrences(of: "?", with: "")
+            // I know, I know, the following two lines should be included in the regular expression. But I did not get it to work.
+                            .replacingOccurrences(of: "[", with: " ")
+                            .replacingOccurrences(of: "]", with: " ")
+                            .replacingOccurrences(of: "[()<>,-]", with: " ", options: .regularExpression)
+                            .components(separatedBy: " ")
+                            .filter { !$0.isEmpty && $0 != "inout" && ![":"].contains($0.last) && !["@"].contains($0.first)}
         return .type(identifiers)
     }
 
