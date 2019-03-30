@@ -127,7 +127,7 @@ class GraphBuilder {
     }
 
     private func handle(tag: String) {
-        guard tag.count <= 32, !["range=", "decl=", "override="].contains(tag) else { return }
+        guard tag.count <= 32, !["range=", "decl=", "override=", "anonname="].contains(tag) else { return }
         openNodes.last?.add(tag: tag)
     }
 
