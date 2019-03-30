@@ -74,9 +74,9 @@ class GraphBuilder {
             if childNodes.contains(identifier) {
                 if let namedNode = namedNodes[identifier], let oldId = namedNode.identifier {
                     namedNodes.removeValue(forKey: identifier)
-                    namedNode.set(identifier: oldId + "." + UUID().uuidString)
+                    namedNode.set(identifier: oldId + ":" + UUID().uuidString)
                 }
-                node = Node(identifier: identifier + "." + UUID().uuidString, scope: scope)
+                node = Node(identifier: identifier + ":" + UUID().uuidString, scope: scope)
             } else {
                 childNodes.insert(identifier)
                 if let namedNode = namedNodes[identifier] {
