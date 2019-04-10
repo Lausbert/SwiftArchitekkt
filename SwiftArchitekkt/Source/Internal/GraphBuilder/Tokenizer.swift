@@ -111,7 +111,7 @@ class Tokenizer {
                 scope.unicodeScalars.append(ch)
             }
         }
-        
+
         var pushedBackScalars: [UnicodeScalar] = []
         var id: String?
         loop: while let ch = nextScalar() {
@@ -130,7 +130,7 @@ class Tokenizer {
             }
         }
         self.pushedBackScalars = pushedBackScalars + self.pushedBackScalars
-        
+
         let scopeStart = Token.scopeStart(scope, identifier: id)
         openScopes.append(scopeStart)
         return scopeStart
@@ -215,10 +215,10 @@ class Tokenizer {
         let identifiers = id.replacingOccurrences(of: " ", with: "").components(separatedBy: ",")
         return .inherits(identifiers)
     }
-    
+
     private func identifier(endingWith last: UnicodeScalar) -> String {
         var tokenText = ""
-        
+
         while let ch = nextScalar() {
             switch ch {
             case last,

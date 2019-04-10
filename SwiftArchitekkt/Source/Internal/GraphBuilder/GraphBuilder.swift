@@ -57,7 +57,7 @@ class GraphBuilder {
     private var graph: [Node] = []
     private var childNodes: Set<String> = [] // track which nodes are already children
     private var namedNodes: [String: Node] = [:]
-    
+
     private func getNonChildNamedNodes() -> [Node] {
         return namedNodes.values.compactMap { (node) -> Node? in
             guard let identifier = node.identifier else { return nil }
@@ -90,13 +90,13 @@ class GraphBuilder {
         } else {
             node = Node(scope: scope)
         }
-        
+
         if let lastOpenNode = openNodes.last {
             lastOpenNode.add(child: node)
         } else {
             graph.append(node)
         }
-        
+
         openNodes.append(node)
     }
 
