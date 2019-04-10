@@ -47,46 +47,13 @@ extension GraphBuilderTests {
     {
       "children" : [
         {
-          "arcs" : [
-            {
-              "identifier" : "Int",
-              "isRoot" : false,
-              "scope" : "unknown"
-            }
-          ],
-          "isRoot" : false,
-          "scope" : "top_level_code_decl"
-        },
-        {
           "children" : [
             {
               "children" : [
                 {
-                  "arcs" : [
-                    {
-                      "identifier" : "IntLiteral",
-                      "isRoot" : false,
-                      "scope" : "unknown"
-                    },
-                    {
-                      "identifier" : "Int",
-                      "isRoot" : false,
-                      "scope" : "unknown"
-                    }
-                  ],
                   "children" : [
                     {
                       "arcs" : [
-                        {
-                          "identifier" : "Int.Type",
-                          "isRoot" : false,
-                          "scope" : "unknown"
-                        },
-                        {
-                          "identifier" : "IntLiteral",
-                          "isRoot" : false,
-                          "scope" : "unknown"
-                        },
                         {
                           "identifier" : "Int",
                           "isRoot" : false,
@@ -94,11 +61,9 @@ extension GraphBuilderTests {
                         }
                       ],
                       "isRoot" : false,
-                      "scope" : "call_expr",
+                      "scope" : "pattern_named",
                       "tags" : [
-                        "function_ref=single",
-                        "implicit",
-                        "location=Test.swift:1:12"
+                        "Test"
                       ]
                     },
                     {
@@ -107,21 +72,49 @@ extension GraphBuilderTests {
                           "identifier" : "Int",
                           "isRoot" : false,
                           "scope" : "unknown"
-                        },
-                        {
-                          "identifier" : "_builtinIntegerLiteral",
-                          "isRoot" : false,
-                          "scope" : "unknown"
-                        },
-                        {
-                          "identifier" : "Builtin.IntLiteral",
-                          "isRoot" : false,
-                          "scope" : "unknown"
                         }
                       ],
                       "children" : [
                         {
+                          "arcs" : [
+                            {
+                              "identifier" : "IntLiteral",
+                              "isRoot" : false,
+                              "scope" : "unknown"
+                            },
+                            {
+                              "identifier" : "Int",
+                              "isRoot" : false,
+                              "scope" : "unknown"
+                            }
+                          ],
                           "children" : [
+                            {
+                              "arcs" : [
+                                {
+                                  "identifier" : "Int.Type",
+                                  "isRoot" : false,
+                                  "scope" : "unknown"
+                                },
+                                {
+                                  "identifier" : "IntLiteral",
+                                  "isRoot" : false,
+                                  "scope" : "unknown"
+                                },
+                                {
+                                  "identifier" : "Int",
+                                  "isRoot" : false,
+                                  "scope" : "unknown"
+                                }
+                              ],
+                              "isRoot" : false,
+                              "scope" : "declref_expr",
+                              "tags" : [
+                                "function_ref=single",
+                                "implicit",
+                                "location=Test.swift:1:12"
+                              ]
+                            },
                             {
                               "arcs" : [
                                 {
@@ -133,6 +126,7 @@ extension GraphBuilderTests {
                               "isRoot" : false,
                               "scope" : "type_expr",
                               "tags" : [
+                                "Int",
                                 "implicit",
                                 "location=Test.swift:1:12",
                                 "typerepr="
@@ -140,7 +134,12 @@ extension GraphBuilderTests {
                             }
                           ],
                           "isRoot" : false,
-                          "scope" : "constructor_ref_call_expr"
+                          "scope" : "constructor_ref_call_expr",
+                          "tags" : [
+                            "implicit",
+                            "location=Test.swift:1:12",
+                            "nothrow"
+                          ]
                         },
                         {
                           "arcs" : [
@@ -150,46 +149,54 @@ extension GraphBuilderTests {
                               "scope" : "unknown"
                             }
                           ],
+                          "children" : [
+                            {
+                              "arcs" : [
+                                {
+                                  "identifier" : "Builtin.IntLiteral",
+                                  "isRoot" : false,
+                                  "scope" : "unknown"
+                                }
+                              ],
+                              "isRoot" : false,
+                              "scope" : "integer_literal_expr",
+                              "tags" : [
+                                "location=Test.swift:1:12",
+                                "value=1"
+                              ]
+                            }
+                          ],
                           "isRoot" : false,
                           "scope" : "tuple_expr",
                           "tags" : [
+                            "implicit",
                             "location=Test.swift:1:12",
-                            "value=1"
+                            "names=_builtinIntegerLiteral"
                           ]
-                        },
-                        {
-                          "isRoot" : false,
-                          "scope" : "integer_literal_expr"
                         }
                       ],
                       "isRoot" : false,
-                      "scope" : "declref_expr",
+                      "scope" : "call_expr",
                       "tags" : [
                         "implicit",
                         "location=Test.swift:1:12",
-                        "names=_builtinIntegerLiteral",
                         "nothrow"
                       ]
                     }
                   ],
                   "isRoot" : false,
-                  "scope" : "brace_stmt",
-                  "tags" : [
-                    "implicit",
-                    "location=Test.swift:1:12",
-                    "nothrow"
-                  ]
+                  "scope" : "pattern_binding_decl"
                 }
               ],
               "isRoot" : false,
-              "scope" : "pattern_binding_decl"
+              "scope" : "brace_stmt",
+              "tags" : [
+                "implicit"
+              ]
             }
           ],
           "isRoot" : false,
-          "scope" : "pattern_named",
-          "tags" : [
-            "implicit"
-          ]
+          "scope" : "top_level_code_decl"
         },
         {
           "arcs" : [
@@ -214,11 +221,6 @@ extension GraphBuilderTests {
       "identifier" : "TestSourceFile",
       "isRoot" : false,
       "scope" : "source_file"
-    },
-    {
-      "identifier" : "_builtinIntegerLiteral",
-      "isRoot" : false,
-      "scope" : "unknown"
     }
   ],
   "isRoot" : true,
@@ -271,46 +273,13 @@ extension GraphBuilderTests {
     {
       "children" : [
         {
-          "arcs" : [
-            {
-              "identifier" : "Int",
-              "isRoot" : false,
-              "scope" : "unknown"
-            }
-          ],
-          "isRoot" : false,
-          "scope" : "top_level_code_decl"
-        },
-        {
           "children" : [
             {
               "children" : [
                 {
-                  "arcs" : [
-                    {
-                      "identifier" : "IntLiteral",
-                      "isRoot" : false,
-                      "scope" : "unknown"
-                    },
-                    {
-                      "identifier" : "Int",
-                      "isRoot" : false,
-                      "scope" : "unknown"
-                    }
-                  ],
                   "children" : [
                     {
                       "arcs" : [
-                        {
-                          "identifier" : "Int.Type",
-                          "isRoot" : false,
-                          "scope" : "unknown"
-                        },
-                        {
-                          "identifier" : "IntLiteral",
-                          "isRoot" : false,
-                          "scope" : "unknown"
-                        },
                         {
                           "identifier" : "Int",
                           "isRoot" : false,
@@ -318,11 +287,9 @@ extension GraphBuilderTests {
                         }
                       ],
                       "isRoot" : false,
-                      "scope" : "call_expr",
+                      "scope" : "pattern_named",
                       "tags" : [
-                        "function_ref=single",
-                        "implicit",
-                        "location=Test.swift:1:12"
+                        "Test"
                       ]
                     },
                     {
@@ -331,21 +298,49 @@ extension GraphBuilderTests {
                           "identifier" : "Int",
                           "isRoot" : false,
                           "scope" : "unknown"
-                        },
-                        {
-                          "identifier" : "_builtinIntegerLiteral",
-                          "isRoot" : false,
-                          "scope" : "unknown"
-                        },
-                        {
-                          "identifier" : "Builtin.IntLiteral",
-                          "isRoot" : false,
-                          "scope" : "unknown"
                         }
                       ],
                       "children" : [
                         {
+                          "arcs" : [
+                            {
+                              "identifier" : "IntLiteral",
+                              "isRoot" : false,
+                              "scope" : "unknown"
+                            },
+                            {
+                              "identifier" : "Int",
+                              "isRoot" : false,
+                              "scope" : "unknown"
+                            }
+                          ],
                           "children" : [
+                            {
+                              "arcs" : [
+                                {
+                                  "identifier" : "Int.Type",
+                                  "isRoot" : false,
+                                  "scope" : "unknown"
+                                },
+                                {
+                                  "identifier" : "IntLiteral",
+                                  "isRoot" : false,
+                                  "scope" : "unknown"
+                                },
+                                {
+                                  "identifier" : "Int",
+                                  "isRoot" : false,
+                                  "scope" : "unknown"
+                                }
+                              ],
+                              "isRoot" : false,
+                              "scope" : "declref_expr",
+                              "tags" : [
+                                "function_ref=single",
+                                "implicit",
+                                "location=Test.swift:1:12"
+                              ]
+                            },
                             {
                               "arcs" : [
                                 {
@@ -357,6 +352,7 @@ extension GraphBuilderTests {
                               "isRoot" : false,
                               "scope" : "type_expr",
                               "tags" : [
+                                "Int",
                                 "implicit",
                                 "location=Test.swift:1:12",
                                 "typerepr="
@@ -364,7 +360,12 @@ extension GraphBuilderTests {
                             }
                           ],
                           "isRoot" : false,
-                          "scope" : "constructor_ref_call_expr"
+                          "scope" : "constructor_ref_call_expr",
+                          "tags" : [
+                            "implicit",
+                            "location=Test.swift:1:12",
+                            "nothrow"
+                          ]
                         },
                         {
                           "arcs" : [
@@ -374,46 +375,54 @@ extension GraphBuilderTests {
                               "scope" : "unknown"
                             }
                           ],
+                          "children" : [
+                            {
+                              "arcs" : [
+                                {
+                                  "identifier" : "Builtin.IntLiteral",
+                                  "isRoot" : false,
+                                  "scope" : "unknown"
+                                }
+                              ],
+                              "isRoot" : false,
+                              "scope" : "integer_literal_expr",
+                              "tags" : [
+                                "location=Test.swift:1:12",
+                                "value=1"
+                              ]
+                            }
+                          ],
                           "isRoot" : false,
                           "scope" : "tuple_expr",
                           "tags" : [
+                            "implicit",
                             "location=Test.swift:1:12",
-                            "value=1"
+                            "names=_builtinIntegerLiteral"
                           ]
-                        },
-                        {
-                          "isRoot" : false,
-                          "scope" : "integer_literal_expr"
                         }
                       ],
                       "isRoot" : false,
-                      "scope" : "declref_expr",
+                      "scope" : "call_expr",
                       "tags" : [
                         "implicit",
                         "location=Test.swift:1:12",
-                        "names=_builtinIntegerLiteral",
                         "nothrow"
                       ]
                     }
                   ],
                   "isRoot" : false,
-                  "scope" : "brace_stmt",
-                  "tags" : [
-                    "implicit",
-                    "location=Test.swift:1:12",
-                    "nothrow"
-                  ]
+                  "scope" : "pattern_binding_decl"
                 }
               ],
               "isRoot" : false,
-              "scope" : "pattern_binding_decl"
+              "scope" : "brace_stmt",
+              "tags" : [
+                "implicit"
+              ]
             }
           ],
           "isRoot" : false,
-          "scope" : "pattern_named",
-          "tags" : [
-            "implicit"
-          ]
+          "scope" : "top_level_code_decl"
         },
         {
           "arcs" : [
@@ -438,11 +447,6 @@ extension GraphBuilderTests {
       "identifier" : "TestSourceFile",
       "isRoot" : false,
       "scope" : "source_file"
-    },
-    {
-      "identifier" : "_builtinIntegerLiteral",
-      "isRoot" : false,
-      "scope" : "unknown"
     }
   ],
   "isRoot" : true,

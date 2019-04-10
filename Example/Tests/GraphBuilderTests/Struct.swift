@@ -57,15 +57,20 @@ extension GraphBuilderTests {
                   "scope" : "parameter_list"
                 },
                 {
+                  "children" : [
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
                   "isRoot" : false,
                   "scope" : "brace_stmt",
                   "tags" : [
                     "implicit"
                   ]
-                },
-                {
-                  "isRoot" : false,
-                  "scope" : "return_stmt"
                 }
               ],
               "identifier" : "Test.init()",
@@ -186,15 +191,20 @@ extension GraphBuilderTests {
                   "scope" : "parameter_list"
                 },
                 {
+                  "children" : [
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
                   "isRoot" : false,
                   "scope" : "brace_stmt",
                   "tags" : [
                     "implicit"
                   ]
-                },
-                {
-                  "isRoot" : false,
-                  "scope" : "return_stmt"
                 }
               ],
               "identifier" : "Test.init()",
@@ -213,7 +223,6 @@ extension GraphBuilderTests {
           "scope" : "struct_decl",
           "tags" : [
             "access=internal",
-            "implicit",
             "interface",
             "non-resilient"
           ]

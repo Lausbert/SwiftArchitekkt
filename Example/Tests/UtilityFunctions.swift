@@ -36,7 +36,7 @@ func XCTStringMatchesPattern(string: String, pattern: String) {
     XCTStringsContainedInString(strings: pattern.replacingOccurrences(of: "@@@", with: " ").components(separatedBy: " "), string: string)
 
     var regex = pattern
-    [("[", "\\["), ("]", "\\]"), ("?", "\\?"), ("(", "\\("), (")", "\\)"), ("\n", "\\n"), ("\'", "\\'"), (".", "\\."), ("\"", "\\\""), ("*", "\\*"), ("/", "\\/"), ("@@@", "[\\s\\S]*")].forEach {
+    [("{", "\\{"), ("}", "\\}"), ("[", "\\["), ("]", "\\]"), ("?", "\\?"), ("(", "\\("), (")", "\\)"), ("\n", "\\n"), ("\'", "\\'"), (".", "\\."), ("\"", "\\\""), ("*", "\\*"), ("/", "\\/"), ("@@@", "[\\s\\S]*")].forEach {
         regex = regex.replacingOccurrences(of: $0, with: $1)
     }
     do {

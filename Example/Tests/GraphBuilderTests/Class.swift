@@ -60,15 +60,20 @@ extension GraphBuilderTests {
                   "scope" : "parameter_list"
                 },
                 {
+                  "children" : [
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
                   "isRoot" : false,
                   "scope" : "brace_stmt",
                   "tags" : [
                     "implicit"
                   ]
-                },
-                {
-                  "isRoot" : false,
-                  "scope" : "return_stmt"
                 }
               ],
               "identifier" : "Test.init()",
@@ -214,15 +219,20 @@ extension GraphBuilderTests {
                   "scope" : "parameter_list"
                 },
                 {
+                  "children" : [
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
                   "isRoot" : false,
                   "scope" : "brace_stmt",
                   "tags" : [
                     "implicit"
                   ]
-                },
-                {
-                  "isRoot" : false,
-                  "scope" : "return_stmt"
                 }
               ],
               "identifier" : "BaseClass.init()",
@@ -297,11 +307,6 @@ extension GraphBuilderTests {
                   "identifier" : "Test.Type",
                   "isRoot" : false,
                   "scope" : "unknown"
-                },
-                {
-                  "identifier" : "BaseClass",
-                  "isRoot" : false,
-                  "scope" : "class_decl"
                 }
               ],
               "children" : [
@@ -318,34 +323,41 @@ extension GraphBuilderTests {
                   "scope" : "parameter_list"
                 },
                 {
-                  "arcs" : [
-                    {
-                      "identifier" : "BaseClass",
-                      "isRoot" : false,
-                      "scope" : "class_decl"
-                    }
-                  ],
-                  "isRoot" : false,
-                  "scope" : "brace_stmt",
-                  "tags" : [
-                    "implicit"
-                  ]
-                },
-                {
-                  "arcs" : [
-                    {
-                      "identifier" : "BaseClass",
-                      "isRoot" : false,
-                      "scope" : "class_decl"
-                    }
-                  ],
                   "children" : [
                     {
                       "children" : [
                         {
+                          "arcs" : [
+                            {
+                              "identifier" : "BaseClass",
+                              "isRoot" : false,
+                              "scope" : "class_decl"
+                            }
+                          ],
                           "children" : [
                             {
+                              "arcs" : [
+                                {
+                                  "identifier" : "BaseClass",
+                                  "isRoot" : false,
+                                  "scope" : "class_decl"
+                                }
+                              ],
                               "children" : [
+                                {
+                                  "arcs" : [
+                                    {
+                                      "identifier" : "BaseClass",
+                                      "isRoot" : false,
+                                      "scope" : "class_decl"
+                                    }
+                                  ],
+                                  "isRoot" : false,
+                                  "scope" : "other_constructor_ref_expr",
+                                  "tags" : [
+                                    "implicit"
+                                  ]
+                                },
                                 {
                                   "arcs" : [
                                     {
@@ -362,7 +374,12 @@ extension GraphBuilderTests {
                                 }
                               ],
                               "isRoot" : false,
-                              "scope" : "rebind_self_in_constructor_expr"
+                              "scope" : "dot_syntax_call_expr",
+                              "tags" : [
+                                "implicit",
+                                "nothrow",
+                                "super"
+                              ]
                             },
                             {
                               "isRoot" : false,
@@ -375,12 +392,14 @@ extension GraphBuilderTests {
                           "isRoot" : false,
                           "scope" : "call_expr",
                           "tags" : [
-                            "implicit"
+                            "arg_labels=",
+                            "implicit",
+                            "nothrow"
                           ]
                         }
                       ],
                       "isRoot" : false,
-                      "scope" : "dot_syntax_call_expr",
+                      "scope" : "rebind_self_in_constructor_expr",
                       "tags" : [
                         "implicit"
                       ]
@@ -394,11 +413,9 @@ extension GraphBuilderTests {
                     }
                   ],
                   "isRoot" : false,
-                  "scope" : "other_constructor_ref_expr",
+                  "scope" : "brace_stmt",
                   "tags" : [
-                    "arg_labels=",
-                    "implicit",
-                    "nothrow"
+                    "implicit"
                   ]
                 }
               ],
@@ -409,9 +426,7 @@ extension GraphBuilderTests {
                 "access=internal",
                 "designated",
                 "implicit",
-                "interface",
-                "nothrow",
-                "super"
+                "interface"
               ]
             },
             {
@@ -452,7 +467,6 @@ extension GraphBuilderTests {
           "scope" : "class_decl",
           "tags" : [
             "access=internal",
-            "implicit",
             "interface",
             "non-resilient"
           ]
@@ -558,15 +572,20 @@ extension GraphBuilderTests {
                   "scope" : "parameter_list"
                 },
                 {
+                  "children" : [
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
                   "isRoot" : false,
                   "scope" : "brace_stmt",
                   "tags" : [
                     "implicit"
                   ]
-                },
-                {
-                  "isRoot" : false,
-                  "scope" : "return_stmt"
                 }
               ],
               "identifier" : "Test.init()",
@@ -617,7 +636,6 @@ extension GraphBuilderTests {
           "scope" : "class_decl",
           "tags" : [
             "access=internal",
-            "implicit",
             "interface",
             "non-resilient"
           ]
@@ -740,15 +758,20 @@ extension GraphBuilderTests {
                   "scope" : "parameter_list"
                 },
                 {
+                  "children" : [
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
                   "isRoot" : false,
                   "scope" : "brace_stmt",
                   "tags" : [
                     "implicit"
                   ]
-                },
-                {
-                  "isRoot" : false,
-                  "scope" : "return_stmt"
                 }
               ],
               "identifier" : "BaseClass.init()",
@@ -828,11 +851,6 @@ extension GraphBuilderTests {
                   "identifier" : "Test.Type",
                   "isRoot" : false,
                   "scope" : "unknown"
-                },
-                {
-                  "identifier" : "BaseClass",
-                  "isRoot" : false,
-                  "scope" : "class_decl"
                 }
               ],
               "children" : [
@@ -849,34 +867,41 @@ extension GraphBuilderTests {
                   "scope" : "parameter_list"
                 },
                 {
-                  "arcs" : [
-                    {
-                      "identifier" : "BaseClass",
-                      "isRoot" : false,
-                      "scope" : "class_decl"
-                    }
-                  ],
-                  "isRoot" : false,
-                  "scope" : "brace_stmt",
-                  "tags" : [
-                    "implicit"
-                  ]
-                },
-                {
-                  "arcs" : [
-                    {
-                      "identifier" : "BaseClass",
-                      "isRoot" : false,
-                      "scope" : "class_decl"
-                    }
-                  ],
                   "children" : [
                     {
                       "children" : [
                         {
+                          "arcs" : [
+                            {
+                              "identifier" : "BaseClass",
+                              "isRoot" : false,
+                              "scope" : "class_decl"
+                            }
+                          ],
                           "children" : [
                             {
+                              "arcs" : [
+                                {
+                                  "identifier" : "BaseClass",
+                                  "isRoot" : false,
+                                  "scope" : "class_decl"
+                                }
+                              ],
                               "children" : [
+                                {
+                                  "arcs" : [
+                                    {
+                                      "identifier" : "BaseClass",
+                                      "isRoot" : false,
+                                      "scope" : "class_decl"
+                                    }
+                                  ],
+                                  "isRoot" : false,
+                                  "scope" : "other_constructor_ref_expr",
+                                  "tags" : [
+                                    "implicit"
+                                  ]
+                                },
                                 {
                                   "arcs" : [
                                     {
@@ -893,7 +918,12 @@ extension GraphBuilderTests {
                                 }
                               ],
                               "isRoot" : false,
-                              "scope" : "rebind_self_in_constructor_expr"
+                              "scope" : "dot_syntax_call_expr",
+                              "tags" : [
+                                "implicit",
+                                "nothrow",
+                                "super"
+                              ]
                             },
                             {
                               "isRoot" : false,
@@ -906,12 +936,14 @@ extension GraphBuilderTests {
                           "isRoot" : false,
                           "scope" : "call_expr",
                           "tags" : [
-                            "implicit"
+                            "arg_labels=",
+                            "implicit",
+                            "nothrow"
                           ]
                         }
                       ],
                       "isRoot" : false,
-                      "scope" : "dot_syntax_call_expr",
+                      "scope" : "rebind_self_in_constructor_expr",
                       "tags" : [
                         "implicit"
                       ]
@@ -925,11 +957,9 @@ extension GraphBuilderTests {
                     }
                   ],
                   "isRoot" : false,
-                  "scope" : "other_constructor_ref_expr",
+                  "scope" : "brace_stmt",
                   "tags" : [
-                    "arg_labels=",
-                    "implicit",
-                    "nothrow"
+                    "implicit"
                   ]
                 }
               ],
@@ -940,9 +970,7 @@ extension GraphBuilderTests {
                 "access=internal",
                 "designated",
                 "implicit",
-                "interface",
-                "nothrow",
-                "super"
+                "interface"
               ]
             },
             {
@@ -983,7 +1011,6 @@ extension GraphBuilderTests {
           "scope" : "class_decl",
           "tags" : [
             "access=internal",
-            "implicit",
             "interface",
             "non-resilient"
           ]
