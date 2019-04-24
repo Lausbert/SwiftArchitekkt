@@ -68,7 +68,7 @@ class Tokenizer {
             case "'":
                 return .tag(identifier(endingWith: "'"))
             case "[":
-                return .tag(identifier(endingWith: "]"))
+                return .tag(identifier(endingWith: "]", oneTimeExceptionForEvery: "["))
             case "<":
                 return .tag(identifier(endingWith: ">"))
             default:
@@ -149,11 +149,6 @@ class Tokenizer {
 
         loop: while let ch = nextScalar() {
             switch ch {
-            case "\n",
-                 "\"",
-                 "'":
-                pushedBackScalars.insert(ch, at: 0)
-                break loop
             case "(":
                 allowedRightParenthesis += 1
                 tokenText.unicodeScalars.append(ch)
@@ -171,7 +166,10 @@ class Tokenizer {
             case "]":
                 allowedRightBracket -= 1
                 tokenText.unicodeScalars.append(ch)
-            case ",",
+            case "\n",
+                 "\"",
+                 "'",
+                 ",",
                  " ":
                 if allowedRightParenthesis <= 0 && allowedRightBracket <= 0 {
                     pushedBackScalars.insert(ch, at: 0)
@@ -206,7 +204,7 @@ class Tokenizer {
                             .replacingOccurrences(of: "]", with: " ")
                             .replacingOccurrences(of: "[()<>,-]", with: " ", options: .regularExpression)
                             .components(separatedBy: " ")
-                            .filter { !$0.isEmpty && $0 != "inout" && ![":"].contains($0.last) && !["@"].contains($0.first)}
+                            .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned"].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
         return .type(identifiers)
     }
 
@@ -216,19 +214,26 @@ class Tokenizer {
         return .inherits(identifiers)
     }
 
-    private func identifier(endingWith last: UnicodeScalar) -> String {
+    private func identifier(endingWith last: UnicodeScalar, oneTimeExceptionForEvery first: UnicodeScalar? = nil) -> String {
         var tokenText = ""
+        var allowedLast = 0
 
         while let ch = nextScalar() {
             switch ch {
-            case last,
-                 "\n":
-                return tokenText
+            case first:
+                allowedLast += 1
+            case last:
+                if allowedLast <= 0 {
+                    return tokenText.replacingOccurrences(of: "\n", with: "")
+                } else {
+                    allowedLast -= 1
+                    tokenText.unicodeScalars.append(ch)
+                }
             default:
                 tokenText.unicodeScalars.append(ch)
             }
         }
-        return tokenText
+        return tokenText.replacingOccurrences(of: "\n", with: "")
     }
 
 }

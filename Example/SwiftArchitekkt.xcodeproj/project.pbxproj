@@ -15,6 +15,7 @@
 		5D800AF922143A9300600D5B /* CompileCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACD22143A9300600D5B /* CompileCommands.swift */; };
 		5D800AFA22143A9300600D5B /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACE22143A9300600D5B /* Graph.swift */; };
 		5D800AFB22143A9300600D5B /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACF22143A9300600D5B /* IntegrationTests.swift */; };
+		5D874E5E22706A0E00BBBF85 /* Alamofire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D874E5D22706A0E00BBBF85 /* Alamofire.swift */; };
 		5D8BDF552246488700177CF0 /* GraphBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8BDF542246488700177CF0 /* GraphBuilderTests.swift */; };
 		5DB2CEF322491861005B9445 /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEF222491861005B9445 /* Class.swift */; };
 		5DB2CEF52249188F005B9445 /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEF42249188F005B9445 /* Struct.swift */; };
@@ -36,6 +37,7 @@
 		5D800ACD22143A9300600D5B /* CompileCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompileCommands.swift; sourceTree = "<group>"; };
 		5D800ACE22143A9300600D5B /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
 		5D800ACF22143A9300600D5B /* IntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
+		5D874E5D22706A0E00BBBF85 /* Alamofire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alamofire.swift; sourceTree = "<group>"; };
 		5D8BDF542246488700177CF0 /* GraphBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBuilderTests.swift; sourceTree = "<group>"; };
 		5DB2CEF222491861005B9445 /* Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
 		5DB2CEF42249188F005B9445 /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				5DB2CEF822491BF7005B9445 /* Protocol.swift */,
 				5DB2CEFA22491C43005B9445 /* Function.swift */,
 				5DB2CEFC22491C75005B9445 /* Variable.swift */,
+				5D874E5D22706A0E00BBBF85 /* Alamofire.swift */,
 			);
 			path = GraphBuilderTests;
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 				5DB2CEF722491BD8005B9445 /* Enum.swift in Sources */,
 				5DB2CEFB22491C43005B9445 /* Function.swift in Sources */,
 				5D800AF722143A9300600D5B /* AST.swift in Sources */,
+				5D874E5E22706A0E00BBBF85 /* Alamofire.swift in Sources */,
 				5D8BDF552246488700177CF0 /* GraphBuilderTests.swift in Sources */,
 				5D800AF922143A9300600D5B /* CompileCommands.swift in Sources */,
 				5D800AF522143A9300600D5B /* Schemes.swift in Sources */,
