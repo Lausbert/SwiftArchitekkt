@@ -116,13 +116,17 @@ class Tokenizer {
         var id: String?
         loop: while let ch = nextScalar() {
             switch ch {
-            case  "\n":
+            case "\n":
                 pushedBackScalars.append(ch)
                 break loop
             case "\"":
-                id = identifierPrefix + identifier(endingWith: "\"")
-                if scope == "source_file", let strongId = id {
-                    id = (strongId.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
+                if pushedBackScalars.last == " " {
+                    id = identifierPrefix + identifier(endingWith: "\"")
+                    if scope == "source_file", let strongId = id {
+                        id = (strongId.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
+                    }
+                } else {
+                    pushedBackScalars.append(ch)
                 }
                 break loop
             default:
@@ -190,6 +194,13 @@ class Tokenizer {
             return typeToken()
         case "inherits:":
             return inheritsToken()
+        case "value=":
+            if nextScalar() == "\"" {
+                let value = identifier(endingWith: "\"")
+                return .tag(tokenText + value)
+            } else {
+                return .tag(tokenText)
+            }
         default:
             return .tag(tokenText)
         }
@@ -204,7 +215,7 @@ class Tokenizer {
                             .replacingOccurrences(of: "]", with: " ")
                             .replacingOccurrences(of: "[()<>,-]", with: " ", options: .regularExpression)
                             .components(separatedBy: " ")
-                            .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned"].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
+                            .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned", "__shared"].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
         return .type(identifiers)
     }
 
