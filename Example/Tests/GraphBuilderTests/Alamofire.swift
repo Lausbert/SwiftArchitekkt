@@ -3,7 +3,7 @@
 import Foundation
 
 extension GraphBuilderTests {
-    
+
     func testGraphBuilderForAlamofireiOS() {
         // class Test {}
         let ast = """
@@ -6337,5 +6337,5 @@ ter "self" interface type='URLRequest' inout)
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
 }
