@@ -150,6 +150,7 @@ class Tokenizer {
 
         var allowedRightParenthesis = 0
         var allowedRightBracket = 0
+        var allowedRightArrow = 0
 
         loop: while let ch = nextScalar() {
             switch ch {
@@ -170,12 +171,18 @@ class Tokenizer {
             case "]":
                 allowedRightBracket -= 1
                 tokenText.unicodeScalars.append(ch)
+            case "<":
+                allowedRightArrow += 1
+                tokenText.unicodeScalars.append(ch)
+            case ">":
+                allowedRightArrow -= 1
+                tokenText.unicodeScalars.append(ch)
             case "\n",
                  "\"",
                  "'",
                  ",",
                  " ":
-                if allowedRightParenthesis <= 0 && allowedRightBracket <= 0 {
+                if allowedRightParenthesis <= 0 && allowedRightBracket <= 0 && allowedRightArrow <= 0 {
                     pushedBackScalars.insert(ch, at: 0)
                     break loop
                 } else {
@@ -207,7 +214,11 @@ class Tokenizer {
     }
 
     private func typeToken() -> Token {
-        guard nextScalar() == "'" else { fatalError("Unexpectly found no typeIdentifier.") }
+        var ch = nextScalar()
+        if ch == "\n" {
+            ch = nextScalar()
+        }
+        guard ch == "'" else { fatalError("Unexpectly found no typeIdentifier.") }
         let id = identifier(endingWith: "'")
         let identifiers = id.replacingOccurrences(of: "?", with: "")
             // I know, I know, the following two lines should be included in the regular expression. But I did not get it to work.
@@ -220,12 +231,12 @@ class Tokenizer {
     }
 
     private func inheritsToken() -> Token {
-        let id = identifier(endingWith: "\n")
-        let identifiers = id.replacingOccurrences(of: " ", with: "").components(separatedBy: ",")
+        let id = identifier(endingWith: "\n", pushBackLast: ")")
+        let identifiers = id.replacingOccurrences(of: " ", with: "").components(separatedBy: [",", "&"])
         return .inherits(identifiers)
     }
 
-    private func identifier(endingWith last: UnicodeScalar, oneTimeExceptionForEvery first: UnicodeScalar? = nil) -> String {
+    private func identifier(endingWith last: UnicodeScalar, oneTimeExceptionForEvery first: UnicodeScalar? = nil, pushBackLast: UnicodeScalar? = nil) -> String {
         var tokenText = ""
         var allowedLast = 0
 
@@ -240,6 +251,9 @@ class Tokenizer {
                     allowedLast -= 1
                     tokenText.unicodeScalars.append(ch)
                 }
+            case pushBackLast:
+                pushedBackScalars.insert(ch, at: 0)
+                return tokenText.replacingOccurrences(of: "\n", with: "")
             default:
                 tokenText.unicodeScalars.append(ch)
             }
