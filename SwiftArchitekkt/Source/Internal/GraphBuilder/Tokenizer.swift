@@ -62,15 +62,7 @@ class Tokenizer {
             case " ", "\n", "\\":
                 continue
             case "(":
-                let token: Token = scopeStartToken()
-                if case let Token.scopeStart(scope, identifier: _) = token, scope == "if_config_decl" {
-                    while let newToken = nextToken() {
-                        if case let Token.scopeEnd(scope, identifier: _) = newToken, scope == "if_config_decl" {
-                            return nextToken()
-                        }
-                    }
-                }
-                return token
+                return scopeStartToken()
             case ")":
                 return scopeEndToken()
             case "'":
@@ -108,7 +100,7 @@ class Tokenizer {
         return iterator.next()
     }
 
-    private func scopeStartToken() -> Token {
+    private func scopeStartToken() -> Token? {
         var scope: String = ""
         loop: while let ch = nextScalar() {
             switch ch {
@@ -143,6 +135,23 @@ class Tokenizer {
         }
         self.pushedBackScalars = pushedBackScalars + self.pushedBackScalars
 
+        
+        switch scope {
+        case "if_config_decl": // just skip if_config_decl scope, since active branch will follow after anyway; related to swift compiler flags
+            let scopeStart = Token.scopeStart(scope, identifier: id)
+            openScopes.append(scopeStart)
+            while let newToken = nextToken() {
+                if case let Token.scopeEnd(scope, identifier: _) = newToken, scope == "if_config_decl" {
+                    return nextToken()
+                }
+            }
+            return nil
+        case "extension_decl":
+            id = identifierPrefix + "extension_decl." +  UUID().uuidString
+        default:
+            break
+        }
+        
         let scopeStart = Token.scopeStart(scope, identifier: id)
         openScopes.append(scopeStart)
         return scopeStart
