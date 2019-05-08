@@ -62,7 +62,15 @@ class Tokenizer {
             case " ", "\n", "\\":
                 continue
             case "(":
-                return scopeStartToken()
+                let token: Token = scopeStartToken()
+                if case let Token.scopeStart(scope, identifier: _) = token, scope == "if_config_decl" {
+                    while let newToken = nextToken() {
+                        if case let Token.scopeEnd(scope, identifier: _) = newToken, scope == "if_config_decl" {
+                            return nextToken()
+                        }
+                    }
+                }
+                return token
             case ")":
                 return scopeEndToken()
             case "'":
