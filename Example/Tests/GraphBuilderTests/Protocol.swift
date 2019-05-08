@@ -52,7 +52,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderProtocolWithAssiciatedTypeAndTwoClassesImplementingIt() {
 //        protocol TestProtocol {
 //            associatedtype T
@@ -95,7 +95,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderProtocolWithAssiciatedTypeAndTwoExtensionsImplementingIt() {
 //        protocol TestProtocol {
 //            associatedtype T
@@ -142,6 +142,5 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-
 
 }

@@ -135,7 +135,6 @@ class Tokenizer {
         }
         self.pushedBackScalars = pushedBackScalars + self.pushedBackScalars
 
-        
         switch scope {
         case "if_config_decl": // just skip if_config_decl scope, since active branch will follow after anyway; related to swift compiler flags
             let scopeStart = Token.scopeStart(scope, identifier: id)
@@ -151,7 +150,7 @@ class Tokenizer {
         default:
             break
         }
-        
+
         let scopeStart = Token.scopeStart(scope, identifier: id)
         openScopes.append(scopeStart)
         return scopeStart
