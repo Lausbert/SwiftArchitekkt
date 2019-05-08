@@ -3,7 +3,7 @@
 import Foundation
 
 extension GraphBuilderTests {
-    
+
     func testGraphBuilderForSingleActiveBranch() {
 //            #if macOS // macOS is active
 //            struct Active {}
@@ -117,7 +117,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderForSingleInactiveBranch() {
         //    #if macOS // macOS is inactive
         //    struct Active {}
@@ -145,7 +145,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderForTwoBranchesWhereIfBranchIsActive() {
 //        #if macOS // macOs is active
 //        struct Active {}
@@ -264,7 +264,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderForTwoBranchesWhereElseBranchIsActive() {
 //        #if macOS // macOs is inactive
 //        struct Active {}
@@ -385,4 +385,3 @@ extension GraphBuilderTests {
     }
 
 }
-
