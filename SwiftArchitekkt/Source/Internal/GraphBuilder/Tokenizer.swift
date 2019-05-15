@@ -235,13 +235,11 @@ class Tokenizer {
             ch = nextScalar()
         }
         guard ch == "'" else { fatalError("Unexpectly found no typeIdentifier.") }
-        let id = identifier(endingWith: "'")
+        let id = moveGenericParametersToTheEnd(id: identifier(endingWith: "'"))
         let identifiers = id.replacingOccurrences(of: "?", with: "")
-            // I know, I know, the following two lines should be included in the regular expression. But I did not get it to work.
-                            .replacingOccurrences(of: "[", with: " ")
-                            .replacingOccurrences(of: "]", with: " ")
-                            .replacingOccurrences(of: "[()<>,-]", with: " ", options: .regularExpression)
+                            .replacingOccurrences(of: "[\\[\\]()<>,-]", with: " ", options: .regularExpression)
                             .components(separatedBy: " ")
+                            .uniqued()
                             .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned", "__shared"].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
         return .type(identifiers)
     }
@@ -275,6 +273,16 @@ class Tokenizer {
             }
         }
         return tokenText.replacingOccurrences(of: "\n", with: "")
+    }
+    
+    private func moveGenericParametersToTheEnd(id: String) -> String {
+        var id = id.replacingOccurrences(of: "->", with: " ")
+        var genericParamerts: [String] = []
+        while let start = id.range(of: "<"), let stop = id.range(of: ">") {
+            genericParamerts.append(String(id[start.lowerBound...stop.lowerBound]))
+            id = String(id[..<start.lowerBound]) + String(id[stop.upperBound...])
+        }
+        return id + " " + genericParamerts.joined(separator: " ")
     }
 
 }
