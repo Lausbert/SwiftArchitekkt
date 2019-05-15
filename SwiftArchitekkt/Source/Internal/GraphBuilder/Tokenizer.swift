@@ -225,7 +225,11 @@ class Tokenizer {
                 return .tag(tokenText)
             }
         default:
-            return .tag(tokenText)
+            if let scopeStart = openScopes.last, case let .scopeStart(scope, identifier: _) = scopeStart, scope == "extension_decl", !tokenText.contains("=") {
+                return .type(typeIdentifiers(forTypeIdentifier: tokenText))
+            } else {
+                return .tag(tokenText)
+            }
         }
     }
 
@@ -235,13 +239,8 @@ class Tokenizer {
             ch = nextScalar()
         }
         guard ch == "'" else { fatalError("Unexpectly found no typeIdentifier.") }
-        let id = moveGenericParametersToTheEnd(id: identifier(endingWith: "'"))
-        let identifiers = id.replacingOccurrences(of: "?", with: "")
-                            .replacingOccurrences(of: "[\\[\\]()<>,-]", with: " ", options: .regularExpression)
-                            .components(separatedBy: " ")
-                            .uniqued()
-                            .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned", "__shared"].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
-        return .type(identifiers)
+        let id = identifier(endingWith: "'")
+        return .type(typeIdentifiers(forTypeIdentifier: id))
     }
 
     private func inheritsToken() -> Token {
@@ -273,6 +272,16 @@ class Tokenizer {
             }
         }
         return tokenText.replacingOccurrences(of: "\n", with: "")
+    }
+    
+    private func typeIdentifiers(forTypeIdentifier id: String) -> [String] {
+        let id = moveGenericParametersToTheEnd(id: id)
+        let identifiers = id.replacingOccurrences(of: "?", with: "")
+            .replacingOccurrences(of: "[\\[\\]()<>,-]", with: " ", options: .regularExpression)
+            .components(separatedBy: " ")
+            .uniqued()
+            .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned", "__shared"].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
+        return identifiers
     }
     
     private func moveGenericParametersToTheEnd(id: String) -> String {

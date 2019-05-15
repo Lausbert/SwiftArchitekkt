@@ -53,7 +53,7 @@ extension GraphBuilderTests {
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
 
-    func testGraphBuilderProtocolWithAssiciatedTypeAndTwoClassesImplementingIt() {
+    func testGraphBuilderForProtocolWithAssociatedTypeAndTwoClassesImplementingIt() {
 //        protocol TestProtocol {
 //            associatedtype T
 //        }
@@ -91,12 +91,353 @@ extension GraphBuilderTests {
       (brace_stmt implicit range=[test.swift:13:7 - line:13:7]))))
 """
         let expectedGraphString = """
-
+{
+  "children" : [
+    {
+      "identifier" : "FirstTestClass.T.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "FirstTestClass.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "Int",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "SecondTestClass.T.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "SecondTestClass.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "Self.T.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "String",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "TestProtocol.Protocol",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "children" : [
+        {
+          "arcs" : [
+            {
+              "identifier" : "TestProtocol.Protocol",
+              "isRoot" : false,
+              "scope" : "unknown"
+            }
+          ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "Self.T.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "identifier" : "TestProtocol.T",
+              "isRoot" : false,
+              "scope" : "associated_type_decl",
+              "tags" : [
+                "access=internal",
+                "interface",
+                "overridden="
+              ]
+            }
+          ],
+          "identifier" : "TestProtocol",
+          "isRoot" : false,
+          "scope" : "protocol",
+          "tags" : [
+            "Self : TestProtocol",
+            "access=internal",
+            "interface",
+            "non-resilient",
+            "requirement",
+            "signature=<Self>"
+          ]
+        },
+        {
+          "arcs" : [
+            {
+              "identifier" : "FirstTestClass.Type",
+              "isRoot" : false,
+              "scope" : "unknown"
+            },
+            {
+              "identifier" : "TestProtocol",
+              "isRoot" : false,
+              "scope" : "protocol"
+            }
+          ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "FirstTestClass.T.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                },
+                {
+                  "identifier" : "Int",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "identifier" : "FirstTestClass.T",
+              "isRoot" : false,
+              "scope" : "typealias",
+              "tags" : [
+                "access=internal",
+                "interface"
+              ]
+            },
+            {
+              "arcs" : [
+                {
+                  "identifier" : "FirstTestClass.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "FirstTestClass.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "children" : [
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "FirstTestClass.init()",
+              "isRoot" : false,
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface"
+              ]
+            },
+            {
+              "children" : [
+                {
+                  "identifier" : "FirstTestClass.deinit.self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "FirstTestClass.deinit",
+              "isRoot" : false,
+              "scope" : "destructor_decl",
+              "tags" : [
+                "@objc",
+                "access=internal",
+                "implicit",
+                "interface"
+              ]
+            }
+          ],
+          "identifier" : "FirstTestClass",
+          "isRoot" : false,
+          "scope" : "class_decl",
+          "tags" : [
+            "access=internal",
+            "interface",
+            "non-resilient"
+          ]
+        },
+        {
+          "arcs" : [
+            {
+              "identifier" : "SecondTestClass.Type",
+              "isRoot" : false,
+              "scope" : "unknown"
+            },
+            {
+              "identifier" : "TestProtocol",
+              "isRoot" : false,
+              "scope" : "protocol"
+            }
+          ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "SecondTestClass.T.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                },
+                {
+                  "identifier" : "String",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "identifier" : "SecondTestClass.T",
+              "isRoot" : false,
+              "scope" : "typealias",
+              "tags" : [
+                "access=internal",
+                "interface"
+              ]
+            },
+            {
+              "arcs" : [
+                {
+                  "identifier" : "SecondTestClass.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "SecondTestClass.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "children" : [
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "SecondTestClass.init()",
+              "isRoot" : false,
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface"
+              ]
+            },
+            {
+              "children" : [
+                {
+                  "identifier" : "SecondTestClass.deinit.self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "SecondTestClass.deinit",
+              "isRoot" : false,
+              "scope" : "destructor_decl",
+              "tags" : [
+                "@objc",
+                "access=internal",
+                "implicit",
+                "interface"
+              ]
+            }
+          ],
+          "identifier" : "SecondTestClass",
+          "isRoot" : false,
+          "scope" : "class_decl",
+          "tags" : [
+            "access=internal",
+            "interface",
+            "non-resilient"
+          ]
+        }
+      ],
+      "identifier" : "testSourceFile",
+      "isRoot" : false,
+      "scope" : "source_file"
+    }
+  ],
+  "isRoot" : true,
+  "scope" : "root"
+}
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
 
-    func testGraphBuilderProtocolWithAssiciatedTypeAndTwoExtensionsImplementingIt() {
+    func testGraphBuilderForProtocolWithAssociatedTypeAndTwoExtensionsImplementingIt() {
 //        protocol TestProtocol {
 //            associatedtype T
 //        }
@@ -138,7 +479,376 @@ extension GraphBuilderTests {
     (typealias range=[test.swift:10:5 - line:10:19] "T" interface type='SecondTestClass.T.Type' access=internal type='String')))
 """
         let expectedGraphString = """
-
+{
+  "children" : [
+    {
+      "identifier" : "FirstTestClass.T.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "FirstTestClass.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "Int",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "SecondTestClass.T.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "SecondTestClass.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "Self.T.Type",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "String",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "identifier" : "TestProtocol.Protocol",
+      "isRoot" : false,
+      "scope" : "unknown"
+    },
+    {
+      "children" : [
+        {
+          "arcs" : [
+            {
+              "identifier" : "TestProtocol.Protocol",
+              "isRoot" : false,
+              "scope" : "unknown"
+            }
+          ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "Self.T.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "identifier" : "TestProtocol.T",
+              "isRoot" : false,
+              "scope" : "associated_type_decl",
+              "tags" : [
+                "access=internal",
+                "interface",
+                "overridden="
+              ]
+            }
+          ],
+          "identifier" : "TestProtocol",
+          "isRoot" : false,
+          "scope" : "protocol",
+          "tags" : [
+            "Self : TestProtocol",
+            "access=internal",
+            "interface",
+            "non-resilient",
+            "requirement",
+            "signature=<Self>"
+          ]
+        },
+        {
+          "arcs" : [
+            {
+              "identifier" : "FirstTestClass.Type",
+              "isRoot" : false,
+              "scope" : "unknown"
+            }
+          ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "FirstTestClass.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "FirstTestClass.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "children" : [
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "FirstTestClass.init()",
+              "isRoot" : false,
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface"
+              ]
+            },
+            {
+              "children" : [
+                {
+                  "identifier" : "FirstTestClass.deinit.self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "FirstTestClass.deinit",
+              "isRoot" : false,
+              "scope" : "destructor_decl",
+              "tags" : [
+                "@objc",
+                "access=internal",
+                "implicit",
+                "interface"
+              ]
+            }
+          ],
+          "identifier" : "FirstTestClass",
+          "isRoot" : false,
+          "scope" : "class_decl",
+          "tags" : [
+            "access=internal",
+            "interface",
+            "non-resilient"
+          ]
+        },
+        {
+          "arcs" : [
+            {
+              "identifier" : "FirstTestClass",
+              "isRoot" : false,
+              "scope" : "class_decl"
+            },
+            {
+              "identifier" : "TestProtocol",
+              "isRoot" : false,
+              "scope" : "protocol"
+            }
+          ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "FirstTestClass.T.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                },
+                {
+                  "identifier" : "Int",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "identifier" : "extension_decl.@@@.T",
+              "isRoot" : false,
+              "scope" : "typealias",
+              "tags" : [
+                "access=internal",
+                "interface"
+              ]
+            }
+          ],
+          "identifier" : "extension_decl.@@@",
+          "isRoot" : false,
+          "scope" : "extension_decl"
+        },
+        {
+          "arcs" : [
+            {
+              "identifier" : "SecondTestClass.Type",
+              "isRoot" : false,
+              "scope" : "unknown"
+            }
+          ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "SecondTestClass.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "children" : [
+                {
+                  "identifier" : "SecondTestClass.init().self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "children" : [
+                    {
+                      "isRoot" : false,
+                      "scope" : "return_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "SecondTestClass.init()",
+              "isRoot" : false,
+              "scope" : "constructor_decl",
+              "tags" : [
+                "access=internal",
+                "designated",
+                "implicit",
+                "interface"
+              ]
+            },
+            {
+              "children" : [
+                {
+                  "identifier" : "SecondTestClass.deinit.self",
+                  "isRoot" : false,
+                  "scope" : "parameter",
+                  "tags" : [
+                    "interface"
+                  ]
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "parameter_list"
+                },
+                {
+                  "isRoot" : false,
+                  "scope" : "brace_stmt",
+                  "tags" : [
+                    "implicit"
+                  ]
+                }
+              ],
+              "identifier" : "SecondTestClass.deinit",
+              "isRoot" : false,
+              "scope" : "destructor_decl",
+              "tags" : [
+                "@objc",
+                "access=internal",
+                "implicit",
+                "interface"
+              ]
+            }
+          ],
+          "identifier" : "SecondTestClass",
+          "isRoot" : false,
+          "scope" : "class_decl",
+          "tags" : [
+            "access=internal",
+            "interface",
+            "non-resilient"
+          ]
+        },
+        {
+          "arcs" : [
+            {
+              "identifier" : "SecondTestClass",
+              "isRoot" : false,
+              "scope" : "class_decl"
+            },
+            {
+              "identifier" : "TestProtocol",
+              "isRoot" : false,
+              "scope" : "protocol"
+            }
+          ],
+          "children" : [
+            {
+              "arcs" : [
+                {
+                  "identifier" : "SecondTestClass.T.Type",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                },
+                {
+                  "identifier" : "String",
+                  "isRoot" : false,
+                  "scope" : "unknown"
+                }
+              ],
+              "identifier" : "extension_decl.@@@.T",
+              "isRoot" : false,
+              "scope" : "typealias",
+              "tags" : [
+                "access=internal",
+                "interface"
+              ]
+            }
+          ],
+          "identifier" : "extension_decl.@@@",
+          "isRoot" : false,
+          "scope" : "extension_decl"
+        }
+      ],
+      "identifier" : "testSourceFile",
+      "isRoot" : false,
+      "scope" : "source_file"
+    }
+  ],
+  "isRoot" : true,
+  "scope" : "root"
+}
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }

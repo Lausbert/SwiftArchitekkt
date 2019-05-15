@@ -46,7 +46,7 @@ func XCTStringMatchesPattern(string: String, pattern: String) {
         }
         XCTAssertEqual(string, match)
     } catch {
-        XCTFail()
+        XCTFail("Could not extract pattern from \(string).")
         return
     }
 }
