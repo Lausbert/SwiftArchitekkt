@@ -273,7 +273,7 @@ class Tokenizer {
         }
         return tokenText.replacingOccurrences(of: "\n", with: "")
     }
-    
+
     private func typeIdentifiers(forTypeIdentifier id: String) -> [String] {
         let id = moveGenericParametersToTheEnd(id: id)
         let identifiers = id.replacingOccurrences(of: "?", with: "")
@@ -283,7 +283,7 @@ class Tokenizer {
             .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned", "__shared"].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
         return identifiers
     }
-    
+
     private func moveGenericParametersToTheEnd(id: String) -> String {
         var id = id.replacingOccurrences(of: "->", with: " ")
         var genericParamerts: [String] = []

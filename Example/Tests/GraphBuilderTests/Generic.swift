@@ -3,7 +3,7 @@
 import Foundation
 
 extension GraphBuilderTests {
-    
+
     func testGraphBuilderForGenericClassWithSingleGenericParameter() {
         // class Generic<T> {}
         let ast = """
@@ -177,7 +177,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderForGenericClassWithMultipleGenericParameter() {
         // class Generic<T, U> {}
         let ast = """
@@ -381,7 +381,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderForGenericFunctionWithSingleGenericParameter() {
         // func generic<T>(t: T) {}
         let ast = """
@@ -459,5 +459,5 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
 }

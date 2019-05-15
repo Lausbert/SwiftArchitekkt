@@ -3,7 +3,7 @@
 import Foundation
 
 extension GraphBuilderTests {
-    
+
     func testGraphBuilderForClassExtension() {
         // class Class {}
         // extension Class {}
@@ -154,7 +154,7 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
     func testGraphBuilderForGenericClassExtension() {
         // class Generic<T> {}
         // extension Generic {}
@@ -347,5 +347,5 @@ extension GraphBuilderTests {
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
     }
-    
+
 }
