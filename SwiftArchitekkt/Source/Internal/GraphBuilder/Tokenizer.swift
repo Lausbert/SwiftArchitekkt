@@ -1,6 +1,7 @@
 //  Copyright © 2019 Stephan Lerner. All rights reserved.
 
 import Foundation
+import CoreArchitekkt
 
 class Tokenizer {
 
@@ -275,23 +276,24 @@ class Tokenizer {
     }
 
     private func typeIdentifiers(forTypeIdentifier id: String) -> [String] {
-        let id = moveGenericParametersToTheEnd(id: id)
+        let id = moveGenericParametersToTheEnd(inTypeIdentifier: id)
         let identifiers = id.replacingOccurrences(of: "?", with: "")
             .replacingOccurrences(of: "[\\[\\]()<>,-]", with: " ", options: .regularExpression)
             .components(separatedBy: " ")
             .uniqued()
-            .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned", "__shared"].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
+            .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned", "__shared", "=="].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
         return identifiers
     }
-
-    private func moveGenericParametersToTheEnd(id: String) -> String {
+    
+    private func moveGenericParametersToTheEnd(inTypeIdentifier id: String) -> String {
         var id = id.replacingOccurrences(of: "->", with: " ")
-        var genericParamerts: [String] = []
-        while let start = id.range(of: "<"), let stop = id.range(of: ">") {
-            genericParamerts.append(String(id[start.lowerBound...stop.lowerBound]))
-            id = String(id[..<start.lowerBound]) + String(id[stop.upperBound...])
+        while true {
+            guard let match = Regex.getMatches(for: StaticString(stringLiteral: "<[^<]+?>"), text: id).first, let range = Range(match.range, in: id) else { break }
+            let genericIdentifier = String(id[id.index(after: range.lowerBound)..<id.index(before: range.upperBound)])
+            let idBefore = id[..<range.lowerBound]
+            let idAfter = String(id[range.upperBound...])
+            id = idBefore + idAfter + " " + genericIdentifier
         }
-        return id + " " + genericParamerts.joined(separator: " ")
+        return id
     }
-
 }
