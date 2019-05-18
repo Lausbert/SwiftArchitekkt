@@ -284,7 +284,7 @@ class Tokenizer {
             .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned", "__shared", "=="].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
         return identifiers
     }
-    
+
     private func moveGenericParametersToTheEnd(inTypeIdentifier id: String) -> String {
         var id = id.replacingOccurrences(of: "->", with: " ")
         while true {
