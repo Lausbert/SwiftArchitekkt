@@ -9,21 +9,12 @@ class GraphBuilder {
     // MARK: - Internal -
 
     init(ast: String) {
-        #if DEBUG
-        print(ast)
-        var tokens: [Tokenizer.Token] = []
-        let newTokenizer = Tokenizer(ast: ast)
-        while let token = newTokenizer.nextToken() {
-            tokens.append(token)
-        }
-        Tokenizer.debugDescription(of: tokens)
-        #endif
         tokenizer = Tokenizer(ast: ast)
     }
 
     func generateGraph(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Node? {
         do {
-            while let token = tokenizer.nextToken() {
+            while let token = try tokenizer.nextToken() {
                 switch token {
                 case let .scopeStart(scope, identifier):
                     try handleScopeStart(scope: scope, identifier: identifier)

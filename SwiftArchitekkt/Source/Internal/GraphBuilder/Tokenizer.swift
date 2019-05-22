@@ -24,6 +24,20 @@ class Tokenizer {
         }
     }
     #endif
+    
+    enum ErrorEnum: LocalizedError, Equatable {
+        case unexpectedlyReachedScopeEnd
+        case unexpectlyFoundNoTypeIdentifier
+        
+        var errorDescription: String? {
+            switch self {
+            case .unexpectedlyReachedScopeEnd:
+                return "Unexpectedly reached scope end."
+            case .unexpectlyFoundNoTypeIdentifier:
+                return "Unexpectly found no typeIdentifier."
+            }
+        }
+    }
 
     enum Token: CustomStringConvertible, Equatable {
 
@@ -57,15 +71,15 @@ class Tokenizer {
         iterator = ast.unicodeScalars.makeIterator()
     }
 
-    func nextToken() -> Token? {
+    func nextToken() throws -> Token? {
         while let ch = nextScalar() {
             switch ch {
             case " ", "\n", "\\":
                 continue
             case "(":
-                return scopeStartToken()
+                return try scopeStartToken()
             case ")":
-                return scopeEndToken()
+                return try scopeEndToken()
             case "'":
                 return .tag(identifier(endingWith: "'"))
             case "[":
@@ -73,7 +87,7 @@ class Tokenizer {
             case "<":
                 return .tag(identifier(endingWith: ">"))
             default:
-                return keywordToken(startingWith: ch)
+                return try keywordToken(startingWith: ch)
             }
         }
         return nil
@@ -101,7 +115,7 @@ class Tokenizer {
         return iterator.next()
     }
 
-    private func scopeStartToken() -> Token? {
+    private func scopeStartToken() throws -> Token? {
         var scope: String = ""
         loop: while let ch = nextScalar() {
             switch ch {
@@ -140,9 +154,9 @@ class Tokenizer {
         case "if_config_decl": // just skip if_config_decl scope, since active branch will follow after anyway; related to swift compiler flags
             let scopeStart = Token.scopeStart(scope, identifier: id)
             openScopes.append(scopeStart)
-            while let newToken = nextToken() {
+            while let newToken = try nextToken() {
                 if case let Token.scopeEnd(scope, identifier: _) = newToken, scope == "if_config_decl" {
-                    return nextToken()
+                    return try nextToken()
                 }
             }
             return nil
@@ -157,12 +171,12 @@ class Tokenizer {
         return scopeStart
     }
 
-    private func scopeEndToken() -> Token {
-        guard let scopeStart = openScopes.popLast(), case let .scopeStart(scope, identifier) = scopeStart else { fatalError("Unexpectedly reached scope end.") }
+    private func scopeEndToken() throws -> Token {
+        guard let scopeStart = openScopes.popLast(), case let .scopeStart(scope, identifier) = scopeStart else { throw ErrorEnum.unexpectedlyReachedScopeEnd }
         return .scopeEnd(scope, identifier: identifier)
     }
 
-    private func keywordToken(startingWith first: UnicodeScalar) -> Token {
+    private func keywordToken(startingWith first: UnicodeScalar) throws -> Token {
         var tokenText = String(first)
 
         var allowedRightParenthesis = 0
@@ -215,7 +229,7 @@ class Tokenizer {
 
         switch tokenText {
         case "type=":
-            return typeToken()
+            return try typeToken()
         case "inherits:":
             return inheritsToken()
         case "value=":
@@ -234,12 +248,12 @@ class Tokenizer {
         }
     }
 
-    private func typeToken() -> Token {
+    private func typeToken() throws -> Token {
         var ch = nextScalar()
         if ch == "\n" {
             ch = nextScalar()
         }
-        guard ch == "'" else { fatalError("Unexpectly found no typeIdentifier.") }
+        guard ch == "'" else { throw ErrorEnum.unexpectlyFoundNoTypeIdentifier }
         let id = identifier(endingWith: "'")
         return .type(typeIdentifiers(forTypeIdentifier: id))
     }
