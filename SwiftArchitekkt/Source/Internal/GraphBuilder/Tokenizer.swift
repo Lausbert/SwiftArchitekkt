@@ -24,11 +24,11 @@ class Tokenizer {
         }
     }
     #endif
-    
+
     enum ErrorEnum: LocalizedError, Equatable {
         case unexpectedlyReachedScopeEnd
         case unexpectlyFoundNoTypeIdentifier
-        
+
         var errorDescription: String? {
             switch self {
             case .unexpectedlyReachedScopeEnd:
