@@ -127,6 +127,7 @@ class Tokenizer {
             }
         }
 
+        var allowedRightParenthesis = 0
         var pushedBackScalars: [UnicodeScalar] = []
         var id: String?
         loop: while let ch = nextScalar() {
@@ -134,6 +135,17 @@ class Tokenizer {
             case "\n":
                 pushedBackScalars.append(ch)
                 break loop
+            case "(":
+                allowedRightParenthesis += 1
+                pushedBackScalars.append(ch)
+            case ")":
+                if allowedRightParenthesis <= 0 {
+                    pushedBackScalars.append(ch)
+                    break loop
+                } else {
+                    pushedBackScalars.append(ch)
+                    allowedRightParenthesis -= 1
+                }
             case "\"":
                 if pushedBackScalars.last == " " {
                     id = identifierPrefix + identifier(endingWith: "\"")
