@@ -14,13 +14,13 @@ extension XcodeBuildWrapper {
     ///   - graphRequest: A graph request
     ///   - completionHandler: Handles the need for decisions or occuring errors
     /// - Returns: An updated graph request, if any parameters were added. The initial graph request if no parameters are missing. Nil if an error occured or a decision is needed.
-    static func update(graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> GraphRequest? {
+    static func update(graphRequest: GraphRequest, xcodeUrl: URL, completionHandler: (GraphRequest.Result) -> Void) -> GraphRequest? {
         var updatedGraphRequest = graphRequest
         while let mostUrgentMissingParamter = XcodeBuildWrapper.mostUrgentMissingParameter(for: updatedGraphRequest) {
             do {
-                let parameterOptions = try XcodeBuildWrapper.get(parameter: mostUrgentMissingParamter, for: updatedGraphRequest)
+                let parameterOptions = try XcodeBuildWrapper.get(parameter: mostUrgentMissingParamter, for: updatedGraphRequest, xcodeUrl: xcodeUrl)
                 if let options = parameterOptions[mostUrgentMissingParamter.rawValue], options.count == 1, let singleOption = options.first {
-                    updatedGraphRequest = GraphRequest(url: updatedGraphRequest.url, options: updatedGraphRequest.options.merging([mostUrgentMissingParamter.rawValue: singleOption], uniquingKeysWith: { $1 }), accessibleUrls: updatedGraphRequest.accessibleUrls)
+                    updatedGraphRequest = GraphRequest(url: updatedGraphRequest.url, options: updatedGraphRequest.options.merging([mostUrgentMissingParamter.rawValue: singleOption], uniquingKeysWith: { $1 }), consistentlyRequiredUrls: updatedGraphRequest.consistentlyRequiredUrls)
                 } else {
                     completionHandler(GraphRequest.Result.decisionNeeded(updatedGraphRequest, parameterOptions))
                     return nil
@@ -44,10 +44,9 @@ extension XcodeBuildWrapper {
         return nil
     }
 
-    private static func get(parameter: ParameterEnum, for graphRequest: GraphRequest) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
+    private static func get(parameter: ParameterEnum, for graphRequest: GraphRequest, xcodeUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
         guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
-        guard let url = graphRequest.accessibleUrls?[AccessRequirementsEvaluator.accessRequirements[0]] else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
-        let xcodeBuildUrl = url.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
+        let xcodeBuildUrl = xcodeUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
 
         switch fileExtension {
         case .project:

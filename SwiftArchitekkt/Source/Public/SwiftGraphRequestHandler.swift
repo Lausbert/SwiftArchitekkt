@@ -10,7 +10,7 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
 
     public init() {}
 
-    public var accessRequirements: [AccessRequirement]? { return AccessRequirementsEvaluator.accessRequirements }
+    public var consistentUrlRequirements: [ConsistentUrlRequirement]? { return ConsistentUrlRequirementsEvaluator.consistentUrlRequirements }
 
     public var handableFileExtensions: [String] { return [XcodeBuildWrapper.SwiftFileExtension.project.rawValue] }; #warning("Todo")
 
@@ -20,27 +20,26 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
             let statusUpdateHandler = DispatchQueue.main.asyncClosure(statusUpdateHandler)
             let completionHandler = DispatchQueue.main.asyncClosure({ (result: GraphRequest.Result) -> Void in
                 switch result {
-                case let .failure(graphRequest, error):
-                    AccessRequirementsEvaluator.stopAccessFor(graphRequest: graphRequest)
+                case let .failure(_, error):
                     let log = OSLog(subsystem: "org.cocoapods.SwiftArchitekkt", category: String(describing: self))
                     os_log("%@", log: log, type: .debug, error.localizedDescription)
-                case let .decisionNeeded(graphRequest, _), let .success(graphRequest, _):
-                    AccessRequirementsEvaluator.stopAccessFor(graphRequest: graphRequest)
+                default:
+                    break
                 }
                 completionHandler(result)
             })
 
-            statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue))
-            guard AccessRequirementsEvaluator.evaluateAndStartAccessFor(graphRequest: graphRequest, completionHandler: completionHandler) else { return }
-            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(graphRequest, LastProcedure.evaluatingAccessRequirements.rawValue, nil))
+            statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(graphRequest, LastProcedure.evaluatingConsistentUrlRequirements.rawValue))
+            guard let xcodeUrl = ConsistentUrlRequirementsEvaluator.getXcodeUrl(for: graphRequest, completionHandler: completionHandler) else { return }
+            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(graphRequest, LastProcedure.evaluatingConsistentUrlRequirements.rawValue, nil))
             #if DEBUG
-            if self.shouldStopAfter(procedure: LastProcedure.evaluatingAccessRequirements.rawValue, graphRequest: graphRequest) {
+            if self.shouldStopAfter(procedure: LastProcedure.evaluatingConsistentUrlRequirements.rawValue, graphRequest: graphRequest) {
                 return
             }
             #endif
 
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(graphRequest, LastProcedure.updatingGraphRequest.rawValue))
-            guard let updatedGraphRequest = XcodeBuildWrapper.update(graphRequest: graphRequest, completionHandler: completionHandler) else { return }
+            guard let updatedGraphRequest = XcodeBuildWrapper.update(graphRequest: graphRequest, xcodeUrl: xcodeUrl, completionHandler: completionHandler) else { return }
             statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.updatingGraphRequest.rawValue, nil))
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.updatingGraphRequest.rawValue, graphRequest: updatedGraphRequest) {
@@ -49,7 +48,7 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
             #endif
 
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingCompileCommands.rawValue))
-            guard let compileCommands = XcodeBuildWrapper.getCompileCommands(for: updatedGraphRequest, completionHandler: completionHandler) else { return }
+            guard let compileCommands = XcodeBuildWrapper.getCompileCommands(for: updatedGraphRequest, xcodeUrl: xcodeUrl, completionHandler: completionHandler) else { return }
             statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingCompileCommands.rawValue, compileCommands.joined(separator: " ")))
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.generatingCompileCommands.rawValue, graphRequest: updatedGraphRequest) {
@@ -58,15 +57,13 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
             #endif
 
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingAST.rawValue))
-            guard let ast = SwiftCompilerWrapper.generateAst(for: compileCommands, graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
+            guard let ast = SwiftCompilerWrapper.generateAst(for: compileCommands, graphRequest: updatedGraphRequest, xcodeUrl: xcodeUrl, completionHandler: completionHandler) else { return }
             statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingAST.rawValue, ast))
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.generatingAST.rawValue, graphRequest: updatedGraphRequest) {
                 return
             }
             #endif
-
-            AccessRequirementsEvaluator.stopAccessFor(graphRequest: updatedGraphRequest)
 
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue))
             guard let rootNode = GraphBuilder(ast: ast).generateGraph(graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
@@ -95,7 +92,7 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
     static let queue = DispatchQueue.global(qos: .utility)
 
     enum LastProcedure: String, CaseIterable {
-        case evaluatingAccessRequirements
+        case evaluatingConsistentUrlRequirements
         case updatingGraphRequest
         case generatingCompileCommands
         case generatingAST

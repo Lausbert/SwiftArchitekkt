@@ -9,14 +9,11 @@ struct SwiftCompilerWrapper {
     // MARK: - Internal -
 
     enum ErrorEnum: LocalizedError, Equatable {
-        case unexpectedlyCouldNotFindAnyAccessibleUrl
         case couldNotProperlyRunSwiftCompiler
         case invalidAstFormat(String)
 
         var errorDescription: String? {
             switch self {
-            case .unexpectedlyCouldNotFindAnyAccessibleUrl:
-                return "Unexpectedly could not find any accessible url."
             case .couldNotProperlyRunSwiftCompiler:
                 return "Could not properly run swift compiler."
             case .invalidAstFormat(let ast):
@@ -25,10 +22,9 @@ struct SwiftCompilerWrapper {
         }
     }
 
-    static func generateAst(for compileCommands: [String], graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> String? {
+    static func generateAst(for compileCommands: [String], graphRequest: GraphRequest, xcodeUrl: URL, completionHandler: (GraphRequest.Result) -> Void) -> String? {
         do {
-            guard let url = graphRequest.accessibleUrls?[AccessRequirementsEvaluator.accessRequirements[0]] else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
-            let swiftUrl = url.appendingPathComponent("Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc/")
+            let swiftUrl = xcodeUrl.appendingPathComponent("Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc/")
             var ast = try generateAst(for: compileCommands, swiftUrl: swiftUrl)
             if ast.first == "\n" {
                 ast.removeFirst()

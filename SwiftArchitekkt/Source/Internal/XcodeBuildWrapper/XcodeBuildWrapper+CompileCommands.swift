@@ -8,9 +8,9 @@ extension XcodeBuildWrapper {
 
     // MARK: - Internal -
 
-    static func getCompileCommands(for graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> [String]? {
+    static func getCompileCommands(for graphRequest: GraphRequest, xcodeUrl: URL, completionHandler: (GraphRequest.Result) -> Void) -> [String]? {
         do {
-            return try getCompileCommands(for: graphRequest)
+            return try getCompileCommands(for: graphRequest, xcodeUrl: xcodeUrl)
         } catch {
             completionHandler(GraphRequest.Result.failure(graphRequest, error))
             return nil
@@ -19,10 +19,9 @@ extension XcodeBuildWrapper {
 
     // MARK: - Private -
 
-    private static func getCompileCommands(for graphRequest: GraphRequest) throws -> [String] {
+    private static func getCompileCommands(for graphRequest: GraphRequest, xcodeUrl: URL) throws -> [String] {
         guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
-        guard let url = graphRequest.accessibleUrls?[AccessRequirementsEvaluator.accessRequirements[0]] else { throw ErrorEnum.unexpectedlyCouldNotFindAnyAccessibleUrl }
-        let xcodeBuildUrl = url.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
+        let xcodeBuildUrl = xcodeUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
 
         switch fileExtension {
         case .project:
