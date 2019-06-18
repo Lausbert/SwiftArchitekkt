@@ -20,7 +20,7 @@ struct ConsistentUrlRequirementsEvaluator {
     }
 
     static let consistentUrlRequirements = [
-        ConsistentUrlRequirement(key: "org.cocoapods.SwiftArchitekkt.Xcode.app", description: "Choose your Xcode app and related command line tools.", fileName: "Xcode", fileType: "app")
+        ConsistentUrlRequirement(key: "org.cocoapods.SwiftArchitekkt.Xcode.app", hint: "Choose your Xcode app and related command line tools.", fileName: "Xcode", fileType: "app")
     ]
 
     static func getXcodeUrl(for graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> URL? {

@@ -1,6 +1,6 @@
 {
   "name": "SwiftArchitekkt",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "summary": "An implementation of a graph request handler, which handles XCode projects & workspaces.",
   "description": "An implementation of a graph request handler, which handles XCode projects & workspaces.",
   "homepage": "https://github.com/Lausbert/SwiftArchitekkt",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/Lausbert/SwiftArchitekkt.git",
-    "tag": "0.1.26"
+    "tag": "0.1.27"
   },
   "platforms": {
     "osx": "10.14"
