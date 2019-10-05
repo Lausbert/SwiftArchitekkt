@@ -1868,107 +1868,11 @@ extension IntegrationTests {
                               "scope" : "unknown"
                             }
                           ],
-                          "children" : [
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "Int1",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                },
-                                {
-                                  "identifier" : "Bool",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "children" : [
-                                {
-                                  "arcs" : [
-                                    {
-                                      "identifier" : "Bool.Type",
-                                      "isRoot" : false,
-                                      "scope" : "unknown"
-                                    },
-                                    {
-                                      "identifier" : "Int1",
-                                      "isRoot" : false,
-                                      "scope" : "unknown"
-                                    },
-                                    {
-                                      "identifier" : "Bool",
-                                      "isRoot" : false,
-                                      "scope" : "unknown"
-                                    }
-                                  ],
-                                  "isRoot" : false,
-                                  "scope" : "declref_expr",
-                                  "tags" : [
-                                    "function_ref=single",
-                                    "implicit"
-                                  ]
-                                },
-                                {
-                                  "arcs" : [
-                                    {
-                                      "identifier" : "Bool.Type",
-                                      "isRoot" : false,
-                                      "scope" : "unknown"
-                                    }
-                                  ],
-                                  "isRoot" : false,
-                                  "scope" : "type_expr",
-                                  "tags" : [
-                                    "Bool",
-                                    "implicit",
-                                    "typerepr="
-                                  ]
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "constructor_ref_call_expr",
-                              "tags" : [
-                                "implicit",
-                                "nothrow"
-                              ]
-                            },
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "Builtin.Int1",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "children" : [
-                                {
-                                  "arcs" : [
-                                    {
-                                      "identifier" : "Builtin.Int1",
-                                      "isRoot" : false,
-                                      "scope" : "unknown"
-                                    }
-                                  ],
-                                  "isRoot" : false,
-                                  "scope" : "boolean_literal_expr",
-                                  "tags" : [
-                                    "value=true"
-                                  ]
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "tuple_expr",
-                              "tags" : [
-                                "implicit",
-                                "names=_builtinBooleanLiteral"
-                              ]
-                            }
-                          ],
                           "isRoot" : false,
-                          "scope" : "call_expr",
+                          "scope" : "boolean_literal_expr",
                           "tags" : [
-                            "implicit",
-                            "nothrow"
+                            "initializer=**NULL**",
+                            "value=true"
                           ]
                         }
                       ],
@@ -2397,8 +2301,7 @@ extension IntegrationTests {
                   "isRoot" : false,
                   "scope" : "brace_stmt",
                   "tags" : [
-                    "implicit",
-                    "rang"
+                    "implicit"
                   ]
                 }
               ],
@@ -2434,22 +2337,7 @@ extension IntegrationTests {
       "scope" : "unknown"
     },
     {
-      "identifier" : "Bool.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Builtin.Int1",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
       "identifier" : "Bundle",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Int1",
       "isRoot" : false,
       "scope" : "unknown"
     },
@@ -2541,6 +2429,13 @@ extension IntegrationTests {
                   "scope" : "parameter_list"
                 },
                 {
+                  "arcs" : [
+                    {
+                      "identifier" : "Void",
+                      "isRoot" : false,
+                      "scope" : "unknown"
+                    }
+                  ],
                   "children" : [
                     {
                       "arcs" : [
@@ -2554,65 +2449,52 @@ extension IntegrationTests {
                         {
                           "arcs" : [
                             {
+                              "identifier" : "UIViewController",
+                              "isRoot" : false,
+                              "scope" : "unknown"
+                            },
+                            {
                               "identifier" : "Void",
                               "isRoot" : false,
                               "scope" : "unknown"
                             }
                           ],
-                          "children" : [
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "UIViewController",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                },
-                                {
-                                  "identifier" : "Void",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "declref_expr",
-                              "tags" : [
-                                "function_ref=single"
-                              ]
-                            },
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "UIViewController",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "super_ref_expr"
-                            }
-                          ],
                           "isRoot" : false,
-                          "scope" : "dot_syntax_call_expr",
+                          "scope" : "declref_expr",
                           "tags" : [
-                            "nothrow",
-                            "super"
+                            "function_ref=single"
                           ]
                         },
                         {
+                          "arcs" : [
+                            {
+                              "identifier" : "UIViewController",
+                              "isRoot" : false,
+                              "scope" : "unknown"
+                            }
+                          ],
                           "isRoot" : false,
-                          "scope" : "tuple_expr"
+                          "scope" : "super_ref_expr"
                         }
                       ],
                       "isRoot" : false,
-                      "scope" : "call_expr",
+                      "scope" : "dot_syntax_call_expr",
                       "tags" : [
-                        "arg_labels=",
-                        "nothrow"
+                        "nothrow",
+                        "super"
                       ]
+                    },
+                    {
+                      "isRoot" : false,
+                      "scope" : "tuple_expr"
                     }
                   ],
                   "isRoot" : false,
-                  "scope" : "brace_stmt"
+                  "scope" : "call_expr",
+                  "tags" : [
+                    "arg_labels=",
+                    "nothrow"
+                  ]
                 }
               ],
               "identifier" : "ViewController.viewDidLoad()",
@@ -2897,7 +2779,7 @@ extension IntegrationTests {
                           "scope" : "unknown"
                         }
                       ],
-                      "identifier" : "ViewController.init(coder:).aDecoder",
+                      "identifier" : "ViewController.init(coder:).coder",
                       "isRoot" : false,
                       "scope" : "parameter",
                       "tags" : [
