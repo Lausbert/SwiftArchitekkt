@@ -37,8 +37,7 @@ extension XcodeBuildWrapper {
     private static func getProjectCompileCommands(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [String] {
         guard let scheme = graphRequest.options[ParameterEnum.scheme.rawValue] else { throw ErrorEnum.couldNotFindAnySchemes(graphRequest.options.description) }
         guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-project", graphRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
-
-        let compileCommandsRegex = "/(swiftc +[^\\n]* -module-name +\(target.replacingOccurrences(of: " ", with: "_")) +[^\\n]*)"
+        let compileCommandsRegex = "/(swiftc[^\\n]* -module-name +([^ ]+) +[^\\n]*)"
         guard let compileCommandsMatchingString = try Regex.getMatchingStrings(for: compileCommandsRegex, text: xcodeBuildResults, captureGroup: 1).first else { throw ErrorEnum.couldNotFindAnyCompileCommands(xcodeBuildResults) }
 
         return compileCommandsMatchingString.replacingOccurrences(of: "\\ ", with: "SpacePlaceholder").components(separatedBy: " ").map { $0.replacingOccurrences(of: "SpacePlaceholder", with: " ") }
