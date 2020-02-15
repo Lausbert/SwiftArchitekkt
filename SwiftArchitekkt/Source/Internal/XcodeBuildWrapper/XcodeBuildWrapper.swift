@@ -14,7 +14,6 @@ struct XcodeBuildWrapper {
 
     enum ParameterEnum: String, CaseIterable {
         case scheme
-        case target
     }
 
     enum ErrorEnum: LocalizedError, Equatable {

@@ -53,8 +53,6 @@ extension XcodeBuildWrapper {
             switch parameter {
             case .scheme:
                 return try getProjectSchemes(for: graphRequest, xcodeBuildUrl: xcodeBuildUrl)
-            case .target:
-                return try getProjectTargets(for: graphRequest, xcodeBuildUrl: xcodeBuildUrl)
             }
         case .workspace:
             #warning("todo")
@@ -74,17 +72,6 @@ extension XcodeBuildWrapper {
             .map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
             else { throw ErrorEnum.couldNotFindAnySchemes(xcodeBuildResults) }
         return ["scheme": schemes]
-    }
-
-    private static func getProjectTargets(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
-        guard let scheme = graphRequest.options[ParameterEnum.scheme.rawValue] else { throw ErrorEnum.couldNotFindAnySchemes(graphRequest.options.description) }
-        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-showBuildSettings", "-project", graphRequest.url.absoluteString, "-scheme", scheme]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
-
-        let targetRegex = "TARGETNAME = ([\\S]+)"
-        let targets = try Regex.getMatchingStrings(for: targetRegex, text: xcodeBuildResults, captureGroup: 1)
-        guard targets.count > 0 else { throw ErrorEnum.couldNotFindAnyTargets(xcodeBuildResults) }
-
-        return ["target": targets]
     }
 
 }
