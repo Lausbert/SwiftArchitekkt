@@ -8,47 +8,50 @@
 import Foundation
 
 public struct Regex {
-    
-    // MARK: - Private -
-    
-    public static func getMachingStrings(for match: NSTextCheckingResult, text: String, captureGroups: [Int]) -> [String] {
-        let matchingStrings = captureGroups
-            .compactMap { captureGroup in
-                Range(match.range(at: captureGroup), in: text).map({String(text[$0])})
-            }
-        assert(matchingStrings.allSatisfy { !$0.isEmpty })
-        assert(matchingStrings.count == captureGroups.count)
-        return matchingStrings
-    }
 
     // MARK: - Public -
 
-    public static func getMatches(for regex: String, text: String) throws -> [NSTextCheckingResult] {
-        let regex = try NSRegularExpression(pattern: regex, options: [])
-        return regex.matches(in: text, options: [], range: NSRange(text.startIndex..., in: text))
+    public struct CombinedResult {
+        let results: [Result]
     }
 
-    public static func getMatchingStrings(for regex: String, text: String, captureGroups: [Int]) throws -> [[String]] {
+    public struct Result {
+        let captureGroup: Int
+        let string: String
+        let range: Range<String.Index>
+    }
+
+    public static func getMatchingStrings(for regex: StaticString, text: String, captureGroups: Int...) -> [CombinedResult] {
+        let matches = try! getMatches(for: "\(regex)", text: text)
+        return matches.map { match in
+            getMachingStrings(for: match, text: text, captureGroups: captureGroups)
+        }
+    }
+
+    public static func getMatchingStrings(for regex: String, text: String, captureGroups: Int...) throws -> [CombinedResult] {
         let matches = try getMatches(for: regex, text: text)
         return matches.map { match in
             getMachingStrings(for: match, text: text, captureGroups: captureGroups)
         }
     }
-    
-    public static func getMatchingStrings(for regex: String, text: String, captureGroup: Int) throws -> [String] {
-        try getMatchingStrings(for: regex, text: text, captureGroups: [captureGroup]).first ?? []
-    }
-    
-    public static func getMatches(for regex: StaticString, text: String) -> [NSTextCheckingResult] {
-        try! getMatches(for: "\(regex)", text: text)
+
+    // MARK: - Private -
+
+    private static func getMachingStrings(for match: NSTextCheckingResult, text: String, captureGroups: [Int]) -> CombinedResult {
+        let results = captureGroups
+            .compactMap { captureGroup in
+                Result(
+                    captureGroup: captureGroup,
+                    string: Range(match.range(at: captureGroup), in: text).map({String(text[$0])})!,
+                    range: Range(match.range(at: captureGroup), in: text)!
+                )
+            }
+        return CombinedResult(results: results)
     }
 
-    public static func getMatchingStrings(for regex: StaticString, text: String, captureGroups: [Int]) -> [[String]] {
-        try! getMatchingStrings(for: "\(regex)", text: text, captureGroups: captureGroups)
-    }
-    
-    public static func getMatchingStrings(for regex: StaticString, text: String, captureGroup: Int) -> [String] {
-        try! getMatchingStrings(for: "\(regex)", text: text, captureGroups: [captureGroup]).first ?? []
+    private static func getMatches(for regex: String, text: String) throws -> [NSTextCheckingResult] {
+        let regex = try NSRegularExpression(pattern: regex, options: [])
+        return regex.matches(in: text, options: [], range: NSRange(text.startIndex..., in: text))
     }
 
 }
