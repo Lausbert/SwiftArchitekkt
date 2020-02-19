@@ -314,7 +314,7 @@ class Tokenizer {
     private func moveGenericParametersToTheEnd(inTypeIdentifier id: String) -> String {
         var id = id.replacingOccurrences(of: "->", with: " ")
         while true {
-            guard let match = Regex.getMatches(for: StaticString(stringLiteral: "<[^<]+?>"), text: id).first, let range = Range(match.range, in: id) else { break }
+            guard let range = Regex.getResult(for: StaticString(stringLiteral: "<[^<]+?>"), text: id, captureGroup: 0).first?.range else { break }
             let genericIdentifier = String(id[id.index(after: range.lowerBound)..<id.index(before: range.upperBound)])
             let idBefore = id[..<range.lowerBound]
             let idAfter = String(id[range.upperBound...])

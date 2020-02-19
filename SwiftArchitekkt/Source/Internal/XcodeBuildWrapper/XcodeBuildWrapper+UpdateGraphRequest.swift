@@ -64,9 +64,10 @@ extension XcodeBuildWrapper {
         guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-list", "-project", graphRequest.url.absoluteString]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
 
         let schemeRegex = "Schemes:\\n((.+\\n)+)"
-        let schemeMatchingStrings = try Regex.getMatchingStrings(for: schemeRegex, text: xcodeBuildResults, captureGroup: 1)
-        guard let schemes = schemeMatchingStrings
+        let schemeResults = try Regex.getResult(for: schemeRegex, text: xcodeBuildResults, captureGroup: 1)
+        guard let schemes = schemeResults
             .first?
+            .string
             .trimmingCharacters(in: .whitespacesAndNewlines)
             .components(separatedBy: "\n")
             .map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })

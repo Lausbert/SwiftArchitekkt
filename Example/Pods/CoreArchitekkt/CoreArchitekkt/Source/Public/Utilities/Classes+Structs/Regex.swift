@@ -12,33 +12,33 @@ public struct Regex {
     // MARK: - Public -
 
     public struct CombinedResult {
-        let results: [Result]
+        public let results: [Result]
     }
 
     public struct Result {
-        let captureGroup: Int
-        let string: String
-        let range: Range<String.Index>
-        let regex: String
-        let text: String
+        public let captureGroup: Int
+        public let string: String
+        public let range: Range<String.Index>
+        public let regex: String
+        public let text: String
     }
 
-    public static func getMatchingStrings(for regex: StaticString, text: String, captureGroup: Int) -> [Result] {
-        return getMatchingStrings(for: regex, text: text, captureGroups: captureGroup).flatMap { $0.results }
+    public static func getResult(for regex: StaticString, text: String, captureGroup: Int) -> [Result] {
+        return getCombinedResult(for: regex, text: text, captureGroups: captureGroup).flatMap { $0.results }
     }
 
-    public static func getMatchingStrings(for regex: String, text: String, captureGroup: Int) throws -> [Result] {
-        return try getMatchingStrings(for: regex, text: text, captureGroups: captureGroup).flatMap { $0.results }
+    public static func getResult(for regex: String, text: String, captureGroup: Int) throws -> [Result] {
+        return try getCombinedResult(for: regex, text: text, captureGroups: captureGroup).flatMap { $0.results }
     }
 
-    public static func getMatchingStrings(for regex: StaticString, text: String, captureGroups: Int...) -> [CombinedResult] {
+    public static func getCombinedResult(for regex: StaticString, text: String, captureGroups: Int...) -> [CombinedResult] {
         let matches = try! getMatches(for: "\(regex)", text: text)
         return matches.map { match in
             getMachingStrings(for: match, regex: "\(regex)", text: text, captureGroups: captureGroups)
         }
     }
 
-    public static func getMatchingStrings(for regex: String, text: String, captureGroups: Int...) throws -> [CombinedResult] {
+    public static func getCombinedResult(for regex: String, text: String, captureGroups: Int...) throws -> [CombinedResult] {
         let matches = try getMatches(for: regex, text: text)
         return matches.map { match in
             getMachingStrings(for: match, regex: regex, text: text, captureGroups: captureGroups)

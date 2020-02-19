@@ -40,11 +40,11 @@ func XCTStringMatchesPattern(string: String, pattern: String) {
         regex = regex.replacingOccurrences(of: $0, with: $1)
     }
     do {
-        guard let match = try Regex.getMatchingStrings(for: regex, text: string, captureGroup: 0).first else {
+        guard let match = try Regex.getResult(for: regex, text: string, captureGroup: 0).first else {
             XCTFail()
             return
         }
-        XCTAssertEqual(string, match)
+        XCTAssertEqual(string, match.string)
     } catch {
         XCTFail("Could not extract pattern from \(string).")
         return
