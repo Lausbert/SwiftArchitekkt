@@ -36,6 +36,7 @@ extension XcodeBuildWrapper {
 
     private static func getProjectCompileCommands(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [String] {
         guard let scheme = graphRequest.options[ParameterEnum.scheme.rawValue] else { throw ErrorEnum.couldNotFindAnySchemes(graphRequest.options.description) }
+        guard let target = graphRequest.options[ParameterEnum.target.rawValue] else { throw ErrorEnum.couldNotFindAnyTargets(graphRequest.options.description) }
         guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-project", graphRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
         let compileCommandsRegex = StaticString("/(swiftc[^\\n]* -module-name +([^ ]+) +[^\\n]*)")
         guard let compileCommandsMatchingString = Regex.getResult(for: compileCommandsRegex, text: xcodeBuildResults, captureGroup: 1).first?.string else { throw ErrorEnum.couldNotFindAnyCompileCommands(xcodeBuildResults) }
