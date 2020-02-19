@@ -20,7 +20,6 @@ struct XcodeBuildWrapper {
         case couldNotHandleFileExtension(String)
         case couldNotProperlyRunXcodeBuild
         case couldNotFindAnySchemes(String)
-        case couldNotFindAnyTargets(String)
         case couldNotFindAnyCompileCommands(String)
 
         var errorDescription: String? {
@@ -31,8 +30,6 @@ struct XcodeBuildWrapper {
                 return "Could not properly run xcodebuild."
             case .couldNotFindAnySchemes(let description):
                 return "Could not find any schemes: \(description)"
-            case .couldNotFindAnyTargets(let description):
-                return "Could not find any targets: \(description)"
             case .couldNotFindAnyCompileCommands(let xcodeBuildResults):
                 return "Could not find any compile commands for specified target: \(xcodeBuildResults)"
             }

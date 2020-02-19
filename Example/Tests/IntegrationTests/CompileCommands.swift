@@ -9,8 +9,7 @@ extension IntegrationTests {
     func testMacOSCompileCommandsForProject() {
         testGraphRequestHandlingForRessourceFile(withName: "MacOSSDK",
                                                  pathExtension: "xcodeproj",
-                                                 options: ["scheme": "MacOSSDK",
-                                                           "target": "MacOSSDK"],
+                                                 options: ["scheme": "MacOSSDK"],
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingCompileCommands,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {
@@ -25,8 +24,7 @@ extension IntegrationTests {
     func testIOSCompileCommandsForProject() {
         testGraphRequestHandlingForRessourceFile(withName: "iOSSDK",
                                                  pathExtension: "xcodeproj",
-                                                 options: ["scheme": "iOSSDK",
-                                                           "target": "iOSSDK"],
+                                                 options: ["scheme": "iOSSDK"],
                                                  lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingCompileCommands,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {

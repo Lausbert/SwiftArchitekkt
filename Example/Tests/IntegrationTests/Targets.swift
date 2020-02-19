@@ -10,13 +10,13 @@ extension IntegrationTests {
         testGraphRequestHandlingForRessourceFile(withName: "NoTarget",
                                                  pathExtension: "xcodeproj",
                                                  options: ["scheme": "AnyScheme"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
+                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingCompileCommands,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
                                                     case .success, .decisionNeeded:
                                                         XCTFail()
                                                     case .failure(_, let error):
-                                                        XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnyTargets("xcodebuild: error: The project named \"NoTarget\" does not contain a scheme named \"AnyScheme\". The \"-list\" option can be used to find the names of the schemes in the project.\n"))
+                                                        XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnyCompileCommands("xcodebuild: error: Scheme AnyScheme is not currently configured for the clean action.\n\n"))
                                                         expectation.fulfill()
                                                     }
         })
@@ -26,14 +26,9 @@ extension IntegrationTests {
         testGraphRequestHandlingForRessourceFile(withName: "SingleTarget",
                                                  pathExtension: "xcodeproj",
                                                  options: ["scheme": "SingleTarget"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
-                                                 statusUpdateValidationHandler: { (graphRequest, _, expectation) in
-                                                    if let target = graphRequest.options["target"] {
-                                                        XCTAssert(target == "SingleTarget")
-                                                    } else {
-                                                        XCTFail()
-                                                    }
-                                                    expectation.fulfill()
+                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingCompileCommands,
+                                                 statusUpdateValidationHandler: { (graphRequest, additionalInformation, expectation) in
+                                                    // future test here
         })
     }
 
@@ -41,21 +36,9 @@ extension IntegrationTests {
         testGraphRequestHandlingForRessourceFile(withName: "MultipleTargets",
                                                  pathExtension: "xcodeproj",
                                                  options: ["scheme": "MultipleTargets"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
-                                                 completionValidationHandler: { (result, expectation) in
-                                                    switch result {
-                                                    case .success, .failure:
-                                                        XCTFail()
-                                                    case .decisionNeeded(_, let options):
-                                                        if let targets = options["target"] {
-                                                            XCTAssert(targets.contains("FirstTarget"))
-                                                            XCTAssert(targets.contains("SecondTarget"))
-                                                            XCTAssert(targets.count == 2)
-                                                        } else {
-                                                            XCTFail()
-                                                        }
-                                                        expectation.fulfill()
-                                                    }
+                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingCompileCommands,
+                                                 statusUpdateValidationHandler: { (graphRequest, additionalInformation, expectation) in
+                                                    // future test here
         })
     }
 
