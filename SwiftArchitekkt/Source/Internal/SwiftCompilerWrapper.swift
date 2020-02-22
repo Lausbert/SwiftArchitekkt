@@ -7,6 +7,10 @@ import os
 struct SwiftCompilerWrapper {
 
     // MARK: - Internal -
+    
+    typealias ModuleName = String
+    typealias CompileCommand = String
+    typealias Ast = String
 
     enum ErrorEnum: LocalizedError, Equatable {
         case couldNotProperlyRunSwiftCompiler
@@ -22,15 +26,17 @@ struct SwiftCompilerWrapper {
         }
     }
 
-    static func generateAst(for compileCommands: [String], graphRequest: GraphRequest, xcodeUrl: URL, completionHandler: (GraphRequest.Result) -> Void) -> String? {
+    static func generateAsts(for compileCommands: [(ModuleName, [CompileCommand])], graphRequest: GraphRequest, xcodeUrl: URL, completionHandler: (GraphRequest.Result) -> Void) -> [(ModuleName, Ast)]? {
         do {
             let swiftUrl = xcodeUrl.appendingPathComponent("Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc/")
-            var ast = try generateAst(for: compileCommands, swiftUrl: swiftUrl)
-            if ast.first == "\n" {
-                ast.removeFirst()
+            return try compileCommands.map { compileCommand in
+                var ast = try generateAst(for: compileCommand.1, swiftUrl: swiftUrl)
+                if ast.first == "\n" {
+                    ast.removeFirst()
+                }
+                guard ast.prefix(12) == "(source_file" && ast.suffix(1) == ")" else { throw ErrorEnum.invalidAstFormat(ast) }
+                return (compileCommand.0, ast)
             }
-            guard ast.prefix(12) == "(source_file" && ast.suffix(1) == ")" else { throw ErrorEnum.invalidAstFormat(ast) }
-            return ast
         } catch {
             completionHandler(GraphRequest.Result.failure(graphRequest, error))
             return nil

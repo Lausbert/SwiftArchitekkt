@@ -57,26 +57,26 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
             #endif
 
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingAST.rawValue))
-            guard let ast = SwiftCompilerWrapper.generateAst(for: compileCommands, graphRequest: updatedGraphRequest, xcodeUrl: xcodeUrl, completionHandler: completionHandler) else { return }
-            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingAST.rawValue, ast))
+            guard let asts = SwiftCompilerWrapper.generateAsts(for: compileCommands, graphRequest: updatedGraphRequest, xcodeUrl: xcodeUrl, completionHandler: completionHandler) else { return }
+            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingAST.rawValue, asts.sorted(by: { $0.0 < $1.0 }).debugDescription))
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.generatingAST.rawValue, graphRequest: updatedGraphRequest) {
                 return
             }
             #endif
 
-            statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue))
-            guard let rootNode = GraphBuilder(ast: ast).generateGraph(graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue, String(data: try? encoder.encode(rootNode), encoding: String.Encoding.utf8)))
-            #if DEBUG
-            if self.shouldStopAfter(procedure: LastProcedure.generatingGraph.rawValue, graphRequest: updatedGraphRequest) {
-                return
-            }
-            #endif
-
-            completionHandler(.success(updatedGraphRequest, rootNode))
+//            statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue))
+//            guard let rootNode = GraphBuilder(ast: ast).generateGraph(graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
+//            let encoder = JSONEncoder()
+//            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+//            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue, String(data: try? encoder.encode(rootNode), encoding: String.Encoding.utf8)))
+//            #if DEBUG
+//            if self.shouldStopAfter(procedure: LastProcedure.generatingGraph.rawValue, graphRequest: updatedGraphRequest) {
+//                return
+//            }
+//            #endif
+//
+//            completionHandler(.success(updatedGraphRequest, rootNode))
 
         }
     }

@@ -5,13 +5,13 @@ import CoreArchitekkt
 import os
 
 extension XcodeBuildWrapper {
-    
-    typealias ModuleName = String
-    typealias CompileCommands = String
 
     // MARK: - Internal -
+    
+    typealias ModuleName = String
+    typealias CompileCommand = String
 
-    static func getCompileCommands(for graphRequest: GraphRequest, xcodeUrl: URL, completionHandler: (GraphRequest.Result) -> Void) -> [(ModuleName, [CompileCommands])]? {
+    static func getCompileCommands(for graphRequest: GraphRequest, xcodeUrl: URL, completionHandler: (GraphRequest.Result) -> Void) -> [(ModuleName, [CompileCommand])]? {
         do {
             return try getCompileCommands(for: graphRequest, xcodeUrl: xcodeUrl)
         } catch {
@@ -22,7 +22,7 @@ extension XcodeBuildWrapper {
 
     // MARK: - Private -
 
-    private static func getCompileCommands(for graphRequest: GraphRequest, xcodeUrl: URL) throws -> [(ModuleName, [CompileCommands])] {
+    private static func getCompileCommands(for graphRequest: GraphRequest, xcodeUrl: URL) throws -> [(ModuleName, [CompileCommand])] {
         guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
         let xcodeBuildUrl = xcodeUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
 
@@ -37,7 +37,7 @@ extension XcodeBuildWrapper {
         }
     }
 
-    private static func getProjectCompileCommands(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [(ModuleName, [CompileCommands])] {
+    private static func getProjectCompileCommands(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [(ModuleName, [CompileCommand])] {
         guard let scheme = graphRequest.options[ParameterEnum.scheme.rawValue] else { throw ErrorEnum.couldNotFindAnySchemes(graphRequest.options.description) }
         guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-project", graphRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
         let compileCommandsRegex = StaticString("/(swiftc[^\\n]* -module-name +([^ ]+) +[^\\n]*)")
@@ -52,7 +52,7 @@ extension XcodeBuildWrapper {
         }
     }
 
-    private static func update(compileCommands: [(ModuleName, [CompileCommands])]) -> [(ModuleName, [CompileCommands])] {
+    private static func update(compileCommands: [(ModuleName, [CompileCommand])]) -> [(ModuleName, [CompileCommand])] {
         return compileCommands.map { compileCommand in
             let moduleName = compileCommand.0
             var updatedCompileCommand = compileCommand.1
