@@ -49,7 +49,7 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
 
             statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingCompileCommands.rawValue))
             guard let compileCommands = XcodeBuildWrapper.getCompileCommands(for: updatedGraphRequest, xcodeUrl: xcodeUrl, completionHandler: completionHandler) else { return }
-            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingCompileCommands.rawValue, compileCommands.joined(separator: " ")))
+            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingCompileCommands.rawValue, compileCommands.cleanedUpDebugDescription))
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.generatingCompileCommands.rawValue, graphRequest: updatedGraphRequest) {
                 return

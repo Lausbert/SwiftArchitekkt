@@ -31,7 +31,7 @@ struct XcodeBuildWrapper {
             case .couldNotFindAnySchemes(let description):
                 return "Could not find any schemes: \(description)"
             case .couldNotFindAnyCompileCommands(let xcodeBuildResults):
-                return "Could not find any compile commands for specified target: \(xcodeBuildResults)"
+                return "Could not find any compile commands: \(xcodeBuildResults)"
             }
         }
 
