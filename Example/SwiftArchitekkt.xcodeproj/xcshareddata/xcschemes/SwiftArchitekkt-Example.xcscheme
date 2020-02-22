@@ -73,14 +73,6 @@
                BlueprintName = "SwiftArchitekkt_Tests"
                ReferencedContainer = "container:SwiftArchitekkt.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "IntegrationTests/testMultipleTargetsForProject()">
-               </Test>
-               <Test
-                  Identifier = "IntegrationTests/testSingleTargetForProject()">
-               </Test>
-            </SkippedTests>
             <LocationScenarioReference
                identifier = "com.apple.dt.IDEFoundation.CurrentLocationScenarioIdentifier"
                referenceType = "1">
