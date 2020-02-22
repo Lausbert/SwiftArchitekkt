@@ -56,3 +56,13 @@ func XCTStringsContainedInString(strings: [String], string: String) {
         XCTAssert(string.contains(str), "Unexpected missing string: \(str)")
     }
 }
+
+extension String {
+
+    func losslessComponents(beginningWith: String) -> [String] {
+        return self.components(separatedBy: beginningWith).compactMap({ (string) -> String? in
+            return string.isEmpty ? nil : beginningWith + string
+        })
+    }
+
+}

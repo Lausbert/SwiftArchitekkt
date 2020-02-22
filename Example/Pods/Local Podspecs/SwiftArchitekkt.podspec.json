@@ -14,11 +14,12 @@
   "platforms": {
     "osx": "10.14"
   },
-  "swift_version": "5.0",
+  "swift_versions": "5.0",
   "source_files": "SwiftArchitekkt/Source/**/*",
   "dependencies": {
     "CoreArchitekkt": [
 
     ]
-  }
+  },
+  "swift_version": "5.0"
 }
