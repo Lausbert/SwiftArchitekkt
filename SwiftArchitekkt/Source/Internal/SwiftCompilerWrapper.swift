@@ -2,7 +2,6 @@
 
 import Foundation
 import CoreArchitekkt
-import os
 
 struct SwiftCompilerWrapper {
 

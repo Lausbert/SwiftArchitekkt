@@ -65,18 +65,18 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
             }
             #endif
 
-//            statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue))
-//            guard let rootNode = GraphBuilder(ast: ast).generateGraph(graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
-//            let encoder = JSONEncoder()
-//            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-//            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue, String(data: try? encoder.encode(rootNode), encoding: String.Encoding.utf8)))
-//            #if DEBUG
-//            if self.shouldStopAfter(procedure: LastProcedure.generatingGraph.rawValue, graphRequest: updatedGraphRequest) {
-//                return
-//            }
-//            #endif
-//
-//            completionHandler(.success(updatedGraphRequest, rootNode))
+            statusUpdateHandler(GraphRequest.StatusUpdate.willStartProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue))
+            guard let rootNode = GraphBuilder.generateGraph(for: asts, graphRequest: updatedGraphRequest, completionHandler: completionHandler) else { return }
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+            statusUpdateHandler(GraphRequest.StatusUpdate.didFinishProcedure(updatedGraphRequest, LastProcedure.generatingGraph.rawValue, Optional(optionalData: try? encoder.encode(rootNode), encoding: String.Encoding.utf8) ?? nil))
+            #if DEBUG
+            if self.shouldStopAfter(procedure: LastProcedure.generatingGraph.rawValue, graphRequest: updatedGraphRequest) {
+                return
+            }
+            #endif
+
+            completionHandler(.success(updatedGraphRequest, rootNode))
 
         }
     }

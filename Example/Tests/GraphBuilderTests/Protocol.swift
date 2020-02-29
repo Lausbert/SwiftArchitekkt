@@ -46,8 +46,9 @@ extension GraphBuilderTests {
       "scope" : "source_file"
     }
   ],
-  "isRoot" : true,
-  "scope" : "root"
+  "identifier" : "testModule",
+  "isRoot" : false,
+  "scope" : "module"
 }
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
@@ -430,8 +431,9 @@ extension GraphBuilderTests {
       "scope" : "source_file"
     }
   ],
-  "isRoot" : true,
-  "scope" : "root"
+  "identifier" : "testModule",
+  "isRoot" : false,
+  "scope" : "module"
 }
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)
@@ -846,8 +848,9 @@ extension GraphBuilderTests {
       "scope" : "source_file"
     }
   ],
-  "isRoot" : true,
-  "scope" : "root"
+  "identifier" : "testModule",
+  "isRoot" : false,
+  "scope" : "module"
 }
 """
         testGraphBuilderFor(ast: ast, expectedGraphString: expectedGraphString)

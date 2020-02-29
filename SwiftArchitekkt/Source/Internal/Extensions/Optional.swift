@@ -8,8 +8,8 @@
 import Foundation
 
 extension Optional where Wrapped == String {
-    init?(data: Data?, encoding: String.Encoding) {
-        if let data = data {
+    init?(optionalData: Data?, encoding: String.Encoding) {
+        if let data = optionalData {
             self = String.init(data: data, encoding: encoding)
         } else {
             self = nil
