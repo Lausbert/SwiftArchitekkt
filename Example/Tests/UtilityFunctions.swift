@@ -60,7 +60,11 @@ func XCTStringsContainedInString(strings: [String], string: String) {
 extension String {
 
     func losslessComponents(beginningWith: String) -> [String] {
-        return self.components(separatedBy: beginningWith).compactMap({ (string) -> String? in
+        self.components(separatedBy: beginningWith).enumerated().compactMap({ (tuple) -> String? in
+            let (offset, string) = tuple
+            if offset == 0 && !string.isEmpty && !self.starts(with: beginningWith) {
+                return string
+            }
             return string.isEmpty ? nil : beginningWith + string
         })
     }
