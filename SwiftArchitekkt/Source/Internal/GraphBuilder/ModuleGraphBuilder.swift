@@ -6,7 +6,7 @@ import CoreArchitekkt
 class ModuleGraphBuilder {
 
     // MARK: - Internal -
-    
+
     typealias ModuleName = String
     typealias Ast = String
 
@@ -39,7 +39,7 @@ class ModuleGraphBuilder {
 
     private let moduleName: ModuleName
     private let tokenizer: Tokenizer
-    
+
     private var openNodes: [Node] = []
     private var graph: [Node] = []
     private var childNodes: Set<String> = [] // track which nodes are already children

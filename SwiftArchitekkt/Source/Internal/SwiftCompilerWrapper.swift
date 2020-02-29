@@ -6,7 +6,7 @@ import CoreArchitekkt
 struct SwiftCompilerWrapper {
 
     // MARK: - Internal -
-    
+
     typealias ModuleName = String
     typealias CompileCommand = String
     typealias Ast = String

@@ -6,7 +6,7 @@ import CoreArchitekkt
 extension XcodeBuildWrapper {
 
     // MARK: - Internal -
-    
+
     typealias ModuleName = String
     typealias CompileCommand = String
 

@@ -9,12 +9,12 @@ import Foundation
 import CoreArchitekkt
 
 class GraphBuilder {
-    
+
     // MARK: - Internal -
-    
+
     typealias ModuleName = String
     typealias Ast = String
-    
+
     static func generateGraph(for asts: [(ModuleName, Ast)], graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Node? {
         do {
             var moduleNodes: [Node] = []
@@ -33,7 +33,5 @@ class GraphBuilder {
     }
 
     // MARK: - Private -
-    
-    
-    
+
 }
