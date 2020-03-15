@@ -37,16 +37,32 @@ extension XcodeBuildWrapper {
     }
 
     private static func getProjectCompileCommands(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [(ModuleName, [CompileCommand])] {
-        guard let scheme = graphRequest.options[ParameterEnum.scheme.rawValue] else { throw ErrorEnum.couldNotFindAnySchemes(graphRequest.options.description) }
-        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-project", graphRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
-        let compileCommandsRegex = StaticString("/(swiftc[^\\n]* -module-name +([^ ]+) +[^\\n]*)")
-        let combinedResults = Regex.getCombinedResult(for: compileCommandsRegex, text: xcodeBuildResults, captureGroups: 1, 2)
-        guard combinedResults.count > 0 else { throw ErrorEnum.couldNotFindAnyCompileCommands(xcodeBuildResults) }
-        guard combinedResults.map({ $0.results }).allSatisfy({ $0.count == 2 }) else { throw ErrorEnum.couldNotFindAnyCompileCommands(xcodeBuildResults) }
-        return combinedResults.map { combinedResult in
-            let moduleName = combinedResult.results[1].string
+        guard let scheme = graphRequest.options[ParameterEnum.scheme.rawValue] else {
+            throw ErrorEnum.couldNotFindAnySchemes(graphRequest.options.description) }
+        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-project", graphRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else {
+            throw ErrorEnum.couldNotProperlyRunXcodeBuild
+        }
+        let compileCommandsRegex = StaticString("CompileSwiftSources normal ([^ ]+) com.apple.xcode.tools.swift.compiler [\\s\\S]*?/(swiftc[^\\n]* -module-name +([^ ]+) +[^\\n]*)")
+        let combinedResults = Regex.getCombinedResult(for: compileCommandsRegex, text: xcodeBuildResults, captureGroups: 1, 2, 3)
+        guard combinedResults.count > 0 else {
+            throw ErrorEnum.couldNotFindAnyCompileCommands(xcodeBuildResults)
+        }
+        guard combinedResults.map({ $0.results }).allSatisfy({ $0.count == 3 }) else {
+            throw ErrorEnum.couldNotFindAnyCompileCommands(xcodeBuildResults)
+        }
+        guard let targetArchitecture = combinedResults.last?.results.first?.string else {
+            throw ErrorEnum.couldNotFindTargetArchitecture(xcodeBuildResults)
+        }
+        return combinedResults.compactMap { combinedResult in
+            guard combinedResult.results[0].string == targetArchitecture else {
+                return nil
+            }
+            let moduleName = combinedResult.results[2].string
             // i hate people who name their classes, variables, functions, files or any other stuff $$$$$$SpacePlaceholder$$$$$$, lol
-            let compileCommands = combinedResult.results[0].string.replacingOccurrences(of: "\\ ", with: "$$$$$$SpacePlaceholder$$$$$$").components(separatedBy: " ").map { $0.replacingOccurrences(of: "$$$$$$SpacePlaceholder$$$$$$", with: " ") }
+            let compileCommands = combinedResult.results[1].string
+                .replacingOccurrences(of: "\\ ", with: "$$$$$$SpacePlaceholder$$$$$$")
+                .components(separatedBy: " ")
+                .map { $0.replacingOccurrences(of: "$$$$$$SpacePlaceholder$$$$$$", with: " ") }
             return (moduleName, compileCommands)
         }
     }

@@ -21,6 +21,7 @@ struct XcodeBuildWrapper {
         case couldNotProperlyRunXcodeBuild
         case couldNotFindAnySchemes(String)
         case couldNotFindAnyCompileCommands(String)
+        case couldNotFindTargetArchitecture(String)
 
         var errorDescription: String? {
             switch self {
@@ -32,6 +33,8 @@ struct XcodeBuildWrapper {
                 return "Could not find any schemes: \(description)"
             case .couldNotFindAnyCompileCommands(let xcodeBuildResults):
                 return "Could not find any compile commands: \(xcodeBuildResults)"
+            case .couldNotFindTargetArchitecture(let xcodeBuildResults):
+                return "Could not find any target architecture: \(xcodeBuildResults)"
             }
         }
 
