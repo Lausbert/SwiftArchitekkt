@@ -8,16 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		5D800AF422143A9300600D5B /* UtilityFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800AC722143A9300600D5B /* UtilityFunctions.swift */; };
-		5D800AF522143A9300600D5B /* Schemes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800AC922143A9300600D5B /* Schemes.swift */; };
-		5D800AF622143A9300600D5B /* FileExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACA22143A9300600D5B /* FileExtensions.swift */; };
+		5D800AF522143A9300600D5B /* Scheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800AC922143A9300600D5B /* Scheme.swift */; };
+		5D800AF622143A9300600D5B /* FileExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACA22143A9300600D5B /* FileExtension.swift */; };
 		5D800AF722143A9300600D5B /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACB22143A9300600D5B /* AST.swift */; };
-		5D800AF822143A9300600D5B /* Targets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACC22143A9300600D5B /* Targets.swift */; };
+		5D800AF822143A9300600D5B /* Target.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACC22143A9300600D5B /* Target.swift */; };
 		5D800AF922143A9300600D5B /* CompileCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACD22143A9300600D5B /* CompileCommands.swift */; };
 		5D800AFA22143A9300600D5B /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACE22143A9300600D5B /* Graph.swift */; };
-		5D800AFB22143A9300600D5B /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACF22143A9300600D5B /* IntegrationTests.swift */; };
+		5D800AFB22143A9300600D5B /* IntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACF22143A9300600D5B /* IntegrationTest.swift */; };
 		5D8382BF228C4F58004B2EB0 /* Generic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8382BE228C4F58004B2EB0 /* Generic.swift */; };
 		5D8382C1228C531A004B2EB0 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8382C0228C531A004B2EB0 /* Extension.swift */; };
-		5D8BDF552246488700177CF0 /* GraphBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8BDF542246488700177CF0 /* GraphBuilderTests.swift */; };
+		5D8BDF552246488700177CF0 /* GraphBuilderTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D8BDF542246488700177CF0 /* GraphBuilderTest.swift */; };
 		5D9E832B2282FC36003CD3C7 /* CompilerFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D9E832A2282FC36003CD3C7 /* CompilerFlags.swift */; };
 		5DB2CEF322491861005B9445 /* Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEF222491861005B9445 /* Class.swift */; };
 		5DB2CEF52249188F005B9445 /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEF42249188F005B9445 /* Struct.swift */; };
@@ -32,16 +32,16 @@
 		3AAFA0ECE7E624E5226A22ED /* SwiftArchitekkt.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SwiftArchitekkt.podspec; path = ../SwiftArchitekkt.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		5507DA78442D810E834C3116 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		5D800AC722143A9300600D5B /* UtilityFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UtilityFunctions.swift; sourceTree = "<group>"; };
-		5D800AC922143A9300600D5B /* Schemes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Schemes.swift; sourceTree = "<group>"; };
-		5D800ACA22143A9300600D5B /* FileExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileExtensions.swift; sourceTree = "<group>"; };
+		5D800AC922143A9300600D5B /* Scheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scheme.swift; sourceTree = "<group>"; };
+		5D800ACA22143A9300600D5B /* FileExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileExtension.swift; sourceTree = "<group>"; };
 		5D800ACB22143A9300600D5B /* AST.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
-		5D800ACC22143A9300600D5B /* Targets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Targets.swift; sourceTree = "<group>"; };
+		5D800ACC22143A9300600D5B /* Target.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Target.swift; sourceTree = "<group>"; };
 		5D800ACD22143A9300600D5B /* CompileCommands.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompileCommands.swift; sourceTree = "<group>"; };
 		5D800ACE22143A9300600D5B /* Graph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Graph.swift; sourceTree = "<group>"; };
-		5D800ACF22143A9300600D5B /* IntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
+		5D800ACF22143A9300600D5B /* IntegrationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTest.swift; sourceTree = "<group>"; };
 		5D8382BE228C4F58004B2EB0 /* Generic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Generic.swift; sourceTree = "<group>"; };
 		5D8382C0228C531A004B2EB0 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		5D8BDF542246488700177CF0 /* GraphBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBuilderTests.swift; sourceTree = "<group>"; };
+		5D8BDF542246488700177CF0 /* GraphBuilderTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphBuilderTest.swift; sourceTree = "<group>"; };
 		5D9E832A2282FC36003CD3C7 /* CompilerFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompilerFlags.swift; sourceTree = "<group>"; };
 		5DB2CEF222491861005B9445 /* Class.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Class.swift; sourceTree = "<group>"; };
 		5DB2CEF42249188F005B9445 /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
@@ -71,10 +71,10 @@
 		5D800AC822143A9300600D5B /* IntegrationTests */ = {
 			isa = PBXGroup;
 			children = (
-				5D800ACF22143A9300600D5B /* IntegrationTests.swift */,
-				5D800ACA22143A9300600D5B /* FileExtensions.swift */,
-				5D800AC922143A9300600D5B /* Schemes.swift */,
-				5D800ACC22143A9300600D5B /* Targets.swift */,
+				5D800ACF22143A9300600D5B /* IntegrationTest.swift */,
+				5D800ACA22143A9300600D5B /* FileExtension.swift */,
+				5D800AC922143A9300600D5B /* Scheme.swift */,
+				5D800ACC22143A9300600D5B /* Target.swift */,
 				5D800ACD22143A9300600D5B /* CompileCommands.swift */,
 				5D800ACB22143A9300600D5B /* AST.swift */,
 				5D800ACE22143A9300600D5B /* Graph.swift */,
@@ -85,7 +85,7 @@
 		5D8BDF51224647F700177CF0 /* GraphBuilderTests */ = {
 			isa = PBXGroup;
 			children = (
-				5D8BDF542246488700177CF0 /* GraphBuilderTests.swift */,
+				5D8BDF542246488700177CF0 /* GraphBuilderTest.swift */,
 				5DB2CEF222491861005B9445 /* Class.swift */,
 				5DB2CEF42249188F005B9445 /* Struct.swift */,
 				5DB2CEF622491BD8005B9445 /* Enum.swift */,
@@ -274,21 +274,21 @@
 			files = (
 				5D8382BF228C4F58004B2EB0 /* Generic.swift in Sources */,
 				5DB2CEF52249188F005B9445 /* Struct.swift in Sources */,
-				5D800AF622143A9300600D5B /* FileExtensions.swift in Sources */,
+				5D800AF622143A9300600D5B /* FileExtension.swift in Sources */,
 				5DB2CEF322491861005B9445 /* Class.swift in Sources */,
 				5DB2CEF922491BF7005B9445 /* Protocol.swift in Sources */,
 				5D800AF422143A9300600D5B /* UtilityFunctions.swift in Sources */,
-				5D800AF822143A9300600D5B /* Targets.swift in Sources */,
+				5D800AF822143A9300600D5B /* Target.swift in Sources */,
 				5D9E832B2282FC36003CD3C7 /* CompilerFlags.swift in Sources */,
 				5D800AFA22143A9300600D5B /* Graph.swift in Sources */,
 				5D8382C1228C531A004B2EB0 /* Extension.swift in Sources */,
 				5DB2CEF722491BD8005B9445 /* Enum.swift in Sources */,
 				5DB2CEFB22491C43005B9445 /* Function.swift in Sources */,
 				5D800AF722143A9300600D5B /* AST.swift in Sources */,
-				5D8BDF552246488700177CF0 /* GraphBuilderTests.swift in Sources */,
+				5D8BDF552246488700177CF0 /* GraphBuilderTest.swift in Sources */,
 				5D800AF922143A9300600D5B /* CompileCommands.swift in Sources */,
-				5D800AF522143A9300600D5B /* Schemes.swift in Sources */,
-				5D800AFB22143A9300600D5B /* IntegrationTests.swift in Sources */,
+				5D800AF522143A9300600D5B /* Scheme.swift in Sources */,
+				5D800AFB22143A9300600D5B /* IntegrationTest.swift in Sources */,
 				5DB2CEFD22491C75005B9445 /* Variable.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

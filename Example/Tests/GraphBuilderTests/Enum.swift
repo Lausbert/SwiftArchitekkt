@@ -2,7 +2,7 @@
 
 import Foundation
 
-extension GraphBuilderTests {
+extension GraphBuilderTest {
 
     func testGraphBuilderForEmptyEnum() {
         // enum Test {}

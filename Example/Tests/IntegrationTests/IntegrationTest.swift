@@ -4,7 +4,7 @@ import XCTest
 import CoreArchitekkt
 @testable import SwiftArchitekkt
 
-class IntegrationTests: XCTestCase {
+class IntegrationTest: XCTestCase {
 
     func testGraphRequestHandlingForRessourceFile(withName name: String,
                                                   pathExtension: String,

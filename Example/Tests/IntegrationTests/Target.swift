@@ -4,7 +4,7 @@ import XCTest
 import CoreArchitekkt
 @testable import SwiftArchitekkt
 
-extension IntegrationTests {
+extension IntegrationTest {
 
     func testNoTargetForProject() {
         testGraphRequestHandlingForRessourceFile(withName: "NoTarget",
@@ -16,7 +16,8 @@ extension IntegrationTests {
                                                     case .success, .decisionNeeded:
                                                         XCTFail()
                                                     case .failure(_, let error):
-                                                        XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnyCompileCommands("xcodebuild: error: Scheme AnyScheme is not currently configured for the clean action.\n\n"))
+                                                        let url = getUrlForRessourceFile(withName: "NoTarget", pathExtension: "xcodeproj").absoluteString.replacingOccurrences(of: "file://", with: "")
+                                                        XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnyCompileCommands("Command line invocation:\n    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -project \(url) -scheme AnyScheme -allowProvisioningUpdates clean build\n\nxcodebuild: error: Scheme AnyScheme is not currently configured for the clean action.\n\n"))
                                                         expectation.fulfill()
                                                     }
         })

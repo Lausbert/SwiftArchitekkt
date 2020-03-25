@@ -4,7 +4,7 @@ import XCTest
 import CoreArchitekkt
 @testable import SwiftArchitekkt
 
-extension IntegrationTests {
+extension IntegrationTest {
 
     func testMacOSGraphForProject() {
         testGraphRequestHandlingForRessourceFile(withName: "MacOSSDK",
@@ -78,6 +78,27 @@ extension IntegrationTests {
                           "tags" : [
                             "window"
                           ]
+                        },
+                        {
+                          "children" : [
+                            {
+                              "children" : [
+                                {
+                                  "isRoot" : false,
+                                  "scope" : "component",
+                                  "tags" : [
+                                    "NSWindow",
+                                    "bind=AppKit.(file).NSWindow",
+                                    "id="
+                                  ]
+                                }
+                              ],
+                              "isRoot" : false,
+                              "scope" : "type_ident"
+                            }
+                          ],
+                          "isRoot" : false,
+                          "scope" : "type_implicitly_unwrapped_optional"
                         }
                       ],
                       "isRoot" : false,
@@ -91,54 +112,20 @@ extension IntegrationTests {
                           "scope" : "unknown"
                         }
                       ],
-                      "children" : [
-                        {
-                          "arcs" : [
-                            {
-                              "identifier" : "NSWindow.Type",
-                              "isRoot" : false,
-                              "scope" : "unknown"
-                            },
-                            {
-                              "identifier" : "NSWindow",
-                              "isRoot" : false,
-                              "scope" : "unknown"
-                            }
-                          ],
-                          "isRoot" : false,
-                          "scope" : "declref_expr",
-                          "tags" : [
-                            "function_ref=unapplied",
-                            "implicit"
-                          ]
-                        },
-                        {
-                          "arcs" : [
-                            {
-                              "identifier" : "NSWindow.Type",
-                              "isRoot" : false,
-                              "scope" : "unknown"
-                            }
-                          ],
-                          "isRoot" : false,
-                          "scope" : "type_expr",
-                          "tags" : [
-                            "<<NULL>>",
-                            "implicit",
-                            "typerepr="
-                          ]
-                        }
-                      ],
                       "isRoot" : false,
-                      "scope" : "dot_syntax_call_expr",
+                      "scope" : "nil_literal_expr",
                       "tags" : [
                         "implicit",
-                        "nothrow"
+                        "initializer=**NULL**"
                       ]
                     }
                   ],
                   "isRoot" : false,
-                  "scope" : "pattern_binding_decl"
+                  "scope" : "pattern_binding_decl",
+                  "tags" : [
+                    "Processed",
+                    "init:"
+                  ]
                 },
                 {
                   "arcs" : [
@@ -184,34 +171,18 @@ extension IntegrationTests {
                                   ],
                                   "children" : [
                                     {
-                                      "arcs" : [
-                                        {
-                                          "identifier" : "NSWindow",
-                                          "isRoot" : false,
-                                          "scope" : "unknown"
-                                        }
-                                      ],
-                                      "children" : [
-                                        {
-                                          "isRoot" : false,
-                                          "scope" : "declref_expr",
-                                          "tags" : [
-                                            "function_ref=unapplied",
-                                            "implicit"
-                                          ]
-                                        }
-                                      ],
                                       "isRoot" : false,
-                                      "scope" : "member_ref_expr",
+                                      "scope" : "declref_expr",
                                       "tags" : [
-                                        "direct_to_storage",
+                                        "function_ref=unapplied",
                                         "implicit"
                                       ]
                                     }
                                   ],
                                   "isRoot" : false,
-                                  "scope" : "load_expr",
+                                  "scope" : "member_ref_expr",
                                   "tags" : [
+                                    "direct_to_storage",
                                     "implicit"
                                   ]
                                 }
@@ -233,7 +204,6 @@ extension IntegrationTests {
                       "isRoot" : false,
                       "scope" : "accessor_decl",
                       "tags" : [
-                        "@objc",
                         "access=internal",
                         "get_for=window",
                         "implicit",
@@ -340,7 +310,6 @@ extension IntegrationTests {
                       "isRoot" : false,
                       "scope" : "accessor_decl",
                       "tags" : [
-                        "@objc",
                         "access=internal",
                         "implicit",
                         "interface",
@@ -435,293 +404,11 @@ extension IntegrationTests {
                   "isRoot" : false,
                   "scope" : "var_decl",
                   "tags" : [
-                    "@objc",
                     "access=internal",
                     "interface",
                     "readImpl=stored",
                     "readWriteImpl=stored",
                     "writeImpl=stored"
-                  ]
-                },
-                {
-                  "arcs" : [
-                    {
-                      "identifier" : "NSWindow",
-                      "isRoot" : false,
-                      "scope" : "unknown"
-                    }
-                  ],
-                  "children" : [
-                    {
-                      "identifier" : "AppDelegate.self:@@@",
-                      "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
-                    },
-                    {
-                      "isRoot" : false,
-                      "scope" : "parameter_list"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "NSWindow",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "children" : [
-                                {
-                                  "arcs" : [
-                                    {
-                                      "identifier" : "NSWindow",
-                                      "isRoot" : false,
-                                      "scope" : "unknown"
-                                    }
-                                  ],
-                                  "children" : [
-                                    {
-                                      "isRoot" : false,
-                                      "scope" : "declref_expr",
-                                      "tags" : [
-                                        "function_ref=unapplied",
-                                        "implicit"
-                                      ]
-                                    }
-                                  ],
-                                  "isRoot" : false,
-                                  "scope" : "member_ref_expr",
-                                  "tags" : [
-                                    "direct_to_storage",
-                                    "implicit"
-                                  ]
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "load_expr",
-                              "tags" : [
-                                "implicit"
-                              ]
-                            }
-                          ],
-                          "isRoot" : false,
-                          "scope" : "return_stmt",
-                          "tags" : [
-                            "implicit"
-                          ]
-                        }
-                      ],
-                      "isRoot" : false,
-                      "scope" : "brace_stmt",
-                      "tags" : [
-                        "implicit"
-                      ]
-                    }
-                  ],
-                  "isRoot" : false,
-                  "scope" : "accessor_decl",
-                  "tags" : [
-                    "@objc",
-                    "access=internal",
-                    "get_for=window",
-                    "implicit",
-                    "interface"
-                  ]
-                },
-                {
-                  "arcs" : [
-                    {
-                      "identifier" : "NSWindow",
-                      "isRoot" : false,
-                      "scope" : "unknown"
-                    }
-                  ],
-                  "children" : [
-                    {
-                      "identifier" : "AppDelegate.self:@@@",
-                      "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
-                    },
-                    {
-                      "children" : [
-                        {
-                          "arcs" : [
-                            {
-                              "identifier" : "NSWindow",
-                              "isRoot" : false,
-                              "scope" : "unknown"
-                            }
-                          ],
-                          "identifier" : "AppDelegate.value",
-                          "isRoot" : false,
-                          "scope" : "parameter",
-                          "tags" : [
-                            "interface"
-                          ]
-                        }
-                      ],
-                      "isRoot" : false,
-                      "scope" : "parameter_list"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "NSWindow",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "children" : [
-                                {
-                                  "isRoot" : false,
-                                  "scope" : "declref_expr",
-                                  "tags" : [
-                                    "function_ref=unapplied",
-                                    "implicit"
-                                  ]
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "member_ref_expr",
-                              "tags" : [
-                                "direct_to_storage",
-                                "implicit"
-                              ]
-                            },
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "NSWindow",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "declref_expr",
-                              "tags" : [
-                                "function_ref=unapplied",
-                                "implicit"
-                              ]
-                            }
-                          ],
-                          "isRoot" : false,
-                          "scope" : "assign_expr",
-                          "tags" : [
-                            "implicit"
-                          ]
-                        }
-                      ],
-                      "isRoot" : false,
-                      "scope" : "brace_stmt",
-                      "tags" : [
-                        "implicit"
-                      ]
-                    }
-                  ],
-                  "isRoot" : false,
-                  "scope" : "accessor_decl",
-                  "tags" : [
-                    "@objc",
-                    "access=internal",
-                    "implicit",
-                    "interface",
-                    "set_for=window"
-                  ]
-                },
-                {
-                  "children" : [
-                    {
-                      "identifier" : "AppDelegate.self:@@@",
-                      "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
-                    },
-                    {
-                      "isRoot" : false,
-                      "scope" : "parameter_list"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "NSWindow",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "children" : [
-                                {
-                                  "arcs" : [
-                                    {
-                                      "identifier" : "NSWindow",
-                                      "isRoot" : false,
-                                      "scope" : "unknown"
-                                    }
-                                  ],
-                                  "children" : [
-                                    {
-                                      "isRoot" : false,
-                                      "scope" : "declref_expr",
-                                      "tags" : [
-                                        "function_ref=unapplied",
-                                        "implicit"
-                                      ]
-                                    }
-                                  ],
-                                  "isRoot" : false,
-                                  "scope" : "member_ref_expr",
-                                  "tags" : [
-                                    "direct_to_impl",
-                                    "implicit"
-                                  ]
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "inout_expr",
-                              "tags" : [
-                                "implicit"
-                              ]
-                            }
-                          ],
-                          "isRoot" : false,
-                          "scope" : "yield_stmt",
-                          "tags" : [
-                            "implicit"
-                          ]
-                        }
-                      ],
-                      "isRoot" : false,
-                      "scope" : "brace_stmt",
-                      "tags" : [
-                        "implicit"
-                      ]
-                    }
-                  ],
-                  "isRoot" : false,
-                  "scope" : "accessor_decl",
-                  "tags" : [
-                    "_modify_for=window",
-                    "access=internal",
-                    "implicit",
-                    "interface"
                   ]
                 },
                 {
@@ -736,10 +423,7 @@ extension IntegrationTests {
                     {
                       "identifier" : "AppDelegate.applicationDidFinishLaunching(_:).self",
                       "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
+                      "scope" : "parameter"
                     },
                     {
                       "children" : [
@@ -788,10 +472,7 @@ extension IntegrationTests {
                     {
                       "identifier" : "AppDelegate.applicationWillTerminate(_:).self",
                       "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
+                      "scope" : "parameter"
                     },
                     {
                       "children" : [
@@ -825,6 +506,34 @@ extension IntegrationTests {
                   "tags" : [
                     "@objc",
                     "access=internal",
+                    "interface"
+                  ]
+                },
+                {
+                  "children" : [
+                    {
+                      "identifier" : "AppDelegate.deinit.self",
+                      "isRoot" : false,
+                      "scope" : "parameter"
+                    },
+                    {
+                      "isRoot" : false,
+                      "scope" : "parameter_list"
+                    },
+                    {
+                      "isRoot" : false,
+                      "scope" : "brace_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
+                  "identifier" : "AppDelegate.deinit",
+                  "isRoot" : false,
+                  "scope" : "destructor_decl",
+                  "tags" : [
+                    "access=internal",
+                    "implicit",
                     "interface"
                   ]
                 },
@@ -957,45 +666,12 @@ extension IntegrationTests {
                     "implicit",
                     "interface"
                   ]
-                },
-                {
-                  "children" : [
-                    {
-                      "identifier" : "AppDelegate.deinit.self",
-                      "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
-                    },
-                    {
-                      "isRoot" : false,
-                      "scope" : "parameter_list"
-                    },
-                    {
-                      "isRoot" : false,
-                      "scope" : "brace_stmt",
-                      "tags" : [
-                        "implicit"
-                      ]
-                    }
-                  ],
-                  "identifier" : "AppDelegate.deinit",
-                  "isRoot" : false,
-                  "scope" : "destructor_decl",
-                  "tags" : [
-                    "@objc",
-                    "access=internal",
-                    "implicit",
-                    "interface"
-                  ]
                 }
               ],
               "identifier" : "AppDelegate",
               "isRoot" : false,
               "scope" : "class_decl",
               "tags" : [
-                "@objc",
                 "access=internal",
                 "interface",
                 "non-resilient"
@@ -1018,11 +694,6 @@ extension IntegrationTests {
         },
         {
           "identifier" : "NSWindow",
-          "isRoot" : false,
-          "scope" : "unknown"
-        },
-        {
-          "identifier" : "NSWindow.Type",
           "isRoot" : false,
           "scope" : "unknown"
         },
@@ -1123,6 +794,27 @@ extension IntegrationTests {
                           "tags" : [
                             "window"
                           ]
+                        },
+                        {
+                          "children" : [
+                            {
+                              "children" : [
+                                {
+                                  "isRoot" : false,
+                                  "scope" : "component",
+                                  "tags" : [
+                                    "UIWindow",
+                                    "bind=UIKit.(file).UIWindow",
+                                    "id="
+                                  ]
+                                }
+                              ],
+                              "isRoot" : false,
+                              "scope" : "type_ident"
+                            }
+                          ],
+                          "isRoot" : false,
+                          "scope" : "type_optional"
                         }
                       ],
                       "isRoot" : false,
@@ -1136,54 +828,20 @@ extension IntegrationTests {
                           "scope" : "unknown"
                         }
                       ],
-                      "children" : [
-                        {
-                          "arcs" : [
-                            {
-                              "identifier" : "UIWindow.Type",
-                              "isRoot" : false,
-                              "scope" : "unknown"
-                            },
-                            {
-                              "identifier" : "UIWindow",
-                              "isRoot" : false,
-                              "scope" : "unknown"
-                            }
-                          ],
-                          "isRoot" : false,
-                          "scope" : "declref_expr",
-                          "tags" : [
-                            "function_ref=unapplied",
-                            "implicit"
-                          ]
-                        },
-                        {
-                          "arcs" : [
-                            {
-                              "identifier" : "UIWindow.Type",
-                              "isRoot" : false,
-                              "scope" : "unknown"
-                            }
-                          ],
-                          "isRoot" : false,
-                          "scope" : "type_expr",
-                          "tags" : [
-                            "<<NULL>>",
-                            "implicit",
-                            "typerepr="
-                          ]
-                        }
-                      ],
                       "isRoot" : false,
-                      "scope" : "dot_syntax_call_expr",
+                      "scope" : "nil_literal_expr",
                       "tags" : [
                         "implicit",
-                        "nothrow"
+                        "initializer=**NULL**"
                       ]
                     }
                   ],
                   "isRoot" : false,
-                  "scope" : "pattern_binding_decl"
+                  "scope" : "pattern_binding_decl",
+                  "tags" : [
+                    "Processed",
+                    "init:"
+                  ]
                 },
                 {
                   "arcs" : [
@@ -1229,34 +887,18 @@ extension IntegrationTests {
                                   ],
                                   "children" : [
                                     {
-                                      "arcs" : [
-                                        {
-                                          "identifier" : "UIWindow",
-                                          "isRoot" : false,
-                                          "scope" : "unknown"
-                                        }
-                                      ],
-                                      "children" : [
-                                        {
-                                          "isRoot" : false,
-                                          "scope" : "declref_expr",
-                                          "tags" : [
-                                            "function_ref=unapplied",
-                                            "implicit"
-                                          ]
-                                        }
-                                      ],
                                       "isRoot" : false,
-                                      "scope" : "member_ref_expr",
+                                      "scope" : "declref_expr",
                                       "tags" : [
-                                        "direct_to_storage",
+                                        "function_ref=unapplied",
                                         "implicit"
                                       ]
                                     }
                                   ],
                                   "isRoot" : false,
-                                  "scope" : "load_expr",
+                                  "scope" : "member_ref_expr",
                                   "tags" : [
+                                    "direct_to_storage",
                                     "implicit"
                                   ]
                                 }
@@ -1491,287 +1133,6 @@ extension IntegrationTests {
                 {
                   "arcs" : [
                     {
-                      "identifier" : "UIWindow",
-                      "isRoot" : false,
-                      "scope" : "unknown"
-                    }
-                  ],
-                  "children" : [
-                    {
-                      "identifier" : "AppDelegate.self:@@@",
-                      "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
-                    },
-                    {
-                      "isRoot" : false,
-                      "scope" : "parameter_list"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "UIWindow",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "children" : [
-                                {
-                                  "arcs" : [
-                                    {
-                                      "identifier" : "UIWindow",
-                                      "isRoot" : false,
-                                      "scope" : "unknown"
-                                    }
-                                  ],
-                                  "children" : [
-                                    {
-                                      "isRoot" : false,
-                                      "scope" : "declref_expr",
-                                      "tags" : [
-                                        "function_ref=unapplied",
-                                        "implicit"
-                                      ]
-                                    }
-                                  ],
-                                  "isRoot" : false,
-                                  "scope" : "member_ref_expr",
-                                  "tags" : [
-                                    "direct_to_storage",
-                                    "implicit"
-                                  ]
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "load_expr",
-                              "tags" : [
-                                "implicit"
-                              ]
-                            }
-                          ],
-                          "isRoot" : false,
-                          "scope" : "return_stmt",
-                          "tags" : [
-                            "implicit"
-                          ]
-                        }
-                      ],
-                      "isRoot" : false,
-                      "scope" : "brace_stmt",
-                      "tags" : [
-                        "implicit"
-                      ]
-                    }
-                  ],
-                  "isRoot" : false,
-                  "scope" : "accessor_decl",
-                  "tags" : [
-                    "@objc",
-                    "access=internal",
-                    "get_for=window",
-                    "implicit",
-                    "interface"
-                  ]
-                },
-                {
-                  "arcs" : [
-                    {
-                      "identifier" : "UIWindow",
-                      "isRoot" : false,
-                      "scope" : "unknown"
-                    }
-                  ],
-                  "children" : [
-                    {
-                      "identifier" : "AppDelegate.self:@@@",
-                      "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
-                    },
-                    {
-                      "children" : [
-                        {
-                          "arcs" : [
-                            {
-                              "identifier" : "UIWindow",
-                              "isRoot" : false,
-                              "scope" : "unknown"
-                            }
-                          ],
-                          "identifier" : "AppDelegate.value",
-                          "isRoot" : false,
-                          "scope" : "parameter",
-                          "tags" : [
-                            "interface"
-                          ]
-                        }
-                      ],
-                      "isRoot" : false,
-                      "scope" : "parameter_list"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "UIWindow",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "children" : [
-                                {
-                                  "isRoot" : false,
-                                  "scope" : "declref_expr",
-                                  "tags" : [
-                                    "function_ref=unapplied",
-                                    "implicit"
-                                  ]
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "member_ref_expr",
-                              "tags" : [
-                                "direct_to_storage",
-                                "implicit"
-                              ]
-                            },
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "UIWindow",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "declref_expr",
-                              "tags" : [
-                                "function_ref=unapplied",
-                                "implicit"
-                              ]
-                            }
-                          ],
-                          "isRoot" : false,
-                          "scope" : "assign_expr",
-                          "tags" : [
-                            "implicit"
-                          ]
-                        }
-                      ],
-                      "isRoot" : false,
-                      "scope" : "brace_stmt",
-                      "tags" : [
-                        "implicit"
-                      ]
-                    }
-                  ],
-                  "isRoot" : false,
-                  "scope" : "accessor_decl",
-                  "tags" : [
-                    "@objc",
-                    "access=internal",
-                    "implicit",
-                    "interface",
-                    "set_for=window"
-                  ]
-                },
-                {
-                  "children" : [
-                    {
-                      "identifier" : "AppDelegate.self:@@@",
-                      "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
-                    },
-                    {
-                      "isRoot" : false,
-                      "scope" : "parameter_list"
-                    },
-                    {
-                      "children" : [
-                        {
-                          "children" : [
-                            {
-                              "arcs" : [
-                                {
-                                  "identifier" : "UIWindow",
-                                  "isRoot" : false,
-                                  "scope" : "unknown"
-                                }
-                              ],
-                              "children" : [
-                                {
-                                  "arcs" : [
-                                    {
-                                      "identifier" : "UIWindow",
-                                      "isRoot" : false,
-                                      "scope" : "unknown"
-                                    }
-                                  ],
-                                  "children" : [
-                                    {
-                                      "isRoot" : false,
-                                      "scope" : "declref_expr",
-                                      "tags" : [
-                                        "function_ref=unapplied",
-                                        "implicit"
-                                      ]
-                                    }
-                                  ],
-                                  "isRoot" : false,
-                                  "scope" : "member_ref_expr",
-                                  "tags" : [
-                                    "direct_to_impl",
-                                    "implicit"
-                                  ]
-                                }
-                              ],
-                              "isRoot" : false,
-                              "scope" : "inout_expr",
-                              "tags" : [
-                                "implicit"
-                              ]
-                            }
-                          ],
-                          "isRoot" : false,
-                          "scope" : "yield_stmt",
-                          "tags" : [
-                            "implicit"
-                          ]
-                        }
-                      ],
-                      "isRoot" : false,
-                      "scope" : "brace_stmt",
-                      "tags" : [
-                        "implicit"
-                      ]
-                    }
-                  ],
-                  "isRoot" : false,
-                  "scope" : "accessor_decl",
-                  "tags" : [
-                    "_modify_for=window",
-                    "access=internal",
-                    "implicit",
-                    "interface"
-                  ]
-                },
-                {
-                  "arcs" : [
-                    {
                       "identifier" : "UIApplication",
                       "isRoot" : false,
                       "scope" : "unknown"
@@ -1796,10 +1157,7 @@ extension IntegrationTests {
                     {
                       "identifier" : "AppDelegate.application(_:didFinishLaunchingWithOptions:).self",
                       "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
+                      "scope" : "parameter"
                     },
                     {
                       "children" : [
@@ -1912,10 +1270,7 @@ extension IntegrationTests {
                     {
                       "identifier" : "AppDelegate.applicationWillResignActive(_:).self",
                       "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
+                      "scope" : "parameter"
                     },
                     {
                       "children" : [
@@ -1964,10 +1319,7 @@ extension IntegrationTests {
                     {
                       "identifier" : "AppDelegate.applicationDidEnterBackground(_:).self",
                       "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
+                      "scope" : "parameter"
                     },
                     {
                       "children" : [
@@ -2016,10 +1368,7 @@ extension IntegrationTests {
                     {
                       "identifier" : "AppDelegate.applicationWillEnterForeground(_:).self",
                       "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
+                      "scope" : "parameter"
                     },
                     {
                       "children" : [
@@ -2068,10 +1417,7 @@ extension IntegrationTests {
                     {
                       "identifier" : "AppDelegate.applicationDidBecomeActive(_:).self",
                       "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
+                      "scope" : "parameter"
                     },
                     {
                       "children" : [
@@ -2120,10 +1466,7 @@ extension IntegrationTests {
                     {
                       "identifier" : "AppDelegate.applicationWillTerminate(_:).self",
                       "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
+                      "scope" : "parameter"
                     },
                     {
                       "children" : [
@@ -2157,6 +1500,34 @@ extension IntegrationTests {
                   "tags" : [
                     "@objc",
                     "access=internal",
+                    "interface"
+                  ]
+                },
+                {
+                  "children" : [
+                    {
+                      "identifier" : "AppDelegate.deinit.self",
+                      "isRoot" : false,
+                      "scope" : "parameter"
+                    },
+                    {
+                      "isRoot" : false,
+                      "scope" : "parameter_list"
+                    },
+                    {
+                      "isRoot" : false,
+                      "scope" : "brace_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
+                  "identifier" : "AppDelegate.deinit",
+                  "isRoot" : false,
+                  "scope" : "destructor_decl",
+                  "tags" : [
+                    "access=internal",
+                    "implicit",
                     "interface"
                   ]
                 },
@@ -2289,45 +1660,12 @@ extension IntegrationTests {
                     "implicit",
                     "interface"
                   ]
-                },
-                {
-                  "children" : [
-                    {
-                      "identifier" : "AppDelegate.deinit.self",
-                      "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
-                    },
-                    {
-                      "isRoot" : false,
-                      "scope" : "parameter_list"
-                    },
-                    {
-                      "isRoot" : false,
-                      "scope" : "brace_stmt",
-                      "tags" : [
-                        "implicit"
-                      ]
-                    }
-                  ],
-                  "identifier" : "AppDelegate.deinit",
-                  "isRoot" : false,
-                  "scope" : "destructor_decl",
-                  "tags" : [
-                    "@objc",
-                    "access=internal",
-                    "implicit",
-                    "interface"
-                  ]
                 }
               ],
               "identifier" : "AppDelegate",
               "isRoot" : false,
               "scope" : "class_decl",
               "tags" : [
-                "@objc",
                 "access=internal",
                 "interface",
                 "non-resilient"
@@ -2385,11 +1723,6 @@ extension IntegrationTests {
         },
         {
           "identifier" : "UIWindow",
-          "isRoot" : false,
-          "scope" : "unknown"
-        },
-        {
-          "identifier" : "UIWindow.Type",
           "isRoot" : false,
           "scope" : "unknown"
         },
@@ -2511,6 +1844,34 @@ extension IntegrationTests {
                     "@objc",
                     "access=internal",
                     "dynamic",
+                    "interface"
+                  ]
+                },
+                {
+                  "children" : [
+                    {
+                      "identifier" : "ViewController.deinit.self",
+                      "isRoot" : false,
+                      "scope" : "parameter"
+                    },
+                    {
+                      "isRoot" : false,
+                      "scope" : "parameter_list"
+                    },
+                    {
+                      "isRoot" : false,
+                      "scope" : "brace_stmt",
+                      "tags" : [
+                        "implicit"
+                      ]
+                    }
+                  ],
+                  "identifier" : "ViewController.deinit",
+                  "isRoot" : false,
+                  "scope" : "destructor_decl",
+                  "tags" : [
+                    "access=internal",
+                    "implicit",
                     "interface"
                   ]
                 },
@@ -2943,45 +2304,12 @@ extension IntegrationTests {
                     "interface",
                     "required"
                   ]
-                },
-                {
-                  "children" : [
-                    {
-                      "identifier" : "ViewController.deinit.self",
-                      "isRoot" : false,
-                      "scope" : "parameter",
-                      "tags" : [
-                        "interface"
-                      ]
-                    },
-                    {
-                      "isRoot" : false,
-                      "scope" : "parameter_list"
-                    },
-                    {
-                      "isRoot" : false,
-                      "scope" : "brace_stmt",
-                      "tags" : [
-                        "implicit"
-                      ]
-                    }
-                  ],
-                  "identifier" : "ViewController.deinit",
-                  "isRoot" : false,
-                  "scope" : "destructor_decl",
-                  "tags" : [
-                    "@objc",
-                    "access=internal",
-                    "implicit",
-                    "interface"
-                  ]
                 }
               ],
               "identifier" : "ViewController",
               "isRoot" : false,
               "scope" : "class_decl",
               "tags" : [
-                "@objc",
                 "access=internal",
                 "interface",
                 "non-resilient"

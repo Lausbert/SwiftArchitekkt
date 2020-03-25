@@ -4,7 +4,7 @@ import XCTest
 import CoreArchitekkt
 @testable import SwiftArchitekkt
 
-class GraphBuilderTests: XCTestCase {
+class GraphBuilderTest: XCTestCase {
 
     func testGraphBuilderFor(ast: String, expectedGraphString: String) {
         guard let moduleNode = try? ModuleGraphBuilder(ast: ("testModule", ast)).generateGraph() else {

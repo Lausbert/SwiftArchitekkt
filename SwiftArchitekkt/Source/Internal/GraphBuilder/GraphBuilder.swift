@@ -32,6 +32,4 @@ class GraphBuilder {
         }
     }
 
-    // MARK: - Private -
-
 }

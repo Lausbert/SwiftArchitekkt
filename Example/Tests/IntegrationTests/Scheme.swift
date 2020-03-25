@@ -4,7 +4,7 @@ import XCTest
 import CoreArchitekkt
 @testable import SwiftArchitekkt
 
-extension IntegrationTests {
+extension IntegrationTest {
 
     func testSchemeForMissingProject() {
         testGraphRequestHandlingForRessourceFile(withName: "MissingProject",
@@ -15,8 +15,8 @@ extension IntegrationTests {
                                                     case .success, .decisionNeeded:
                                                         XCTFail()
                                                     case .failure(_, let error):
-                                                        let url = getUrlForRessourceFile(withName: "MissingProject", pathExtension: "xcodeproj")
-                                                        XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnySchemes("xcodebuild: error: \'\(url.absoluteString.replacingOccurrences(of: "file://", with: ""))\' does not exist.\n"))
+                                                        let url = getUrlForRessourceFile(withName: "MissingProject", pathExtension: "xcodeproj").absoluteString.replacingOccurrences(of: "file://", with: "")
+                                                        XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnySchemes("Command line invocation:\n    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -list -project \(url)\n\nxcodebuild: error: \'\(url)\' does not exist.\n"))
                                                         expectation.fulfill()
                                                     }
         })
@@ -31,7 +31,8 @@ extension IntegrationTests {
                                                     case .success, .decisionNeeded:
                                                         XCTFail()
                                                     case .failure(_, let error):
-                                                        XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnySchemes("Information about project \"NoScheme\":\n    Targets:\n        NoScheme\n\n    Build Configurations:\n        Debug\n        Release\n\n    If no build configuration is specified and -scheme is not passed then \"Release\" is used.\n\n    This project contains no schemes.\n"))
+                                                        let url = getUrlForRessourceFile(withName: "NoScheme", pathExtension: "xcodeproj").absoluteString.replacingOccurrences(of: "file://", with: "")
+                                                        XCTEqualAfterCasting(error, toTypeOf: XcodeBuildWrapper.ErrorEnum.couldNotFindAnySchemes("Command line invocation:\n    /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -list -project \(url)\n\nInformation about project \"NoScheme\":\n    Targets:\n        NoScheme\n\n    Build Configurations:\n        Debug\n        Release\n\n    If no build configuration is specified and -scheme is not passed then \"Release\" is used.\n\n    This project contains no schemes.\n"))
                                                         expectation.fulfill()
                                                     }
         })

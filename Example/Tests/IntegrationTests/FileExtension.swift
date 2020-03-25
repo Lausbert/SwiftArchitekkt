@@ -4,7 +4,7 @@ import XCTest
 import CoreArchitekkt
 @testable import SwiftArchitekkt
 
-extension IntegrationTests {
+extension IntegrationTest {
 
     func testWrongFileExtension() {
         testGraphRequestHandlingForRessourceFile(withName: "WrongFileExtension",
