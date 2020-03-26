@@ -23,16 +23,6 @@ extension GraphBuilderTest {
 {
   "children" : [
     {
-      "identifier" : "Generic.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "T",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
       "children" : [
         {
           "arcs" : [
@@ -197,21 +187,6 @@ extension GraphBuilderTest {
         let expectedGraphString = """
 {
   "children" : [
-    {
-      "identifier" : "Generic.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "T",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "U",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
     {
       "children" : [
         {
@@ -396,11 +371,6 @@ extension GraphBuilderTest {
         let expectedGraphString = """
 {
   "children" : [
-    {
-      "identifier" : "T",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
     {
       "children" : [
         {

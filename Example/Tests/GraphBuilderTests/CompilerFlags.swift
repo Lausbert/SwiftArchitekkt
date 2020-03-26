@@ -31,11 +31,6 @@ extension GraphBuilderTest {
 {
   "children" : [
     {
-      "identifier" : "Active.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
       "children" : [
         {
           "arcs" : [
@@ -180,11 +175,6 @@ extension GraphBuilderTest {
 {
   "children" : [
     {
-      "identifier" : "Active.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
       "children" : [
         {
           "arcs" : [
@@ -299,11 +289,6 @@ extension GraphBuilderTest {
         let expectedGraphString = """
 {
   "children" : [
-    {
-      "identifier" : "Other.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
     {
       "children" : [
         {

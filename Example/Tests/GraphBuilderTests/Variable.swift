@@ -25,26 +25,6 @@ extension GraphBuilderTest {
 {
   "children" : [
     {
-      "identifier" : "Builtin.IntLiteral",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Int",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Int.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "IntLiteral",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
       "children" : [
         {
           "children" : [
@@ -251,26 +231,6 @@ extension GraphBuilderTest {
         let expectedGraphString = """
 {
   "children" : [
-    {
-      "identifier" : "Builtin.IntLiteral",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Int",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Int.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "IntLiteral",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
     {
       "children" : [
         {

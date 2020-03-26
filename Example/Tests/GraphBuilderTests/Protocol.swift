@@ -14,11 +14,6 @@ extension GraphBuilderTest {
 {
   "children" : [
     {
-      "identifier" : "Test.Protocol",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
       "children" : [
         {
           "arcs" : [
@@ -94,46 +89,6 @@ extension GraphBuilderTest {
         let expectedGraphString = """
 {
   "children" : [
-    {
-      "identifier" : "FirstTestClass.T.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "FirstTestClass.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Int",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "SecondTestClass.T.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "SecondTestClass.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Self.T.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "String",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "TestProtocol.Protocol",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
     {
       "children" : [
         {
@@ -483,46 +438,6 @@ extension GraphBuilderTest {
         let expectedGraphString = """
 {
   "children" : [
-    {
-      "identifier" : "FirstTestClass.T.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "FirstTestClass.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Int",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "SecondTestClass.T.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "SecondTestClass.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Self.T.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "String",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "TestProtocol.Protocol",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
     {
       "children" : [
         {

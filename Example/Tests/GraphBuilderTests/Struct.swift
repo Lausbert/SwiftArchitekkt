@@ -19,11 +19,6 @@ extension GraphBuilderTest {
 {
   "children" : [
     {
-      "identifier" : "Test.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
       "children" : [
         {
           "arcs" : [
@@ -123,16 +118,6 @@ extension GraphBuilderTest {
         let expectedGraphString = """
 {
   "children" : [
-    {
-      "identifier" : "Protocol.Protocol",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
-      "identifier" : "Test.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
     {
       "children" : [
         {

@@ -14,11 +14,6 @@ extension GraphBuilderTest {
 {
   "children" : [
     {
-      "identifier" : "Test.Type",
-      "isRoot" : false,
-      "scope" : "unknown"
-    },
-    {
       "children" : [
         {
           "arcs" : [

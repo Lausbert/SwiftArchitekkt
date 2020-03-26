@@ -9,13 +9,14 @@ class ModuleGraphBuilder {
 
     typealias ModuleName = String
     typealias Ast = String
+    typealias ChildNamedNode = Node
 
     init(ast: (ModuleName, Ast)) {
         moduleName = ast.0
         tokenizer = Tokenizer(ast: ast.1)
     }
 
-    func generateGraph() throws -> Node {
+    func generateGraph() throws -> (Node, [String: ChildNamedNode])  {
         while let token = try tokenizer.nextToken() {
             switch token {
             case let .scopeStart(scope, identifier):
@@ -29,10 +30,9 @@ class ModuleGraphBuilder {
                 handle(tag: tag)
             }
         }
-        let completeGraph = (graph + getNonChildNamedNodes()).sorted()
         let moduleNode = Node(identifier: moduleName, scope: "module")
-        moduleNode.set(children: completeGraph)
-        return moduleNode
+        moduleNode.set(children: graph)
+        return (moduleNode, getChildNamedNodes())
     }
 
     // MARK: - Private -
@@ -45,14 +45,8 @@ class ModuleGraphBuilder {
     private var childNodes: Set<String> = [] // track which nodes are already children
     private var namedNodes: [String: Node] = [:]
 
-    private func getNonChildNamedNodes() -> [Node] {
-        return namedNodes.values.compactMap { (node) -> Node? in
-            guard let identifier = node.identifier else { return nil }
-            if !childNodes.contains(identifier) {
-                return node
-            }
-            return nil
-        }
+    private func getChildNamedNodes() -> [String: Node] {
+        namedNodes.filter { childNodes.contains($0.key) }
     }
 
     private func handleScopeStart(scope: String, identifier: String?) throws {

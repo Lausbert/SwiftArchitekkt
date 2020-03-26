@@ -7,7 +7,7 @@ import CoreArchitekkt
 class GraphBuilderTest: XCTestCase {
 
     func testGraphBuilderFor(ast: String, expectedGraphString: String) {
-        guard let moduleNode = try? ModuleGraphBuilder(ast: ("testModule", ast)).generateGraph() else {
+        guard let (moduleNode, _) = try? ModuleGraphBuilder(ast: ("testModule", ast)).generateGraph() else {
             XCTFail("Could not generate module node.")
             return
         }
