@@ -1,9 +1,5 @@
-//
-//  GraphBuilder.swift
-//  SwiftArchitekkt
-//
-//  Created by Stephan Lerner on 29.02.20.
-//
+//  Copyright © 2019 Stephan Lerner. All rights reserved.
+
 
 import Foundation
 import CoreArchitekkt
