@@ -10,7 +10,7 @@ import UIKit
 import Package
 
 class ViewController: UIViewController {
-    
+
     let package = Package()
 
     override func viewDidLoad() {
@@ -18,6 +18,4 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-
 }
-

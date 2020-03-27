@@ -16,7 +16,7 @@ class ModuleGraphBuilder {
         tokenizer = Tokenizer(ast: ast.1)
     }
 
-    func generateGraph() throws -> (Node, [String: ChildNamedNode])  {
+    func generateGraph() throws -> (Node, [String: ChildNamedNode]) {
         while let token = try tokenizer.nextToken() {
             switch token {
             case let .scopeStart(scope, identifier):
