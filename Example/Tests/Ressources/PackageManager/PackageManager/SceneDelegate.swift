@@ -1,10 +1,4 @@
-//
-//  SceneDelegate.swift
-//  PackageManager
-//
-//  Created by Stephan Lerner on 29.02.20.
-//  Copyright © 2020 Stephan Lerner. All rights reserved.
-//
+// Copyright © 2020 Stephan Lerner. All rights reserved.
 
 import UIKit
 
