@@ -26,6 +26,7 @@
 		5DB2CEFB22491C43005B9445 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEFA22491C43005B9445 /* Function.swift */; };
 		5DB2CEFD22491C75005B9445 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DB2CEFC22491C75005B9445 /* Variable.swift */; };
 		8D88A58F242EBB3100CA3934 /* PackageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D88A58E242EBB3100CA3934 /* PackageManager.swift */; };
+		8D98ED322430F4C80048D7A9 /* CocoaPods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D98ED312430F4C80048D7A9 /* CocoaPods.swift */; };
 		F89B317D1B6622D4E24A723D /* Pods_SwiftArchitekkt_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7F04948C5190A4047861E3 /* Pods_SwiftArchitekkt_Tests.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +55,7 @@
 		887A1D0711F4671AAF29AD60 /* Pods-SwiftArchitekkt_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftArchitekkt_Tests.release.xcconfig"; path = "Target Support Files/Pods-SwiftArchitekkt_Tests/Pods-SwiftArchitekkt_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8B7F04948C5190A4047861E3 /* Pods_SwiftArchitekkt_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftArchitekkt_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D88A58E242EBB3100CA3934 /* PackageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageManager.swift; sourceTree = "<group>"; };
+		8D98ED312430F4C80048D7A9 /* CocoaPods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaPods.swift; sourceTree = "<group>"; };
 		ED83F68A20348A760038D96B /* SwiftArchitekkt_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftArchitekkt_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED83F69020348A760038D96B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -81,6 +83,7 @@
 				5D800ACB22143A9300600D5B /* AST.swift */,
 				5D800ACE22143A9300600D5B /* Graph.swift */,
 				8D88A58E242EBB3100CA3934 /* PackageManager.swift */,
+				8D98ED312430F4C80048D7A9 /* CocoaPods.swift */,
 			);
 			path = IntegrationTests;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5D8382BF228C4F58004B2EB0 /* Generic.swift in Sources */,
+				8D98ED322430F4C80048D7A9 /* CocoaPods.swift in Sources */,
 				5DB2CEF52249188F005B9445 /* Struct.swift in Sources */,
 				5D800AF622143A9300600D5B /* FileExtension.swift in Sources */,
 				5DB2CEF322491861005B9445 /* Class.swift in Sources */,
