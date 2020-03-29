@@ -10,7 +10,7 @@ struct XcodeBuildWrapper {
     enum SwiftFileExtension: String, CaseIterable {
         case project = "xcodeproj"
         case workspace = "xcworkspace"
-        
+
         var xcodeBuildCommand: String {
             switch self {
             case .project: return "-project"

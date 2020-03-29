@@ -16,4 +16,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 class TestChildClass: TestClass, TestProtocol {}
 
 class TestGenericChildClass: TestGenericClass<Int>, TestProtocol {}
-
