@@ -44,23 +44,17 @@ extension XcodeBuildWrapper {
     }
 
     private static func get(parameter: ParameterEnum, for graphRequest: GraphRequest, xcodeUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
-        guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
         let xcodeBuildUrl = xcodeUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
 
-        switch fileExtension {
-        case .project:
-            switch parameter {
-            case .scheme:
-                return try getProjectSchemes(for: graphRequest, xcodeBuildUrl: xcodeBuildUrl)
-            }
-        case .workspace:
-            #warning("todo")
-            return [:]
+        switch parameter {
+        case .scheme:
+            return try getSchemes(for: graphRequest, xcodeBuildUrl: xcodeBuildUrl)
         }
     }
 
-    private static func getProjectSchemes(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
-        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-list", "-project", graphRequest.url.absoluteString]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
+    private static func getSchemes(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
+        guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
+        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-list", fileExtension.xcodeBuildCommand, graphRequest.url.absoluteString]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
 
         let schemeRegex = "Schemes:\\n((.+\\n)+)"
         let schemeResults = try Regex.getResult(for: schemeRegex, text: xcodeBuildResults, captureGroup: 1)

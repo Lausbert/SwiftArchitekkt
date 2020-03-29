@@ -108,7 +108,7 @@ class ModuleGraphBuilder {
     }
 
     private func handle(tag: String) {
-        guard tag.count <= 32, ["range=", "decl=", "override=", "anonname="].allSatisfy({ !tag.contains($0) }) else { return }
+        guard tag.count <= 32, ["range=", "decl=", "override=", "anonname=", "location="].allSatisfy({ !tag.contains($0) }) else { return }
         openNodes.last?.add(tag: tag)
     }
 

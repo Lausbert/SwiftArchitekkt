@@ -22,24 +22,17 @@ extension XcodeBuildWrapper {
     // MARK: - Private -
 
     private static func getCompileCommands(for graphRequest: GraphRequest, xcodeUrl: URL) throws -> [(ModuleName, [CompileCommand])] {
-        guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
         let xcodeBuildUrl = xcodeUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
-
-        switch fileExtension {
-        case .project:
-            let compileCommands = try getProjectCompileCommands(for: graphRequest, xcodeBuildUrl: xcodeBuildUrl)
-            let updatedCompileCommands = update(compileCommands: compileCommands)
-            return updatedCompileCommands
-        case .workspace:
-            #warning("todo")
-            return []
-        }
+        let initialCompileCommands = try getInitialCompileCommands(for: graphRequest, xcodeBuildUrl: xcodeBuildUrl)
+        let updatedCompileCommands = update(compileCommands: initialCompileCommands)
+        return updatedCompileCommands
     }
 
-    private static func getProjectCompileCommands(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [(ModuleName, [CompileCommand])] {
+    private static func getInitialCompileCommands(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [(ModuleName, [CompileCommand])] {
+        guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
         guard let scheme = graphRequest.options[ParameterEnum.scheme.rawValue] else {
             throw ErrorEnum.couldNotFindAnySchemes(graphRequest.options.description) }
-        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-project", graphRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else {
+        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: [fileExtension.xcodeBuildCommand, graphRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else {
             throw ErrorEnum.couldNotProperlyRunXcodeBuild
         }
         let compileCommandsRegex = StaticString("CompileSwiftSources normal ([^ ]+) com.apple.xcode.tools.swift.compiler [\\s\\S]*?/(swiftc[^\\n]* -module-name +([^ ]+) +[^\\n]*)")

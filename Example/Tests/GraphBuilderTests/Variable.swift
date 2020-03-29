@@ -91,8 +91,7 @@ extension GraphBuilderTest {
                               "scope" : "declref_expr",
                               "tags" : [
                                 "function_ref=single",
-                                "implicit",
-                                "location=Test.swift:1:12"
+                                "implicit"
                               ]
                             },
                             {
@@ -108,7 +107,6 @@ extension GraphBuilderTest {
                               "tags" : [
                                 "Int",
                                 "implicit",
-                                "location=Test.swift:1:12",
                                 "typerepr="
                               ]
                             }
@@ -117,7 +115,6 @@ extension GraphBuilderTest {
                           "scope" : "constructor_ref_call_expr",
                           "tags" : [
                             "implicit",
-                            "location=Test.swift:1:12",
                             "nothrow"
                           ]
                         },
@@ -141,7 +138,6 @@ extension GraphBuilderTest {
                               "isRoot" : false,
                               "scope" : "integer_literal_expr",
                               "tags" : [
-                                "location=Test.swift:1:12",
                                 "value=1"
                               ]
                             }
@@ -150,7 +146,6 @@ extension GraphBuilderTest {
                           "scope" : "tuple_expr",
                           "tags" : [
                             "implicit",
-                            "location=Test.swift:1:12",
                             "names=_builtinIntegerLiteral"
                           ]
                         }
@@ -159,7 +154,6 @@ extension GraphBuilderTest {
                       "scope" : "call_expr",
                       "tags" : [
                         "implicit",
-                        "location=Test.swift:1:12",
                         "nothrow"
                       ]
                     }
@@ -298,8 +292,7 @@ extension GraphBuilderTest {
                               "scope" : "declref_expr",
                               "tags" : [
                                 "function_ref=single",
-                                "implicit",
-                                "location=Test.swift:1:12"
+                                "implicit"
                               ]
                             },
                             {
@@ -315,7 +308,6 @@ extension GraphBuilderTest {
                               "tags" : [
                                 "Int",
                                 "implicit",
-                                "location=Test.swift:1:12",
                                 "typerepr="
                               ]
                             }
@@ -324,7 +316,6 @@ extension GraphBuilderTest {
                           "scope" : "constructor_ref_call_expr",
                           "tags" : [
                             "implicit",
-                            "location=Test.swift:1:12",
                             "nothrow"
                           ]
                         },
@@ -348,7 +339,6 @@ extension GraphBuilderTest {
                               "isRoot" : false,
                               "scope" : "integer_literal_expr",
                               "tags" : [
-                                "location=Test.swift:1:12",
                                 "value=1"
                               ]
                             }
@@ -357,7 +347,6 @@ extension GraphBuilderTest {
                           "scope" : "tuple_expr",
                           "tags" : [
                             "implicit",
-                            "location=Test.swift:1:12",
                             "names=_builtinIntegerLiteral"
                           ]
                         }
@@ -366,7 +355,6 @@ extension GraphBuilderTest {
                       "scope" : "call_expr",
                       "tags" : [
                         "implicit",
-                        "location=Test.swift:1:12",
                         "nothrow"
                       ]
                     }

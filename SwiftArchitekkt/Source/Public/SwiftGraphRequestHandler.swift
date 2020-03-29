@@ -12,7 +12,7 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
 
     public var consistentUrlRequirements: [ConsistentUrlRequirement]? { return ConsistentUrlRequirementsEvaluator.consistentUrlRequirements }
 
-    public var handableFileExtensions: [String] { return [XcodeBuildWrapper.SwiftFileExtension.project.rawValue] }; #warning("Todo")
+    public var handableFileExtensions: [String] { return XcodeBuildWrapper.SwiftFileExtension.allCases.map { $0.rawValue } }
 
     public func handle(graphRequest: GraphRequest, statusUpdateHandler: ((GraphRequest.StatusUpdate) -> Void)? = nil, completionHandler: @escaping (GraphRequest.Result) -> Void) {
         SwiftGraphRequestHandler.queue.async {
