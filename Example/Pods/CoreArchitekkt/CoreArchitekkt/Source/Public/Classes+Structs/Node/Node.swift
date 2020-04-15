@@ -6,8 +6,9 @@ public class Node: NSObject, Codable {
 
     // MARK: - Public -
 
+    public let identifier: String
     public let isRoot: Bool
-    public private(set) var identifier: String?
+    public private(set) var name: String?
     public private(set) var scope: String
     // for cleaner encoded nodes _children, _arcs and _tags should be optional; for cleaner API children, arcs and tags should not
     public var children: [Node] {
@@ -25,26 +26,15 @@ public class Node: NSObject, Codable {
         return children + children.flatMap { $0.allDescendants }
     }
 
-    public init(identifier: String?, scope: String, isRoot: Bool) {
-        self.identifier = identifier
-        self.scope = scope
+    public init(scope: String, name: String? = nil, isRoot: Bool = false) {
+        self.identifier = UUID().uuidString
         self.isRoot = isRoot
+        self.name = name
+        self.scope = scope
     }
 
-    public convenience init(scope: String, isRoot: Bool) {
-        self.init(identifier: nil, scope: scope, isRoot: isRoot)
-    }
-
-    public convenience init(identifier: String, scope: String) {
-        self.init(identifier: identifier, scope: scope, isRoot: false)
-    }
-
-    public convenience init(scope: String) {
-        self.init(identifier: nil, scope: scope, isRoot: false)
-    }
-
-    public func set(identifier: String) {
-        self.identifier = identifier
+    public func set(name: String) {
+        self.name = name
     }
 
     public func set(scope: String) {
@@ -98,24 +88,21 @@ public class Node: NSObject, Codable {
 
     public func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(identifier, forKey: .identifier)
         try container.encode(isRoot, forKey: .isRoot)
-        if let identifier = identifier {
-            try container.encode(identifier, forKey: .identifier)
+        if let name = name {
+            try container.encode(name, forKey: .name)
         }
         try container.encode(scope, forKey: .scope)
         if let children = _children, !children.isEmpty {
             try container.encode(children, forKey: .children)
         }
         // reinitialize nodes in _arcs without children and arcs to avoid circular dependencies
-        if let arcs = _arcs?.map({ Node(identifier: $0.identifier, scope: $0.scope, isRoot: $0.isRoot) }), !arcs.isEmpty {
+        if let arcs = _arcs?.map({ Node(scope: $0.scope, name: $0.name, isRoot: $0.isRoot) }), !arcs.isEmpty {
             try container.encode(arcs, forKey: .arcs)
         }
         if let tags = _tags {
-            #if DEBUG
             try container.encode(tags.sorted(), forKey: .tags)
-            #else
-            try container.encode(tags, forKey: .tags)
-            #endif
         }
     }
 
@@ -125,8 +112,9 @@ public class Node: NSObject, Codable {
     /// - Throws: This function throws
     required public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        identifier = try container.decode(String.self, forKey: .identifier)
         isRoot = try container.decode(Bool.self, forKey: .isRoot)
-        identifier = try container.decodeIfPresent(String.self, forKey: .identifier)
+        name = try container.decodeIfPresent(String.self, forKey: .name)
         scope = try container.decode(String.self, forKey: .scope)
         _children = try container.decodeIfPresent([Node].self, forKey: .children)
         _arcs = try container.decodeIfPresent([Node].self, forKey: .arcs)
@@ -137,10 +125,10 @@ public class Node: NSObject, Codable {
         _children?.forEach { $0.parent = self }
 
         if isRoot {
-            guard identifier == nil && _arcs == nil else { throw ErrorEnum.unexpectedIdentifierOrArcsForRootNode }
+            guard name == nil && _arcs == nil else { throw ErrorEnum.unexpectedNameOrArcsForRootNode }
             let namedDescendants = Dictionary(uniqueKeysWithValues: allDescendants.compactMap { (node: Node) -> (String, Node)? in
-                if let identifier = node.identifier {
-                    return (identifier, node)
+                if let name = node.name {
+                    return (name, node)
                 }
                 return nil
             })
@@ -151,14 +139,14 @@ public class Node: NSObject, Codable {
     // MARK: - Internal -
 
     enum ErrorEnum: LocalizedError, Equatable {
-        case unexpectedIdentifierOrArcsForRootNode
+        case unexpectedNameOrArcsForRootNode
         case unexpectedUnnamedArc
         case unexpectedOrphanedArc
 
         var errorDescription: String? {
             switch self {
-            case .unexpectedIdentifierOrArcsForRootNode:
-                return "Unexpected identifier or arcs for root node."
+            case .unexpectedNameOrArcsForRootNode:
+                return "Unexpected name or arcs for root node."
             case .unexpectedUnnamedArc:
                 return "Unexpected unnamed arc."
             case .unexpectedOrphanedArc:
@@ -176,8 +164,9 @@ public class Node: NSObject, Codable {
     // MARK: Codable
 
     private enum CodingKeys: CodingKey {
-        case isRoot
         case identifier
+        case isRoot
+        case name
         case scope
         case children
         case arcs
@@ -187,8 +176,8 @@ public class Node: NSObject, Codable {
 
     private func replaceAllNamedArcs(with namedDescendants: [String: Node]) throws {
         for arc in arcs {
-            guard let identifier = arc.identifier else { throw ErrorEnum.unexpectedUnnamedArc }
-            guard let namedNode = namedDescendants[identifier] else { throw ErrorEnum.unexpectedOrphanedArc }
+            guard let name = arc.name else { throw ErrorEnum.unexpectedUnnamedArc }
+            guard let namedNode = namedDescendants[name] else { throw ErrorEnum.unexpectedOrphanedArc }
             replace(arc: arc, with: namedNode)
         }
         try children.forEach { try $0.replaceAllNamedArcs(with: namedDescendants) }

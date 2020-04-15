@@ -27,41 +27,41 @@ class Tokenizer {
 
     enum ErrorEnum: LocalizedError, Equatable {
         case unexpectedlyReachedScopeEnd
-        case unexpectlyFoundNoTypeIdentifier
+        case unexpectlyFoundNoTypeName
 
         var errorDescription: String? {
             switch self {
             case .unexpectedlyReachedScopeEnd:
                 return "Unexpectedly reached scope end."
-            case .unexpectlyFoundNoTypeIdentifier:
-                return "Unexpectly found no typeIdentifier."
+            case .unexpectlyFoundNoTypeName:
+                return "Unexpectly found no typeName."
             }
         }
     }
 
     enum Token: CustomStringConvertible, Equatable {
 
-        // token with identifiers
+        // token with names
         case type([String])
         case inherits([String])
         case tag(String)
 
         // scope tokens
-        case scopeStart(String, identifier: String?)
-        case scopeEnd(String, identifier: String?)
+        case scopeStart(String, name: String?)
+        case scopeEnd(String, name: String?)
 
         var description: String {
             switch self {
-            case let .scopeStart(scope, identifier):
-                return identifier == nil ? "scopeStart: \(scope)" : "scopeStart: \(scope), \(identifier ?? "")"
-            case let .scopeEnd(scope, identifier):
-                return identifier == nil ? "scopeEnd: \(scope)" : "scopeEnd: \(scope), \(identifier ?? "")"
-            case let .inherits(identifiers):
-                return "inherits: \(identifiers)"
-            case let .type(identifiers):
-                return "type: \(identifiers)"
-            case let .tag(identifier):
-                return "tag: \(identifier)"
+            case let .scopeStart(scope, name):
+                return name == nil ? "scopeStart: \(scope)" : "scopeStart: \(scope), \(name ?? "")"
+            case let .scopeEnd(scope, name):
+                return name == nil ? "scopeEnd: \(scope)" : "scopeEnd: \(scope), \(name ?? "")"
+            case let .inherits(names):
+                return "inherits: \(names)"
+            case let .type(names):
+                return "type: \(names)"
+            case let .tag(name):
+                return "tag: \(name)"
             }
         }
 
@@ -81,11 +81,11 @@ class Tokenizer {
             case ")":
                 return try scopeEndToken()
             case "'":
-                return .tag(identifier(endingWith: "'"))
+                return .tag(name(endingWith: "'"))
             case "[":
-                return .tag(identifier(endingWith: "]", oneTimeExceptionForEvery: "["))
+                return .tag(name(endingWith: "]", oneTimeExceptionForEvery: "["))
             case "<":
-                return .tag(identifier(endingWith: ">"))
+                return .tag(name(endingWith: ">"))
             default:
                 return try keywordToken(startingWith: ch)
             }
@@ -98,10 +98,10 @@ class Tokenizer {
     private var iterator: String.UnicodeScalarView.Iterator
     private var pushedBackScalars: [UnicodeScalar] = []
     private var openScopes: [Token] = []
-    private var identifierPrefix: String {
+    private var namePrefix: String {
         for openScope in openScopes.reversed() {
-            if case let .scopeStart(scope, identifier) = openScope, scope != "source_file", let id = identifier {
-                return id + "."
+            if case let .scopeStart(scope, name) = openScope, scope != "source_file", let na = name {
+                return na + "."
             }
         }
         return ""
@@ -129,7 +129,7 @@ class Tokenizer {
 
         var allowedRightParenthesis = 0
         var pushedBackScalars: [UnicodeScalar] = []
-        var id: String?
+        var na: String?
         loop: while let ch = nextScalar() {
             switch ch {
             case "\n":
@@ -148,9 +148,9 @@ class Tokenizer {
                 }
             case "\"":
                 if pushedBackScalars.last == " " {
-                    id = identifierPrefix + identifier(endingWith: "\"")
-                    if scope == "source_file", let strongId = id {
-                        id = (strongId.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
+                    na = namePrefix + name(endingWith: "\"")
+                    if scope == "source_file", let strongName = na {
+                        na = (strongName.components(separatedBy: "/").last?.components(separatedBy: ".").first ?? "") + "SourceFile"
                     }
                 } else {
                     pushedBackScalars.append(ch)
@@ -164,28 +164,28 @@ class Tokenizer {
 
         switch scope {
         case "if_config_decl": // just skip if_config_decl scope, since active branch will follow after anyway; related to swift compiler flags
-            let scopeStart = Token.scopeStart(scope, identifier: id)
+            let scopeStart = Token.scopeStart(scope, name: na)
             openScopes.append(scopeStart)
             while let newToken = try nextToken() {
-                if case let Token.scopeEnd(scope, identifier: _) = newToken, scope == "if_config_decl" {
+                if case let Token.scopeEnd(scope, name: _) = newToken, scope == "if_config_decl" {
                     return try nextToken()
                 }
             }
             return nil
         case "extension_decl":
-            id = identifierPrefix + "extension_decl." +  UUID().uuidString
+            na = namePrefix + "extension_decl." +  UUID().uuidString
         default:
             break
         }
 
-        let scopeStart = Token.scopeStart(scope, identifier: id)
+        let scopeStart = Token.scopeStart(scope, name: na)
         openScopes.append(scopeStart)
         return scopeStart
     }
 
     private func scopeEndToken() throws -> Token {
-        guard let scopeStart = openScopes.popLast(), case let .scopeStart(scope, identifier) = scopeStart else { throw ErrorEnum.unexpectedlyReachedScopeEnd }
-        return .scopeEnd(scope, identifier: identifier)
+        guard let scopeStart = openScopes.popLast(), case let .scopeStart(scope, name) = scopeStart else { throw ErrorEnum.unexpectedlyReachedScopeEnd }
+        return .scopeEnd(scope, name: name)
     }
 
     private func keywordToken(startingWith first: UnicodeScalar) throws -> Token {
@@ -246,14 +246,14 @@ class Tokenizer {
             return inheritsToken()
         case "value=":
             if nextScalar() == "\"" {
-                let value = identifier(endingWith: "\"")
+                let value = name(endingWith: "\"")
                 return .tag(tokenText + value)
             } else {
                 return .tag(tokenText)
             }
         default:
-            if let scopeStart = openScopes.last, case let .scopeStart(scope, identifier: _) = scopeStart, scope == "extension_decl", !tokenText.contains("=") {
-                return .type(typeIdentifiers(forTypeIdentifier: tokenText))
+            if let scopeStart = openScopes.last, case let .scopeStart(scope, name: _) = scopeStart, scope == "extension_decl", !tokenText.contains("=") {
+                return .type(typeNames(forTypeName: tokenText))
             } else {
                 return .tag(tokenText)
             }
@@ -265,18 +265,18 @@ class Tokenizer {
         if ch == "\n" {
             ch = nextScalar()
         }
-        guard ch == "'" else { throw ErrorEnum.unexpectlyFoundNoTypeIdentifier }
-        let id = identifier(endingWith: "'")
-        return .type(typeIdentifiers(forTypeIdentifier: id))
+        guard ch == "'" else { throw ErrorEnum.unexpectlyFoundNoTypeName }
+        let na = name(endingWith: "'")
+        return .type(typeNames(forTypeName: na))
     }
 
     private func inheritsToken() -> Token {
-        let id = identifier(endingWith: "\n", pushBackLast: ")")
-        let identifiers = id.replacingOccurrences(of: " ", with: "").components(separatedBy: [",", "&"])
-        return .inherits(identifiers)
+        let na = name(endingWith: "\n", pushBackLast: ")")
+        let names = na.replacingOccurrences(of: " ", with: "").components(separatedBy: [",", "&"])
+        return .inherits(names)
     }
 
-    private func identifier(endingWith last: UnicodeScalar, oneTimeExceptionForEvery first: UnicodeScalar? = nil, pushBackLast: UnicodeScalar? = nil) -> String {
+    private func name(endingWith last: UnicodeScalar, oneTimeExceptionForEvery first: UnicodeScalar? = nil, pushBackLast: UnicodeScalar? = nil) -> String {
         var tokenText = ""
         var allowedLast = 0
 
@@ -301,25 +301,25 @@ class Tokenizer {
         return tokenText.replacingOccurrences(of: "\n", with: "")
     }
 
-    private func typeIdentifiers(forTypeIdentifier id: String) -> [String] {
-        let id = moveGenericParametersToTheEnd(inTypeIdentifier: id)
-        let identifiers = id.replacingOccurrences(of: "?", with: "")
+    private func typeNames(forTypeName na: String) -> [String] {
+        let na = moveGenericParametersToTheEnd(inTypeName: na)
+        let names = na.replacingOccurrences(of: "?", with: "")
             .replacingOccurrences(of: "[\\[\\]()<>,-]", with: " ", options: .regularExpression)
             .components(separatedBy: " ")
             .uniqued()
             .filter { !$0.isEmpty && !["inout", "where", "throws", "Self", "block", "__owned", "__shared", "=="].contains($0) && ![":"].contains($0.last) && !["@"].contains($0.first)}
-        return identifiers
+        return names
     }
 
-    private func moveGenericParametersToTheEnd(inTypeIdentifier id: String) -> String {
-        var id = id.replacingOccurrences(of: "->", with: " ")
+    private func moveGenericParametersToTheEnd(inTypeName na: String) -> String {
+        var na = na.replacingOccurrences(of: "->", with: " ")
         while true {
-            guard let range = Regex.getResult(for: StaticString(stringLiteral: "<[^<]+?>"), text: id, captureGroup: 0).first?.range else { break }
-            let genericIdentifier = String(id[id.index(after: range.lowerBound)..<id.index(before: range.upperBound)])
-            let idBefore = id[..<range.lowerBound]
-            let idAfter = String(id[range.upperBound...])
-            id = idBefore + idAfter + " " + genericIdentifier
+            guard let range = Regex.getResult(for: StaticString(stringLiteral: "<[^<]+?>"), text: na, captureGroup: 0).first?.range else { break }
+            let genericName = String(na[na.index(after: range.lowerBound)..<na.index(before: range.upperBound)])
+            let naBefore = na[..<range.lowerBound]
+            let naAfter = String(na[range.upperBound...])
+            na = naBefore + naAfter + " " + genericName
         }
-        return id
+        return na
     }
 }

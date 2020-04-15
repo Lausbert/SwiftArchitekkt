@@ -19,18 +19,18 @@ class ModuleGraphBuilder {
     func generateGraph() throws -> (Node, [String: ChildNamedNode]) {
         while let token = try tokenizer.nextToken() {
             switch token {
-            case let .scopeStart(scope, identifier):
-                try handleScopeStart(scope: scope, identifier: identifier)
-            case let .scopeEnd(scope, identifier):
-                handleScopeEnd(scope: scope, identifier: identifier)
-            case let .type(identifiers),
-                 let .inherits(identifiers):
-                handle(identifiers: identifiers)
+            case let .scopeStart(scope, name):
+                try handleScopeStart(scope: scope, name: name)
+            case let .scopeEnd(scope, name):
+                handleScopeEnd(scope: scope, name: name)
+            case let .type(names),
+                 let .inherits(names):
+                handle(names: names)
             case let .tag(tag):
                 handle(tag: tag)
             }
         }
-        let moduleNode = Node(identifier: moduleName, scope: "module")
+        let moduleNode = Node(scope: "module", name: moduleName)
         moduleNode.set(children: graph)
         return (moduleNode, getChildNamedNodes())
     }
@@ -49,23 +49,23 @@ class ModuleGraphBuilder {
         namedNodes.filter { childNodes.contains($0.key) }
     }
 
-    private func handleScopeStart(scope: String, identifier: String?) throws {
+    private func handleScopeStart(scope: String, name: String?) throws {
         let node: Node
-        if let identifier = identifier {
-            if childNodes.contains(identifier) {
-                if let namedNode = namedNodes[identifier], let oldId = namedNode.identifier {
-                    namedNodes.removeValue(forKey: identifier)
-                    namedNode.set(identifier: oldId + ":" + UUID().uuidString)
+        if let name = name {
+            if childNodes.contains(name) {
+                if let namedNode = namedNodes[name], let oldId = namedNode.name {
+                    namedNodes.removeValue(forKey: name)
+                    namedNode.set(name: oldId + ":" + UUID().uuidString)
                 }
-                node = Node(identifier: identifier + ":" + UUID().uuidString, scope: scope)
+                node = Node(scope: scope, name: name + ":" + UUID().uuidString)
             } else {
-                childNodes.insert(identifier)
-                if let namedNode = namedNodes[identifier] {
+                childNodes.insert(name)
+                if let namedNode = namedNodes[name] {
                     namedNode.set(scope: scope)
                     node = namedNode
                 } else {
-                    node = Node(identifier: identifier, scope: scope)
-                    namedNodes[identifier] = node
+                    node = Node(scope: scope, name: name)
+                    namedNodes[name] = node
                 }
             }
         } else {
@@ -81,10 +81,10 @@ class ModuleGraphBuilder {
         openNodes.append(node)
     }
 
-    private func handleScopeEnd(scope: String, identifier: String?) {
-        if let id = openNodes.last?.identifier {
-            if let identifier = identifier {
-                assert(id.contains(identifier))
+    private func handleScopeEnd(scope: String, name: String?) {
+        if let na = openNodes.last?.name {
+            if let name = name {
+                assert(na.contains(name))
             } else {
                 assertionFailure()
             }
@@ -93,14 +93,14 @@ class ModuleGraphBuilder {
         openNodes.removeLast()
     }
 
-    private func handle(identifiers: [String]) {
-        for identifier in identifiers {
+    private func handle(names: [String]) {
+        for name in names {
             let node: Node
-            if let namedNode = namedNodes[identifier] {
+            if let namedNode = namedNodes[name] {
                 node = namedNode
             } else {
-                node = Node(identifier: identifier, scope: "unknown")
-                namedNodes[identifier] = node
+                node = Node(scope: "unknown", name: name)
+                namedNodes[name] = node
             }
             assert(openNodes.last != nil)
             openNodes.last?.add(arc: node)
