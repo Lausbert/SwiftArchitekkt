@@ -9,14 +9,14 @@ class ModuleGraphBuilder {
 
     typealias ModuleName = String
     typealias Ast = String
-    typealias ChildNamedNode = Node
+    typealias NonChildNamedNode = Node
 
     init(ast: (ModuleName, Ast)) {
         moduleName = ast.0
         tokenizer = Tokenizer(ast: ast.1)
     }
 
-    func generateGraph() throws -> (Node, [String: ChildNamedNode]) {
+    func generateGraph() throws -> (Node, [UUID: NonChildNamedNode]) {
         while let token = try tokenizer.nextToken() {
             switch token {
             case let .scopeStart(scope, name):
@@ -32,7 +32,7 @@ class ModuleGraphBuilder {
         }
         let moduleNode = Node(scope: "module", name: moduleName)
         moduleNode.set(children: graph)
-        return (moduleNode, getChildNamedNodes())
+        return (moduleNode, getNonChildNamedNodes())
     }
 
     // MARK: - Private -
@@ -45,8 +45,8 @@ class ModuleGraphBuilder {
     private var childNodes: Set<String> = [] // track which nodes are already children
     private var namedNodes: [String: Node] = [:]
 
-    private func getChildNamedNodes() -> [String: Node] {
-        namedNodes.filter { childNodes.contains($0.key) }
+    private func getNonChildNamedNodes() -> [UUID: NonChildNamedNode] {
+        Dictionary(uniqueKeysWithValues: namedNodes.values.compactMap({ childNodes.contains($0.name ?? "") ? nil : ($0.id, $0) }))
     }
 
     private func handleScopeStart(scope: String, name: String?) throws {
@@ -103,7 +103,7 @@ class ModuleGraphBuilder {
                 namedNodes[name] = node
             }
             assert(openNodes.last != nil)
-            openNodes.last?.add(arc: node)
+            openNodes.last?.add(arc: node.id)
         }
     }
 

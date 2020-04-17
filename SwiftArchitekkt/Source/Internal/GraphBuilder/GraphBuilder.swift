@@ -15,10 +15,10 @@ class GraphBuilder {
 
             // At first get all module root nodes and all named nodes which are also children of these root nodes. Named nodes which are also children of a root node are declared in this module.
             var moduleNodes: [Node] = []
-            var childNamedNodes: [String: Node] = [:]
+            var nonChildNamedNodes: [UUID: Node] = [:]
             for ast in asts {
-                let (moduleNode, moduleChildNamedNodes) = try ModuleGraphBuilder(ast: ast).generateGraph()
-                childNamedNodes.merge(moduleChildNamedNodes) { $1 }
+                let (moduleNode, moduleNonChildNamedNodes) = try ModuleGraphBuilder(ast: ast).generateGraph()
+                nonChildNamedNodes.merge(moduleNonChildNamedNodes) { $1 }
                 moduleNodes.append(moduleNode)
             }
 
@@ -26,21 +26,26 @@ class GraphBuilder {
             let rootNode = Node(scope: "root", isRoot: true)
             rootNode.set(children: moduleNodes)
 
-            // At third traverse all arcs in whole graph with unknown scope. Unknown scope means they were referenced but not declared in a module. Check if another module contains a node with the same name. If this is the case replace the arc with the node from another module. If no other module contains a node with the same name, remove the arc. This should be the case for builtin types, stuff declared in system libraries and Metatypes, since they do not show in the asts.
+            // At third link arcs with "unkown" scope (aka non child nodes) to the actual nodes in other modules, if they exist there
+            var allNamedChildNodes: [String: Node] = [:]
             rootNode.allDescendants.forEach { node in
-                var arcsWithKnownScope: [Node] = []
-                for arc in node.arcs {
-                    if arc.scope == "unknown",
-                        let name = arc.name,
-                        let arcWithKnownScope = childNamedNodes[name] {
-                        arcsWithKnownScope.append(arcWithKnownScope)
-                    } else if arc.scope != "unknown" {
-                        arcsWithKnownScope.append(arc)
-                    }
+                if let name = node.name {
+                    allNamedChildNodes[name] = node
                 }
-                node.set(arcs: arcsWithKnownScope)
             }
-
+            rootNode.allDescendants.forEach { node in
+                node.set(arcs: node.arcs.compactMap { arc in
+                    if let arcNode = nonChildNamedNodes[arc] {
+                        if let name = arcNode.name, let namedNode = allNamedChildNodes[name] {
+                            return namedNode.id
+                        } else {
+                            return nil
+                        }
+                    } else {
+                        return arc
+                    }
+                })
+            }
             return rootNode
 
         } catch {
