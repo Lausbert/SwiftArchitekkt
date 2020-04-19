@@ -23,7 +23,7 @@ class GraphBuilder {
             }
 
             // At second initalize a general root node with module nodes as children
-            let rootNode = Node(scope: "root", isRoot: true)
+            let rootNode = Node(scope: "root")
             rootNode.set(children: moduleNodes)
 
             // At third link arcs with "unkown" scope (aka non child nodes) to the actual nodes in other modules, if they exist there

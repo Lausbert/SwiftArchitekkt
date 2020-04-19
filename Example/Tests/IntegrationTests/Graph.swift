@@ -39,8 +39,7 @@ extension IntegrationTest {
               "children" : [
 
               ],
-              "identifier" : "@@@",
-              "isRoot" : false,
+              "id" : "@@@",
               "scope" : "import_decl",
               "tags" : [
                 "Cocoa"
@@ -48,9 +47,7 @@ extension IntegrationTest {
             },
             {
               "arcs" : [
-                "@@@",
-                "@@@",
-                "@@@"
+
               ],
               "children" : [
                 {
@@ -60,18 +57,17 @@ extension IntegrationTest {
                   "children" : [
                     {
                       "arcs" : [
-                        "@@@"
+
                       ],
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "pattern_named",
                           "tags" : [
                             "window"
@@ -94,8 +90,7 @@ extension IntegrationTest {
                                   "children" : [
 
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "component",
                                   "tags" : [
                                     "NSWindow",
@@ -104,24 +99,21 @@ extension IntegrationTest {
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "type_ident",
                               "tags" : [
 
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "type_implicitly_unwrapped_optional",
                           "tags" : [
 
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "pattern_typed",
                       "tags" : [
 
@@ -129,13 +121,12 @@ extension IntegrationTest {
                     },
                     {
                       "arcs" : [
-                        "@@@"
+
                       ],
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "nil_literal_expr",
                       "tags" : [
                         "implicit",
@@ -143,8 +134,7 @@ extension IntegrationTest {
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "scope" : "pattern_binding_decl",
                   "tags" : [
                     "Processed",
@@ -153,12 +143,12 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
                       "arcs" : [
-                        "@@@"
+
                       ],
                       "children" : [
                         {
@@ -168,8 +158,7 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.window.self:@@@",
                           "scope" : "parameter",
                           "tags" : [
@@ -183,8 +172,7 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "parameter_list",
                           "tags" : [
 
@@ -202,7 +190,7 @@ extension IntegrationTest {
                               "children" : [
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
@@ -212,8 +200,7 @@ extension IntegrationTest {
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "declref_expr",
                                       "tags" : [
                                         "function_ref=unapplied",
@@ -221,8 +208,7 @@ extension IntegrationTest {
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "member_ref_expr",
                                   "tags" : [
                                     "direct_to_storage",
@@ -230,24 +216,21 @@ extension IntegrationTest {
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "return_stmt",
                               "tags" : [
                                 "implicit"
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "brace_stmt",
                           "tags" : [
                             "implicit"
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "accessor_decl",
                       "tags" : [
                         "access=internal",
@@ -258,7 +241,7 @@ extension IntegrationTest {
                     },
                     {
                       "arcs" : [
-                        "@@@"
+
                       ],
                       "children" : [
                         {
@@ -268,8 +251,7 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.window.self:@@@",
                           "scope" : "parameter",
                           "tags" : [
@@ -283,13 +265,12 @@ extension IntegrationTest {
                           "children" : [
                             {
                               "arcs" : [
-                                "@@@"
+
                               ],
                               "children" : [
 
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "name" : "AppDelegate.window.value",
                               "scope" : "parameter",
                               "tags" : [
@@ -297,8 +278,7 @@ extension IntegrationTest {
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "parameter_list",
                           "tags" : [
 
@@ -316,7 +296,7 @@ extension IntegrationTest {
                               "children" : [
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
@@ -326,8 +306,7 @@ extension IntegrationTest {
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "declref_expr",
                                       "tags" : [
                                         "function_ref=unapplied",
@@ -335,8 +314,7 @@ extension IntegrationTest {
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "member_ref_expr",
                                   "tags" : [
                                     "direct_to_storage",
@@ -345,13 +323,12 @@ extension IntegrationTest {
                                 },
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
 
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "declref_expr",
                                   "tags" : [
                                     "function_ref=unapplied",
@@ -359,24 +336,21 @@ extension IntegrationTest {
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "assign_expr",
                               "tags" : [
                                 "implicit"
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "brace_stmt",
                           "tags" : [
                             "implicit"
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "accessor_decl",
                       "tags" : [
                         "access=internal",
@@ -397,8 +371,7 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.window.self:@@@",
                           "scope" : "parameter",
                           "tags" : [
@@ -412,8 +385,7 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "parameter_list",
                           "tags" : [
 
@@ -431,12 +403,12 @@ extension IntegrationTest {
                               "children" : [
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
                                         {
@@ -446,8 +418,7 @@ extension IntegrationTest {
                                           "children" : [
 
                                           ],
-                                          "identifier" : "@@@",
-                                          "isRoot" : false,
+                                          "id" : "@@@",
                                           "scope" : "declref_expr",
                                           "tags" : [
                                             "function_ref=unapplied",
@@ -455,8 +426,7 @@ extension IntegrationTest {
                                           ]
                                         }
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "member_ref_expr",
                                       "tags" : [
                                         "direct_to_impl",
@@ -464,32 +434,28 @@ extension IntegrationTest {
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "inout_expr",
                                   "tags" : [
                                     "implicit"
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "yield_stmt",
                               "tags" : [
                                 "implicit"
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "brace_stmt",
                           "tags" : [
                             "implicit"
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "accessor_decl",
                       "tags" : [
                         "_modify_for=window",
@@ -499,8 +465,7 @@ extension IntegrationTest {
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.window",
                   "scope" : "var_decl",
                   "tags" : [
@@ -513,7 +478,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -523,8 +488,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.applicationDidFinishLaunching(_:).self",
                       "scope" : "parameter",
                       "tags" : [
@@ -538,13 +502,12 @@ extension IntegrationTest {
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.applicationDidFinishLaunching(_:).aNotification",
                           "scope" : "parameter",
                           "tags" : [
@@ -552,8 +515,7 @@ extension IntegrationTest {
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -566,16 +528,14 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
 
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.applicationDidFinishLaunching(_:)",
                   "scope" : "func_decl",
                   "tags" : [
@@ -586,7 +546,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -596,8 +556,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.applicationWillTerminate(_:).self",
                       "scope" : "parameter",
                       "tags" : [
@@ -611,13 +570,12 @@ extension IntegrationTest {
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.applicationWillTerminate(_:).aNotification",
                           "scope" : "parameter",
                           "tags" : [
@@ -625,8 +583,7 @@ extension IntegrationTest {
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -639,16 +596,14 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
 
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.applicationWillTerminate(_:)",
                   "scope" : "func_decl",
                   "tags" : [
@@ -669,8 +624,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.deinit.self",
                       "scope" : "parameter",
                       "tags" : [
@@ -684,8 +638,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -698,16 +651,14 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
                         "implicit"
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.deinit",
                   "scope" : "destructor_decl",
                   "tags" : [
@@ -718,7 +669,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -728,8 +679,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.init().self",
                       "scope" : "parameter",
                       "tags" : [
@@ -743,8 +693,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -762,23 +711,22 @@ extension IntegrationTest {
                           "children" : [
                             {
                               "arcs" : [
-                                "@@@"
+
                               ],
                               "children" : [
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "other_constructor_ref_expr",
                                       "tags" : [
                                         "implicit"
@@ -786,21 +734,19 @@ extension IntegrationTest {
                                     },
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "super_ref_expr",
                                       "tags" : [
                                         "implicit"
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "dot_syntax_call_expr",
                                   "tags" : [
                                     "implicit",
@@ -815,16 +761,14 @@ extension IntegrationTest {
                                   "children" : [
 
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "tuple_expr",
                                   "tags" : [
                                     "implicit"
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "call_expr",
                               "tags" : [
                                 "arg_labels=",
@@ -833,8 +777,7 @@ extension IntegrationTest {
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "rebind_self_in_constructor_expr",
                           "tags" : [
                             "implicit"
@@ -847,24 +790,21 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "return_stmt",
                           "tags" : [
                             "implicit"
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
                         "implicit"
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.init()",
                   "scope" : "constructor_decl",
                   "tags" : [
@@ -877,8 +817,7 @@ extension IntegrationTest {
                   ]
                 }
               ],
-              "identifier" : "@@@",
-              "isRoot" : false,
+              "id" : "@@@",
               "name" : "AppDelegate",
               "scope" : "class_decl",
               "tags" : [
@@ -888,8 +827,7 @@ extension IntegrationTest {
               ]
             }
           ],
-          "identifier" : "@@@",
-          "isRoot" : false,
+          "id" : "@@@",
           "name" : "AppDelegateSourceFile",
           "scope" : "source_file",
           "tags" : [
@@ -897,8 +835,7 @@ extension IntegrationTest {
           ]
         }
       ],
-      "identifier" : "@@@",
-      "isRoot" : false,
+      "id" : "@@@",
       "name" : "MacOSSDK",
       "scope" : "module",
       "tags" : [
@@ -906,8 +843,7 @@ extension IntegrationTest {
       ]
     }
   ],
-  "identifier" : "@@@",
-  "isRoot" : true,
+  "id" : "@@@",
   "scope" : "root",
   "tags" : [
 
@@ -952,8 +888,7 @@ extension IntegrationTest {
               "children" : [
 
               ],
-              "identifier" : "@@@",
-              "isRoot" : false,
+              "id" : "@@@",
               "scope" : "import_decl",
               "tags" : [
                 "UIKit"
@@ -961,8 +896,7 @@ extension IntegrationTest {
             },
             {
               "arcs" : [
-                "@@@",
-                "@@@"
+
               ],
               "children" : [
                 {
@@ -977,8 +911,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "ViewController.viewDidLoad().self",
                       "scope" : "parameter",
                       "tags" : [
@@ -992,8 +925,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -1001,24 +933,22 @@ extension IntegrationTest {
                     },
                     {
                       "arcs" : [
-                        "@@@"
+
                       ],
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
                             {
                               "arcs" : [
-                                "@@@",
-                                "@@@"
+
                               ],
                               "children" : [
 
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "declref_expr",
                               "tags" : [
                                 "function_ref=single"
@@ -1026,21 +956,19 @@ extension IntegrationTest {
                             },
                             {
                               "arcs" : [
-                                "@@@"
+
                               ],
                               "children" : [
 
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "super_ref_expr",
                               "tags" : [
 
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "dot_syntax_call_expr",
                           "tags" : [
                             "nothrow",
@@ -1054,16 +982,14 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "tuple_expr",
                           "tags" : [
 
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "call_expr",
                       "tags" : [
                         "arg_labels=",
@@ -1071,8 +997,7 @@ extension IntegrationTest {
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "ViewController.viewDidLoad()",
                   "scope" : "func_decl",
                   "tags" : [
@@ -1094,8 +1019,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "ViewController.deinit.self",
                       "scope" : "parameter",
                       "tags" : [
@@ -1109,8 +1033,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -1123,16 +1046,14 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
                         "implicit"
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "ViewController.deinit",
                   "scope" : "destructor_decl",
                   "tags" : [
@@ -1143,9 +1064,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@",
-                    "@@@",
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -1155,8 +1074,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "ViewController.init(nibName:bundle:).self",
                       "scope" : "parameter",
                       "tags" : [
@@ -1170,13 +1088,12 @@ extension IntegrationTest {
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "ViewController.init(nibName:bundle:).nibNameOrNil",
                           "scope" : "parameter",
                           "tags" : [
@@ -1186,13 +1103,12 @@ extension IntegrationTest {
                         },
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "ViewController.init(nibName:bundle:).nibBundleOrNil",
                           "scope" : "parameter",
                           "tags" : [
@@ -1201,8 +1117,7 @@ extension IntegrationTest {
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -1220,27 +1135,22 @@ extension IntegrationTest {
                           "children" : [
                             {
                               "arcs" : [
-                                "@@@"
+
                               ],
                               "children" : [
                                 {
                                   "arcs" : [
-                                    "@@@",
-                                    "@@@",
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
                                       "arcs" : [
-                                        "@@@",
-                                        "@@@",
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "other_constructor_ref_expr",
                                       "tags" : [
                                         "implicit"
@@ -1248,21 +1158,19 @@ extension IntegrationTest {
                                     },
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "super_ref_expr",
                                       "tags" : [
                                         "implicit"
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "dot_syntax_call_expr",
                                   "tags" : [
                                     "implicit",
@@ -1272,19 +1180,17 @@ extension IntegrationTest {
                                 },
                                 {
                                   "arcs" : [
-                                    "@@@",
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "declref_expr",
                                       "tags" : [
                                         "function_ref=unapplied",
@@ -1293,13 +1199,12 @@ extension IntegrationTest {
                                     },
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "declref_expr",
                                       "tags" : [
                                         "function_ref=unapplied",
@@ -1307,8 +1212,7 @@ extension IntegrationTest {
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "tuple_expr",
                                   "tags" : [
                                     ",bundle",
@@ -1317,8 +1221,7 @@ extension IntegrationTest {
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "call_expr",
                               "tags" : [
                                 "arg_labels=nibName:bundle:",
@@ -1327,8 +1230,7 @@ extension IntegrationTest {
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "rebind_self_in_constructor_expr",
                           "tags" : [
                             "implicit"
@@ -1341,24 +1243,21 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "return_stmt",
                           "tags" : [
                             "implicit"
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
                         "implicit"
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "ViewController.init(nibName:bundle:)",
                   "scope" : "constructor_decl",
                   "tags" : [
@@ -1372,8 +1271,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@",
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -1383,8 +1281,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "ViewController.init(coder:).self",
                       "scope" : "parameter",
                       "tags" : [
@@ -1398,13 +1295,12 @@ extension IntegrationTest {
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "ViewController.init(coder:).coder",
                           "scope" : "parameter",
                           "tags" : [
@@ -1413,8 +1309,7 @@ extension IntegrationTest {
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -1432,25 +1327,22 @@ extension IntegrationTest {
                           "children" : [
                             {
                               "arcs" : [
-                                "@@@"
+
                               ],
                               "children" : [
                                 {
                                   "arcs" : [
-                                    "@@@",
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
                                       "arcs" : [
-                                        "@@@",
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "other_constructor_ref_expr",
                                       "tags" : [
                                         "implicit"
@@ -1458,21 +1350,19 @@ extension IntegrationTest {
                                     },
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "super_ref_expr",
                                       "tags" : [
                                         "implicit"
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "dot_syntax_call_expr",
                                   "tags" : [
                                     "implicit",
@@ -1482,18 +1372,17 @@ extension IntegrationTest {
                                 },
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "declref_expr",
                                       "tags" : [
                                         "function_ref=unapplied",
@@ -1501,8 +1390,7 @@ extension IntegrationTest {
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "tuple_expr",
                                   "tags" : [
                                     "implicit",
@@ -1510,8 +1398,7 @@ extension IntegrationTest {
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "call_expr",
                               "tags" : [
                                 "arg_labels=coder:",
@@ -1520,8 +1407,7 @@ extension IntegrationTest {
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "rebind_self_in_constructor_expr",
                           "tags" : [
                             "implicit"
@@ -1534,24 +1420,21 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "return_stmt",
                           "tags" : [
                             "implicit"
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
                         "implicit"
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "ViewController.init(coder:)",
                   "scope" : "constructor_decl",
                   "tags" : [
@@ -1566,8 +1449,7 @@ extension IntegrationTest {
                   ]
                 }
               ],
-              "identifier" : "@@@",
-              "isRoot" : false,
+              "id" : "@@@",
               "name" : "ViewController",
               "scope" : "class_decl",
               "tags" : [
@@ -1577,8 +1459,7 @@ extension IntegrationTest {
               ]
             }
           ],
-          "identifier" : "@@@",
-          "isRoot" : false,
+          "id" : "@@@",
           "name" : "ViewControllerSourceFile",
           "scope" : "source_file",
           "tags" : [
@@ -1597,8 +1478,7 @@ extension IntegrationTest {
               "children" : [
 
               ],
-              "identifier" : "@@@",
-              "isRoot" : false,
+              "id" : "@@@",
               "scope" : "import_decl",
               "tags" : [
                 "UIKit"
@@ -1606,9 +1486,7 @@ extension IntegrationTest {
             },
             {
               "arcs" : [
-                "@@@",
-                "@@@",
-                "@@@"
+
               ],
               "children" : [
                 {
@@ -1618,18 +1496,17 @@ extension IntegrationTest {
                   "children" : [
                     {
                       "arcs" : [
-                        "@@@"
+
                       ],
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "pattern_named",
                           "tags" : [
                             "window"
@@ -1652,8 +1529,7 @@ extension IntegrationTest {
                                   "children" : [
 
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "component",
                                   "tags" : [
                                     "UIWindow",
@@ -1662,24 +1538,21 @@ extension IntegrationTest {
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "type_ident",
                               "tags" : [
 
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "type_optional",
                           "tags" : [
 
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "pattern_typed",
                       "tags" : [
 
@@ -1687,13 +1560,12 @@ extension IntegrationTest {
                     },
                     {
                       "arcs" : [
-                        "@@@"
+
                       ],
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "nil_literal_expr",
                       "tags" : [
                         "implicit",
@@ -1701,8 +1573,7 @@ extension IntegrationTest {
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "scope" : "pattern_binding_decl",
                   "tags" : [
                     "Processed",
@@ -1711,12 +1582,12 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
                       "arcs" : [
-                        "@@@"
+
                       ],
                       "children" : [
                         {
@@ -1726,8 +1597,7 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.window.self:@@@",
                           "scope" : "parameter",
                           "tags" : [
@@ -1741,8 +1611,7 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "parameter_list",
                           "tags" : [
 
@@ -1760,7 +1629,7 @@ extension IntegrationTest {
                               "children" : [
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
@@ -1770,8 +1639,7 @@ extension IntegrationTest {
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "declref_expr",
                                       "tags" : [
                                         "function_ref=unapplied",
@@ -1779,8 +1647,7 @@ extension IntegrationTest {
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "member_ref_expr",
                                   "tags" : [
                                     "direct_to_storage",
@@ -1788,24 +1655,21 @@ extension IntegrationTest {
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "return_stmt",
                               "tags" : [
                                 "implicit"
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "brace_stmt",
                           "tags" : [
                             "implicit"
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "accessor_decl",
                       "tags" : [
                         "@objc",
@@ -1817,7 +1681,7 @@ extension IntegrationTest {
                     },
                     {
                       "arcs" : [
-                        "@@@"
+
                       ],
                       "children" : [
                         {
@@ -1827,8 +1691,7 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.window.self:@@@",
                           "scope" : "parameter",
                           "tags" : [
@@ -1842,13 +1705,12 @@ extension IntegrationTest {
                           "children" : [
                             {
                               "arcs" : [
-                                "@@@"
+
                               ],
                               "children" : [
 
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "name" : "AppDelegate.window.value",
                               "scope" : "parameter",
                               "tags" : [
@@ -1856,8 +1718,7 @@ extension IntegrationTest {
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "parameter_list",
                           "tags" : [
 
@@ -1875,7 +1736,7 @@ extension IntegrationTest {
                               "children" : [
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
@@ -1885,8 +1746,7 @@ extension IntegrationTest {
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "declref_expr",
                                       "tags" : [
                                         "function_ref=unapplied",
@@ -1894,8 +1754,7 @@ extension IntegrationTest {
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "member_ref_expr",
                                   "tags" : [
                                     "direct_to_storage",
@@ -1904,13 +1763,12 @@ extension IntegrationTest {
                                 },
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
 
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "declref_expr",
                                   "tags" : [
                                     "function_ref=unapplied",
@@ -1918,24 +1776,21 @@ extension IntegrationTest {
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "assign_expr",
                               "tags" : [
                                 "implicit"
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "brace_stmt",
                           "tags" : [
                             "implicit"
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "accessor_decl",
                       "tags" : [
                         "@objc",
@@ -1957,8 +1812,7 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.window.self:@@@",
                           "scope" : "parameter",
                           "tags" : [
@@ -1972,8 +1826,7 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "parameter_list",
                           "tags" : [
 
@@ -1991,12 +1844,12 @@ extension IntegrationTest {
                               "children" : [
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
                                         {
@@ -2006,8 +1859,7 @@ extension IntegrationTest {
                                           "children" : [
 
                                           ],
-                                          "identifier" : "@@@",
-                                          "isRoot" : false,
+                                          "id" : "@@@",
                                           "scope" : "declref_expr",
                                           "tags" : [
                                             "function_ref=unapplied",
@@ -2015,8 +1867,7 @@ extension IntegrationTest {
                                           ]
                                         }
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "member_ref_expr",
                                       "tags" : [
                                         "direct_to_impl",
@@ -2024,32 +1875,28 @@ extension IntegrationTest {
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "inout_expr",
                                   "tags" : [
                                     "implicit"
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "yield_stmt",
                               "tags" : [
                                 "implicit"
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "brace_stmt",
                           "tags" : [
                             "implicit"
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "accessor_decl",
                       "tags" : [
                         "_modify_for=window",
@@ -2059,8 +1906,7 @@ extension IntegrationTest {
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.window",
                   "scope" : "var_decl",
                   "tags" : [
@@ -2074,10 +1920,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@",
-                    "@@@",
-                    "@@@",
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -2087,8 +1930,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.application(_:didFinishLaunchingWithOptions:).self",
                       "scope" : "parameter",
                       "tags" : [
@@ -2102,13 +1944,12 @@ extension IntegrationTest {
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.application(_:didFinishLaunchingWithOptions:).application",
                           "scope" : "parameter",
                           "tags" : [
@@ -2117,14 +1958,12 @@ extension IntegrationTest {
                         },
                         {
                           "arcs" : [
-                            "@@@",
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.application(_:didFinishLaunchingWithOptions:).launchOptions",
                           "scope" : "parameter",
                           "tags" : [
@@ -2132,8 +1971,7 @@ extension IntegrationTest {
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -2156,8 +1994,7 @@ extension IntegrationTest {
                               "children" : [
 
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "component",
                               "tags" : [
                                 "Bool",
@@ -2166,16 +2003,14 @@ extension IntegrationTest {
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "type_ident",
                           "tags" : [
 
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "result",
                       "tags" : [
 
@@ -2193,13 +2028,12 @@ extension IntegrationTest {
                           "children" : [
                             {
                               "arcs" : [
-                                "@@@"
+
                               ],
                               "children" : [
 
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "boolean_literal_expr",
                               "tags" : [
                                 "initializer=**NULL**",
@@ -2207,24 +2041,21 @@ extension IntegrationTest {
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "return_stmt",
                           "tags" : [
 
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
 
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.application(_:didFinishLaunchingWithOptions:)",
                   "scope" : "func_decl",
                   "tags" : [
@@ -2235,7 +2066,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -2245,8 +2076,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.applicationWillResignActive(_:).self",
                       "scope" : "parameter",
                       "tags" : [
@@ -2260,13 +2090,12 @@ extension IntegrationTest {
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.applicationWillResignActive(_:).application",
                           "scope" : "parameter",
                           "tags" : [
@@ -2274,8 +2103,7 @@ extension IntegrationTest {
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -2288,16 +2116,14 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
 
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.applicationWillResignActive(_:)",
                   "scope" : "func_decl",
                   "tags" : [
@@ -2308,7 +2134,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -2318,8 +2144,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.applicationDidEnterBackground(_:).self",
                       "scope" : "parameter",
                       "tags" : [
@@ -2333,13 +2158,12 @@ extension IntegrationTest {
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.applicationDidEnterBackground(_:).application",
                           "scope" : "parameter",
                           "tags" : [
@@ -2347,8 +2171,7 @@ extension IntegrationTest {
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -2361,16 +2184,14 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
 
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.applicationDidEnterBackground(_:)",
                   "scope" : "func_decl",
                   "tags" : [
@@ -2381,7 +2202,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -2391,8 +2212,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.applicationWillEnterForeground(_:).self",
                       "scope" : "parameter",
                       "tags" : [
@@ -2406,13 +2226,12 @@ extension IntegrationTest {
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.applicationWillEnterForeground(_:).application",
                           "scope" : "parameter",
                           "tags" : [
@@ -2420,8 +2239,7 @@ extension IntegrationTest {
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -2434,16 +2252,14 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
 
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.applicationWillEnterForeground(_:)",
                   "scope" : "func_decl",
                   "tags" : [
@@ -2454,7 +2270,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -2464,8 +2280,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.applicationDidBecomeActive(_:).self",
                       "scope" : "parameter",
                       "tags" : [
@@ -2479,13 +2294,12 @@ extension IntegrationTest {
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.applicationDidBecomeActive(_:).application",
                           "scope" : "parameter",
                           "tags" : [
@@ -2493,8 +2307,7 @@ extension IntegrationTest {
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -2507,16 +2320,14 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
 
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.applicationDidBecomeActive(_:)",
                   "scope" : "func_decl",
                   "tags" : [
@@ -2527,7 +2338,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -2537,8 +2348,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.applicationWillTerminate(_:).self",
                       "scope" : "parameter",
                       "tags" : [
@@ -2552,13 +2362,12 @@ extension IntegrationTest {
                       "children" : [
                         {
                           "arcs" : [
-                            "@@@"
+
                           ],
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "name" : "AppDelegate.applicationWillTerminate(_:).application",
                           "scope" : "parameter",
                           "tags" : [
@@ -2566,8 +2375,7 @@ extension IntegrationTest {
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -2580,16 +2388,14 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
 
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.applicationWillTerminate(_:)",
                   "scope" : "func_decl",
                   "tags" : [
@@ -2610,8 +2416,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.deinit.self",
                       "scope" : "parameter",
                       "tags" : [
@@ -2625,8 +2430,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -2639,16 +2443,14 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
                         "implicit"
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.deinit",
                   "scope" : "destructor_decl",
                   "tags" : [
@@ -2659,7 +2461,7 @@ extension IntegrationTest {
                 },
                 {
                   "arcs" : [
-                    "@@@"
+
                   ],
                   "children" : [
                     {
@@ -2669,8 +2471,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "name" : "AppDelegate.init().self",
                       "scope" : "parameter",
                       "tags" : [
@@ -2684,8 +2485,7 @@ extension IntegrationTest {
                       "children" : [
 
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "parameter_list",
                       "tags" : [
 
@@ -2703,23 +2503,22 @@ extension IntegrationTest {
                           "children" : [
                             {
                               "arcs" : [
-                                "@@@"
+
                               ],
                               "children" : [
                                 {
                                   "arcs" : [
-                                    "@@@"
+
                                   ],
                                   "children" : [
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "other_constructor_ref_expr",
                                       "tags" : [
                                         "implicit"
@@ -2727,21 +2526,19 @@ extension IntegrationTest {
                                     },
                                     {
                                       "arcs" : [
-                                        "@@@"
+
                                       ],
                                       "children" : [
 
                                       ],
-                                      "identifier" : "@@@",
-                                      "isRoot" : false,
+                                      "id" : "@@@",
                                       "scope" : "super_ref_expr",
                                       "tags" : [
                                         "implicit"
                                       ]
                                     }
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "dot_syntax_call_expr",
                                   "tags" : [
                                     "implicit",
@@ -2756,16 +2553,14 @@ extension IntegrationTest {
                                   "children" : [
 
                                   ],
-                                  "identifier" : "@@@",
-                                  "isRoot" : false,
+                                  "id" : "@@@",
                                   "scope" : "tuple_expr",
                                   "tags" : [
                                     "implicit"
                                   ]
                                 }
                               ],
-                              "identifier" : "@@@",
-                              "isRoot" : false,
+                              "id" : "@@@",
                               "scope" : "call_expr",
                               "tags" : [
                                 "arg_labels=",
@@ -2774,8 +2569,7 @@ extension IntegrationTest {
                               ]
                             }
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "rebind_self_in_constructor_expr",
                           "tags" : [
                             "implicit"
@@ -2788,24 +2582,21 @@ extension IntegrationTest {
                           "children" : [
 
                           ],
-                          "identifier" : "@@@",
-                          "isRoot" : false,
+                          "id" : "@@@",
                           "scope" : "return_stmt",
                           "tags" : [
                             "implicit"
                           ]
                         }
                       ],
-                      "identifier" : "@@@",
-                      "isRoot" : false,
+                      "id" : "@@@",
                       "scope" : "brace_stmt",
                       "tags" : [
                         "implicit"
                       ]
                     }
                   ],
-                  "identifier" : "@@@",
-                  "isRoot" : false,
+                  "id" : "@@@",
                   "name" : "AppDelegate.init()",
                   "scope" : "constructor_decl",
                   "tags" : [
@@ -2818,8 +2609,7 @@ extension IntegrationTest {
                   ]
                 }
               ],
-              "identifier" : "@@@",
-              "isRoot" : false,
+              "id" : "@@@",
               "name" : "AppDelegate",
               "scope" : "class_decl",
               "tags" : [
@@ -2829,8 +2619,7 @@ extension IntegrationTest {
               ]
             }
           ],
-          "identifier" : "@@@",
-          "isRoot" : false,
+          "id" : "@@@",
           "name" : "AppDelegateSourceFile",
           "scope" : "source_file",
           "tags" : [
@@ -2838,8 +2627,7 @@ extension IntegrationTest {
           ]
         }
       ],
-      "identifier" : "@@@",
-      "isRoot" : false,
+      "id" : "@@@",
       "name" : "iOSSDK",
       "scope" : "module",
       "tags" : [
@@ -2847,8 +2635,7 @@ extension IntegrationTest {
       ]
     }
   ],
-  "identifier" : "@@@",
-  "isRoot" : true,
+  "id" : "@@@",
   "scope" : "root",
   "tags" : [
 
