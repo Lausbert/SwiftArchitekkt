@@ -20,7 +20,7 @@ struct ConsistentUrlRequirementsEvaluator {
     }
 
     static let consistentUrlRequirements = [
-        ConsistentUrlRequirement(key: "org.cocoapods.SwiftArchitekkt.Xcode.app", hint: "Choose your Xcode.app first. It is probably located in your applications folder. You can change it later in the settings.", fileName: "Xcode", fileType: "app")
+        ConsistentUrlRequirement(key: "org.cocoapods.SwiftArchitekkt.Xcode.app", hint: "Choose your Xcode.app first. It is probably located in your applications folder. You can change it later in your preferences.", fileName: "Xcode", fileType: "app")
     ]
 
     static func getXcodeUrl(for graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> URL? {
