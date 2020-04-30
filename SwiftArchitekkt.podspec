@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'SwiftArchitekkt'
-    s.version          = '0.1.35'
+    s.version          = '0.1.36'
     s.summary          = 'An implementation of a graph request handler, which handles XCode projects & workspaces.'
 
     s.description      = <<-DESC
