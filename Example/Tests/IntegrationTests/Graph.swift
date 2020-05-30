@@ -42,7 +42,7 @@ extension IntegrationTest {
               "id" : "@@@",
               "scope" : "import_decl",
               "tags" : [
-                "Cocoa"
+
               ]
             },
             {
@@ -891,7 +891,7 @@ extension IntegrationTest {
               "id" : "@@@",
               "scope" : "import_decl",
               "tags" : [
-                "UIKit"
+
               ]
             },
             {
@@ -1481,7 +1481,7 @@ extension IntegrationTest {
               "id" : "@@@",
               "scope" : "import_decl",
               "tags" : [
-                "UIKit"
+
               ]
             },
             {

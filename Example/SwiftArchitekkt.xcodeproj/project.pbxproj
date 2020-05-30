@@ -15,7 +15,6 @@
 		5D800AF922143A9300600D5B /* CompileCommands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACD22143A9300600D5B /* CompileCommands.swift */; };
 		5D800AFA22143A9300600D5B /* Graph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACE22143A9300600D5B /* Graph.swift */; };
 		5D800AFB22143A9300600D5B /* IntegrationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D800ACF22143A9300600D5B /* IntegrationTest.swift */; };
-		8D88A58F242EBB3100CA3934 /* PackageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D88A58E242EBB3100CA3934 /* PackageManager.swift */; };
 		8D98ED322430F4C80048D7A9 /* CocoaPods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D98ED312430F4C80048D7A9 /* CocoaPods.swift */; };
 		F89B317D1B6622D4E24A723D /* Pods_SwiftArchitekkt_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B7F04948C5190A4047861E3 /* Pods_SwiftArchitekkt_Tests.framework */; };
 /* End PBXBuildFile section */
@@ -34,7 +33,6 @@
 		6E329DF2802B567D7A38D1A7 /* Pods-SwiftArchitekkt_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftArchitekkt_Tests.debug.xcconfig"; path = "Target Support Files/Pods-SwiftArchitekkt_Tests/Pods-SwiftArchitekkt_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		887A1D0711F4671AAF29AD60 /* Pods-SwiftArchitekkt_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftArchitekkt_Tests.release.xcconfig"; path = "Target Support Files/Pods-SwiftArchitekkt_Tests/Pods-SwiftArchitekkt_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		8B7F04948C5190A4047861E3 /* Pods_SwiftArchitekkt_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SwiftArchitekkt_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8D88A58E242EBB3100CA3934 /* PackageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageManager.swift; sourceTree = "<group>"; };
 		8D98ED312430F4C80048D7A9 /* CocoaPods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaPods.swift; sourceTree = "<group>"; };
 		ED83F68A20348A760038D96B /* SwiftArchitekkt_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftArchitekkt_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED83F69020348A760038D96B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,7 +60,6 @@
 				5D800ACD22143A9300600D5B /* CompileCommands.swift */,
 				5D800ACB22143A9300600D5B /* AST.swift */,
 				5D800ACE22143A9300600D5B /* Graph.swift */,
-				8D88A58E242EBB3100CA3934 /* PackageManager.swift */,
 				8D98ED312430F4C80048D7A9 /* CocoaPods.swift */,
 			);
 			path = IntegrationTests;
@@ -245,7 +242,6 @@
 				5D800AF422143A9300600D5B /* UtilityFunctions.swift in Sources */,
 				5D800AF822143A9300600D5B /* Target.swift in Sources */,
 				5D800AFA22143A9300600D5B /* Graph.swift in Sources */,
-				8D88A58F242EBB3100CA3934 /* PackageManager.swift in Sources */,
 				5D800AF722143A9300600D5B /* AST.swift in Sources */,
 				5D800AF922143A9300600D5B /* CompileCommands.swift in Sources */,
 				5D800AF522143A9300600D5B /* Scheme.swift in Sources */,

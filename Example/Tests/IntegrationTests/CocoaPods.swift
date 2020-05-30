@@ -42,7 +42,7 @@ extension IntegrationTest {
               "id" : "@@@",
               "scope" : "import_decl",
               "tags" : [
-                "Foundation"
+
               ]
             },
             {
@@ -1518,12 +1518,12 @@ extension IntegrationTest {
               "id" : "@@@",
               "scope" : "import_decl",
               "tags" : [
-                "UIKit"
+
               ]
             },
             {
               "arcs" : [
-
+                "@@@"
               ],
               "children" : [
 
@@ -1531,7 +1531,7 @@ extension IntegrationTest {
               "id" : "@@@",
               "scope" : "import_decl",
               "tags" : [
-                "CocoaPod"
+
               ]
             },
             {

@@ -81,7 +81,11 @@ class Tokenizer {
             case ")":
                 return try scopeEndToken()
             case "'":
-                return .tag(name(endingWith: "'"))
+                if let scopeStart = openScopes.last, case let .scopeStart(scope, name: _) = scopeStart, scope == "import_decl" {
+                    return .type([name(endingWith: "'")])
+                } else {
+                    return .tag(name(endingWith: "'"))
+                }
             case "[":
                 return .tag(name(endingWith: "]", oneTimeExceptionForEvery: "["))
             case "<":
@@ -172,8 +176,6 @@ class Tokenizer {
                 }
             }
             return nil
-        case "extension_decl":
-            na = namePrefix + "extension_decl." +  UUID().uuidString
         default:
             break
         }
