@@ -176,6 +176,8 @@ class Tokenizer {
                 }
             }
             return nil
+        case "extension_decl": // i have forgotten, why I did this; anyway if i remove it, some strange things happen in SKArchitekkt; investigate further if there is time in the future
+            na = namePrefix + "extension_decl_" +  UUID().uuidString
         default:
             break
         }
