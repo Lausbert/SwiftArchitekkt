@@ -1,6 +1,0 @@
-framework module SwiftArchitekkt {
-  umbrella header "SwiftArchitekkt-umbrella.h"
-
-  export *
-  module * { export * }
-}
