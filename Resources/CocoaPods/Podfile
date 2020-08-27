@@ -1,0 +1,8 @@
+source 'https://github.com/Lausbert/PodSpecsArchitekkt.git'
+
+target 'CocoaPods' do
+  use_frameworks!
+  
+  pod 'CocoaPod'
+  
+end

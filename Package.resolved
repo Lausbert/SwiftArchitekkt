@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CoreArchitekkt",
+        "repositoryURL": "https://github.com/Lausbert/CoreArchitekkt",
+        "state": {
+          "branch": null,
+          "revision": "46f622ee064562690e0198cf94ee51892ef6175b",
+          "version": "0.1.71"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
