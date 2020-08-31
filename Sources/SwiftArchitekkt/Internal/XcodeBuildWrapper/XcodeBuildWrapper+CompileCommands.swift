@@ -51,8 +51,10 @@ extension XcodeBuildWrapper {
                 return nil
             }
             let moduleName = combinedResult.results[2].string
-            // i hate people who name their classes, variables, functions, files or any other stuff $$$$$$SpacePlaceholder$$$$$$, lol
             let compileCommands = combinedResult.results[1].string
+                // fix weird escaped equal sign in build logs > enforce-exclusivity\\=checked and so on
+                .replacingOccurrences(of: "\\=", with: "=")
+                // i hate people who name their classes, variables, functions, files or any other stuff $$$$$$SpacePlaceholder$$$$$$, lol
                 .replacingOccurrences(of: "\\ ", with: "$$$$$$SpacePlaceholder$$$$$$")
                 .components(separatedBy: " ")
                 .map { $0.replacingOccurrences(of: "$$$$$$SpacePlaceholder$$$$$$", with: " ") }

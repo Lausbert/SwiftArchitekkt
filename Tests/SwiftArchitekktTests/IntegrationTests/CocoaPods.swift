@@ -351,6 +351,7 @@ extension IntegrationTest {
                   "scope" : "constructor_decl",
                   "tags" : [
                     "access=public",
+                    "captures=(<generic> )",
                     "designated",
                     "interface"
                   ]

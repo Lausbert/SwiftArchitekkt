@@ -18,7 +18,7 @@ class IntegrationTest: XCTestCase {
         let expectation = XCTestExpectation(description: "expectation fullfilled")
         let swiftGraphRequestHandler = SwiftGraphRequestHandler()
         guard let firstAccessRequirement = swiftGraphRequestHandler.consistentUrlRequirements?[0] else { fatalError("No access requirement defined for swift graph request handler.") }
-        guard let firstAccessibleUrl = URL(string: "/Applications/Xcode.app/") else { fatalError("Could not initialize accessible url.") }
+        guard let firstAccessibleUrl = URL(string: "/Applications/Xcode-beta.app/") else { fatalError("Could not initialize accessible url.") }
         let graphRequest = GraphRequest(url: url, options: options, consistentlyRequiredUrls: [firstAccessRequirement: firstAccessibleUrl])
         swiftGraphRequestHandler.handle(graphRequest: graphRequest, statusUpdateHandler: { (statusUpdate) in
             switch statusUpdate {
