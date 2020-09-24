@@ -86,11 +86,11 @@ public class SwiftGraphRequestHandler: GraphRequestHandler {
     static let queue = DispatchQueue.global(qos: .utility)
 
     enum LastProcedure: String, CaseIterable {
-        case evaluatingConsistentUrlRequirements
-        case updatingGraphRequest
-        case generatingCompileCommands
-        case generatingAST
-        case generatingGraph
+        case evaluatingConsistentUrlRequirements = "Checking for Xcode url."
+        case updatingGraphRequest = "Checking for missing parameters."
+        case generatingCompileCommands = "Generating compile commands."
+        case generatingAST = "Building abstract syntax tree."
+        case generatingGraph = "Building graph."
     }
 
     // MARK: - Private -
