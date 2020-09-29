@@ -18,7 +18,7 @@ extension XcodeBuildWrapper {
         while let mostUrgentMissingParamter = XcodeBuildWrapper.mostUrgentMissingParameter(for: updatedGraphRequest) {
             do {
                 let parameterOptions = try XcodeBuildWrapper.get(parameter: mostUrgentMissingParamter, for: updatedGraphRequest, xcodeUrl: xcodeUrl)
-                if let options = parameterOptions[mostUrgentMissingParamter.rawValue], options.count == 1, let singleOption = options.first {
+                if parameterOptions.1.count == 1, let singleOption = parameterOptions.1.first {
                     updatedGraphRequest = GraphRequest(url: updatedGraphRequest.url, options: updatedGraphRequest.options.merging([mostUrgentMissingParamter.rawValue: singleOption], uniquingKeysWith: { $1 }), consistentlyRequiredUrls: updatedGraphRequest.consistentlyRequiredUrls)
                 } else {
                     completionHandler(GraphRequest.Result.decisionNeeded(updatedGraphRequest, parameterOptions))
@@ -43,7 +43,7 @@ extension XcodeBuildWrapper {
         return nil
     }
 
-    private static func get(parameter: ParameterEnum, for graphRequest: GraphRequest, xcodeUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
+    private static func get(parameter: ParameterEnum, for graphRequest: GraphRequest, xcodeUrl: URL) throws -> (GraphRequest.Parameter, [GraphRequest.Option]) {
         let xcodeBuildUrl = xcodeUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
 
         switch parameter {
@@ -52,7 +52,7 @@ extension XcodeBuildWrapper {
         }
     }
 
-    private static func getSchemes(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [GraphRequest.Parameter: [GraphRequest.Option]] {
+    private static func getSchemes(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> (GraphRequest.Parameter, [GraphRequest.Option]) {
         guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
         guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: ["-list", fileExtension.xcodeBuildCommand, graphRequest.url.absoluteString]) else { throw ErrorEnum.couldNotProperlyRunXcodeBuild }
 
@@ -65,7 +65,7 @@ extension XcodeBuildWrapper {
             .components(separatedBy: "\n")
             .map({ $0.trimmingCharacters(in: .whitespacesAndNewlines) })
             else { throw ErrorEnum.couldNotFindAnySchemes(xcodeBuildResults) }
-        return ["scheme": schemes]
+        return ("scheme", schemes)
     }
 
 }
