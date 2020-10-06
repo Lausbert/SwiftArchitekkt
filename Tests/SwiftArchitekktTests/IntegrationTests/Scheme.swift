@@ -65,13 +65,10 @@ extension IntegrationTest {
                                                     case .success, .failure:
                                                         XCTFail()
                                                     case .decisionNeeded(_, let options):
-                                                        if let schemes = options["scheme"] {
-                                                            XCTAssert(schemes.contains("FirstScheme"))
-                                                            XCTAssert(schemes.contains("SecondScheme"))
-                                                            XCTAssert(schemes.count == 2)
-                                                        } else {
-                                                            XCTFail()
-                                                        }
+                                                        XCTAssertEqual(options.0, "scheme")
+                                                        XCTAssert(options.1.contains("FirstScheme"))
+                                                        XCTAssert(options.1.contains("SecondScheme"))
+                                                        XCTAssert(options.1.count == 2)
                                                         expectation.fulfill()
                                                     }
         })
@@ -86,13 +83,10 @@ extension IntegrationTest {
                                                     case .success, .failure:
                                                         XCTFail()
                                                     case .decisionNeeded(_, let options):
-                                                        if let schemes = options["scheme"] {
-                                                            XCTAssert(schemes.contains("First Scheme"))
-                                                            XCTAssert(schemes.contains("Second Scheme"))
-                                                            XCTAssert(schemes.count == 2)
-                                                        } else {
-                                                            XCTFail()
-                                                        }
+                                                        XCTAssertEqual(options.0, "scheme")
+                                                        XCTAssert(options.1.contains("First Scheme"))
+                                                        XCTAssert(options.1.contains("Second Scheme"))
+                                                        XCTAssert(options.1.count == 2)
                                                         expectation.fulfill()
                                                     }
         })
