@@ -25,7 +25,7 @@ struct SwiftCompilerWrapper {
         }
     }
 
-    static func generateAsts(for compileCommands: [(ModuleName, [CompileCommand])], graphRequest: GraphRequest, xcodeUrl: URL, completionHandler: (GraphRequest.Result) -> Void) -> [(ModuleName, Ast)]? {
+    static func generateAsts(for compileCommands: [(ModuleName, [CompileCommand])], nodeRequest: NodeRequest, xcodeUrl: URL, completionHandler: (NodeRequest.Result) -> Void) -> [(ModuleName, Ast)]? {
         do {
             let swiftUrl = xcodeUrl.appendingPathComponent("Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc/")
             return try compileCommands.map { compileCommand in
@@ -37,7 +37,7 @@ struct SwiftCompilerWrapper {
                 return (compileCommand.0, ast)
             }
         } catch {
-            completionHandler(GraphRequest.Result.failure(graphRequest, error))
+            completionHandler(NodeRequest.Result.failure(nodeRequest, error))
             return nil
         }
     }

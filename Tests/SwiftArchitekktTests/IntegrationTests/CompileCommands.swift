@@ -7,10 +7,10 @@ import CoreArchitekkt
 extension IntegrationTest {
 
     func testMacOSCompileCommandsForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "MacOSSDK",
+        testNodeRequestHandlingForRessourceFile(withName: "MacOSSDK",
                                                  pathExtension: "xcodeproj",
                                                  options: ["scheme": "MacOSSDK"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingCompileCommands,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingCompileCommands,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {
                                                         XCTFail()
@@ -22,10 +22,10 @@ extension IntegrationTest {
     }
 
     func testIOSCompileCommandsForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "iOSSDK",
+        testNodeRequestHandlingForRessourceFile(withName: "iOSSDK",
                                                  pathExtension: "xcodeproj",
                                                  options: ["scheme": "iOSSDK"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingCompileCommands,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingCompileCommands,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {
                                                         XCTFail()

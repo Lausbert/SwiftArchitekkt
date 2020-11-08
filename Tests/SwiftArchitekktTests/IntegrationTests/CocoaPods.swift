@@ -7,16 +7,16 @@ import CoreArchitekkt
 extension IntegrationTest {
 
     func testCocoaPodsForWorkspace() {
-        testGraphRequestHandlingForRessourceFile(withName: "CocoaPods",
+        testNodeRequestHandlingForRessourceFile(withName: "CocoaPods",
                                                  pathExtension: "xcworkspace",
                                                  options: ["scheme": "CocoaPods"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingGraph,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingNode,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {
                                                         XCTFail()
                                                         return
                                                     }
-                                                    let graphString = """
+                                                    let nodeString = """
 {
   "arcs" : [
 
@@ -3229,7 +3229,7 @@ extension IntegrationTest {
   ]
 }
 """
-                                                    XCTStringMatchesPattern(string: additionalInformation, pattern: graphString)
+                                                    XCTStringMatchesPattern(string: additionalInformation, pattern: nodeString)
                                                     expectation.fulfill()
         })
     }

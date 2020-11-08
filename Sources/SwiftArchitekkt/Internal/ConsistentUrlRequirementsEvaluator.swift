@@ -23,11 +23,11 @@ struct ConsistentUrlRequirementsEvaluator {
         ConsistentUrlRequirement(key: "org.cocoapods.SwiftArchitekkt.Xcode.app", hint: "Choose your Xcode.app first. It is probably located in your applications folder. You can change it later in your preferences.", fileName: "Xcode", fileType: "app")
     ]
 
-    static func getXcodeUrl(for graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> URL? {
-        if let url = graphRequest.consistentlyRequiredUrls[consistentUrlRequirements[0]] {
+    static func getXcodeUrl(for nodeRequest: NodeRequest, completionHandler: (NodeRequest.Result) -> Void) -> URL? {
+        if let url = nodeRequest.consistentlyRequiredUrls[consistentUrlRequirements[0]] {
             return url
         } else {
-            completionHandler(.failure(graphRequest, ErrorEnum.unexpectedlyCouldNotFindXcodeUrl))
+            completionHandler(.failure(nodeRequest, ErrorEnum.unexpectedlyCouldNotFindXcodeUrl))
             return nil
         }
     }

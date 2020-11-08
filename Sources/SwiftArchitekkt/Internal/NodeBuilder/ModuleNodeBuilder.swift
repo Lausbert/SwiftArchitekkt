@@ -3,7 +3,7 @@
 import Foundation
 import CoreArchitekkt
 
-class ModuleGraphBuilder {
+class ModuleNodeBuilder {
 
     // MARK: - Internal -
 
@@ -16,7 +16,7 @@ class ModuleGraphBuilder {
         tokenizer = Tokenizer(ast: ast.1)
     }
 
-    func generateGraph() throws -> (Node, [UUID: NonChildNamedNode]) {
+    func generateNode() throws -> (Node, [UUID: NonChildNamedNode]) {
         while let token = try tokenizer.nextToken() {
             switch token {
             case let .scopeStart(scope, name):
@@ -31,7 +31,7 @@ class ModuleGraphBuilder {
             }
         }
         let moduleNode = Node(scope: "module", name: moduleName)
-        moduleNode.set(children: graph)
+        moduleNode.set(children: nodes)
         return (moduleNode, getNonChildNamedNodes())
     }
 
@@ -41,7 +41,7 @@ class ModuleGraphBuilder {
     private let tokenizer: Tokenizer
 
     private var openNodes: [Node] = []
-    private var graph: [Node] = []
+    private var nodes: [Node] = []
     private var childNodes: Set<String> = [] // track which nodes are already children
     private var namedNodes: [String: Node] = [:]
 
@@ -75,7 +75,7 @@ class ModuleGraphBuilder {
         if let lastOpenNode = openNodes.last {
             lastOpenNode.add(child: node)
         } else {
-            graph.append(node)
+            nodes.append(node)
         }
 
         openNodes.append(node)

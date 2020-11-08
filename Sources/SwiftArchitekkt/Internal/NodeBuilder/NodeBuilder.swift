@@ -3,21 +3,21 @@
 import Foundation
 import CoreArchitekkt
 
-class GraphBuilder {
+class NodeBuilder {
 
     // MARK: - Internal -
 
     typealias ModuleName = String
     typealias Ast = String
 
-    static func generateGraph(for asts: [(ModuleName, Ast)], graphRequest: GraphRequest, completionHandler: (GraphRequest.Result) -> Void) -> Node? {
+    static func generateNode(for asts: [(ModuleName, Ast)], nodeRequest: NodeRequest, completionHandler: (NodeRequest.Result) -> Void) -> Node? {
         do {
 
             // At first get all module root nodes and all named nodes which are also children of these root nodes. Named nodes which are also children of a root node are declared in this module.
             var moduleNodes: [Node] = []
             var nonChildNamedNodes: [UUID: Node] = [:]
             for ast in asts {
-                let (moduleNode, moduleNonChildNamedNodes) = try ModuleGraphBuilder(ast: ast).generateGraph()
+                let (moduleNode, moduleNonChildNamedNodes) = try ModuleNodeBuilder(ast: ast).generateNode()
                 nonChildNamedNodes.merge(moduleNonChildNamedNodes) { $1 }
                 moduleNodes.append(moduleNode)
             }
@@ -49,7 +49,7 @@ class GraphBuilder {
             return rootNode
 
         } catch {
-            completionHandler(GraphRequest.Result.failure(graphRequest, error))
+            completionHandler(NodeRequest.Result.failure(nodeRequest, error))
             return nil
         }
     }

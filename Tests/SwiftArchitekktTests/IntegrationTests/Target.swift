@@ -7,10 +7,10 @@ import CoreArchitekkt
 extension IntegrationTest {
 
     func testNoTargetForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "NoTarget",
+        testNodeRequestHandlingForRessourceFile(withName: "NoTarget",
                                                  pathExtension: "xcodeproj",
                                                  options: ["scheme": "AnyScheme"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingCompileCommands,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingCompileCommands,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
                                                     case .success, .decisionNeeded:
@@ -26,10 +26,10 @@ extension IntegrationTest {
     }
 
     func testSingleTargetForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "SingleTarget",
+        testNodeRequestHandlingForRessourceFile(withName: "SingleTarget",
                                                  pathExtension: "xcodeproj",
                                                  options: ["scheme": "SingleTarget"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingCompileCommands,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingCompileCommands,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {
                                                         XCTFail()
@@ -41,10 +41,10 @@ extension IntegrationTest {
     }
 
     func testMultipleTargetsForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "MultipleTargets",
+        testNodeRequestHandlingForRessourceFile(withName: "MultipleTargets",
                                                  pathExtension: "xcodeproj",
                                                  options: ["scheme": "MultipleTargets"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingCompileCommands,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingCompileCommands,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {
                                                         XCTFail()

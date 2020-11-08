@@ -7,9 +7,9 @@ import CoreArchitekkt
 extension IntegrationTest {
 
     func testWrongFileExtension() {
-        testGraphRequestHandlingForRessourceFile(withName: "WrongFileExtension",
+        testNodeRequestHandlingForRessourceFile(withName: "WrongFileExtension",
                                                  pathExtension: "test",
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.updatingNodeRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
                                                     case .success, .decisionNeeded:

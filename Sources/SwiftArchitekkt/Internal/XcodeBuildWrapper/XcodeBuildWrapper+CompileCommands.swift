@@ -10,29 +10,29 @@ extension XcodeBuildWrapper {
     typealias ModuleName = String
     typealias CompileCommand = String
 
-    static func getCompileCommands(for graphRequest: GraphRequest, xcodeUrl: URL, completionHandler: (GraphRequest.Result) -> Void) -> [(ModuleName, [CompileCommand])]? {
+    static func getCompileCommands(for nodeRequest: NodeRequest, xcodeUrl: URL, completionHandler: (NodeRequest.Result) -> Void) -> [(ModuleName, [CompileCommand])]? {
         do {
-            return try getCompileCommands(for: graphRequest, xcodeUrl: xcodeUrl)
+            return try getCompileCommands(for: nodeRequest, xcodeUrl: xcodeUrl)
         } catch {
-            completionHandler(GraphRequest.Result.failure(graphRequest, error))
+            completionHandler(NodeRequest.Result.failure(nodeRequest, error))
             return nil
         }
     }
 
     // MARK: - Private -
 
-    private static func getCompileCommands(for graphRequest: GraphRequest, xcodeUrl: URL) throws -> [(ModuleName, [CompileCommand])] {
+    private static func getCompileCommands(for nodeRequest: NodeRequest, xcodeUrl: URL) throws -> [(ModuleName, [CompileCommand])] {
         let xcodeBuildUrl = xcodeUrl.appendingPathComponent("Contents/Developer/usr/bin/xcodebuild/")
-        let initialCompileCommands = try getInitialCompileCommands(for: graphRequest, xcodeBuildUrl: xcodeBuildUrl)
+        let initialCompileCommands = try getInitialCompileCommands(for: nodeRequest, xcodeBuildUrl: xcodeBuildUrl)
         let updatedCompileCommands = update(compileCommands: initialCompileCommands)
         return updatedCompileCommands
     }
 
-    private static func getInitialCompileCommands(for graphRequest: GraphRequest, xcodeBuildUrl: URL) throws -> [(ModuleName, [CompileCommand])] {
-        guard let fileExtension = SwiftFileExtension(rawValue: graphRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(graphRequest.url.pathExtension) }
-        guard let scheme = graphRequest.options[ParameterEnum.scheme.rawValue] else {
-            throw ErrorEnum.couldNotFindAnySchemes(graphRequest.options.description) }
-        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: [fileExtension.xcodeBuildCommand, graphRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else {
+    private static func getInitialCompileCommands(for nodeRequest: NodeRequest, xcodeBuildUrl: URL) throws -> [(ModuleName, [CompileCommand])] {
+        guard let fileExtension = SwiftFileExtension(rawValue: nodeRequest.url.pathExtension) else { throw ErrorEnum.couldNotHandleFileExtension(nodeRequest.url.pathExtension) }
+        guard let scheme = nodeRequest.options[ParameterEnum.scheme.rawValue] else {
+            throw ErrorEnum.couldNotFindAnySchemes(nodeRequest.options.description) }
+        guard let xcodeBuildResults = Shell.launch(path: xcodeBuildUrl.absoluteString, arguments: [fileExtension.xcodeBuildCommand, nodeRequest.url.absoluteString, "-scheme", scheme, "-allowProvisioningUpdates", "clean", "build"]) else {
             throw ErrorEnum.couldNotProperlyRunXcodeBuild
         }
         let compileCommandsRegex = StaticString("CompileSwiftSources normal ([^ ]+) com.apple.xcode.tools.swift.compiler [\\s\\S]*?/(swiftc[^\\n]* -module-name +([^ ]+) +[^\\n]*)")

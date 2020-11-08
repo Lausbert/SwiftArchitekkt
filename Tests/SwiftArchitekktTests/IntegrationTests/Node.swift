@@ -6,17 +6,17 @@ import CoreArchitekkt
 
 extension IntegrationTest {
 
-    func testMacOSGraphForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "MacOSSDK",
+    func testMacOSNodeForProject() {
+        testNodeRequestHandlingForRessourceFile(withName: "MacOSSDK",
                                                  pathExtension: "xcodeproj",
                                                  options: ["scheme": "MacOSSDK"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingGraph,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingNode,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {
                                                         XCTFail()
                                                         return
                                                     }
-                                                    let graphString = """
+                                                    let nodeString = """
 {
   "arcs" : [
 
@@ -850,22 +850,22 @@ extension IntegrationTest {
   ]
 }
 """
-                                                    XCTStringMatchesPattern(string: additionalInformation, pattern: graphString)
+                                                    XCTStringMatchesPattern(string: additionalInformation, pattern: nodeString)
                                                     expectation.fulfill()
         })
     }
 
-    func testIOSGraphForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "iOSSDK",
+    func testIOSNodeForProject() {
+        testNodeRequestHandlingForRessourceFile(withName: "iOSSDK",
                                                  pathExtension: "xcodeproj",
                                                  options: ["scheme": "iOSSDK"],
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.generatingGraph,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingNode,
                                                  statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
                                                     guard let additionalInformation = additionalInformation else {
                                                         XCTFail()
                                                         return
                                                     }
-                                                    let graphString = """
+                                                    let nodeString = """
 {
   "arcs" : [
 
@@ -2642,7 +2642,7 @@ extension IntegrationTest {
   ]
 }
 """
-                                                    XCTStringMatchesPattern(string: additionalInformation, pattern: graphString)
+                                                    XCTStringMatchesPattern(string: additionalInformation, pattern: nodeString)
                                                     expectation.fulfill()
         })
     }

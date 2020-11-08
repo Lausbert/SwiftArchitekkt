@@ -7,9 +7,9 @@ import CoreArchitekkt
 extension IntegrationTest {
 
     func testSchemeForMissingProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "MissingProject",
+        testNodeRequestHandlingForRessourceFile(withName: "MissingProject",
                                                  pathExtension: "xcodeproj",
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.updatingNodeRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
                                                     case .success, .decisionNeeded:
@@ -25,9 +25,9 @@ extension IntegrationTest {
     }
 
     func testNoSchemeForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "NoScheme",
+        testNodeRequestHandlingForRessourceFile(withName: "NoScheme",
                                                  pathExtension: "xcodeproj",
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.updatingNodeRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
                                                     case .success, .decisionNeeded:
@@ -43,11 +43,11 @@ extension IntegrationTest {
     }
 
     func testSingleSchemeForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "SingleScheme",
+        testNodeRequestHandlingForRessourceFile(withName: "SingleScheme",
                                                  pathExtension: "xcodeproj",
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
-                                                 statusUpdateValidationHandler: { (graphRequest, _, expectation) in
-                                                    if let scheme = graphRequest.options["scheme"] {
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.updatingNodeRequest,
+                                                 statusUpdateValidationHandler: { (nodeRequest, _, expectation) in
+                                                    if let scheme = nodeRequest.options["scheme"] {
                                                         XCTAssert(scheme == "SingleScheme")
                                                     } else {
                                                         XCTFail()
@@ -57,9 +57,9 @@ extension IntegrationTest {
     }
 
     func testMultipleSchemesForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "MultipleSchemes",
+        testNodeRequestHandlingForRessourceFile(withName: "MultipleSchemes",
                                                  pathExtension: "xcodeproj",
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.updatingNodeRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
                                                     case .success, .failure:
@@ -75,9 +75,9 @@ extension IntegrationTest {
     }
 
     func testMultipleSchemesWithWhitespaceForProject() {
-        testGraphRequestHandlingForRessourceFile(withName: "MultipleSchemesWithWhitespace",
+        testNodeRequestHandlingForRessourceFile(withName: "MultipleSchemesWithWhitespace",
                                                  pathExtension: "xcodeproj",
-                                                 lastProcedure: SwiftGraphRequestHandler.LastProcedure.updatingGraphRequest,
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.updatingNodeRequest,
                                                  completionValidationHandler: { (result, expectation) in
                                                     switch result {
                                                     case .success, .failure:
