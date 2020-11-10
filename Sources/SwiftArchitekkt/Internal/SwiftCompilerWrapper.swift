@@ -10,6 +10,7 @@ struct SwiftCompilerWrapper {
     struct Result {
         let moduleName: String
         let ast: String
+        let warning: String?
     }
 
     enum ErrorEnum: LocalizedError, Equatable {
@@ -23,6 +24,7 @@ struct SwiftCompilerWrapper {
         }
     }
 
+
     static func generateSwiftCompilerResults(for xcodeBuildResults: [XcodeBuildWrapper.Result], nodeRequest: NodeRequest, xcodeUrl: URL, completionHandler: (NodeRequest.Result) -> Void) -> [Result]? {
         do {
             let swiftUrl = xcodeUrl.appendingPathComponent("Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc/")
@@ -31,7 +33,11 @@ struct SwiftCompilerWrapper {
                 if ast.first == "\n" {
                     ast.removeFirst()
                 }
-                return Result(moduleName: xcodeBuildResult.moduleName, ast: ast)
+                if ast.prefix(12) == "(source_file" && ast.suffix(1) == ")" {
+                    return Result(moduleName: xcodeBuildResult.moduleName, ast: ast, warning: nil)
+                } else {
+                    return Result(moduleName: xcodeBuildResult.moduleName, ast: "", warning: "AST for \(xcodeBuildResult.moduleName) has invalid format: \(ast)")
+                }
             }
         } catch {
             completionHandler(NodeRequest.Result.failure(nodeRequest, error))

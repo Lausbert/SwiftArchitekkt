@@ -6,14 +6,14 @@ import CoreArchitekkt
 
 extension IntegrationTest {
 
-//    func testSnapKitCocoaPodsForWorkspace() {
-//        testNodeRequestHandlingForRessourceFile(withName: "SnapKitCocoaPods",
-//                                                 pathExtension: "xcworkspace",
-//                                                 options: ["scheme": "SnapKitCocoaPods"],
-//                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingNode,
-//                                                 completionValidationHandler: { (result, expectation) in
-//                                                    print(result)
-//                                                 }
-//        )
-//    }
+    func testSnapKitCocoaPodsForWorkspace() {
+        testNodeRequestHandlingForRessourceFile(withName: "SnapKitCocoaPods",
+                                                 pathExtension: "xcworkspace",
+                                                 options: ["scheme": "SnapKitCocoaPods"],
+                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingNode,
+                                                 statusUpdateValidationHandler: { (_, additionalInformation, expectation) in
+                                                    print(additionalInformation)
+                                                 }
+        )
+    }
 }

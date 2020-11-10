@@ -66,7 +66,7 @@ public class SwiftNodeRequestHandler: NodeRequestHandler {
             #endif
 
             statusUpdateHandler(NodeRequest.StatusUpdate.willStartProcedure(updatedNodeRequest, LastProcedure.generatingNode.rawValue))
-            let nodeBuilderResult = NodeBuilder.generateNodeBuilderResult(for: swiftCompilerResults)
+            guard let nodeBuilderResult = NodeBuilder.generateNodeBuilderResult(for: swiftCompilerResults, nodeRequest: updatedNodeRequest, completionHandler: completionHandler) else { return }
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
             statusUpdateHandler(NodeRequest.StatusUpdate.didFinishProcedure(updatedNodeRequest, LastProcedure.generatingNode.rawValue, Optional(optionalData: try? encoder.encode(nodeBuilderResult.node), encoding: String.Encoding.utf8) ?? nil))
@@ -76,7 +76,8 @@ public class SwiftNodeRequestHandler: NodeRequestHandler {
             }
             #endif
 
-            completionHandler(.success(updatedNodeRequest, nodeBuilderResult.node, nodeBuilderResult.warnings))
+            let warnings = swiftCompilerResults.compactMap { $0.warning }
+            completionHandler(.success(updatedNodeRequest, nodeBuilderResult.node, warnings))
 
         }
     }
