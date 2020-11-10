@@ -6,17 +6,18 @@ import CoreArchitekkt
 class ModuleNodeBuilder {
 
     // MARK: - Internal -
-
-    typealias ModuleName = String
-    typealias Ast = String
-    typealias NonChildNamedNode = Node
-
-    init(ast: (ModuleName, Ast)) {
-        moduleName = ast.0
-        tokenizer = Tokenizer(ast: ast.1)
+    
+    struct Result {
+        let node: Node
+        let nonChildNamedNodes: [UUID: Node]
     }
 
-    func generateNode() throws -> (Node, [UUID: NonChildNamedNode]) {
+    init(swiftCompilerResult: SwiftCompilerWrapper.Result) {
+        moduleName = swiftCompilerResult.moduleName
+        tokenizer = Tokenizer(ast: swiftCompilerResult.ast)
+    }
+
+    func generateNode() throws -> Result {
         while let token = try tokenizer.nextToken() {
             switch token {
             case let .scopeStart(scope, name):
@@ -32,12 +33,12 @@ class ModuleNodeBuilder {
         }
         let moduleNode = Node(scope: "module", name: moduleName)
         moduleNode.set(children: nodes)
-        return (moduleNode, getNonChildNamedNodes())
+        return Result(node: moduleNode, nonChildNamedNodes: getNonChildNamedNodes())
     }
 
     // MARK: - Private -
 
-    private let moduleName: ModuleName
+    private let moduleName: String
     private let tokenizer: Tokenizer
 
     private var openNodes: [Node] = []
@@ -45,7 +46,7 @@ class ModuleNodeBuilder {
     private var childNodes: Set<String> = [] // track which nodes are already children
     private var namedNodes: [String: Node] = [:]
 
-    private func getNonChildNamedNodes() -> [UUID: NonChildNamedNode] {
+    private func getNonChildNamedNodes() -> [UUID: Node] {
         Dictionary(uniqueKeysWithValues: namedNodes.values.compactMap({ childNodes.contains($0.name ?? "") ? nil : ($0.id, $0) }))
     }
 

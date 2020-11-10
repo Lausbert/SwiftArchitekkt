@@ -6,35 +6,32 @@ import CoreArchitekkt
 struct SwiftCompilerWrapper {
 
     // MARK: - Internal -
-
-    typealias ModuleName = String
-    typealias CompileCommand = String
-    typealias Ast = String
+    
+    struct Result {
+        let moduleName: String
+        let ast: String
+    }
 
     enum ErrorEnum: LocalizedError, Equatable {
         case couldNotProperlyRunSwiftCompiler
-        case invalidAstFormat(String)
 
         var errorDescription: String? {
             switch self {
             case .couldNotProperlyRunSwiftCompiler:
                 return "Could not properly run swift compiler."
-            case .invalidAstFormat(let ast):
-                return "AST has invalid format: \(ast)"
             }
         }
     }
 
-    static func generateAsts(for compileCommands: [(ModuleName, [CompileCommand])], nodeRequest: NodeRequest, xcodeUrl: URL, completionHandler: (NodeRequest.Result) -> Void) -> [(ModuleName, Ast)]? {
+    static func generateSwiftCompilerResults(for xcodeBuildResults: [XcodeBuildWrapper.Result], nodeRequest: NodeRequest, xcodeUrl: URL, completionHandler: (NodeRequest.Result) -> Void) -> [Result]? {
         do {
             let swiftUrl = xcodeUrl.appendingPathComponent("Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc/")
-            return try compileCommands.map { compileCommand in
-                var ast = try generateAst(for: compileCommand.1, swiftUrl: swiftUrl)
+            return try xcodeBuildResults.map { xcodeBuildResult in
+                var ast = try generateAst(for: xcodeBuildResult.compileCommands, swiftUrl: swiftUrl)
                 if ast.first == "\n" {
                     ast.removeFirst()
                 }
-                guard ast.prefix(12) == "(source_file" && ast.suffix(1) == ")" else { throw ErrorEnum.invalidAstFormat(ast) }
-                return (compileCommand.0, ast)
+                return Result(moduleName: xcodeBuildResult.moduleName, ast: ast)
             }
         } catch {
             completionHandler(NodeRequest.Result.failure(nodeRequest, error))

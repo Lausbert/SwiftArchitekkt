@@ -6,25 +6,6 @@ import CoreArchitekkt
 
 extension IntegrationTest {
 
-    func testNoTargetForProject() {
-        testNodeRequestHandlingForRessourceFile(withName: "NoTarget",
-                                                 pathExtension: "xcodeproj",
-                                                 options: ["scheme": "AnyScheme"],
-                                                 lastProcedure: SwiftNodeRequestHandler.LastProcedure.generatingCompileCommands,
-                                                 completionValidationHandler: { (result, expectation) in
-                                                    switch result {
-                                                    case .success, .decisionNeeded:
-                                                        XCTFail()
-                                                    case .failure(_, let error):
-                                                        if let error = error as? XcodeBuildWrapper.ErrorEnum, case XcodeBuildWrapper.ErrorEnum.couldNotFindAnyCompileCommands = error {
-                                                            expectation.fulfill()
-                                                        } else {
-                                                            XCTFail()
-                                                        }
-                                                    }
-        })
-    }
-
     func testSingleTargetForProject() {
         testNodeRequestHandlingForRessourceFile(withName: "SingleTarget",
                                                  pathExtension: "xcodeproj",

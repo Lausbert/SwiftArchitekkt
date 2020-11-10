@@ -48,8 +48,8 @@ public class SwiftNodeRequestHandler: NodeRequestHandler {
             #endif
 
             statusUpdateHandler(NodeRequest.StatusUpdate.willStartProcedure(updatedNodeRequest, LastProcedure.generatingCompileCommands.rawValue))
-            guard let compileCommands = XcodeBuildWrapper.getCompileCommands(for: updatedNodeRequest, xcodeUrl: xcodeUrl, completionHandler: completionHandler) else { return }
-            statusUpdateHandler(NodeRequest.StatusUpdate.didFinishProcedure(updatedNodeRequest, LastProcedure.generatingCompileCommands.rawValue, compileCommands.sorted(by: { $0.0 < $1.0 }).debugDescription))
+            guard let xcodeBuildResults = XcodeBuildWrapper.getXcodeBuildResults(for: updatedNodeRequest, xcodeUrl: xcodeUrl, completionHandler: completionHandler) else { return }
+            statusUpdateHandler(NodeRequest.StatusUpdate.didFinishProcedure(updatedNodeRequest, LastProcedure.generatingCompileCommands.rawValue, xcodeBuildResults.sorted(by: { $0.moduleName < $1.moduleName }).debugDescription))
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.generatingCompileCommands.rawValue, nodeRequest: updatedNodeRequest) {
                 return
@@ -57,8 +57,8 @@ public class SwiftNodeRequestHandler: NodeRequestHandler {
             #endif
 
             statusUpdateHandler(NodeRequest.StatusUpdate.willStartProcedure(updatedNodeRequest, LastProcedure.generatingAST.rawValue))
-            guard let asts = SwiftCompilerWrapper.generateAsts(for: compileCommands, nodeRequest: updatedNodeRequest, xcodeUrl: xcodeUrl, completionHandler: completionHandler) else { return }
-            statusUpdateHandler(NodeRequest.StatusUpdate.didFinishProcedure(updatedNodeRequest, LastProcedure.generatingAST.rawValue, asts.sorted(by: { $0.0 < $1.0 }).debugDescription))
+            guard let swiftCompilerResults = SwiftCompilerWrapper.generateSwiftCompilerResults(for: xcodeBuildResults, nodeRequest: updatedNodeRequest, xcodeUrl: xcodeUrl, completionHandler: completionHandler) else { return }
+            statusUpdateHandler(NodeRequest.StatusUpdate.didFinishProcedure(updatedNodeRequest, LastProcedure.generatingAST.rawValue, swiftCompilerResults.sorted(by: { $0.moduleName < $1.moduleName }).debugDescription))
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.generatingAST.rawValue, nodeRequest: updatedNodeRequest) {
                 return
@@ -66,17 +66,17 @@ public class SwiftNodeRequestHandler: NodeRequestHandler {
             #endif
 
             statusUpdateHandler(NodeRequest.StatusUpdate.willStartProcedure(updatedNodeRequest, LastProcedure.generatingNode.rawValue))
-            guard let rootNode = NodeBuilder.generateNode(for: asts, nodeRequest: updatedNodeRequest, completionHandler: completionHandler) else { return }
+            let nodeBuilderResult = NodeBuilder.generateNodeBuilderResult(for: swiftCompilerResults)
             let encoder = JSONEncoder()
             encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-            statusUpdateHandler(NodeRequest.StatusUpdate.didFinishProcedure(updatedNodeRequest, LastProcedure.generatingNode.rawValue, Optional(optionalData: try? encoder.encode(rootNode), encoding: String.Encoding.utf8) ?? nil))
+            statusUpdateHandler(NodeRequest.StatusUpdate.didFinishProcedure(updatedNodeRequest, LastProcedure.generatingNode.rawValue, Optional(optionalData: try? encoder.encode(nodeBuilderResult.node), encoding: String.Encoding.utf8) ?? nil))
             #if DEBUG
             if self.shouldStopAfter(procedure: LastProcedure.generatingNode.rawValue, nodeRequest: updatedNodeRequest) {
                 return
             }
             #endif
 
-            completionHandler(.success(updatedNodeRequest, rootNode))
+            completionHandler(.success(updatedNodeRequest, nodeBuilderResult.node, nodeBuilderResult.warnings))
 
         }
     }

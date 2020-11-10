@@ -27,6 +27,7 @@ struct XcodeBuildWrapper {
         case couldNotHandleFileExtension(String)
         case couldNotProperlyRunXcodeBuild
         case couldNotFindAnySchemes(String)
+        case buildFailed(String)
         case couldNotFindAnyCompileCommands(String)
         case couldNotFindTargetArchitecture(String)
 
@@ -38,6 +39,8 @@ struct XcodeBuildWrapper {
                 return "Could not properly run xcodebuild."
             case .couldNotFindAnySchemes(let description):
                 return "Could not find any schemes: \(description)"
+            case .buildFailed(let xcodeBuildResults):
+                return "Build failed: \(xcodeBuildResults)"
             case .couldNotFindAnyCompileCommands(let xcodeBuildResults):
                 return "Could not find any compile commands: \(xcodeBuildResults)"
             case .couldNotFindTargetArchitecture(let xcodeBuildResults):
