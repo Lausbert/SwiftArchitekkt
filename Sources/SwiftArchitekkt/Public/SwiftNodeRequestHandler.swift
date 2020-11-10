@@ -76,9 +76,10 @@ public class SwiftNodeRequestHandler: NodeRequestHandler {
             }
             #endif
 
+            statusUpdateHandler(NodeRequest.StatusUpdate.willStartProcedure(updatedNodeRequest, LastProcedure.finished.rawValue))
             let warnings = swiftCompilerResults.compactMap { $0.warning }
             completionHandler(.success(updatedNodeRequest, nodeBuilderResult.node, warnings))
-
+            statusUpdateHandler(NodeRequest.StatusUpdate.didFinishProcedure(updatedNodeRequest, LastProcedure.finished.rawValue, nil))
         }
     }
 
@@ -92,6 +93,7 @@ public class SwiftNodeRequestHandler: NodeRequestHandler {
         case generatingCompileCommands = "Generating compile commands."
         case generatingAST = "Building abstract syntax tree."
         case generatingNode = "Building graph."
+        case finished = "Build succeeded."
     }
 
     // MARK: - Private -
