@@ -308,6 +308,7 @@ class Tokenizer {
     private func typeNames(forTypeName na: String) -> [String] {
         let na = moveGenericParametersToTheEnd(inTypeName: na)
         let names = na.replacingOccurrences(of: "?", with: "")
+            .replacingOccurrences(of: ".Type", with: "")
             .replacingOccurrences(of: "[\\[\\]()<>,-]", with: " ", options: .regularExpression)
             .components(separatedBy: " ")
             .uniqued()
