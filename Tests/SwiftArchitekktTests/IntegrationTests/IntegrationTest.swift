@@ -18,7 +18,7 @@ class IntegrationTest: XCTestCase {
         let expectation = XCTestExpectation(description: "expectation fullfilled")
         let swiftNodeRequestHandler = SwiftNodeRequestHandler()
         guard let firstAccessRequirement = swiftNodeRequestHandler.consistentUrlRequirements?[0] else { fatalError("No access requirement defined for swift node request handler.") }
-        guard let firstAccessibleUrl = URL(string: "/Applications/Xcode-beta.app/") else { fatalError("Could not initialize accessible url.") }
+        guard let firstAccessibleUrl = URL(string: "/Applications/Xcode.app/") else { fatalError("Could not initialize accessible url.") }
         let nodeRequest = NodeRequest(url: url, options: options, consistentlyRequiredUrls: [firstAccessRequirement: firstAccessibleUrl])
         swiftNodeRequestHandler.handle(nodeRequest: nodeRequest, statusUpdateHandler: { (statusUpdate) in
             switch statusUpdate {
