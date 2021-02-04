@@ -12,7 +12,7 @@ extension IntegrationTest {
                                                  options: ["scheme": "SnapKitCocoaPods"],
                                                  lastProcedure: SwiftNodeRequestHandler.LastProcedure.finished,
                                                  completionValidationHandler: { (result, expectation) in
-                                                    if case let NodeRequest.Result.success(_, node, warnings) = result {
+                                                    if case let NodeRequest.Result.success(_, node, _, warnings) = result {
                                                         XCTAssertEqual(node.children.count, 2)
                                                         let snapKitNode = node.children[0]
                                                         XCTAssertEqual(snapKitNode.name, "SnapKit")
@@ -21,7 +21,7 @@ extension IntegrationTest {
                                                         XCTAssertEqual(SnapKitCocoaPodsNode.name, "SnapKitCocoaPods")
                                                         XCTAssertEqual(SnapKitCocoaPodsNode.children.count, 3)
                                                         XCTAssertEqual(warnings.count, 1)
-                                                        XCTStringMatchesPattern(string: warnings[0], pattern: "AST for SnapKit has invalid format: ASTScopeImpl: resorting to startingScope hack@@@")
+                                                        XCTStringMatchesPattern(string: warnings[0], pattern: "AST for SnapKit has invalid format@@@ASTScopeImpl: resorting to startingScope hack@@@")
                                                         expectation.fulfill()
                                                     } else {
                                                         XCTFail()

@@ -15,7 +15,7 @@ public class SwiftNodeRequestHandler: NodeRequestHandler {
     public var handableFileExtensions: [String] { return XcodeBuildWrapper.SwiftFileExtension.allCases.map { $0.rawValue } }
 
     public func handle(nodeRequest: NodeRequest, statusUpdateHandler: ((NodeRequest.StatusUpdate) -> Void)? = nil, completionHandler: @escaping (NodeRequest.Result) -> Void) {
-        SwiftNodeRequestHandler.queue.async {
+        SwiftNodeRequestHandler.queue.async { [self] in
 
             let statusUpdateHandler = DispatchQueue.main.asyncClosure(statusUpdateHandler)
             let completionHandler = DispatchQueue.main.asyncClosure({ (result: NodeRequest.Result) -> Void in
@@ -78,7 +78,7 @@ public class SwiftNodeRequestHandler: NodeRequestHandler {
 
             statusUpdateHandler(NodeRequest.StatusUpdate.willStartProcedure(updatedNodeRequest, LastProcedure.finished.rawValue))
             let warnings = swiftCompilerResults.compactMap { $0.warning }
-            completionHandler(.success(updatedNodeRequest, nodeBuilderResult.node, warnings))
+            completionHandler(.success(updatedNodeRequest, nodeBuilderResult.node, self.virtualTransformations, warnings))
             statusUpdateHandler(NodeRequest.StatusUpdate.didFinishProcedure(updatedNodeRequest, LastProcedure.finished.rawValue, nil))
         }
     }
@@ -97,6 +97,12 @@ public class SwiftNodeRequestHandler: NodeRequestHandler {
     }
 
     // MARK: - Private -
+    
+    private let virtualTransformations: [SecondOrderVirtualTransformation] = [
+        .flattenScope(scope: "root"),
+        .flattenScope(scope: "module"),
+        .flattenScope(scope: "source_file")
+    ]
 
     #if DEBUG
     private func shouldStopAfter(procedure: String, nodeRequest: NodeRequest) -> Bool {
