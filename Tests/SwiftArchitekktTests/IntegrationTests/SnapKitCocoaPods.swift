@@ -21,7 +21,7 @@ extension IntegrationTest {
                                                         XCTAssertEqual(SnapKitCocoaPodsNode.name, "SnapKitCocoaPods")
                                                         XCTAssertEqual(SnapKitCocoaPodsNode.children.count, 3)
                                                         XCTAssertEqual(warnings.count, 1)
-                                                        XCTStringMatchesPattern(string: warnings[0], pattern: "AST for SnapKit has invalid format@@@ASTScopeImpl: resorting to startingScope hack@@@")
+                                                        XCTStringMatchesPattern(string: warnings[0], pattern: "AST for SnapKit has invalid format@@@")
                                                         expectation.fulfill()
                                                     } else {
                                                         XCTFail()

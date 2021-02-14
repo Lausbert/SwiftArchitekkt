@@ -36,7 +36,10 @@ struct SwiftCompilerWrapper {
                 if ast.prefix(12) == "(source_file" && ast.suffix(1) == ")" {
                     return Result(moduleName: xcodeBuildResult.moduleName, ast: ast, warning: nil)
                 } else {
-                    return Result(moduleName: xcodeBuildResult.moduleName, ast: "", warning: "AST for \(xcodeBuildResult.moduleName) has invalid format: \(ast)")
+                    let warning = ast.count > 22000 ?
+                        "AST for \(xcodeBuildResult.moduleName) has invalid format: \(ast.prefix(10000))\n\n[...]\n\n\(ast.suffix(10000))" :
+                        "AST for \(xcodeBuildResult.moduleName) has invalid format: \(ast)"
+                    return Result(moduleName: xcodeBuildResult.moduleName, ast: "", warning: warning)
                 }
             }
         } catch {
