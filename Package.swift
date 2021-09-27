@@ -23,13 +23,11 @@ let package = Package(
     targets: [
         .target(
             name: "SwiftArchitekkt",
-            dependencies: ["CoreArchitekkt"],
-            exclude: ["Resources"]
+            dependencies: ["CoreArchitekkt"]
         ),
         .testTarget(
             name: "SwiftArchitekktTests",
-            dependencies: ["SwiftArchitekkt"],
-            exclude: ["Resources"]
+            dependencies: ["SwiftArchitekkt"]
         ),
     ]
 )
