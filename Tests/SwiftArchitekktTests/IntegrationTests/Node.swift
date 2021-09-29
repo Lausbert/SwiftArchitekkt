@@ -865,6 +865,7 @@ extension IntegrationTest {
                                                         XCTFail()
                                                         return
                                                     }
+            print(additionalInformation)
                                                     let nodeString = """
 {
   "arcs" : [

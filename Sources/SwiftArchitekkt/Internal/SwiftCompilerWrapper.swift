@@ -33,7 +33,7 @@ struct SwiftCompilerWrapper {
                 if ast.first == "\n" {
                     ast.removeFirst()
                 }
-                if ast.prefix(12) == "(source_file" && ast.suffix(1) == ")" {
+                if ast.prefix(12) == "(source_file" && (ast.suffix(1) == ")" || ast.suffix(2) == ")\n" ) {
                     return Result(moduleName: xcodeBuildResult.moduleName, ast: ast, warning: nil)
                 } else {
                     let warning = ast.count > 22000 ?

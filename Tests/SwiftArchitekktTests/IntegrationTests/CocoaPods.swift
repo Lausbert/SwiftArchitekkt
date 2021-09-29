@@ -275,7 +275,6 @@ extension IntegrationTest {
               "name" : "TestProtocol",
               "scope" : "protocol",
               "tags" : [
-                "Self : TestProtocol",
                 "access=public",
                 "interface",
                 "non-resilient",
@@ -1792,7 +1791,6 @@ extension IntegrationTest {
                       "scope" : "accessor_decl",
                       "tags" : [
                         "access=internal",
-                        "final",
                         "get_for=testClass",
                         "implicit",
                         "interface"
@@ -2062,7 +2060,6 @@ extension IntegrationTest {
                       "scope" : "accessor_decl",
                       "tags" : [
                         "access=internal",
-                        "final",
                         "get_for=testStruct",
                         "implicit",
                         "interface"
@@ -2267,7 +2264,6 @@ extension IntegrationTest {
                       "scope" : "accessor_decl",
                       "tags" : [
                         "access=internal",
-                        "final",
                         "get_for=testEnum",
                         "implicit",
                         "interface"
@@ -2404,8 +2400,7 @@ extension IntegrationTest {
                               "scope" : "type_expr",
                               "tags" : [
                                 "TestGenericClass<String>",
-                                "pr=",
-                                "typere"
+                                "typerepr="
                               ]
                             }
                           ],
@@ -2538,7 +2533,6 @@ extension IntegrationTest {
                       "scope" : "accessor_decl",
                       "tags" : [
                         "access=internal",
-                        "final",
                         "get_for=testGenericClass",
                         "implicit",
                         "interface"
