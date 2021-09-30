@@ -29,11 +29,8 @@ struct SwiftCompilerWrapper {
         do {
             let swiftUrl = xcodeUrl.appendingPathComponent("Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc/")
             return try xcodeBuildResults.map { xcodeBuildResult in
-                var ast = try generateAst(for: xcodeBuildResult.compileCommands, swiftUrl: swiftUrl)
-                if ast.first == "\n" {
-                    ast.removeFirst()
-                }
-                if ast.prefix(12) == "(source_file" && (ast.suffix(1) == ")" || ast.suffix(2) == ")\n" ) {
+                let ast = try generateAst(for: xcodeBuildResult.compileCommands, swiftUrl: swiftUrl).trimmingCharacters(in: .whitespacesAndNewlines)
+                if ast.prefix(12) == "(source_file" && ast.suffix(1) == ")" {
                     return Result(moduleName: xcodeBuildResult.moduleName, ast: ast, warning: nil)
                 } else {
                     let warning = ast.count > 22000 ?
